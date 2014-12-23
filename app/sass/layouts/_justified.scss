@@ -1,15 +1,18 @@
 /**
- * JUSTIFIED LAYOUT:
- * distribute child items equally in the parent box
+ *  JUSTIFIED LAYOUT
  *
- * .l-justified                     - wrapper with text-align justify
- *   .justified__item               - items to be distributed equally
- *   :after                         - creates a break of the line, making the distribution possible
+ *  distributes items evenly in the parent using inline-blocks and text-align:justify
+ *  usage of inline-blocks also enables vertical alignment with vertical-align property
  *
- * description of idea here http://justifygrid.com/
+ *  .l-justified
+ *    &__item
+ *
+ *  @warning
+ *    font-size and line-height inside .l-justified__item are reset to the base values
+ *    so, if your module has custom font-size and/or line-height, you should probably
+ *    use different layout
+ *
  */
-
-
 .l-justified {
   text-align: justify;
   text-justify: distribute-all-lines;
@@ -22,21 +25,17 @@
     display: inline-block;
     width: 100%;
   }
-}
 
-.justified__item {
-  display: inline-block;
-  vertical-align: middle;
-  text-align: left;
-  text-justify: auto;
+  &__item {
+    display: inline-block;
+    vertical-align: top;
 
-  @extend %clearlast;
-}
+    font-size: $global-font-size;
+    line-height: $global-line-height;
 
-@mixin setup-justified-children($font-size, $line-height) {
-  .justified__item {
-    font-size: $font-size;
-    line-height: $line-height;
+    text-align: left;
+    text-justify: auto;
+
+    @extend %cf;
   }
 }
-

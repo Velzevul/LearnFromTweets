@@ -1,6 +1,6 @@
 {
   "name": "boilerplate",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/Velzevul/boilerplate",
   "authors": [
     "Volodymyr Dziubak <volodymyr.dzyubak@gmail.com>"
@@ -12,5 +12,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "modernizr": "~2.8.3"
+  }
 }

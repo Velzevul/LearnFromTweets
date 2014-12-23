@@ -1,28 +1,40 @@
 /**
- * MEDIA OBJECT ABSTRACTION
- * layout of type "figure-content" or "content-figure" with floated figure
- * and new block formatting context for the content part
+ *  MEDIA LAYOUT
  *
- * more info here: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
+ *  layout of type "figure-content" or "content-figure" with floated figure
+ *  and new block formatting context for the content part
+ *
+ *  more info here: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
+ *
+ *  .l-media
+ *    &__figure
+ *    &__body
+ *    &--rev
+ *
  */
+.l-media {
+  @extend %cf;
 
-.media {
-  overflow: hidden;
-}
+  &__figure {
+    float: left;
+    margin-right: $global-baseline * 2;
 
-.media__figure {
-  float: left;
-  margin-right: em(15, $base-font-size);
-
-  .media--rev & {
-    float: right;
-    margin-right: 0;
-    margin-left: em(15, $base-font-size);
+    .l-media--rev & {
+      float: right;
+      margin-right: 0;
+      margin-left: $global-baseline * 2;
+    }
   }
-}
 
-.media__body {
-  overflow: hidden; // apply new block formatting context
+  &__body {
+    // apply new block formatting context
+    .flexbox & {
+      display: flex; display: -webkit-flex;
+      flex-direction: column; -webkit-flex-direction: column;
+    }
 
-  @extend %clearlast;
+    .no-flexbox & {
+      overflow: hidden;
+    }
+  }
 }
