@@ -20,12 +20,26 @@ module.exports = function(grunt) {
       }
     },
 
+    html2js: {
+      options: {
+        base: 'app/scripts/',
+        module: 'app-templates'
+      },
+      templates: {
+        src: ['app/scripts/templates/**/*.html'],
+        dest: 'app/scripts/templates.js'
+      }
+    },
+
     watch: {
       css: {
         files: ['app/sass/**/*.scss'],
         tasks: ['compass']
       },
-
+      templates: {
+        files: ['app/scripts/templates/**/*.html'],
+        tasks: ['html2js']
+      },
       livereload: {
         files: ['app/*.html', 'app/css/*.css', 'app/scripts/**/*.js'],
         options: {
@@ -35,8 +49,6 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-compass');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-express');
-  grunt.registerTask('default', ['compass', 'express', 'watch', 'express-keepalive']);
+  require('load-grunt-tasks')(grunt);
+  grunt.registerTask('default', ['compass', 'html2js', 'express', 'watch', 'express-keepalive']);
 };
