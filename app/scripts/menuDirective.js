@@ -11,7 +11,7 @@ angular.module('tweetsToSoftware')
             controller: function($scope) {
                 $timeout(function() {
                     $scope.structure = MenuService.get();
-                    MenuService.activate('edit/cut');
+                    MenuService.activate('Cut');
                 }, 100);
             }
         };

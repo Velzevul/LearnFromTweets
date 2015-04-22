@@ -1,57 +1,43 @@
-{
-    "file": {
-        "_": {
-            "label": "File"
-        },
-        "new-project": {
-            "_": {
-                "label": "New Project"
-            }
-        },
-        "new": {
-            "_": {
-                "label": "New"
-            }
-        }
-    },
-    "edit": {
-        "_": {
-            "label": "Edit"
-        },
-        "cut": {
-            "_": {
-                "label": "Cut"
-            }
-        },
-        "paste": {
-            "_": {
-                "label": "Paste"
-            }
-        }
-    },
-    "code": {
-        "_": {
-            "label": "Code"
-        },
-        "surround-with": {
-            "_": {
-                "label": "Surround With"
-            }
-        },
-        "completion": {
-            "_": {
-                "label": "Completion"
-            },
-            "basic": {
-                "_": {
-                    "label": "Basic"
-                }
-            },
-            "smart-type": {
-                "_": {
-                    "label": "SmartType"
-                }
-            }
-        }
-    }
-}
+[
+  {
+    "label": "File",
+    "children": [
+      {
+        "label": "New"
+      },
+      {
+        "label": "Open"
+      }
+    ]
+  },
+  {
+    "label": "Edit",
+    "children": [
+      {
+        "label": "Cut"
+      },
+      {
+        "label": "Paste"
+      }
+    ]
+  },
+  {
+    "label": "Code",
+    "children": [
+      {
+        "label": "Surround With"
+      },
+      {
+        "label": "Completion",
+        "children": [
+          {
+            "label": "Basic"
+          },
+          {
+            "label": "SmartType"
+          }
+        ]
+      }
+    ]
+  }
+]

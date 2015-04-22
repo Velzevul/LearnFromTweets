@@ -3,57 +3,71 @@ angular.module('tweetsToSoftware')
        'use strict';
 
         var data = {
-            menu: {}
-        };
+                menu: []
+            },
+            dataMap = {};
 
         $http.get('/data/menu.json')
             .success(function(response) {
                 data.menu = response;
+
+                function updateIndex(item, index, path) {
+                    dataMap[item['label']] = {
+                        index: index,
+                        path: path,
+                        object: item
+                    };
+
+                    if (item['children'] && item['children'].length > 0) {
+                        angular.forEach(item['children'], function(child, childIndex) {
+                            var childPath = angular.copy(path);
+
+                            childPath.push(item['label']);
+                            updateIndex(child, childIndex, childPath);
+                        });
+                    }
+                }
+
+                angular.forEach(data.menu, function(item, index) {
+                    updateIndex(item, index, []);
+                });
             });
 
-        function findTarget(item) {
-            var path = item.split('/'),
-                target = null;
+        function getItemTree(itemLabel) {
+            var result = [];
 
-            if (Object.keys(data.menu)) {
-                target = data.menu;
-
-                angular.forEach(path, function(pathItem){
-                    if (target[pathItem]) {
-                        target = target[pathItem];
-                    }
+            if (dataMap[itemLabel]) {
+                angular.forEach(dataMap[itemLabel].path, function(pathItem) {
+                    result.push(dataMap[pathItem].object);
                 });
+
+                result.push(dataMap[itemLabel].object);
             }
 
-            return target;
+            return result;
         }
 
         function deactivateAll() {
-            function deactivate(obj) {
-                obj['_'].isActive = false;
-
-                for (key in obj) {
-                    if ((key != '_') && (obj.hasOwnProperty(key))) {
-                        deactivate(obj[key]);
-                    }
-                }
-            }
+            angular.forEach(dataMap, function(item) {
+                item.object.isActive = false;
+            });
         }
 
         return {
             get: function() {
                 return data.menu;
             },
-            activate: function(item) {
-                var target = findTarget(item),
-                    result;
-
-                if (target) {
-                    deactivateAll();
-                    target['_'].isActive = true;
-                    result = true;
-                } else {
+            activate: function(itemLabel) {
+                var itemTree = getItemTree(itemLabel),
                     result = false;
+
+                deactivateAll();
+                if (itemTree.length) {
+                    angular.forEach(itemTree, function(item) {
+                        item.isActive = true;
+                    });
+
+                    result = true;
                 }
 
                 return result;
