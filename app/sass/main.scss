@@ -118,7 +118,7 @@
         'layouts/block',
         'layouts/offscreen';
 
-// module imports here
+@import 'modules/app-menu';
 
 @import 'states',
         'dev-grid',

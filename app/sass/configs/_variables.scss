@@ -19,19 +19,14 @@
   $color-tx-darkened: #202020;
 
   $color-bg:            #FFFFFF;
-  $color-bg-secondary:  #FAFAFA; // beige sections
-  $color-bg-tertiary:   #363636; // dark grey sections
-  $color-bg-quaternary: #202020; // dark sections
+  $color-bg-secondary:  #e7e7e7;
 
-  $color-border: #f4f4f4;
+  $color-border: darken($color-bg-secondary, 15%);
 
-  $color-dc-primary:   #31BB9B; // green
-  $color-dc-secondary: #BCA97A; // brown
-  $color-dc-tertiary:  #F54828; // red
+  $color-dc-primary: #faff00;
 
 // layout
   $max-width: 1200px;
-  $min-width: 500px;
 
 /*
  * RESPONSIVE

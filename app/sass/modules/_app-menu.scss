@@ -1,0 +1,60 @@
+.app-menu {
+  position: absolute;
+  top: 0;
+  left: 0; right: 0;
+
+  background: $color-bg-secondary;
+  border-bottom: 1px solid $color-border;
+
+  &__slot {
+    position: relative;
+  }
+}
+
+.am-item {
+  // ...
+
+  &__name {
+    padding: 0 $global-baseline;
+
+    font-size: 14px;
+    line-height: $global-baseline * 2.5;
+  }
+}
+
+.am-dropdown {
+  position: absolute;
+
+  background: white;
+  border: 1px solid #cccccc;
+
+  &__slot {
+    position: relative;
+  }
+}
+  .am-dropdown--root {
+    top: 100%;
+    left: 0;
+  }
+  .am-dropdown--nested {
+    top: 0;
+    left: 100%;
+  }
+
+.amd-item {
+  width: $global-baseline * 10;
+
+  &__name {
+    @extend .am-item__name;
+  }
+}
+  .amd-item--parent {
+    position: relative;
+
+    &:after {
+      @include simple-arrow($global-baseline/3, darken($color-border, 15%), 'quadrant-2', 0, $global-baseline, 'right');
+    }
+  }
+  .amd-item--highlighted {
+    background: rgba($color-dc-primary, 0.5);
+  }

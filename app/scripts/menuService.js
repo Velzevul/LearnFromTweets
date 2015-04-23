@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .factory('MenuService', function($http) {
+    .factory('MenuService', function($http, $timeout) {
        'use strict';
 
         var data = {
@@ -61,9 +61,10 @@ angular.module('tweetsToSoftware')
                 var itemTree = getItemTree(itemLabel),
                     result = false;
 
-                deactivateAll();
                 if (itemTree.length) {
                     angular.forEach(itemTree, function(item) {
+                        console.log('activate ' + item.label);
+                        clearTimeout(item.hideTimeoutId);
                         item.isActive = true;
                     });
 
@@ -71,6 +72,18 @@ angular.module('tweetsToSoftware')
                 }
 
                 return result;
+            },
+            deactivate: function(itemLabel) {
+                var itemTree = getItemTree(itemLabel);
+
+                if (itemTree.length) {
+                    angular.forEach(itemTree, function(item) {
+                        item.hideTimeoutId = $timeout(function() {
+                            console.log('deactivate ' + item.label);
+                            item.isActive = false;
+                        }, 19).$$timeoutId;
+                    });
+                }
             }
         };
     });

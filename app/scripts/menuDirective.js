@@ -5,14 +5,13 @@ angular.module('tweetsToSoftware')
         return {
             restrict: 'E',
             templateUrl: 'scripts/templates/menu.html',
-            scope: {
-
-            },
+            scope: {},
             controller: function($scope) {
-                $timeout(function() {
-                    $scope.structure = MenuService.get();
-                    MenuService.activate('Cut');
-                }, 100);
+                $scope.menuItems = MenuService.get();
+                //MenuService.activate('Cut');
+
+                $scope.activate = MenuService.activate;
+                $scope.deactivate = MenuService.deactivate;
             }
         };
     });

@@ -1,5 +1,27 @@
-<div class="app-menu">
-    <div class="am-item">
-        <button class="am-item__name">Color</button>
+<script type="text/ng-template" id="menuDropdown">
+    <div class="amd-item">
+        <div ng-mouseover="activate(item.label)" ng-mouseleave="deactivate(rootItem.label)" class="amd-item__name">{{item.label}}</div>
     </div>
+
+    <div ng-show="item.children.length">
+        <div class="am-dropdown am-dropdown--nested">
+            <div class="am-dropdown__slot" ng-repeat="item in item.children" ng-include="'menuDropdown'"></div>
+        </div>
+    </div>
+</script>
+
+<div class="app-menu">
+    <ul class="l-list-inline l-list-inline--collapsed">
+        <li class="l-list-inline__item" ng-repeat="rootItem in menuItems">
+            <div class="app-menu__slot">
+                <div class="am-item">
+                    <div ng-mouseover="activate(rootItem.label)" ng-mouseleave="deactivate(rootItem.label)" class="am-item__name">{{rootItem.label}}</div>
+                </div>
+
+                <div class="am-dropdown am-dropdown--root" ng-show="rootItem.isActive">
+                    <div class="am-dropdown__slot" ng-repeat="item in rootItem.children" ng-include="'menuDropdown'"></div>
+                </div>
+            </div>
+        </li>
+    </ul>
 </div>
