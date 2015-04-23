@@ -15,12 +15,19 @@
   // ...
 
   &__name {
+    display: block;
+    width: 100%;
     padding: 0 $global-baseline;
 
     font-size: 14px;
     line-height: $global-baseline * 2.5;
+
+    text-align: left;
   }
 }
+  .am-item--active {
+    background: darken($color-bg-secondary, 10%);
+  }
 
 .am-dropdown {
   position: absolute;
@@ -47,6 +54,10 @@
   &__name {
     @extend .am-item__name;
   }
+
+  &:hover {
+    background: lighten($color-bg-secondary, 5%);
+  }
 }
   .amd-item--parent {
     position: relative;
@@ -54,6 +65,9 @@
     &:after {
       @include simple-arrow($global-baseline/3, darken($color-border, 15%), 'quadrant-2', 0, $global-baseline, 'right');
     }
+  }
+  .amd-item--active {
+    background: lighten($color-bg-secondary, 5%);
   }
   .amd-item--highlighted {
     background: rgba($color-dc-primary, 0.5);
