@@ -15,7 +15,7 @@
 
 // colors
   $color-tx:          #444444;
-  $color-tx-muted:    #969696;
+  $color-tx-muted: #a6a6a6;
   $color-tx-darkened: #202020;
 
   $color-bg:            #FFFFFF;
@@ -24,6 +24,7 @@
   $color-border: darken($color-bg-secondary, 15%);
 
   $color-dc-primary: #faff00;
+  $color-dc-secondary: #4583ff;
 
 // layout
   $max-width: 1200px;

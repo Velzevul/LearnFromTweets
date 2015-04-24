@@ -14,7 +14,7 @@
 
 <div class="app-menu">
     <ul class="l-list-inline l-list-inline--collapsed">
-        <li class="l-list-inline__item" ng-repeat="rootItem in menuItems">
+        <li class="l-list-inline__item" ng-repeat="rootItem in data.menu">
             <div class="app-menu__slot">
                 <div class="am-item" ng-class="{'am-item--active': rootItem.isActive}">
                     <button ng-mouseover="activate(rootItem.label)" ng-mouseleave="deactivate(rootItem.label)" class="am-item__name">{{rootItem.label}}</button>

@@ -1,4 +1,4 @@
-angular.module('app-templates', ['templates/menu.html']);
+angular.module('app-templates', ['templates/menu.html', 'templates/twitterWidget.html']);
 
 angular.module("templates/menu.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/menu.html",
@@ -18,7 +18,7 @@ angular.module("templates/menu.html", []).run(["$templateCache", function($templ
     "\n" +
     "<div class=\"app-menu\">\n" +
     "    <ul class=\"l-list-inline l-list-inline--collapsed\">\n" +
-    "        <li class=\"l-list-inline__item\" ng-repeat=\"rootItem in menuItems\">\n" +
+    "        <li class=\"l-list-inline__item\" ng-repeat=\"rootItem in data.menu\">\n" +
     "            <div class=\"app-menu__slot\">\n" +
     "                <div class=\"am-item\" ng-class=\"{'am-item--active': rootItem.isActive}\">\n" +
     "                    <button ng-mouseover=\"activate(rootItem.label)\" ng-mouseleave=\"deactivate(rootItem.label)\" class=\"am-item__name\">{{rootItem.label}}</button>\n" +
@@ -32,4 +32,43 @@ angular.module("templates/menu.html", []).run(["$templateCache", function($templ
     "    </ul>\n" +
     "</div>\n" +
     "");
+}]);
+
+angular.module("templates/twitterWidget.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/twitterWidget.html",
+    "<div class=\"twitter-widget\">\n" +
+    "    <div class=\"tw-header\">\n" +
+    "        <div class=\"tw-header__title\">Relevant tweets</div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"twitter-widget__body\">\n" +
+    "        <div class=\"tweet\" ng-repeat=\"tweet in data.tweets\">\n" +
+    "            <div class=\"l-block-x-small\">\n" +
+    "                <div class=\"l-split\">\n" +
+    "                    <div class=\"l-split__right\">\n" +
+    "                        <div class=\"tweet__published\">{{tweet.published}}</div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"l-split__left\">\n" +
+    "                        <div class=\"l-list-inline l-list-inline--x-small\">\n" +
+    "                            <div class=\"l-list-inline__item\">\n" +
+    "                                <div class=\"tweet__author-avatar\" style=\"background-image: url({{tweet.author.avatar}});\"></div>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "                            <div class=\"l-list-inline__item\">\n" +
+    "                                <div class=\"tweet__author-name\">@{{tweet.author.name}}</div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"l-block-x-small\">\n" +
+    "                <div class=\"tweet__command\"><button ng-click=\"highlight(tweet.command)\" class=\"tweet__link\">{{tweet.command}}</button></div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"tweet__text\">{{tweet.text}}</div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>");
 }]);

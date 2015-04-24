@@ -56,7 +56,7 @@ angular.module('tweetsToSoftware')
 
         return {
             get: function() {
-                return data.menu;
+                return data;
             },
             activate: function(itemLabel) {
                 var itemTree = getItemTree(itemLabel),

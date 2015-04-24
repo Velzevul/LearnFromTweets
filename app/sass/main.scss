@@ -118,7 +118,9 @@
         'layouts/block',
         'layouts/offscreen';
 
-@import 'modules/app-menu';
+@import 'modules/app-menu',
+        'modules/twitter-widget',
+        'modules/tweet';
 
 @import 'states',
         'dev-grid',

@@ -15,6 +15,7 @@
  *
  */
 $blocks: (
+  'block-x-small': $global-baseline / 2,
   'block-small'  : $global-baseline,
   'block'        : $global-baseline * 2,
   'block-med'    : $global-baseline * 3,

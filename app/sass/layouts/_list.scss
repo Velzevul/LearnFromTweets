@@ -17,6 +17,7 @@
  *
  */
 $list-modifiers: (
+  'x-small'  : $global-baseline/2,
   'small'    : $global-baseline,
   'large'    : $global-baseline * 4,
   'collapsed': 0.1px

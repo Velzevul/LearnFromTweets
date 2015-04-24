@@ -7,8 +7,7 @@ angular.module('tweetsToSoftware')
             templateUrl: 'scripts/templates/menu.html',
             scope: {},
             controller: function($scope) {
-                $scope.menuItems = MenuService.get();
-                //MenuService.activate('Cut');
+                $scope.data = MenuService.get();
 
                 $scope.activate = MenuService.activate;
                 $scope.deactivate = MenuService.deactivate;

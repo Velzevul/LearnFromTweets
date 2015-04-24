@@ -18,6 +18,17 @@
       },
       {
         "label": "Paste"
+      },
+      {
+        "label": "Restructure",
+        "children": [
+          {
+            "label": "Current File"
+          },
+          {
+            "label": "Project"
+          }
+        ]
       }
     ]
   },
