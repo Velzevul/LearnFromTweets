@@ -86,17 +86,8 @@ angular.module('tweetsToSoftware')
 
                 return result;
             },
-            deactivate: function(itemLabel) {
-                var itemTree = getItemTree(itemLabel);
-
-                if (itemTree.length) {
-                    angular.forEach(itemTree, function(item) {
-                        item.hideTimeoutId = $timeout(function() {
-                            item.isActive = false;
-                            item.isHighlighted = false;
-                        }, 50).$$timeoutId;
-                    });
-                }
+            deactivate: function() {
+                deactivateAll();
             }
         };
     });

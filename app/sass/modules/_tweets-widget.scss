@@ -1,0 +1,9 @@
+.tweets-widget {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  &__slot {
+    position: relative;
+  }
+}

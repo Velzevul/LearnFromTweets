@@ -1,0 +1,45 @@
+.tweets-popup {
+  position: relative;
+
+  &__thumb {
+    width: $global-baseline*2;
+    height: $global-baseline*2;
+
+    border-radius: 50%;
+    border: 1px solid $color-border;
+
+    background-position: center center;
+    background-size: cover;
+  }
+
+  &__popup {
+    position: absolute;
+    top: 120%;
+    left: 120%;
+
+    width: $global-baseline*15;
+
+    background: white;
+    border: 1px solid $color-border;
+  }
+}
+
+.tweets-popup-history {
+  @extend .tweets-popup;
+
+  .tweets-popup-history__thumb {
+    width:  $global-baseline * 1.5;
+    height: $global-baseline * 1.5;
+    margin: $global-baseline / 2;
+
+    line-height: $global-baseline * 1.5;
+
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .tweets-popup__popup {
+    height: $global-baseline * 10;
+    overflow: auto;
+  }
+}

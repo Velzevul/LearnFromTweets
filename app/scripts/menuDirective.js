@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('menu', function(MenuService, $timeout) {
+    .directive('menu', function(MenuService, $document) {
        'use strict';
 
         return {
@@ -10,7 +10,12 @@ angular.module('tweetsToSoftware')
                 $scope.data = MenuService.get();
 
                 $scope.activate = MenuService.activate;
-                $scope.deactivate = MenuService.deactivate;
+            },
+            link: function($scope, elem) {
+                $document.on('click', function() {
+                    MenuService.deactivate();
+                    $scope.$apply()
+                });
             }
         };
     });

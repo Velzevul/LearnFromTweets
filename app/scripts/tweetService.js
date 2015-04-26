@@ -1,19 +1,17 @@
 angular.module('tweetsToSoftware')
-    .factory('TweetService', function($http, $interval) {
+    .factory('TweetService', function($http) {
         'use strict';
 
-        var data = {
-            tweets: []
-        };
+        var tweets = {};
 
         $http.get('/data/tweets.json')
             .success(function(response) {
-                data.tweets = response;
+                tweets = response;
             });
 
         return {
-            get: function() {
-                return data;
+            get: function(menuPath) {
+                return tweets[menuPath];
             }
         };
     });

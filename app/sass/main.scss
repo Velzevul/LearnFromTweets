@@ -119,7 +119,8 @@
         'layouts/offscreen';
 
 @import 'modules/app-menu',
-        'modules/twitter-widget',
+        'modules/tweets-widget',
+        'modules/tweets-popup',
         'modules/tweet';
 
 @import 'states',

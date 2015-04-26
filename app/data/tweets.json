@@ -1,22 +1,20 @@
-[
-  {
+{
+  "Code/Completion/SmartType": {
     "id": 1,
     "text": "Real time-saver for typing!",
-    "command": "Code/Completion/SmartType",
     "published": "just now",
     "author": {
       "name": "VoloD",
       "avatar": "https://pbs.twimg.com/profile_images/481030178227752960/DtpVP2_4_bigger.png"
     }
   },
-  {
+  "Edit/Restructure/Project": {
     "id": 2,
     "text": "Amazing when working with lazy co-workers =)",
-    "command": "Edit/Restructure/Project",
     "published": "1 min. ago",
     "author": {
       "name": "chriscoyer",
       "avatar": "https://pbs.twimg.com/profile_images/550841435831173120/fSk-hlgT_bigger.jpeg"
     }
   }
-]
+}
