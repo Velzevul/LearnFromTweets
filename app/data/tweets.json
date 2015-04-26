@@ -1,20 +1,69 @@
 {
-  "Code/Completion/SmartType": {
-    "id": 1,
-    "text": "Real time-saver for typing!",
-    "published": "just now",
-    "author": {
-      "name": "VoloD",
-      "avatar": "https://pbs.twimg.com/profile_images/481030178227752960/DtpVP2_4_bigger.png"
+  "SmartType": [
+    {
+      "id": 1,
+      "text": "Real time-saver for typing!",
+      "published": "15 mins. ago",
+      "author": {
+        "name": "volod",
+        "avatar": "https://pbs.twimg.com/profile_images/481030178227752960/DtpVP2_4_bigger.png"
+      }
+    },
+    {
+      "id": 3,
+      "text": "Really useful feature! works well for complex projects...",
+      "published": "2 days ago",
+      "author": {
+        "name": "yassinebentaieb",
+        "avatar": "https://pbs.twimg.com/profile_images/1617898274/yassinebentaieb_bigger.png"
+      }
+    },
+    {
+      "id": 4,
+      "text": "Cool feature!",
+      "published": "3 days ago",
+      "author": {
+        "name": "chriscoyer",
+        "avatar": "https://pbs.twimg.com/profile_images/550841435831173120/fSk-hlgT_bigger.jpeg"
+      }
+    },
+    {
+      "id": 1,
+      "text": "Real time-saver for typing!",
+      "published": "15 mins. ago",
+      "author": {
+        "name": "volod",
+        "avatar": "https://pbs.twimg.com/profile_images/481030178227752960/DtpVP2_4_bigger.png"
+      }
+    },
+    {
+      "id": 3,
+      "text": "Really useful feature! works well for complex projects...",
+      "published": "2 days ago",
+      "author": {
+        "name": "yassinebentaieb",
+        "avatar": "https://pbs.twimg.com/profile_images/1617898274/yassinebentaieb_bigger.png"
+      }
+    },
+    {
+      "id": 4,
+      "text": "Cool feature!",
+      "published": "3 days ago",
+      "author": {
+        "name": "chriscoyer",
+        "avatar": "https://pbs.twimg.com/profile_images/550841435831173120/fSk-hlgT_bigger.jpeg"
+      }
     }
-  },
-  "Edit/Restructure/Project": {
-    "id": 2,
-    "text": "Amazing when working with lazy co-workers =)",
-    "published": "1 min. ago",
-    "author": {
-      "name": "chriscoyer",
-      "avatar": "https://pbs.twimg.com/profile_images/550841435831173120/fSk-hlgT_bigger.jpeg"
+  ],
+  "Project": [
+    {
+      "id": 2,
+      "text": "Amazing when working with lazy co-workers =)",
+      "published": "1 min. ago",
+      "author": {
+        "name": "chriscoyer",
+        "avatar": "https://pbs.twimg.com/profile_images/550841435831173120/fSk-hlgT_bigger.jpeg"
+      }
     }
-  }
+  ]
 }

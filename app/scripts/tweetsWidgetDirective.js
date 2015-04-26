@@ -9,12 +9,16 @@ angular.module('tweetsToSoftware')
                 context: '='
             },
             controller: function($scope) {
-                $scope.tweets = [1,2];
+                $scope.tweets = [];
 
-                //TweetService.get($scope.context)
-                //    .success(function(response) {
-                //        $scope.tweets = response;
-                //    });
+                TweetService.get($scope.context)
+                    .then(function(response) {
+                        $scope.tweets = response;
+
+                        if (response) {
+                            $scope.notification = response[0];
+                        }
+                    });
             }
         }
     });

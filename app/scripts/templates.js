@@ -1,4 +1,4 @@
-angular.module('app-templates', ['templates/historyPopup.html', 'templates/menu.html', 'templates/tweet.html', 'templates/tweetsWidget.html']);
+angular.module('app-templates', ['templates/historyPopup.html', 'templates/menu.html', 'templates/notificationPopup.html', 'templates/tweet.html', 'templates/tweetsWidget.html']);
 
 angular.module("templates/historyPopup.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/historyPopup.html",
@@ -7,11 +7,15 @@ angular.module("templates/historyPopup.html", []).run(["$templateCache", functio
     "         ng-mouseover=\"showPopup()\"\n" +
     "         ng-mouseleave=\"hidePopup()\">...</div>\n" +
     "\n" +
-    "    <div class=\"tweets-popup__popup\"\n" +
+    "    <div class=\"tp-popup\"\n" +
     "         ng-show=\"visible\"\n" +
     "         ng-mouseover=\"showPopup()\"\n" +
     "         ng-mouseleave=\"hidePopup()\">\n" +
-    "        tweets go here...\n" +
+    "        <div class=\"tp-popup__header\">Recent activity</div>\n" +
+    "\n" +
+    "        <div class=\"tp-popup__body tp-popup__body--long\">\n" +
+    "            <tweet ng-repeat=\"tweet in tweets\" tweet=\"tweet\"></tweet>\n" +
+    "        </div>\n" +
     "    </div>\n" +
     "</div>");
 }]);
@@ -65,9 +69,40 @@ angular.module("templates/menu.html", []).run(["$templateCache", function($templ
     "");
 }]);
 
+angular.module("templates/notificationPopup.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/notificationPopup.html",
+    "<div class=\"tweets-popup-notification\">\n" +
+    "    <div class=\"tweets-popup-notification__thumb\"\n" +
+    "         ng-mouseover=\"showPopup()\"\n" +
+    "         ng-mouseleave=\"hidePopup()\"\n" +
+    "         style=\"background-image: url({{tweet.author.avatar}});\"></div>\n" +
+    "\n" +
+    "    <div class=\"tp-popup\"\n" +
+    "         ng-show=\"visible\"\n" +
+    "         ng-mouseover=\"showPopup()\"\n" +
+    "         ng-mouseleave=\"hidePopup()\">\n" +
+    "        <div class=\"tp-popup__body\">\n" +
+    "            <div class=\"tweet\">\n" +
+    "                <div class=\"l-split\">\n" +
+    "                    <div class=\"l-split__right\">\n" +
+    "                        <div class=\"tweet__published\">{{tweet.published}}</div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"l-split__left\">\n" +
+    "                        <div class=\"tweet__author-name\">@{{tweet.author.name}}</div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"tweet__text\">{{tweet.text}}</div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>");
+}]);
+
 angular.module("templates/tweet.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/tweet.html",
-    "<div class=\"tweet\" ng-repeat=\"tweet in data.tweets\">\n" +
+    "<div class=\"tweet\">\n" +
     "    <div class=\"l-block-x-small\">\n" +
     "        <div class=\"l-split\">\n" +
     "            <div class=\"l-split__right\">\n" +
@@ -88,10 +123,6 @@ angular.module("templates/tweet.html", []).run(["$templateCache", function($temp
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"l-block-x-small\">\n" +
-    "        <div class=\"tweet__command\"><button ng-click=\"highlight(tweet.command)\" class=\"tweet__link\">{{tweet.command}}</button></div>\n" +
-    "    </div>\n" +
-    "\n" +
     "    <div class=\"tweet__text\">{{tweet.text}}</div>\n" +
     "</div>");
 }]);
@@ -99,8 +130,18 @@ angular.module("templates/tweet.html", []).run(["$templateCache", function($temp
 angular.module("templates/tweetsWidget.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/tweetsWidget.html",
     "<div class=\"tweets-widget\">\n" +
-    "    <div class=\"tweets-widget__slot\" ng-show=\"tweets.length\">\n" +
-    "        <history-popup tweets=\"tweets\"></history-popup>\n" +
+    "    <div class=\"l-list-inline l-list-inline--collapsed\">\n" +
+    "        <div class=\"l-list-inline__item\">\n" +
+    "            <div class=\"tweets-widget__slot\" ng-show=\"notification\">\n" +
+    "                <notification-popup tweet=\"notification\"></notification-popup>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"l-list-inline__item\">\n" +
+    "            <div class=\"tweets-widget__slot\" ng-show=\"tweets.length\">\n" +
+    "                <history-popup tweets=\"tweets\"></history-popup>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "    </div>\n" +
     "</div>");
 }]);

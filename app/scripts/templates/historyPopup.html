@@ -3,10 +3,14 @@
          ng-mouseover="showPopup()"
          ng-mouseleave="hidePopup()">...</div>
 
-    <div class="tweets-popup__popup"
+    <div class="tp-popup"
          ng-show="visible"
          ng-mouseover="showPopup()"
          ng-mouseleave="hidePopup()">
-        tweets go here...
+        <div class="tp-popup__header">Recent activity</div>
+
+        <div class="tp-popup__body tp-popup__body--long">
+            <tweet ng-repeat="tweet in tweets" tweet="tweet"></tweet>
+        </div>
     </div>
 </div>

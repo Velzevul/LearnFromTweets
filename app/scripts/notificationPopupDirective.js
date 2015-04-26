@@ -1,12 +1,12 @@
 angular.module('tweetsToSoftware')
-    .directive('historyPopup', function($timeout) {
+    .directive('notificationPopup', function($timeout) {
         'use strict';
 
         return {
             restrict: 'E',
-            templateUrl: 'templates/historyPopup.html',
+            templateUrl: 'templates/notificationPopup.html',
             scope: {
-                tweets: '='
+                tweet: '='
             },
             controller: function($scope) {
                 var hideTimeoutId = null,

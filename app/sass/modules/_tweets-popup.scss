@@ -1,9 +1,39 @@
 .tweets-popup {
   position: relative;
+}
+
+.tp-popup {
+  position: absolute;
+  top: $global-baseline * 3;
+  left: - $global-baseline * 3;
+
+  width: $global-baseline*26;
+
+  border: 1px solid $color-border;
+
+  &__header {
+    padding: $global-baseline/2;
+
+    background: $color-bg-secondary;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__body {
+    background: white;
+  }
+    &__body--long {
+      max-height: $global-baseline * 25;
+      overflow: auto;
+    }
+}
+
+.tweets-popup-notification {
+  @extend .tweets-popup;
 
   &__thumb {
     width: $global-baseline*2;
     height: $global-baseline*2;
+    margin: $global-baseline/4;
 
     border-radius: 50%;
     border: 1px solid $color-border;
@@ -11,35 +41,19 @@
     background-position: center center;
     background-size: cover;
   }
-
-  &__popup {
-    position: absolute;
-    top: 120%;
-    left: 120%;
-
-    width: $global-baseline*15;
-
-    background: white;
-    border: 1px solid $color-border;
-  }
 }
 
 .tweets-popup-history {
   @extend .tweets-popup;
 
-  .tweets-popup-history__thumb {
-    width:  $global-baseline * 1.5;
-    height: $global-baseline * 1.5;
-    margin: $global-baseline / 2;
+  &__thumb {
+    width:  $global-baseline * 2;
+    height: $global-baseline * 2;
+    margin: $global-baseline/4 0;
 
-    line-height: $global-baseline * 1.5;
+    line-height: $global-baseline * 2;
 
     text-align: center;
     cursor: pointer;
-  }
-
-  .tweets-popup__popup {
-    height: $global-baseline * 10;
-    overflow: auto;
   }
 }

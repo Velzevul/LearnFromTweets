@@ -1,5 +1,15 @@
 <div class="tweets-widget">
-    <div class="tweets-widget__slot" ng-show="tweets.length">
-        <history-popup tweets="tweets"></history-popup>
+    <div class="l-list-inline l-list-inline--collapsed">
+        <div class="l-list-inline__item">
+            <div class="tweets-widget__slot" ng-show="notification">
+                <notification-popup tweet="notification"></notification-popup>
+            </div>
+        </div>
+
+        <div class="l-list-inline__item">
+            <div class="tweets-widget__slot" ng-show="tweets.length">
+                <history-popup tweets="tweets"></history-popup>
+            </div>
+        </div>
     </div>
 </div>

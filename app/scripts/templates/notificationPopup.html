@@ -1,0 +1,27 @@
+<div class="tweets-popup-notification">
+    <div class="tweets-popup-notification__thumb"
+         ng-mouseover="showPopup()"
+         ng-mouseleave="hidePopup()"
+         style="background-image: url({{tweet.author.avatar}});"></div>
+
+    <div class="tp-popup"
+         ng-show="visible"
+         ng-mouseover="showPopup()"
+         ng-mouseleave="hidePopup()">
+        <div class="tp-popup__body">
+            <div class="tweet">
+                <div class="l-split">
+                    <div class="l-split__right">
+                        <div class="tweet__published">{{tweet.published}}</div>
+                    </div>
+
+                    <div class="l-split__left">
+                        <div class="tweet__author-name">@{{tweet.author.name}}</div>
+                    </div>
+                </div>
+
+                <div class="tweet__text">{{tweet.text}}</div>
+            </div>
+        </div>
+    </div>
+</div>

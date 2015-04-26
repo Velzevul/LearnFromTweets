@@ -4,14 +4,13 @@ angular.module('tweetsToSoftware')
 
         var tweets = {};
 
-        $http.get('/data/tweets.json')
-            .success(function(response) {
-                tweets = response;
-            });
 
         return {
-            get: function(menuPath) {
-                return tweets[menuPath];
+            get: function(menuItem) {
+                return $http.get('/data/tweets.json')
+                    .then(function(response) {
+                        return response.data[menuItem];
+                    });
             }
         };
     });

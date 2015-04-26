@@ -1,4 +1,4 @@
-<div class="tweet" ng-repeat="tweet in data.tweets">
+<div class="tweet">
     <div class="l-block-x-small">
         <div class="l-split">
             <div class="l-split__right">
@@ -17,10 +17,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="l-block-x-small">
-        <div class="tweet__command"><button ng-click="highlight(tweet.command)" class="tweet__link">{{tweet.command}}</button></div>
     </div>
 
     <div class="tweet__text">{{tweet.text}}</div>
