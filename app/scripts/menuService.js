@@ -1,8 +1,41 @@
 angular.module('tweetsToSoftware')
-    .factory('MenuService', function($http, $timeout) {
+    .factory('MenuService', function($http, $interval) {
        'use strict';
 
-        var menuFlat = {};
+        var data = {
+                menu: []
+            },
+            menuFlat = {};
+
+        $http.get('/data/menu.json')
+            .then(function(response) {
+                data.menu = response.data;
+
+                function updateMap(item, index, parents) {
+                    var label = parents.length ? [parents[parents.length - 1], item['label']].join('/') : item['label'];
+
+                    item.id = label;
+
+                    menuFlat[label] = {
+                        index: index,
+                        parents: parents,
+                        object: item
+                    };
+
+                    if (item['children'] && item['children'].length > 0) {
+                        angular.forEach(item['children'], function(child, childIndex) {
+                            var childPath = angular.copy(parents);
+
+                            childPath.push(label);
+                            updateMap(child, childIndex, childPath);
+                        });
+                    }
+                }
+
+                angular.forEach(data.menu, function(item, index) {
+                    updateMap(item, index, []);
+                });
+            });
 
         function getItemTree(itemPath) {
             var result = [];
@@ -26,37 +59,7 @@ angular.module('tweetsToSoftware')
 
         return {
             get: function() {
-                return $http.get('/data/menu.json')
-                    .then(function(response) {
-                        var menu = response.data;
-
-                        function updateMap(item, index, parents) {
-                            var label = parents.length ? [parents[parents.length - 1], item['label']].join('/') : item['label'];
-
-                            item.id = label;
-
-                            menuFlat[label] = {
-                                index: index,
-                                parents: parents,
-                                object: item
-                            };
-
-                            if (item['children'] && item['children'].length > 0) {
-                                angular.forEach(item['children'], function(child, childIndex) {
-                                    var childPath = angular.copy(parents);
-
-                                    childPath.push(label);
-                                    updateMap(child, childIndex, childPath);
-                                });
-                            }
-                        }
-
-                        angular.forEach(menu, function(item, index) {
-                            updateMap(item, index, []);
-                        });
-
-                        return menu;
-                    });
+                return data;
             },
             open: function(itemPath) {
                 var itemTree = getItemTree(itemPath),
