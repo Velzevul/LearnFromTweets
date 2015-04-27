@@ -1,9 +1,8 @@
 angular.module('tweetsToSoftware')
-    .controller('mainController', function($scope, MenuService) {
+    .controller('mainController', function($scope, MenuService, TweetService) {
         'use strict';
 
-        $scope.highlight = function(itemLabel) {
-            MenuService.activate(itemLabel);
-            MenuService.highlight(itemLabel);
-        };
+        $scope.notify = function() {
+            TweetService.broadcast('Code/Completion/SmartType');
+        }
     });

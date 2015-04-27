@@ -4,3 +4,12 @@
  *  sandbox for various experiments and other stuff that should be refactored in the future
  *
  */
+
+.link {
+  color: $color-dc-secondary;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

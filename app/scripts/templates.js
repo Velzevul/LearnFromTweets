@@ -28,7 +28,8 @@ angular.module("templates/menu.html", []).run(["$templateCache", function($templ
     "    <div class=\"amd-item\"\n" +
     "         ng-class=\"{'amd-item--active': item.isActive,\n" +
     "                    'amd-item--parent': item.children.length,\n" +
-    "                    'amd-item--highlighted': item.isHighlighted}\">\n" +
+    "                    'amd-item--highlighted': item.isHighlighted}\"\n" +
+    "         ng-mouseover=\"item.isHighlighted = false\">\n" +
     "\n" +
     "\n" +
     "         <button class=\"amd-item__name\"\n" +
@@ -51,7 +52,9 @@ angular.module("templates/menu.html", []).run(["$templateCache", function($templ
     "            ng-repeat=\"rootItem in data.menu\">\n" +
     "            <div class=\"app-menu__slot\">\n" +
     "                <div class=\"am-item\"\n" +
-    "                     ng-class=\"{'am-item--active': rootItem.isActive}\">\n" +
+    "                     ng-class=\"{'am-item--active': rootItem.isActive,\n" +
+    "                                'am-item--highlighted': rootItem.isHighlighted}\"\n" +
+    "                     ng-mouseover=\"rootItem.isHighlighted = false\">\n" +
     "                    <button class=\"am-item__name\"\n" +
     "                            ng-mouseover=\"activate(rootItem.label)\">{{rootItem.label}}</button>\n" +
     "                </div>\n" +
@@ -94,6 +97,18 @@ angular.module("templates/notificationPopup.html", []).run(["$templateCache", fu
     "                </div>\n" +
     "\n" +
     "                <div class=\"tweet__text\">{{tweet.text}}</div>\n" +
+    "\n" +
+    "                <div class=\"l-list-inline l-list-inline--x-small\">\n" +
+    "                    <div class=\"l-list-inline__item\">\n" +
+    "                        <button class=\"link\">retweet</button>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"l-list-inline__item\">\n" +
+    "                        <button class=\"link\">save</button>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"l-list-inline__item\">\n" +
+    "                        <button class=\"link\">dismiss</button>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -124,6 +139,18 @@ angular.module("templates/tweet.html", []).run(["$templateCache", function($temp
     "    </div>\n" +
     "\n" +
     "    <div class=\"tweet__text\">{{tweet.text}}</div>\n" +
+    "\n" +
+    "    <div class=\"l-list-inline l-list-inline--x-small\">\n" +
+    "        <div class=\"l-list-inline__item\">\n" +
+    "            <button class=\"link\">retweet</button>\n" +
+    "        </div>\n" +
+    "        <div class=\"l-list-inline__item\">\n" +
+    "            <button class=\"link\">save</button>\n" +
+    "        </div>\n" +
+    "        <div class=\"l-list-inline__item\">\n" +
+    "            <button class=\"link\">hide</button>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "</div>");
 }]);
 

@@ -14,11 +14,11 @@ angular.module('tweetsToSoftware')
                 TweetService.get($scope.context)
                     .then(function(response) {
                         $scope.tweets = response;
-
-                        if (response) {
-                            $scope.notification = response[0];
-                        }
                     });
+
+                $scope.$on($scope.context, function(event, tweet) {
+                    $scope.notification = tweet;
+                });
             }
         }
     });

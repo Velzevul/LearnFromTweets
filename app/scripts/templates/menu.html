@@ -4,7 +4,8 @@
     <div class="amd-item"
          ng-class="{'amd-item--active': item.isActive,
                     'amd-item--parent': item.children.length,
-                    'amd-item--highlighted': item.isHighlighted}">
+                    'amd-item--highlighted': item.isHighlighted}"
+         ng-mouseover="item.isHighlighted = false">
 
 
          <button class="amd-item__name"
@@ -27,7 +28,9 @@
             ng-repeat="rootItem in data.menu">
             <div class="app-menu__slot">
                 <div class="am-item"
-                     ng-class="{'am-item--active': rootItem.isActive}">
+                     ng-class="{'am-item--active': rootItem.isActive,
+                                'am-item--highlighted': rootItem.isHighlighted}"
+                     ng-mouseover="rootItem.isHighlighted = false">
                     <button class="am-item__name"
                             ng-mouseover="activate(rootItem.label)">{{rootItem.label}}</button>
                 </div>

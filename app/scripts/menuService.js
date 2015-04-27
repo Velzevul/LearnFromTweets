@@ -50,7 +50,6 @@ angular.module('tweetsToSoftware')
         function deactivateAll() {
             angular.forEach(dataMap, function(item) {
                 item.object.isActive = false;
-                item.object.isHighlighted = false;
             });
         }
 
@@ -76,15 +75,11 @@ angular.module('tweetsToSoftware')
                 return result;
             },
             highlight: function(itemLabel) {
-                var itemTree = getItemTree(itemLabel),
-                    result = false;
+                var itemTree = itemLabel.split('/');
 
-                if (itemTree.length) {
-                    itemTree[itemTree.length - 1].isHighlighted = true;
-                    result = true;
-                }
-
-                return result;
+                angular.forEach(itemTree, function(item) {
+                    dataMap[item].object.isHighlighted = true;
+                });
             },
             deactivate: function() {
                 deactivateAll();

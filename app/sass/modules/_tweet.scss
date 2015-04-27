@@ -3,6 +3,10 @@
 
   border-bottom: 1px solid $color-border;
 
+  &__text {
+    line-height: 18px;
+  }
+  
   &__author-name {
     font-weight: 600;
   }
