@@ -1,20 +1,18 @@
 <script type="text/ng-template" id="menuDropdown">
-    <tweets-widget context="item.label" ng-if="!item.children.length"></tweets-widget>
-
     <div class="amd-item"
-         ng-class="{'amd-item--active': item.isActive,
+         ng-class="{'amd-item--active': item.isOpen,
                     'amd-item--parent': item.children.length,
                     'amd-item--highlighted': item.isHighlighted}"
          ng-mouseover="item.isHighlighted = false">
 
 
          <button class="amd-item__name"
-                 ng-mouseover="activate(item.label)">{{item.label}}</button>
+                 ng-mouseover="open(item.id)">{{item.label}}</button>
     </div>
 
     <div ng-show="item.children.length">
         <div class="am-dropdown am-dropdown--nested"
-             ng-show="item.isActive">
+             ng-show="item.isOpen">
             <div class="am-dropdown__slot"
                  ng-repeat="item in item.children"
                  ng-include="'menuDropdown'"></div>
@@ -25,18 +23,18 @@
 <div class="app-menu">
     <ul class="l-list-inline l-list-inline--collapsed">
         <li class="l-list-inline__item"
-            ng-repeat="rootItem in data.menu">
+            ng-repeat="rootItem in menu">
             <div class="app-menu__slot">
                 <div class="am-item"
-                     ng-class="{'am-item--active': rootItem.isActive,
+                     ng-class="{'am-item--active': rootItem.isOpen,
                                 'am-item--highlighted': rootItem.isHighlighted}"
                      ng-mouseover="rootItem.isHighlighted = false">
                     <button class="am-item__name"
-                            ng-mouseover="activate(rootItem.label)">{{rootItem.label}}</button>
+                            ng-mouseover="open(rootItem.id)">{{rootItem.label}}</button>
                 </div>
 
                 <div class="am-dropdown am-dropdown--root"
-                     ng-show="rootItem.isActive">
+                     ng-show="rootItem.isOpen">
                     <div class="am-dropdown__slot"
                          ng-repeat="item in rootItem.children"
                          ng-include="'menuDropdown'"></div>

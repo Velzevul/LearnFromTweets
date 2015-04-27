@@ -2,71 +2,71 @@ angular.module('tweetsToSoftware')
     .factory('MenuService', function($http, $timeout) {
        'use strict';
 
-        var data = {
-                menu: []
-            },
-            dataMap = {};
+        var menuFlat = {};
 
-        $http.get('/data/menu.json')
-            .success(function(response) {
-                data.menu = response;
-
-                function updateIndex(item, index, path) {
-                    dataMap[item['label']] = {
-                        index: index,
-                        path: path,
-                        object: item
-                    };
-
-                    if (item['children'] && item['children'].length > 0) {
-                        angular.forEach(item['children'], function(child, childIndex) {
-                            var childPath = angular.copy(path);
-
-                            childPath.push(item['label']);
-                            updateIndex(child, childIndex, childPath);
-                        });
-                    }
-                }
-
-                angular.forEach(data.menu, function(item, index) {
-                    updateIndex(item, index, []);
-                });
-            });
-
-        function getItemTree(itemLabel) {
+        function getItemTree(itemPath) {
             var result = [];
 
-            if (dataMap[itemLabel]) {
-                angular.forEach(dataMap[itemLabel].path, function(pathItem) {
-                    result.push(dataMap[pathItem].object);
+            if (menuFlat[itemPath]) {
+                angular.forEach(menuFlat[itemPath].parents, function(parent) {
+                    result.push(menuFlat[parent].object);
                 });
 
-                result.push(dataMap[itemLabel].object);
+                result.push(menuFlat[itemPath].object);
             }
 
             return result;
         }
 
         function deactivateAll() {
-            angular.forEach(dataMap, function(item) {
-                item.object.isActive = false;
+            angular.forEach(menuFlat, function(item) {
+                item.object.isOpen = false;
             });
         }
 
         return {
             get: function() {
-                return data;
+                return $http.get('/data/menu.json')
+                    .then(function(response) {
+                        var menu = response.data;
+
+                        function updateMap(item, index, parents) {
+                            var label = parents.length ? [parents[parents.length - 1], item['label']].join('/') : item['label'];
+
+                            item.id = label;
+
+                            menuFlat[label] = {
+                                index: index,
+                                parents: parents,
+                                object: item
+                            };
+
+                            if (item['children'] && item['children'].length > 0) {
+                                angular.forEach(item['children'], function(child, childIndex) {
+                                    var childPath = angular.copy(parents);
+
+                                    childPath.push(label);
+                                    updateMap(child, childIndex, childPath);
+                                });
+                            }
+                        }
+
+                        angular.forEach(menu, function(item, index) {
+                            updateMap(item, index, []);
+                        });
+
+                        return menu;
+                    });
             },
-            activate: function(itemLabel) {
-                var itemTree = getItemTree(itemLabel),
+            open: function(itemPath) {
+                var itemTree = getItemTree(itemPath),
                     result = false;
 
                 if (itemTree.length) {
                     deactivateAll();
 
                     angular.forEach(itemTree, function(item) {
-                        clearTimeout(item.hideTimeoutId);
-                        item.isActive = true;
+                        item.isOpen = true;
                     });
 
                     result = true;
@@ -74,11 +74,11 @@ angular.module('tweetsToSoftware')
 
                 return result;
             },
-            highlight: function(itemLabel) {
-                var itemTree = itemLabel.split('/');
+            highlight: function(itemPath) {
+                var itemTree = getItemTree(itemPath);
 
                 angular.forEach(itemTree, function(item) {
-                    dataMap[item].object.isHighlighted = true;
+                    item.isHighlighted = true;
                 });
             },
             deactivate: function() {
