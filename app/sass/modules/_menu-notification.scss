@@ -1,0 +1,13 @@
+.menu-notification {
+  position: absolute;
+  z-index: 2;
+  top: $global-baseline;
+  left: 90%;
+
+  width: $global-baseline*20;
+  padding: $global-baseline;
+
+  background: white;
+  border: 1px solid $color-border;
+  box-shadow: 0 0 10px rgba(black, 0.3);
+}

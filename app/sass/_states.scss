@@ -16,6 +16,9 @@
   position: relative;
 }
 
+.is-rtl { direction: rtl; }
+.is-ltr { direction: ltr; }
+
 .is-left-aligned { text-align: left !important; }
 .is-right-aligned { text-align: right !important; }
 .is-center-aligned { text-align: center !important; }

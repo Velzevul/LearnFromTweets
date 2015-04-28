@@ -1,11 +1,5 @@
 .tweets-widget {
-  position: absolute;
-  bottom: 0;
-  right: 0; left: 0;
   padding: $global-baseline/2;
 
   line-height: $global-baseline*2;
-  
-  background: $color-bg-secondary;
-  border-top: 1px solid $color-border;
 }

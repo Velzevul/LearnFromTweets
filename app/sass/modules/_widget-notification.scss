@@ -1,0 +1,15 @@
+.widget-notification {
+  position: relative;
+
+  line-height: $global-baseline*2;
+
+  &__author-avatar {
+    width: $global-baseline*2;
+    height: $global-baseline*2;
+
+    background-size: cover;
+    background-position: center center;
+    border: 1px solid $color-border;
+    border-radius: 50%;
+  }
+}

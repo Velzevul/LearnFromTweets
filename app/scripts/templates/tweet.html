@@ -6,30 +6,14 @@
             </div>
 
             <div class="l-split__left">
-                <div class="l-list-inline l-list-inline--x-small">
-                    <div class="l-list-inline__item">
-                        <div class="tweet__author-avatar" style="background-image: url({{tweet.author.avatar}});"></div>
-                    </div>
-
-                    <div class="l-list-inline__item">
-                        <div class="tweet__author-name">@{{tweet.author.name}}</div>
-                    </div>
-                </div>
+                <div class="tweet__author-name">@{{tweet.author.name}}</div>
             </div>
         </div>
     </div>
 
-    <div class="tweet__text">{{tweet.text}}</div>
-
-    <div class="l-list-inline l-list-inline--x-small">
-        <div class="l-list-inline__item">
-            <button class="link">retweet</button>
-        </div>
-        <div class="l-list-inline__item">
-            <button class="link">save</button>
-        </div>
-        <div class="l-list-inline__item">
-            <button class="link">hide</button>
-        </div>
+    <div class="l-block-x-small">
+        <div class="tweet__text">{{tweet.text}}</div>
     </div>
+
+    here be actions...
 </div>

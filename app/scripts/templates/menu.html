@@ -1,10 +1,12 @@
 <script type="text/ng-template" id="menuDropdown">
+    <menu-notification  context="item.id"
+                        ng-show="item.isHighlighted && !item.children.length"></menu-notification>
+
     <div class="amd-item"
          ng-class="{'amd-item--active': item.isOpen,
                     'amd-item--parent': item.children.length,
                     'amd-item--highlighted': item.isHighlighted}"
          ng-mouseover="item.isHighlighted = false">
-
 
          <button class="amd-item__name"
                  ng-mouseover="open(item.id)">{{item.label}}</button>

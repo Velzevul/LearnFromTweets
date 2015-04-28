@@ -118,9 +118,13 @@
         'layouts/block',
         'layouts/offscreen';
 
-@import 'modules/app-menu',
+@import 'modules/topbar',
+        'modules/toolbar',
+        'modules/app-menu',
         'modules/tweets-widget',
-        'modules/tweet-notification';
+        'modules/widget-notification',
+        'modules/menu-notification',
+        'modules/tweet';
 
 @import 'states',
         'dev-grid',

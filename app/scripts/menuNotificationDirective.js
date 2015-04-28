@@ -1,15 +1,15 @@
 angular.module('tweetsToSoftware')
-    .directive('tweetsWidget', function($timeout, NotificationService) {
+    .directive('menuNotification', function(NotificationService) {
         'use strict';
 
         return {
             restrict: 'E',
-            templateUrl: 'templates/tweetsWidget.html',
-            scope: {},
+            templateUrl: 'templates/menuNotification.html',
+            scope: {
+                context: '='
+            },
             controller: function($scope) {
                 $scope.data = NotificationService.get();
-
-                NotificationService.listen();
             }
         }
     });

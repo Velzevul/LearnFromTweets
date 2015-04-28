@@ -8,9 +8,16 @@
     <script src="modernizr/modernizr.js"></script>
 </head>
 <body ng-controller="mainController">
-    <menu></menu>
-
-    <tweets-widget></tweets-widget>
+    <div class="topbar">
+        <menu></menu>
+    </div>
+    <div class="toolbar">
+        <div class="l-split">
+            <div class="l-split__right">
+                <tweets-widget></tweets-widget>
+            </div>
+        </div>
+    </div>
 
     <script src="angular/angular.js"></script>
 
@@ -20,15 +27,17 @@
     <script src="scripts/mainController.js"></script>
 
     <script src="scripts/menuService.js"></script>
+    <script src="scripts/notificationService.js"></script>
     <script src="scripts/tweetService.js"></script>
 
     <script src="scripts/menuDirective.js"></script>
 
     <script src="scripts/tweetsWidgetDirective.js"></script>
-    <script src="scripts/tweetNotificationDirective.js"></script>
+    <script src="scripts/widgetNotificationDirective.js"></script>
+    <script src="scripts/menuNotificationDirective.js"></script>
+    <script src="scripts/tweetDirective.js"></script>
 
     <!--<script src="scripts/historyPopupDirective.js"></script>-->
     <!--<script src="scripts/notificationPopupDirective.js"></script>-->
-    <!--<script src="scripts/tweetDirective.js"></script>-->
 </body>
 </html>
