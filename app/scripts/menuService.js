@@ -54,6 +54,7 @@ angular.module('tweetsToSoftware')
         function deactivateAll() {
             angular.forEach(menuFlat, function(item) {
                 item.object.isOpen = false;
+                item.object.isHighlighted = false;
             });
         }
 
@@ -78,13 +79,20 @@ angular.module('tweetsToSoftware')
                 return result;
             },
             highlight: function(itemPath) {
-                var itemTree = getItemTree(itemPath);
+                var itemTree = getItemTree(itemPath),
+                    result = false;
 
-                angular.forEach(itemTree, function(item) {
-                    item.isHighlighted = true;
-                });
+                if (itemTree.length) {
+                    angular.forEach(itemTree, function(item) {
+                        item.isHighlighted = true;
+                    });
+
+                    result = true;
+                }
+
+                return result;
             },
-            deactivate: function() {
+            hideAll: function() {
                 deactivateAll();
             }
         };

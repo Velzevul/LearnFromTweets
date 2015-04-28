@@ -27,7 +27,7 @@ angular.module('tweetsToSoftware')
                         }
                     },
                     {
-                        command: 'Code/SurroundWith',
+                        command: 'Code/Surround With',
                         tweet: {
                             "id": 6,
                             "text": "Good explanation how this works: youtube.com/Q4WR3G1",

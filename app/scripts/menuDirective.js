@@ -12,7 +12,7 @@ angular.module('tweetsToSoftware')
             },
             link: function($scope, elem) {
                 $document.on('click', function() {
-                    MenuService.deactivate();
+                    MenuService.hideAll();
                     $scope.$apply()
                 });
             }

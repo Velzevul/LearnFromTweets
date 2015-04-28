@@ -4,8 +4,8 @@
   line-height: $global-baseline*2;
 
   &__author-avatar {
-    width: $global-baseline*3;
-    height: $global-baseline*3;
+    width: $global-baseline*2;
+    height: $global-baseline*2;
 
     background-size: cover;
     background-position: center center;
@@ -16,7 +16,7 @@
 
 .tn-popup {
   position: absolute;
-  bottom: $global-baseline*3.2;
+  bottom: $global-baseline*2;
   left: 50%;
   width: $global-baseline*20;
   padding: $global-baseline;
