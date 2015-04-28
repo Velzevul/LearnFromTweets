@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .factory('TweetService', function($http, $rootScope, $timeout) {
+    .factory('TweetService', function($http) {
         'use strict';
 
         var tweets = {};

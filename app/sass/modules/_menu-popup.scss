@@ -1,0 +1,15 @@
+.menu-popup {
+  position: absolute;
+  right: 0; top: 0;
+
+  &__indicator {
+    width:  $global-baseline * 2;
+    height: $global-baseline * 2;
+    margin: $global-baseline/4 0;
+
+    line-height: $global-baseline * 2;
+
+    text-align: center;
+    cursor: pointer;
+  }
+}

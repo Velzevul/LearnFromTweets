@@ -1,6 +1,9 @@
 <script type="text/ng-template" id="menuDropdown">
-    <menu-notification  context="item.id"
+    <menu-notification  context="item"
                         ng-show="item.isHighlighted && !item.children.length"></menu-notification>
+
+    <menu-popup context="item"
+                ng-show="!item.children.length"></menu-popup>
 
     <div class="amd-item"
          ng-class="{'amd-item--active': item.isOpen,

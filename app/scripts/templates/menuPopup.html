@@ -1,0 +1,23 @@
+<div class="menu-popup"
+     ng-show="tweets.length">
+    <div class="menu-popup__indicator"
+         ng-mouseover="show()"
+         ng-mouseleave="hide()">...</div>
+
+    <div class="popup"
+         ng-show="popupVisible"
+         ng-mouseover="show()"
+         ng-mouseleave="hide()">
+        <div class="p-header">
+            <div class="p-header__title">Tweets about '{{context.label}}'</div>
+        </div>
+
+        <div class="p-body p-body--limited">
+            <div class="p-body__item"
+                 ng-class="{'p-body__item--last': $last}"
+                 ng-repeat="t in tweets">
+                <tweet tweet="t"></tweet>
+            </div>
+        </div>
+    </div>
+</div>
