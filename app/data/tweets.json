@@ -1,5 +1,5 @@
 {
-  "SmartType": [
+  "Code/Completion/SmartType": [
     {
       "id": 1,
       "text": "Real time-saver for typing!",
@@ -55,7 +55,7 @@
       }
     }
   ],
-  "Project": [
+  "Edit/Restructure/Project": [
     {
       "id": 2,
       "text": "Amazing when working with lazy co-workers =)",

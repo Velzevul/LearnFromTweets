@@ -5,19 +5,14 @@ angular.module('tweetsToSoftware')
         return {
             restrict: 'E',
             templateUrl: 'templates/tweetsWidget.html',
-            scope: {
-                context: '='
-            },
+            scope: {},
             controller: function($scope) {
-                $scope.tweets = [];
+                $scope.notifications = [];
 
-                TweetService.get($scope.context)
-                    .then(function(response) {
-                        $scope.tweets = response;
-                    });
+                TweetService.broadcast();
 
-                $scope.$on($scope.context, function(event, tweet) {
-                    $scope.notification = tweet;
+                $scope.$on('newTweet', function(event, notification) {
+                    $scope.notifications.unshift(notification);
                 });
             }
         }

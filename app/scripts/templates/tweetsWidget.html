@@ -1,14 +1,16 @@
 <div class="tweets-widget">
-    <div class="l-list-inline l-list-inline--collapsed">
-        <div class="l-list-inline__item">
-            <div class="tweets-widget__slot" ng-show="notification">
-                <notification-popup tweet="notification"></notification-popup>
-            </div>
-        </div>
+    <div class="l-split">
+        <div class="l-split__right">Here be options...</div>
 
-        <div class="l-list-inline__item">
-            <div class="tweets-widget__slot" ng-show="tweets.length">
-                <history-popup tweets="tweets"></history-popup>
+        <div class="l-split__left">
+            <div class="l-list-inline l-list-inline--x-small">
+                <div class="l-list-inline__item">
+                    Latest tweets:
+                </div>
+
+                <div class="l-list-inline__item" ng-repeat="n in notifications">
+                    <tweet-notification notification="n"></tweet-notification>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,19 @@
+<div class="tweet-notification">
+    <div ng-mouseover="activate()"
+         ng-mouseleave="deactivate()">
+        <div class="tweet-notification__author-avatar"
+             style="background-image: url({{notification.tweet.author.avatar}});"></div>
+        <!-- timestamp here -->
+    </div>
+
+    <div class="tn-popup"
+         ng-show="active"
+         ng-mouseover="activate()"
+         ng-mouseleave="deactivate()">
+        <div class="l-block-x-small">
+            <div class="tn-popup__author-name">@{{notification.tweet.author.name}}</div>
+        </div>
+
+        <div class="tn-popup__text">{{notification.tweet.text}}</div>
+    </div>
+</div>
