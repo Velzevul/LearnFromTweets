@@ -7,7 +7,11 @@ angular.module('tweetsToSoftware')
             templateUrl: 'scripts/templates/menu.html',
             scope: {},
             controller: function($scope) {
-                $scope.data = MenuService.get()
+                MenuService.get()
+                    .then(function(menu) {
+                        $scope.menu = menu;
+                    })
+
                 $scope.open = MenuService.open;
             },
             link: function($scope, elem) {

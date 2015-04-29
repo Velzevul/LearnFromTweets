@@ -7,7 +7,10 @@ angular.module('tweetsToSoftware')
             templateUrl: 'templates/tweetsWidget.html',
             scope: {},
             controller: function($scope) {
-                $scope.data = NotificationService.get();
+                NotificationService.get()
+                    .then(function(data) {
+                        $scope.data = data;
+                    });
 
                 NotificationService.listen();
             }

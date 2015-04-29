@@ -1,0 +1,51 @@
+.activity-overlay {
+  position: absolute;
+  z-index: 999;
+  top: 0; bottom: 0;
+  right: 0; left: 0;
+
+  color: white;
+
+  background: rgba(black, 0.8);
+}
+
+.ao-header {
+  position: relative;
+  padding: $global-baseline * 1.5;
+
+  text-align: center;
+
+  .ao-header__title {
+    font-size: $global-baseline * 2;
+  }
+
+  .ao-header__closebtn {
+    position: absolute;
+    top: $global-baseline*1.5;
+    right: $global-baseline*1.5;
+
+    display: block;
+    width: $global-baseline * 2;
+    height: $global-baseline * 2;
+
+    line-height: $global-baseline * 2;
+    
+    text-align: center;
+    cursor: pointer;
+  }
+}
+
+.ao-section {
+  position: relative;
+  padding: $global-baseline * 1.5;
+
+  &__title {
+    width: 100%;
+
+    font-size: 11px;
+    
+    text-transform: uppercase;
+
+    border-bottom: 1px solid rgba(white, 0.5);
+  }
+}

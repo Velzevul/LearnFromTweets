@@ -1,41 +1,58 @@
 angular.module('tweetsToSoftware')
-    .factory('MenuService', function($http, $interval) {
+    .factory('MenuService', function($http, $q) {
        'use strict';
 
-        var data = {
-                menu: []
-            },
-            menuFlat = {};
+        var menu = [],
+            menuFlat = {},
+            loaded = false,
+            promise = null;
 
-        $http.get('/data/menu.json')
-            .then(function(response) {
-                data.menu = response.data;
+        function load() {
+            var res = null;
 
-                function updateMap(item, index, parents) {
-                    var label = parents.length ? [parents[parents.length - 1], item['label']].join('/') : item['label'];
+            if (loaded) {
+                var deferred = $q.defer();
 
-                    item.id = label;
+                deferred.resolve();
+                res = deferred.promise;
+            } else {
+                if (!promise) {
+                    promise = $http.get('/data/menu.json')
+                        .then(function(response) {
+                            menu = response.data;
 
-                    menuFlat[label] = {
-                        index: index,
-                        parents: parents,
-                        object: item
-                    };
+                            function updateMap(item, index, parents) {
+                                var label = parents.length ? [parents[parents.length - 1], item['label']].join('/') : item['label'];
 
-                    if (item['children'] && item['children'].length > 0) {
-                        angular.forEach(item['children'], function(child, childIndex) {
-                            var childPath = angular.copy(parents);
+                                item.id = label;
 
-                            childPath.push(label);
-                            updateMap(child, childIndex, childPath);
+                                menuFlat[label] = {
+                                    index: index,
+                                    parents: parents,
+                                    object: item
+                                };
+
+                                if (item['children'] && item['children'].length > 0) {
+                                    angular.forEach(item['children'], function(child, childIndex) {
+                                        var childPath = angular.copy(parents);
+
+                                        childPath.push(label);
+                                        updateMap(child, childIndex, childPath);
+                                    });
+                                }
+                            }
+
+                            angular.forEach(menu, function(item, index) {
+                                updateMap(item, index, []);
+                            });
                         });
-                    }
                 }
 
-                angular.forEach(data.menu, function(item, index) {
-                    updateMap(item, index, []);
-                });
-            });
+                res = promise;
+            }
+
+            return res;
+        }
 
         function getItemTree(itemPath) {
             var result = [];
@@ -60,7 +77,16 @@ angular.module('tweetsToSoftware')
 
         return {
             get: function() {
-                return data;
+                return load()
+                    .then(function() {
+                        return menu;
+                    });
+            },
+            getFlat: function() {
+                return load()
+                    .then(function() {
+                       return menuFlat;
+                    });
             },
             open: function(itemPath) {
                 var itemTree = getItemTree(itemPath),

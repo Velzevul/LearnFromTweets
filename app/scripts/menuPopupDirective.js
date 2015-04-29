@@ -17,9 +17,9 @@ angular.module('tweetsToSoftware')
                     showDelay = 300,
                     hideDelay = 20;
 
-                TweetService.get($scope.context.id)
-                    .then(function(data) {
-                        $scope.tweets = data;
+                TweetService.getForItem($scope.context.id)
+                    .then(function(tweets) {
+                        $scope.tweets = tweets;
                     });
 
                 $scope.show = function() {

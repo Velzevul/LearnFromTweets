@@ -9,7 +9,10 @@ angular.module('tweetsToSoftware')
                 context: '='
             },
             controller: function($scope) {
-                $scope.data = NotificationService.get();
+                NotificationService.get()
+                    .then(function(data) {
+                        $scope.data = data;
+                    });
             }
         }
     });
