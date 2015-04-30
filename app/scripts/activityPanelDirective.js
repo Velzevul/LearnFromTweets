@@ -9,7 +9,11 @@ angular.module('tweetsToSoftware')
             controller: function($scope) {
                 $scope.filter = function() {
                     TweetsFilter.lowerTimeBound = parseInt(moment('29 April 2015').format('x'));
-                }
+                };
+
+                $scope.filterAurhor = function() {
+                    TweetsFilter.authors.push('volod');
+                };
             }
         };
     });

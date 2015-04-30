@@ -28,14 +28,15 @@ angular.module('tweetsToSoftware')
                             buildStructure();
                         });
 
-                        $scope.$watchGroup(['filters.authors', 'filters.lowerTimeBound', 'filters.upperTimeBound'], function() {
+                        $scope.$watchGroup(['filters.authors.length', 'filters.lowerTimeBound', 'filters.upperTimeBound'], function() {
                             // rebuild structure when filters get changed
                             buildStructure();
                         });
                     });
 
                 function buildStructure() {
-                    var totalTweets = 0;
+                    var totalTweets = 0,
+                        availableAuthors = {};
 
                     angular.forEach($scope.menuFlat, function(menuFlatItem) {
                         menuFlatItem.object.tweets = [];
@@ -44,6 +45,13 @@ angular.module('tweetsToSoftware')
 
                     angular.forEach($scope.allTweets.tweets, function(tweet) {
                         if (matchFilters(tweet)) {
+                            if (availableAuthors[tweet.author.name]) {
+                                availableAuthors[tweet.author.name].tweetsCount += 1;
+                            } else {
+                                availableAuthors[tweet.author.name] = angular.copy(tweet.author);
+                                availableAuthors[tweet.author.name].tweetsCount = 1;
+                            }
+
                             totalTweets += 1;
                             $scope.menuFlat[tweet.commandId].object.tweets.push(tweet);
                             increaseTweetCounters(tweet.commandId);
@@ -64,11 +72,31 @@ angular.module('tweetsToSoftware')
                         }
                     }
 
+                    $scope.availableAuthors = [];
+                    for (var key in availableAuthors) {
+                        $scope.availableAuthors.push(availableAuthors[key]);
+                    }
                 }
 
                 function matchFilters(tweet) {
                     // TODO: implement real functionality
-                    return tweet.published > $scope.filters.lowerTimeBound;
+                    console.log(tweet.author.name, $scope.filters.authors)
+                    if ($scope.filters.authors.length &&
+                        ($scope.filters.authors.indexOf(tweet.author.name) == -1)) {
+                        return false;
+                    }
+
+                    if ($scope.filters.lowerTimeBound &&
+                        (tweet.published < $scope.filters.lowerTimeBound)) {
+                        return false;
+                    }
+
+                    if ($scope.filters.upperTimeBound &&
+                        (tweet.published > $scope.filters.upperTimeBound)) {
+                        return false;
+                    }
+
+                    return true;
                 }
 
                 $scope.open = MenuService.open;
