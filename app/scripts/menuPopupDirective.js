@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('menuPopup', function($timeout, TweetService) {
+    .directive('menuPopup', function($timeout) {
         'use strict';
 
         return {
@@ -9,18 +9,12 @@ angular.module('tweetsToSoftware')
                 context: '='
             },
             controller: function($scope) {
-                $scope.tweets = [];
                 $scope.popupVisible = false;
 
                 var showTimeoutId = null,
                     hideTimeoutId = null,
                     showDelay = 300,
                     hideDelay = 20;
-
-                TweetService.getForItem($scope.context.id)
-                    .then(function(tweets) {
-                        $scope.tweets = tweets;
-                    });
 
                 $scope.show = function() {
                     clearTimeout(showTimeoutId);

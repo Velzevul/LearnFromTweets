@@ -16,18 +16,26 @@
             <div class="l-split__right">
                 <tweets-widget></tweets-widget>
             </div>
+
+            <div class="l-split__left">
+                <div class="toolbar__mock"></div>
+            </div>
         </div>
     </div>
 
-    <activity-overlay></activity-overlay>
+    <activity-panel></activity-panel>
 
     <script src="jquery/dist/jquery.js"></script>
     <script src="angular/angular.js"></script>
+    <script src="moment/moment.js"></script>
+    <script src="angular-moment/angular-moment.js"></script>
 
     <script src="scripts/templates.js"></script>
     <script src="scripts/app.js"></script>
 
     <script src="scripts/mainController.js"></script>
+
+    <script src="scripts/tweetsFilterValue.js"></script>
 
     <script src="scripts/menuService.js"></script>
     <script src="scripts/notificationService.js"></script>
@@ -41,8 +49,6 @@
     <script src="scripts/menuNotificationDirective.js"></script>
     <script src="scripts/menuPopupDirective.js"></script>
 
-    <script src="scripts/activityOverlayDirective.js"></script>
-    <script src="scripts/menuMinimapDirective.js"></script>
-    <script src="scripts/menuMinimapItemDirective.js"></script>
+    <script src="scripts/activityPanelDirective.js"></script>
 </body>
 </html>

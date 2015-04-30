@@ -1,0 +1,30 @@
+.app-panel {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+
+  height: $global-baseline*30;
+
+  border: 1px solid $color-border;
+}
+
+.ap-header {
+  padding: $global-baseline/4 $global-baseline;
+
+  background: lighten($color-bg-secondary, 5%);
+  border-bottom: 1px solid $color-border;
+
+  &__title {
+    font-weight: 600;
+  }
+}
+
+.ap-section {
+  padding: $global-baseline;
+
+  font-weight: 600;
+
+  &__title {
+    font-size: 12px;
+  }
+}

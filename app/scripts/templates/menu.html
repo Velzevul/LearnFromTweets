@@ -9,10 +9,11 @@
          ng-class="{'amd-item--active': item.isOpen,
                     'amd-item--parent': item.children.length,
                     'amd-item--highlighted': item.isHighlighted}"
-         ng-mouseover="item.isHighlighted = false">
+         ng-mouseover="item.isHighlighted = false"
+         style="background-color: {{getHighlightColor(item.intensity)}} !important;">
 
          <button class="amd-item__name"
-                 ng-mouseover="open(item.id)">{{item.label}}</button>
+                 ng-mouseover="open(item.id)">{{item.label}} {{item.intensity}}</button>
     </div>
 
     <div ng-show="item.children.length">
@@ -33,9 +34,10 @@
                 <div class="am-item"
                      ng-class="{'am-item--active': rootItem.isOpen,
                                 'am-item--highlighted': rootItem.isHighlighted}"
-                     ng-mouseover="rootItem.isHighlighted = false">
+                     ng-mouseover="rootItem.isHighlighted = false"
+                     style="background-color: {{getHighlightColor(rootItem.intensity)}} !important;">
                     <button class="am-item__name"
-                            ng-mouseover="open(rootItem.id)">{{rootItem.label}}</button>
+                            ng-mouseover="open(rootItem.id)">{{rootItem.label}} {{rootItem.intensity}}</button>
                 </div>
 
                 <div class="am-dropdown am-dropdown--root"

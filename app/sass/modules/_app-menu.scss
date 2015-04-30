@@ -23,7 +23,7 @@
     background: darken($color-bg-secondary, 10%);
   }
   .am-item--highlighted {
-    background: rgba($color-dc-primary, 0.5);
+    background: rgba($color-dc-secondary, 0.5);
   }
 
 .am-dropdown {
@@ -67,5 +67,5 @@
     background: lighten($color-bg-secondary, 5%);
   }
   .amd-item--highlighted {
-    background: rgba($color-dc-primary, 0.5);
+    background: rgba($color-dc-secondary, 0.5);
   }

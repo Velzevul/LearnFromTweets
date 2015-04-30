@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('widgetNotification', function($timeout, MenuService) {
+    .directive('widgetNotification', function($timeout, MenuService, TweetsFilter) {
         'use strict';
 
         return {
@@ -18,7 +18,7 @@ angular.module('tweetsToSoftware')
                     showTimeoutId = $timeout(function() {
                         MenuService.hideAll();
                         MenuService.open($scope.notification.command);
-                        MenuService.highlight($scope.notification.command);
+                        MenuService4.highlight($scope.notification.command);
                     }, showDelay).$$timeoutId;
                 };
 

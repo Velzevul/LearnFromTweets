@@ -2,8 +2,9 @@ angular.module('tweetsToSoftware')
     .factory('TweetService', function($http, $q) {
         'use strict';
 
-        var tweets = [],
-            commandMap = {},
+        var allTweets = {
+                tweets: []
+            },
             loaded = false,
             promise = null;
 
@@ -20,15 +21,7 @@ angular.module('tweetsToSoftware')
                     promise = $http.get('/data/tweets.json')
                         .then(function(response) {
                             loaded = true;
-                            tweets = response.data;
-
-                            angular.forEach(tweets, function(item) {
-                               if (commandMap[item.commandId]) {
-                                   commandMap[item.commandId].push(item);
-                               } else {
-                                   commandMap[item.commandId] = [item];
-                               }
-                            });
+                            allTweets.tweets = response.data;
                         });
                 }
 
@@ -42,13 +35,7 @@ angular.module('tweetsToSoftware')
             get: function() {
                 return load()
                     .then(function() {
-                        return tweets;
-                    });
-            },
-            getForItem: function(menuItem) {
-                return load()
-                    .then(function() {
-                        return commandMap[menuItem];
+                        return allTweets;
                     });
             }
         };
