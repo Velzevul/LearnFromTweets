@@ -1,0 +1,22 @@
+.menu-minimap {
+  // ...
+}
+
+.mm-item {
+  padding: 0 $global-baseline/2;
+
+  background: lighten($color-bg-secondary, 5%);
+
+  &__name {
+    font-size: 11px;
+
+    color: $color-tx;
+  }
+}
+  .mm-item--parent {
+    border-bottom: 1px solid $color-border;
+  }
+
+.mm-submenu {
+  margin-left: $global-baseline * 1.5;
+}
