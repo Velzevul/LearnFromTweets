@@ -1,0 +1,28 @@
+.author {
+  padding: $global-baseline/2 0;
+
+  &__avatar {
+    width: $global-baseline * 2.5;
+    height: $global-baseline * 2.5;
+
+    border-radius: 50%;
+    border: 1px solid $color-border;
+
+    background-size: cover;
+    background-position: center center;
+  }
+  
+  &__name {
+    font-weight: 600;
+  }
+
+  &__follow {
+    font-weight: 12px;
+    line-height: 16px;
+
+    color: $color-tx-muted;
+  }
+}
+  .author--selected {
+    background: $color-bg-secondary;
+  }

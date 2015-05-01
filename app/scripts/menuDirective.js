@@ -80,7 +80,6 @@ angular.module('tweetsToSoftware')
 
                 function matchFilters(tweet) {
                     // TODO: implement real functionality
-                    console.log(tweet.author.name, $scope.filters.authors)
                     if ($scope.filters.authors.length &&
                         ($scope.filters.authors.indexOf(tweet.author.name) == -1)) {
                         return false;

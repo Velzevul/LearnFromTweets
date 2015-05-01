@@ -3,8 +3,6 @@
   bottom: 0;
   left: 0; right: 0;
 
-  height: $global-baseline*30;
-
   border: 1px solid $color-border;
 }
 
@@ -20,11 +18,20 @@
 }
 
 .ap-section {
-  padding: $global-baseline;
-
-  font-weight: 600;
+  padding: $global-baseline * 2;
 
   &__title {
+    font-weight: 600;
     font-size: 12px;
+
+    border-bottom: 1px solid $color-border;
   }
+
+  &__body {
+    // ...
+  }
+    &__body--limited {
+      height: $global-baseline * 20;
+      overflow: auto;
+    }
 }
