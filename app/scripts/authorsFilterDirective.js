@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('authorsFilter', function() {
+    .directive('authorsFilter', function(TweetsFilter) {
         'use strict';
 
         return {
@@ -49,8 +49,10 @@ angular.module('tweetsToSoftware')
                 $scope.selectAuthor = function(author) {
                     if ($scope.selectedAuthor == author) {
                         $scope.selectedAuthor = null;
+                        TweetsFilter.author = null;
                     } else {
                         $scope.selectedAuthor = author;
+                        TweetsFilter.author = author.name;
                     }
                 };
 

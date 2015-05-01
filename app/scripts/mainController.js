@@ -1,5 +1,6 @@
 angular.module('tweetsToSoftware')
-    .controller('mainController', function($scope, $timeout, MenuService, TweetService) {
+    .controller('mainController', function($scope, TweetsFilter) {
         'use strict';
 
+        $scope.filters = TweetsFilter;
     });

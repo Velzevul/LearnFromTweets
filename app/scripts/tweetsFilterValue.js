@@ -5,6 +5,6 @@ angular.module('tweetsToSoftware')
     .value('TweetsFilter', {
         lowerTimeBound: null,
         upperTimeBound: null,
-        authors: [],
-        active: false
+        author: null,
+        active: true
     });

@@ -28,7 +28,7 @@ angular.module('tweetsToSoftware')
                             buildStructure();
                         });
 
-                        $scope.$watchGroup(['filters.authors.length', 'filters.lowerTimeBound', 'filters.upperTimeBound'], function() {
+                        $scope.$watchGroup(['filters.author', 'filters.lowerTimeBound', 'filters.upperTimeBound'], function() {
                             // rebuild structure when filters get changed
                             buildStructure();
                         });
@@ -80,8 +80,8 @@ angular.module('tweetsToSoftware')
 
                 function matchFilters(tweet) {
                     // TODO: implement real functionality
-                    if ($scope.filters.authors.length &&
-                        ($scope.filters.authors.indexOf(tweet.author.name) == -1)) {
+                    if ($scope.filters.author &&
+                        ($scope.filters.author != tweet.author.name)) {
                         return false;
                     }
 
