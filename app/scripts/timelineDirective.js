@@ -16,6 +16,7 @@ angular.module('tweetsToSoftware')
                 function plot(data) {
                     angular.forEach(data, function(item) {
                         item.time = parseDate(item.time);
+                        item.time.setMinutes(30);
                     });
 
                     var x = d3.time.scale()
@@ -67,13 +68,10 @@ angular.module('tweetsToSoftware')
                         .x(function(d) { return x(d.time); })
                         .y(function(d) { return y(d.nTweets); });
 
-                    //var histogram = d3.layout.histogram()
-                    //    .bins();
-
                     svg.append('g')
                         .attr('class', 'axis')
                         .attr('transform', 'translate(0,' + height + ')')
-                        .call(hoursAxis);
+                        .call(daysAxis);
 
                     svg.append('g')
                         .attr('class', 'axis')
@@ -83,7 +81,7 @@ angular.module('tweetsToSoftware')
                     svg.append('g')
                         .attr('class', 'axis')
                         .attr('transform', 'translate(0,' + height + ')')
-                        .call(daysAxis);
+                        .call(hoursAxis);
 
                     svg.append('g')
                         .attr('class', 'axis')
@@ -96,6 +94,33 @@ angular.module('tweetsToSoftware')
                     svg.append('path')
                         .attr('class', 'line')
                         .attr('d', line(data));
+
+                    var brush = d3.svg.brush()
+                        .x(x)
+                        .on("brush", brushed);
+
+                    var gBrush = svg.append("g")
+                        .attr("class", "brush")
+                        .call(brush);
+
+                    gBrush.selectAll("rect")
+                        .attr("height", height);
+
+                    function brushed() {
+                        var extent0 = brush.extent(),
+                            extent1 = extent0.map(d3.time.hour.round);
+
+                        // if empty when rounded, use floor & ceil instead
+                        if (extent1[0] >= extent1[1]) {
+                            extent1[0] = d3.time.hour.floor(extent0[0]);
+                            extent1[1] = d3.time.hour.ceil(extent0[1]);
+                        }
+
+                        d3.select(this)
+                            .call(brush.extent(extent1));
+
+                        console.log(extent1);
+                    }
                 }
 
                 ActivityService.get()

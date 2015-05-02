@@ -41,3 +41,9 @@
 .area {
   fill: rgba($color-dc-secondary, 0.3);
 }
+
+.brush .extent {
+  stroke: black;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
