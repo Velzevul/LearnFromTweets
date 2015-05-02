@@ -16,7 +16,7 @@ def generateActivity():
 
     for dt in rrule.rrule(rrule.HOURLY, dtstart=initial_date, until=now):
         result.append({ 'time': str(dt),
-                        'n_tweets': randint(0, 10) })
+                        'nTweets': randint(0, 10) })
 
     return result
 

@@ -18,17 +18,13 @@
   shape-rendering: crispEdges;
 }
 
-.x.axis line {
-  stroke: white;
-}
+//.x.axis line {
+//  stroke: white;
+//}
 
-.x.axis .minor {
-  stroke-opacity: 0.5;
-}
-
-.x.axis path {
-  display: none;
-}
+//.x.axis .minor {
+//  stroke-opacity: 0.5;
+//}
 
 .axis path,
 .axis line {
@@ -36,14 +32,10 @@
   stroke: black;
 }
 
-.x.axis path {
-  display: none;
-}
-
 .line {
   fill: none;
   stroke: $color-dc-secondary;
-  stroke-width: 1.5px;
+  stroke-width: 1px;
 }
 
 .area {
