@@ -1,8 +1,8 @@
-<div class="app-panel">
+<div class="app-panel" ng-show="filters.active">
     <div class="ap-header">
         <div class="l-split">
             <div class="l-split__right">
-                <button class="link" ng-click="filters.active = false">(close)</button>
+                <button class="link" ng-click="toggleFilters()">(close)</button>
             </div>
 
             <div class="l-split__left">

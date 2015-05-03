@@ -11,10 +11,11 @@
     <div class="topbar">
         <menu></menu>
     </div>
+
     <div class="toolbar">
         <div class="l-split">
             <div class="l-split__right">
-                <tweets-widget ng-show="!filters.active"></tweets-widget>
+                <tweets-widget></tweets-widget>
             </div>
 
             <div class="l-split__left">
@@ -23,7 +24,7 @@
         </div>
     </div>
 
-    <activity-panel ng-show="filters.active"></activity-panel>
+    <activity-panel></activity-panel>
 
     <script src="jquery/dist/jquery.js"></script>
     <script src="angular/angular.js"></script>

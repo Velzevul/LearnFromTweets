@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('menu', function($q, $document, MenuService, TweetService, TweetsFilter) {
+    .directive('menu', function($q, $document, MenuService, DataService) {
        'use strict';
 
         return {
@@ -9,102 +9,58 @@ angular.module('tweetsToSoftware')
             controller: function($scope) {
                 var highlightColor = '69,131,255';
 
-                $scope.filters = TweetsFilter;
+                $scope.filters = DataService.getFilters();
 
                 $q.all([
                     MenuService.get(),
                     MenuService.getFlat(),
-                    TweetService.get()
+                    DataService.getMenuTweets()
                 ])
                     .then(function(data) {
                         $scope.menu = data[0];
-                        $scope.menuFlat = data[1];
-                        $scope.allTweets = data[2];
 
-                        buildStructure();
+                        var menuTweets = data[2].menuTweets,
+                            menuFlat = data[1],
+                            nTweets = data[2].nTweets;
 
-                        $scope.$watch('allTweets.tweets.length', function() {
-                           // rebuild structure when new tweet is added
-                            buildStructure();
-                        });
+                        angular.forEach(menuFlat, function(itemFlat) {
+                            itemFlat.object.nTweets = 0;
+                            itemFlat.object.intensity = 0;
 
-                        $scope.$watchGroup(['filters.author', 'filters.lowerTimeBound', 'filters.upperTimeBound'], function() {
-                            // rebuild structure when filters get changed
-                            buildStructure();
-                        });
-                    });
-
-                function buildStructure() {
-                    var totalTweets = 0,
-                        availableAuthors = {};
-
-                    angular.forEach($scope.menuFlat, function(menuFlatItem) {
-                        menuFlatItem.object.tweets = [];
-                        menuFlatItem.object.tweetsCount = 0;
-                    });
-
-                    angular.forEach($scope.allTweets.tweets, function(tweet) {
-                        if (matchFilters(tweet)) {
-                            if (availableAuthors[tweet.author.name]) {
-                                availableAuthors[tweet.author.name].tweetsCount += 1;
-                            } else {
-                                availableAuthors[tweet.author.name] = angular.copy(tweet.author);
-                                availableAuthors[tweet.author.name].tweetsCount = 1;
+                            if (menuTweets[itemFlat.object.id]) {
+                                itemFlat.object.nTweets = menuTweets[itemFlat.object.id];
+                                itemFlat.object.intensity = menuTweets[itemFlat.object.id]/nTweets;
                             }
+                        });
 
-                            totalTweets += 1;
-                            $scope.menuFlat[tweet.commandId].object.tweets.push(tweet);
-                            increaseTweetCounters(tweet.commandId);
-                        }
+                        debugger;
                     });
 
-                    angular.forEach($scope.menuFlat, function(menuFlatItem) {
-                        menuFlatItem.object.intensity = menuFlatItem.object.tweetsCount/totalTweets;
-                    });
+                $scope.$on('filtersChanged', function() {
+                    DataService.getMenuTweets()
+                        .then(function(response) {
+                            var menuTweets = response.menuTweets,
+                                nTweets = response.nTweets;
 
-                    function increaseTweetCounters(commandId) {
-                        var menuItem = $scope.menuFlat[commandId];
+                            angular.forEach($scope.menu, function(item) {
+                                item.nTweets = 0;
+                                item.intensity = 0;
 
-                        menuItem.object.tweetsCount += 1;
-
-                        if (menuItem.parents.length) {
-                            increaseTweetCounters(menuItem.parents[menuItem.parents.length - 1]);
-                        }
-                    }
-
-                    $scope.availableAuthors = [];
-                    for (var key in availableAuthors) {
-                        $scope.availableAuthors.push(availableAuthors[key]);
-                    }
-                }
-
-                function matchFilters(tweet) {
-                    // TODO: implement real functionality
-                    if ($scope.filters.author &&
-                        ($scope.filters.author != tweet.author.name)) {
-                        return false;
-                    }
-
-                    if ($scope.filters.lowerTimeBound &&
-                        (tweet.published < $scope.filters.lowerTimeBound)) {
-                        return false;
-                    }
-
-                    if ($scope.filters.upperTimeBound &&
-                        (tweet.published > $scope.filters.upperTimeBound)) {
-                        return false;
-                    }
-
-                    return true;
-                }
+                                if (menuTweets[item.id]) {
+                                    item.nTweets = menuTweets[item.id];
+                                    item.intensity = menuTweets[item.id]/nTweets;
+                                }
+                            });
+                        });
+                });
 
                 $scope.open = MenuService.open;
 
-                $scope.getHighlightColor = function(intensity) {
+                $scope.getHighlightColor = function(item) {
                     var res = '';
 
                     if ($scope.filters.active) {
-                        res = 'rgba(' + highlightColor + ', ' + intensity + ')';
+                        res = 'rgba(' + highlightColor + ', ' + item.intensity + ')';
                     }
 
                     return res;

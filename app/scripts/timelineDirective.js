@@ -131,28 +131,6 @@ angular.module('tweetsToSoftware')
                         .attr("height", height);
                 }
 
-                $q.all([
-                    DataService.getActivity(),
-                    DataService.getDomain()
-                ])
-                    .then(function(response) {
-                        angular.forEach(response[0].activity, function(item) {
-                            item.parsedTime = parseDate(item.time);
-                        });
-
-                        $scope.nTweets = response[0].nTweets;
-                        $scope.domainLowerBound = moment(response[1][response[1].length - 1]).format('MMM DD HH:MM');
-                        $scope.domainUpperBound = moment(response[1][0]).format('MMM DD HH:MM');
-
-                        $scope.lowerTimeBound = $scope.domainLowerBound;
-                        $scope.upperTimeBound = $scope.domainUpperBound;
-
-                        drawAxes(response[0].activity, response[1]);
-                        drawGhostChart(response[0].activity);
-                        drawChart(response[0].activity);
-                        setBrush();
-                    });
-
                 $(window).on('resize', function() {
                     clearTimeout(redrawTimeoutId);
                     redrawTimeoutId = $timeout(function() {
@@ -216,6 +194,32 @@ angular.module('tweetsToSoftware')
                             drawChart(response.activity);
                             setBrush();
                         });
+                });
+
+                $scope.$on('filtersActivated', function() {
+                    $timeout(function() {
+                        $q.all([
+                            DataService.getActivity(),
+                            DataService.getDomain()
+                        ])
+                            .then(function(response) {
+                                angular.forEach(response[0].activity, function(item) {
+                                    item.parsedTime = parseDate(item.time);
+                                });
+
+                                $scope.nTweets = response[0].nTweets;
+                                $scope.domainLowerBound = moment(response[1][response[1].length - 1]).format('MMM DD HH:MM');
+                                $scope.domainUpperBound = moment(response[1][0]).format('MMM DD HH:MM');
+
+                                $scope.lowerTimeBound = $scope.domainLowerBound;
+                                $scope.upperTimeBound = $scope.domainUpperBound;
+
+                                drawAxes(response[0].activity, response[1]);
+                                drawGhostChart(response[0].activity);
+                                drawChart(response[0].activity);
+                                setBrush();
+                            });
+                    });
                 });
             }
         }

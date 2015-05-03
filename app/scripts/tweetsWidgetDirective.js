@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('tweetsWidget', function($timeout, NotificationService, TweetsFilter) {
+    .directive('tweetsWidget', function($timeout, NotificationService, DataService) {
         'use strict';
 
         return {
@@ -14,7 +14,8 @@ angular.module('tweetsToSoftware')
 
                 NotificationService.listen();
 
-                $scope.filters = TweetsFilter;
+                $scope.toggleFilters = DataService.toggleFilters;
+                $scope.filters = DataService.getFilters();
             }
         }
     });

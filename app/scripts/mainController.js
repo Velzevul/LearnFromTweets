@@ -1,6 +1,4 @@
 angular.module('tweetsToSoftware')
-    .controller('mainController', function($scope, TweetsFilter) {
+    .controller('mainController', function($scope) {
         'use strict';
-
-        $scope.filters = TweetsFilter;
     });

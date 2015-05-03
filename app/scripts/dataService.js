@@ -3,6 +3,7 @@ angular.module('tweetsToSoftware')
         'use strict';
 
         var filters = {
+                active: false,
                 time: null,
                 author: null
             },
@@ -14,7 +15,7 @@ angular.module('tweetsToSoftware')
                 tweets: null,
                 authors: null,
                 activity: null,
-                menuItems: null
+                menuTweets: null
             },
             loaded,
             promise;
@@ -54,7 +55,7 @@ angular.module('tweetsToSoftware')
                 tweets: [],
                 activity: [],
                 authors: [],
-                menuItems: {}
+                menuTweets: {}
             };
 
             var activityMap = {},
@@ -64,10 +65,10 @@ angular.module('tweetsToSoftware')
                if (matchFilters(tweet)) {
                    filteredData.tweets.push(tweet);
 
-                   if (filteredData.menuItems[tweet.commandId]) {
-                       filteredData.menuItems[tweet.commandId] += 1;
+                   if (filteredData.menuTweets[tweet.commandId]) {
+                       filteredData.menuTweets[tweet.commandId] += 1;
                    } else {
-                       filteredData.menuItems[tweet.commandId] = 1;
+                       filteredData.menuTweets[tweet.commandId] = 1;
                    }
 
                    if (authorsMap[tweet.author.name]) {
@@ -112,6 +113,12 @@ angular.module('tweetsToSoftware')
         }
 
         return {
+            toggleFilters: function() {
+                filters.active = !filters.active;
+                if (filters.active) {
+                    $rootScope.$broadcast('filtersActivated');
+                }
+            },
             getFilters: function() {
                 return filters;
             },
@@ -156,10 +163,13 @@ angular.module('tweetsToSoftware')
                         };
                     });
             },
-            getMenuItems: function() {
+            getMenuTweets: function() {
                 return load()
                     .then(function() {
-                        return filteredData.menuItems;
+                        return {
+                            menuTweets: filteredData.menuTweets,
+                            nTweets: filteredData.tweets.length
+                        };
                     });
             },
             getAuthors: function() {

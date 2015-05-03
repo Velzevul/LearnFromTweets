@@ -1,10 +1,12 @@
-<div class="tweets-widget">
+<div class="tweets-widget" ng-hide="filters.active">
     <div class="l-list-inline l-list-inline--x-small is-rtl">
         <div class="l-list-inline__item is-middle-aligned is-ltr">
-            <button class="link" ng-click="filters.active = true">all activity</button>
+            <button class="link"
+                    ng-click="toggleFilters()">all activity</button>
         </div>
 
-        <div class="l-list-inline__item is-middle-aligned is-ltr" ng-repeat="n in data.notifications">
+        <div class="l-list-inline__item is-middle-aligned is-ltr"
+             ng-repeat="n in data.notifications">
             <widget-notification notification="n"></widget-notification>
         </div>
     </div>
