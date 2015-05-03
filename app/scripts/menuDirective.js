@@ -18,41 +18,48 @@ angular.module('tweetsToSoftware')
                 ])
                     .then(function(data) {
                         $scope.menu = data[0];
+                        $scope.menuFlat = data[1];
 
-                        var menuTweets = data[2].menuTweets,
-                            menuFlat = data[1],
-                            nTweets = data[2].nTweets;
-
-                        angular.forEach(menuFlat, function(itemFlat) {
-                            itemFlat.object.nTweets = 0;
-                            itemFlat.object.intensity = 0;
-
-                            if (menuTweets[itemFlat.object.id]) {
-                                itemFlat.object.nTweets = menuTweets[itemFlat.object.id];
-                                itemFlat.object.intensity = menuTweets[itemFlat.object.id]/nTweets;
-                            }
-                        });
-
-                        debugger;
+                        calculateIntensity(data[2]);
                     });
 
                 $scope.$on('filtersChanged', function() {
                     DataService.getMenuTweets()
-                        .then(function(response) {
-                            var menuTweets = response.menuTweets,
-                                nTweets = response.nTweets;
-
-                            angular.forEach($scope.menu, function(item) {
-                                item.nTweets = 0;
-                                item.intensity = 0;
-
-                                if (menuTweets[item.id]) {
-                                    item.nTweets = menuTweets[item.id];
-                                    item.intensity = menuTweets[item.id]/nTweets;
-                                }
-                            });
-                        });
+                        .then(calculateIntensity);
                 });
+
+                function calculateIntensity(response) {
+                    var menuTweets = response.menuTweets,
+                        nTweets = response.nTweets;
+
+                    angular.forEach(Object.keys($scope.menuFlat), function(menuItemId) {
+                        var menuItem = $scope.menuFlat[menuItemId].object;
+
+                        menuItem.nTweets = 0;
+                        menuItem.intensity = 0;
+                    });
+
+                    angular.forEach(Object.keys($scope.menuFlat), function(menuItemId) {
+                        var menuItem = $scope.menuFlat[menuItemId].object,
+                            menuItemParentIds = $scope.menuFlat[menuItemId].parents,
+                            parent;
+
+                        if (menuTweets[menuItem.id]) {
+                            menuItem.nTweets += menuTweets[menuItem.id];
+
+                            angular.forEach(menuItemParentIds, function(parentId) {
+                                parent = $scope.menuFlat[parentId].object;
+                                parent.nTweets += menuTweets[menuItem.id];
+                            });
+                        }
+                    });
+
+                    angular.forEach(Object.keys($scope.menuFlat), function(menuItemId) {
+                        var menuItem = $scope.menuFlat[menuItemId].object;
+
+                        menuItem.intensity = menuItem.nTweets/nTweets;
+                    });
+                }
 
                 $scope.open = MenuService.open;
 
