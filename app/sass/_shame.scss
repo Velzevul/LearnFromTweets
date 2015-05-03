@@ -38,12 +38,19 @@
   stroke-width: 1px;
 }
 
+
 .area {
   fill: rgba($color-dc-secondary, 0.3);
 }
 
+.ghost-area {
+  fill: rgba($color-border, 0.3);
+}
+
 .brush .extent {
-  stroke: black;
-  fill-opacity: .125;
+  stroke: $color-dc-tertiary;
+  stroke-opacity: 0.6;
+  stroke-width: 2px;
+  fill: none;
   shape-rendering: crispEdges;
 }

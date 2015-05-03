@@ -12,13 +12,15 @@ def saveJson(data, filename):
 def generateActivity():
     now = datetime.now()
     initial_date = now - timedelta(days=2)
+    domain = []
     result = []
 
     for dt in rrule.rrule(rrule.HOURLY, dtstart=initial_date, until=now):
+        domain.append(str(dt))
         result.append({ 'time': str(dt),
                         'nTweets': randint(0, 10) })
 
-    return result
+    return domain, result
 
 def generateDummyTweets(activity):
     def getMenuItems():
@@ -48,7 +50,7 @@ def generateDummyTweets(activity):
     fake = Factory.create()
 
     for entry in activity:
-        for i in range(entry['n_tweets']):
+        for i in range(entry['nTweets']):
             random_author = authors[randint(0,len(authors)-1)]
             random_menu_item = menu_items[randint(0,len(menu_items)-1)]
 
@@ -63,8 +65,8 @@ def generateDummyTweets(activity):
     return tweets
 
 def main():
-    activity = generateActivity()
-    saveJson(activity, 'activity')
+    domain, activity = generateActivity()
+    saveJson(domain, 'domain')
 
     tweets = generateDummyTweets(activity)
     saveJson(tweets, 'tweets')

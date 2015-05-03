@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('timeline', function(ActivityService) {
+    .directive('timeline', function($window, $q, $timeout, DataService) {
         'use strict';
 
         return {
@@ -8,125 +8,215 @@ angular.module('tweetsToSoftware')
             scope: {},
             link: function($scope, elem) {
                 var margin = {top: 24, right: 24, bottom: 50, left: 50},
-                    width = $(elem).parent().width() - margin.right - margin.left,
-                    height = 250 - margin.top - margin.bottom;
+                    parseDate = d3.time.format('%Y-%m-%d %H:%M:%S').parse,
+                    height = 250 - margin.top - margin.bottom,
+                    redrawTimeoutId = null;
 
-                var parseDate = d3.time.format('%Y-%m-%d %H:%M:%S').parse;
+                var x = d3.time.scale(),
+                    y = d3.scale.linear();
 
-                function plot(data) {
-                    angular.forEach(data, function(item) {
-                        item.time = parseDate(item.time);
-                        item.time.setMinutes(30);
-                    });
-
-                    var x = d3.time.scale()
-                        .range([0, width])
-                        .domain(d3.extent(data, function(d) { return d.time; }));
-
-                    var y = d3.scale.linear()
-                        .range([height, 0])
-                        .domain([0, d3.max(data, function(item) { return item.nTweets; }) + 1]);
-
-                    var daysAxis = d3.svg.axis()
-                        .scale(x)
+                var daysAxis = d3.svg.axis()
                         .ticks(d3.time.days)
-                        .tickSize(18)
+                        .innerTickSize(18)
+                        .outerTickSize(0)
                         .tickFormat(function(d) {
                             return moment(d).format('MMM Do');
-                        });
-
-                    var halfDaysAxis = d3.svg.axis()
-                        .scale(x)
+                        }),
+                    halfDaysAxis = d3.svg.axis()
                         .ticks(d3.time.hours, 12)
-                        .tickSize(12)
-                        .tickFormat(function(d) { return ''; });
-
-                    var hoursAxis = d3.svg.axis()
-                        .scale(x)
+                        .innerTickSize(12)
+                        .outerTickSize(0)
+                        .tickFormat(function(d) { return ''; }),
+                    hoursAxis = d3.svg.axis()
                         .ticks(d3.time.hours)
-                        .tickSize(6)
-                        .tickFormat(function(d) { return ''; });
-
-                    var yAxis = d3.svg.axis()
-                        .scale(y)
+                        .innerTickSize(6)
+                        .outerTickSize(1)
+                        .tickFormat(function(d) { return ''; }),
+                    yAxis = d3.svg.axis()
                         .orient('left');
 
-                    var svg = d3.select('#timeline').append('svg')
-                        .attr('width', width + margin.left + margin.right)
-                        .attr('height', height + margin.top + margin.bottom)
-                        .append('g')
-                        .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+                var area = d3.svg.area(),
+                    line = d3.svg.line(),
+                    svg = d3.select('#timeline').append('svg'),
+                    canvas = svg.append('g'),
+                    brush = d3.svg.brush();
 
-                    var area = d3.svg.area()
-                        .interpolate("monotone")
-                        .x(function(d) { return x(d.time); })
-                        .y0(height)
-                        .y1(function(d) { return y(d.nTweets); });
+                area.interpolate("monotone")
+                    .x(function(d) { return x(d.parsedTime); })
+                    .y0(height)
+                    .y1(function(d) { return y(d.nTweets); });
 
-                    var line = d3.svg.line()
-                        .interpolate("monotone")
-                        .x(function(d) { return x(d.time); })
-                        .y(function(d) { return y(d.nTweets); });
+                line.interpolate("monotone")
+                    .x(function(d) { return x(d.parsedTime); })
+                    .y(function(d) { return y(d.nTweets); });
 
-                    svg.append('g')
+                canvas.attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+
+                function drawAxes(data, domain) {
+                    console.log('draw axes');
+
+                    var width = $('#timeline').width() - margin.right - margin.left;
+
+                    svg.attr('width', width + margin.left + margin.right)
+                        .attr('height', height + margin.top + margin.bottom);
+
+                    x.range([0, width])
+                        .domain(d3.extent(domain, function(d) { return parseDate(d); }));
+
+                    y.range([height, 0])
+                        .domain([0, d3.max(data, function(item) { return item.nTweets; }) + 1]);
+
+                    daysAxis.scale(x);
+                    halfDaysAxis.scale(x);
+                    hoursAxis.scale(x);
+                    yAxis.scale(y);
+
+                    $('.axis').remove();
+
+                    canvas.append('g')
                         .attr('class', 'axis')
                         .attr('transform', 'translate(0,' + height + ')')
                         .call(daysAxis);
 
-                    svg.append('g')
+                    canvas.append('g')
                         .attr('class', 'axis')
                         .attr('transform', 'translate(0,' + height + ')')
                         .call(halfDaysAxis);
 
-                    svg.append('g')
+                    canvas.append('g')
                         .attr('class', 'axis')
                         .attr('transform', 'translate(0,' + height + ')')
                         .call(hoursAxis);
 
-                    svg.append('g')
+                    canvas.append('g')
                         .attr('class', 'axis')
                         .call(yAxis);
+                }
 
-                    svg.append('path')
+                function drawGhostChart(data) {
+                    console.log('draw ghost chart');
+
+                    $('.ghost-area').remove();
+
+                    canvas.append('path')
+                        .attr('class', 'ghost-area')
+                        .attr('d', area(data));
+                }
+
+                function drawChart(data) {
+                    console.log('draw chart');
+
+                    $('.line, .area').remove();
+
+                    canvas.append('path')
                         .attr('class', 'area')
                         .attr('d', area(data));
 
-                    svg.append('path')
+                    canvas.append('path')
                         .attr('class', 'line')
                         .attr('d', line(data));
-
-                    var brush = d3.svg.brush()
-                        .x(x)
-                        .on("brush", brushed);
-
-                    var gBrush = svg.append("g")
-                        .attr("class", "brush")
-                        .call(brush);
-
-                    gBrush.selectAll("rect")
-                        .attr("height", height);
-
-                    function brushed() {
-                        var extent0 = brush.extent(),
-                            extent1 = extent0.map(d3.time.hour.round);
-
-                        // if empty when rounded, use floor & ceil instead
-                        if (extent1[0] >= extent1[1]) {
-                            extent1[0] = d3.time.hour.floor(extent0[0]);
-                            extent1[1] = d3.time.hour.ceil(extent0[1]);
-                        }
-
-                        d3.select(this)
-                            .call(brush.extent(extent1));
-
-                        console.log(extent1);
-                    }
                 }
 
-                ActivityService.get()
-                    .then(function(activity) {
-                        plot(activity)
+                function setBrush() {
+                    console.log('set brush');
+                    $('.brush').remove();
+
+                    brush.x(x)
+                        .on('brushend', setTimeFilter);
+
+                    canvas.append("g")
+                        .attr("class", "brush")
+                        .call(brush)
+                        .selectAll("rect")
+                        .attr("height", height);
+                }
+
+                $q.all([
+                    DataService.getActivity(),
+                    DataService.getDomain()
+                ])
+                    .then(function(response) {
+                        angular.forEach(response[0].activity, function(item) {
+                            item.parsedTime = parseDate(item.time);
+                        });
+
+                        $scope.nTweets = response[0].nTweets;
+                        $scope.domainLowerBound = moment(response[1][response[1].length - 1]).format('MMM DD HH:MM');
+                        $scope.domainUpperBound = moment(response[1][0]).format('MMM DD HH:MM');
+
+                        $scope.lowerTimeBound = $scope.domainLowerBound;
+                        $scope.upperTimeBound = $scope.domainUpperBound;
+
+                        drawAxes(response[0].activity, response[1]);
+                        drawGhostChart(response[0].activity);
+                        drawChart(response[0].activity);
+                        setBrush();
                     });
+
+                $(window).on('resize', function() {
+                    clearTimeout(redrawTimeoutId);
+                    redrawTimeoutId = $timeout(function() {
+                        $q.all([
+                            DataService.getActivity(),
+                            DataService.getDomain()
+                        ])
+                            .then(function(response) {
+                                angular.forEach(response[0].activity, function(item) {
+                                    item.parsedTime = parseDate(item.time);
+                                });
+
+                                drawAxes(response[0].activity, response[1]);
+                                drawGhostChart(response[0].activity);
+                                drawChart(response[0].activity);
+                                setBrush();
+                            });
+                    }, 300).$$timeoutId;
+                });
+
+                $scope.filterSet = false;
+                $scope.unsetTimeFilter = function() {
+                    var b = brush.extent();
+
+                    d3.selectAll('.brush').call(brush.clear());
+
+                    $scope.lowerTimeBound = $scope.domainLowerBound;
+                    $scope.upperTimeBound = $scope.domainUpperBound;
+
+                    DataService.setFilters({
+                        time: 'clear'
+                    });
+
+                    $scope.filterSet = false;
+                };
+
+                function setTimeFilter() {
+                    var b = brush.extent();
+
+                    $scope.lowerTimeBound = moment(b[0]).format('MMM DD HH:00');
+                    $scope.upperTimeBound = moment(b[1]).format('MMM DD HH:00');
+
+                    DataService.setFilters({
+                        time: {
+                            lower: moment(b[0]).format('YYYY-MM-DD HH:MM:SS'),
+                            higher: moment(b[1]).format('YYYY-MM-DD HH:MM:SS')
+                        }
+                    });
+
+                    $scope.filterSet = true;
+                }
+
+                $scope.$on('filtersChanged', function() {
+                    DataService.getActivity()
+                        .then(function(response) {
+                            angular.forEach(response.activity, function(item) {
+                                item.parsedTime = parseDate(item.time);
+                            });
+
+                            $scope.nTweets = response.nTweets;
+                            drawChart(response.activity);
+                            setBrush();
+                        });
+                });
             }
         }
     });

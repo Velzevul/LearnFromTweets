@@ -19,6 +19,7 @@ angular.module('tweetsToSoftware')
                     promise = $http.get('/data/activity.json')
                         .then(function(response) {
                             activity = response.data;
+                            console.log(activity[0]);
 
                             angular.forEach(activity, function(item) {
                                item.timestamp = moment(item.time).format('x');

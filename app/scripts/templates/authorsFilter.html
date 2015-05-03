@@ -1,13 +1,19 @@
 <div class="ap-section">
     <div class="l-block-x-small">
+        <div class="-split">
+            <div class="l-split__right">
+                <button class="link"
+                        ng-show="filterSet"
+                        ng-click="unsetAuthorFilter()">clear filter</button>
+            </div>
+        </div>
         <div class="ap-section__title">Authors</div>
     </div>
 
     <div class="ap-section__body ap-section__body--limited">
-        <div ng-repeat="author in authors">
+        <div ng-repeat="author in authors | orderBy : '-tweetsCount'">
             <div class="author"
-                 ng-class="{'author--selected': selectedAuthor == author}"
-                 ng-click="selectAuthor(author)">
+                 ng-click="setAuthorFilter(author)">
                 <div class="l-media">
                     <div class="l-media__figure">
                         <div class="author__avatar"
@@ -27,7 +33,7 @@
 
                         <div class="author__follow">
                             <div class="l-list-inline l-list-inline--x-small"
-                                 ng-show="author.isFollowed">
+                                 ng-show="author.isFollowing">
                                 <div class="l-list-inline__item">
                                     You follow @{{author.name}}
                                 </div>
@@ -40,7 +46,7 @@
 
                             <button class="link"
                                     ng-click="toggleFollow($event, author)"
-                                    ng-hide="author.isFollowed">follow @{{author.name}}</button>
+                                    ng-hide="author.isFollowing">follow @{{author.name}}</button>
                         </div>
                     </div>
                 </div>

@@ -1,1 +1,19 @@
-<div id="timeline"></div>
+<div class="ap-section">
+    <div class="l-block">
+        <div class="l-split">
+            <div class="l-split__right">
+                <button class="link"
+                        ng-show="filterSet"
+                        ng-click="unsetTimeFilter()">clear filter</button>
+            </div>
+
+            <div class="l-split__left">
+                <div class="ap-section__title">{{nTweets}} tweets in {{lowerTimeBound}} - {{upperTimeBound}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="timeline-slot">
+        <div id="timeline"></div>
+    </div>
+</div>
