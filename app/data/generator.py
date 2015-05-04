@@ -11,14 +11,14 @@ def saveJson(data, filename):
 
 def generateActivity():
     now = datetime.now()
-    initial_date = now - timedelta(days=2)
+    initial_date = now - timedelta(days=1)
     domain = []
     result = []
 
     for dt in rrule.rrule(rrule.HOURLY, dtstart=initial_date, until=now):
         domain.append(str(dt))
         result.append({ 'time': str(dt),
-                        'nTweets': randint(0, 10) })
+                        'nTweets': randint(0, 5) })
 
     return domain, result
 

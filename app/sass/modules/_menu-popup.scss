@@ -5,11 +5,13 @@
   &__indicator {
     width:  $global-baseline * 2;
     height: $global-baseline * 2;
-    margin: $global-baseline/4 0;
+    margin: $global-baseline/6 0;
 
+    font-size: 10px;
     line-height: $global-baseline * 2;
 
     text-align: center;
+    color: $color-dc-tertiary;
     cursor: pointer;
   }
 }

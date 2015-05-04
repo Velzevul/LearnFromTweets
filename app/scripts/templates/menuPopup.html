@@ -1,8 +1,8 @@
 <div class="menu-popup"
-     ng-show="context.tweets.length">
+     ng-show="tweets.length">
     <div class="menu-popup__indicator"
          ng-mouseover="show()"
-         ng-mouseleave="hide()">...</div>
+         ng-mouseleave="hide()">({{context.nTweets}})</div>
 
     <div class="popup"
          ng-show="popupVisible"
@@ -15,7 +15,7 @@
         <div class="p-body p-body--limited">
             <div class="p-body__item"
                  ng-class="{'p-body__item--last': $last}"
-                 ng-repeat="t in context.tweets">
+                 ng-repeat="t in tweets">
                 <tweet tweet="t"></tweet>
             </div>
         </div>

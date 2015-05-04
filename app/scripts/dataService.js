@@ -13,6 +13,7 @@ angular.module('tweetsToSoftware')
             },
             filteredData = {
                 tweets: null,
+                tweetsByItems: null,
                 authors: null,
                 activity: null,
                 menuTweets: null
@@ -53,6 +54,7 @@ angular.module('tweetsToSoftware')
 
             filteredData = {
                 tweets: [],
+                tweetsByItems: {},
                 activity: [],
                 authors: [],
                 menuTweets: {}
@@ -64,6 +66,12 @@ angular.module('tweetsToSoftware')
             angular.forEach(rawData.tweets, function(tweet) {
                if (matchFilters(tweet)) {
                    filteredData.tweets.push(tweet);
+
+                   if (filteredData.tweetsByItems[tweet.commandId]) {
+                       filteredData.tweetsByItems[tweet.commandId].push(tweet);
+                   } else {
+                       filteredData.tweetsByItems[tweet.commandId] = [tweet];
+                   }
 
                    if (filteredData.menuTweets[tweet.commandId]) {
                        filteredData.menuTweets[tweet.commandId] += 1;
@@ -140,19 +148,19 @@ angular.module('tweetsToSoftware')
                         return rawData.domain;
                     });
             },
-            getTweets: function(menuItem) {
+            getTweets: function(menuItemId) {
                 return load()
                     .then(function() {
                         var result;
 
-                        if (menuItem) {
-                            result = filteredData.tweets;
+                        if (menuItemId) {
+                            result = filteredData.tweetsByItems[menuItemId];
                         } else {
                             result = filteredData.tweets;
                         }
 
                         return result;
-                    })
+                    });
             },
             getActivity: function() {
                 return load()

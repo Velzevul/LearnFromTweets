@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('widgetNotification', function($timeout, MenuService, TweetsFilter) {
+    .directive('widgetNotification', function($timeout, MenuService) {
         'use strict';
 
         return {

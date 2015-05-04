@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('menuPopup', function($timeout) {
+    .directive('menuPopup', function($timeout, DataService) {
         'use strict';
 
         return {
@@ -10,6 +10,18 @@ angular.module('tweetsToSoftware')
             },
             controller: function($scope) {
                 $scope.popupVisible = false;
+
+                DataService.getTweets($scope.context.id)
+                    .then(function(response) {
+                         $scope.tweets = response;
+                    });
+
+                $scope.$on('filtersChanged', function() {
+                    DataService.getTweets($scope.context.id)
+                        .then(function(response) {
+                            $scope.tweets = response;
+                        });
+                });
 
                 var showTimeoutId = null,
                     hideTimeoutId = null,
