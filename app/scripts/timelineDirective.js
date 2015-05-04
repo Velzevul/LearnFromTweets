@@ -106,7 +106,7 @@ angular.module('tweetsToSoftware')
                 function drawChart(data) {
                     console.log('draw chart');
 
-                    $('.line, .area').remove();
+                    $('.line, .area, .dot').remove();
 
                     canvas.append('path')
                         .attr('class', 'area')
@@ -115,6 +115,14 @@ angular.module('tweetsToSoftware')
                     canvas.append('path')
                         .attr('class', 'line')
                         .attr('d', line(data));
+
+                    canvas.selectAll('.dot')
+                            .data(data)
+                        .enter().append('circle')
+                            .attr('class', 'dot')
+                            .attr('r', 2.5)
+                            .attr('cx', function(d) { return x(d.parsedTime); })
+                            .attr('cy', function(d) { return y(d.nTweets); });
                 }
 
                 function setBrush() {

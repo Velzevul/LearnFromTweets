@@ -47,6 +47,10 @@
   fill: rgba($color-border, 0.3);
 }
 
+.dot {
+  fill: $color-dc-secondary;
+}
+
 .brush .extent {
   stroke: $color-dc-tertiary;
   stroke-opacity: 0.6;
