@@ -6,8 +6,8 @@ angular.module('tweetsToSoftware')
             domain = [],
             commandRelevancyData = {},
             commandVocabularyData = {},
-            commandRelevancyThreshold = 30,
-            commandVocabularyThreshold = 30,
+            commandRelevancyThreshold = 85,
+            commandVocabularyThreshold = 20,
             filters = {
                 active: false,
                 time: null,
@@ -18,6 +18,7 @@ angular.module('tweetsToSoftware')
             filteredData = {
                 tweets: null,
                 tweetsByItems: null,
+                menuItemsPrivacy: null,
                 menuCounters: null
             },
             loaded,
@@ -61,8 +62,8 @@ angular.module('tweetsToSoftware')
             filteredData = {
                 tweets: [],
                 tweetsByItems: {},
-                menuCounters: {},
-                authorCounters: {}
+                menuItemsPrivacy: {},
+                menuCounters: {}
             };
 
             angular.forEach(tweets, function(tweet) {
@@ -75,22 +76,27 @@ angular.module('tweetsToSoftware')
                        filteredData.tweetsByItems[tweet.commandId] = [tweet];
                    }
 
-                   if (!filteredData.menuCounters[tweet.commandId]) {
-                       filteredData.menuCounters[tweet.commandId] = 0;
+                   if (filteredData.menuCounters[tweet.commandId]) {
+                       filteredData.menuCounters[tweet.commandId] += 1;
+                   } else {
+                       filteredData.menuCounters[tweet.commandId] = 1;
                    }
 
-                   if ((filters.highlightRelevant && filters.highlightUnknown) &&
-                       (commandRelevancyData[tweet.commandId] <= commandRelevancyThreshold) &&
+                   if (filters.highlightRelevant &&
+                       filters.highlightUnknown &&
+                       (commandRelevancyData[tweet.commandId] >= commandRelevancyThreshold) &&
                        (commandVocabularyData[tweet.commandId] <= commandVocabularyThreshold)) {
-                       filteredData.menuCounters[tweet.commandId] += 1;
-                   } else if ((filters.highlightRelevant && !filters.highlightUnknown) &&
-                              (commandRelevancyData[tweet.commandId] <= commandRelevancyThreshold)) {
-                       filteredData.menuCounters[tweet.commandId] += 1;
-                   } else if ((!filters.highlightRelevant && filters.highlightUnknown) &&
+                       filteredData.menuItemsPrivacy[tweet.commandId] = true;
+                   } else if (filters.highlightRelevant &&
+                              !filters.highlightUnknown &&
+                              (commandRelevancyData[tweet.commandId] >= commandRelevancyThreshold)) {
+                       filteredData.menuItemsPrivacy[tweet.commandId] = true;
+                   } else if (filters.highlightUnknown &&
+                              !filters.highlightRelevant &&
                               (commandVocabularyData[tweet.commandId] <= commandVocabularyThreshold)) {
-                       filteredData.menuCounters[tweet.commandId] += 1;
-                   } else if (!filters.highlightRelevant && !filters.highlightUnknown) {
-                       filteredData.menuCounters[tweet.commandId] += 1;
+                       filteredData.menuItemsPrivacy[tweet.commandId] = true;
+                   } else {
+                       filteredData.menuItemsPrivacy[tweet.commandId] = false;
                    }
                }
             });
@@ -170,10 +176,13 @@ angular.module('tweetsToSoftware')
             getMenuCounters: function() {
                 return load()
                     .then(function() {
-                        return {
-                            menuTweets: filteredData.menuCounters,
-                            nTweets: filteredData.tweets.length
-                        };
+                        return filteredData.menuCounters;
+                    });
+            },
+            getMenuItemsPrivacy: function() {
+                return load()
+                    .then(function() {
+                        return filteredData.menuItemsPrivacy;
                     });
             }
         }

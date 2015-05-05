@@ -164,6 +164,7 @@ angular.module('tweetsToSoftware')
                             $scope.upperTimeBound = b[1];
 
                             drawChart($scope.chart);
+                            setBrush();
                         })
                         .on('brushend', setTimeFilter);
 
@@ -258,7 +259,6 @@ angular.module('tweetsToSoftware')
                 });
 
                 $scope.$on('authorFiltersChanged', changeListener);
-                $scope.$on('privacyFiltersChanged', changeListener);
 
                 function changeListener() {
                     var filter = DataService.getFilters();
@@ -273,6 +273,7 @@ angular.module('tweetsToSoftware')
 
                     drawGhostChart($scope.ghost, 'ghost-area');
                     drawChart($scope.chart);
+                    setBrush();
                 }
             }
         }

@@ -31,4 +31,15 @@
     background: $color-dc-secondary;
     border-radius: 3px;
   }
+    &__counter--highlighted {
+      background: $color-dc-tertiary;
+    }
+    &__counter--mixed {
+      background-color: none;
+      @include background-image(linear-gradient(left top,
+              $color-dc-tertiary 0%,
+              $color-dc-tertiary 50%,
+              $color-dc-secondary 50%,
+              $color-dc-secondary 100%));
+    }
 }

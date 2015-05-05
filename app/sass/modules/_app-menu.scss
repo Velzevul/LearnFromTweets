@@ -7,6 +7,23 @@
   }
 }
 
+%counter-proto {
+  display: block;
+  height: 16px;
+  min-width: 16px;
+  padding: 0 3px;
+
+  line-height: 16px;
+  font-size: 10px;
+  font-weight: 600;
+
+  text-align: center;
+  color: white;
+
+  background: $color-dc-secondary;
+  border-radius: 3px;
+}
+
 .am-item {
   @include transition-property(background-color);
   @include transition-duration(0.2s);
@@ -25,21 +42,23 @@
   }
 
   &__counter {
-    display: block;
-    height: 16px;
-    min-width: 16px;
-    padding: 0 3px;
+    @extend %counter-proto;
 
-    line-height: 16px;
-    font-size: 10px;
-    font-weight: 600;
-
-    text-align: center;
-    color: white;
-
-    background: $color-dc-secondary;
-    border-radius: 3px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
   }
+    &__counter--highlighted {
+      background: $color-dc-tertiary;
+    }
+    &__counter--mixed {
+      background-color: none;
+      @include background-image(linear-gradient(left top,
+              $color-dc-tertiary 0%,
+              $color-dc-tertiary 50%,
+              $color-dc-secondary 50%,
+              $color-dc-secondary 100%));
+    }
 }
   .am-item--active {
     background: darken($color-bg-secondary, 10%);
@@ -83,12 +102,18 @@
   }
 
   &__counter {
-    @extend .am-item__counter;
+    @extend %counter-proto;
     
     position: absolute;
     z-index: 1;
     top: 6px; right: 18px;
   }
+    &__counter--highlighted {
+      @extend .am-item__counter--highlighted;
+    }
+    &__counter--mixed {
+      @extend .am-item__counter--mixed;
+    }
 }
   .amd-item--parent {
     position: relative;
