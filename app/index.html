@@ -10,6 +10,55 @@
     <!-- /build -->
 </head>
 <body ng-controller="mainController">
-    I am a page
+    <div class="topbar">
+        <menu></menu>
+    </div>
+
+    <div class="toolbar">
+        <div class="l-split">
+            <div class="l-split__right">
+                <tweets-widget></tweets-widget>
+            </div>
+
+            <div class="l-split__left">
+                <div class="toolbar__mock"></div>
+            </div>
+        </div>
+    </div>
+
+    <activity-panel></activity-panel>
+
+    <!-- build:js scripts/dependencies.concat.js -->
+    <script src="jquery/dist/jquery.js"></script>
+    <script src="angular/angular.js"></script>
+    <script src="moment/moment.js"></script>
+    <script src="angular-moment/angular-moment.js"></script>
+    <script src="d3/d3.js"></script>
+    <!-- /build -->
+
+    <!-- build:js scripts/app.concat.js -->
+    <script src="scripts/templates.js"></script>
+    <script src="scripts/app.js"></script>
+
+    <script src="scripts/mainController.js"></script>
+
+    <script src="scripts/menuService.js"></script>
+    <script src="scripts/notificationService.js"></script>
+    <script src="scripts/dataService.js"></script>
+    <script src="scripts/authorService.js"></script>
+    <script src="scripts/activityService.js"></script>
+
+    <script src="scripts/menuDirective.js"></script>
+    <script src="scripts/tweetDirective.js"></script>
+
+    <script src="scripts/tweetsWidgetDirective.js"></script>
+    <script src="scripts/widgetNotificationDirective.js"></script>
+    <script src="scripts/menuNotificationDirective.js"></script>
+    <script src="scripts/menuPopupDirective.js"></script>
+
+    <script src="scripts/activityPanelDirective.js"></script>
+    <script src="scripts/authorsFilterDirective.js"></script>
+    <script src="scripts/timelineDirective.js"></script>
+    <!-- /build -->
 </body>
 </html>
