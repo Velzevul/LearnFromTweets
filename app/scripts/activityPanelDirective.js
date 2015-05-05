@@ -9,6 +9,7 @@ angular.module('tweetsToSoftware')
             controller: function($scope) {
                 $scope.filters = DataService.getFilters();
                 $scope.toggleFilters = DataService.toggleFilters;
+                $scope.setFilters = DataService.setFilters;
             }
         };
     });

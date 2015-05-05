@@ -31,7 +31,7 @@
     // ...
   }
     &__body--limited {
-      height: $global-baseline * 20;
+      max-height: $global-baseline * 30;
       overflow: auto;
     }
 }

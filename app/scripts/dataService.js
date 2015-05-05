@@ -4,10 +4,16 @@ angular.module('tweetsToSoftware')
 
         var tweets = [],
             domain = [],
+            commandRelevancyData = {},
+            commandVocabularyData = {},
+            commandRelevancyThreshold = 30,
+            commandVocabularyThreshold = 30,
             filters = {
                 active: false,
                 time: null,
-                author: null
+                author: null,
+                highlightRelevant: false,
+                highlightUnknown: false
             },
             filteredData = {
                 tweets: null,
@@ -29,11 +35,15 @@ angular.module('tweetsToSoftware')
                 if (!promise) {
                     promise = $q.all([
                         $http.get('/data/tweets.json'),
-                        $http.get('/data/domain.json')
+                        $http.get('/data/domain.json'),
+                        $http.get('/data/commandRelevancy.json'),
+                        $http.get('/data/commandVocabulary.json')
                     ])
                         .then(function(response) {
                             tweets = response[0].data;
                             domain = response[1].data;
+                            commandRelevancyData = response[2].data;
+                            commandVocabularyData = response[3].data;
 
                             filterData();
                         });
@@ -65,18 +75,30 @@ angular.module('tweetsToSoftware')
                        filteredData.tweetsByItems[tweet.commandId] = [tweet];
                    }
 
-                   if (filteredData.menuCounters[tweet.commandId]) {
+                   if (!filteredData.menuCounters[tweet.commandId]) {
+                       filteredData.menuCounters[tweet.commandId] = 0;
+                   }
+
+                   if ((filters.highlightRelevant && filters.highlightUnknown) &&
+                       (commandRelevancyData[tweet.commandId] <= commandRelevancyThreshold) &&
+                       (commandVocabularyData[tweet.commandId] <= commandVocabularyThreshold)) {
                        filteredData.menuCounters[tweet.commandId] += 1;
-                   } else {
-                       filteredData.menuCounters[tweet.commandId] = 1;
+                   } else if ((filters.highlightRelevant && !filters.highlightUnknown) &&
+                              (commandRelevancyData[tweet.commandId] <= commandRelevancyThreshold)) {
+                       filteredData.menuCounters[tweet.commandId] += 1;
+                   } else if ((!filters.highlightRelevant && filters.highlightUnknown) &&
+                              (commandVocabularyData[tweet.commandId] <= commandVocabularyThreshold)) {
+                       filteredData.menuCounters[tweet.commandId] += 1;
+                   } else if (!filters.highlightRelevant && !filters.highlightUnknown) {
+                       filteredData.menuCounters[tweet.commandId] += 1;
                    }
                }
             });
 
             function matchFilters(tweet) {
                 if (filters.time) {
-                    if ((moment(tweet.published).toDate() < filters.time.lower) ||
-                        (moment(tweet.published).toDate() > filters.time.upper)) {
+                    if ((moment(tweet.published).minutes(0).toDate() <= filters.time.lower) ||
+                        (moment(tweet.published).minutes(0).toDate() >= filters.time.upper)) {
                         return false;
                     }
                 }
@@ -110,6 +132,16 @@ angular.module('tweetsToSoftware')
                 if (f.author !== undefined) {
                     filters.author = f.author;
                     $rootScope.$broadcast('authorFiltersChanged');
+                }
+
+                if (f.highlightUnknown !== undefined) {
+                    filters.highlightUnknown = f.highlightUnknown;
+                    $rootScope.$broadcast('privacyFiltersChanged');
+                }
+
+                if (f.highlightRelevant !== undefined) {
+                    filters.highlightRelevant = f.highlightRelevant;
+                    $rootScope.$broadcast('privacyFiltersChanged');
                 }
 
                 $rootScope.$broadcast('filtersChanged');

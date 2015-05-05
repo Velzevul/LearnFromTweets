@@ -257,7 +257,10 @@ angular.module('tweetsToSoftware')
                     }, 300).$$timeoutId;
                 });
 
-                $scope.$on('authorFiltersChanged', function() {
+                $scope.$on('authorFiltersChanged', changeListener);
+                $scope.$on('privacyFiltersChanged', changeListener);
+
+                function changeListener() {
                     var filter = DataService.getFilters();
 
                     if (filter.author) {
@@ -270,7 +273,7 @@ angular.module('tweetsToSoftware')
 
                     drawGhostChart($scope.ghost, 'ghost-area');
                     drawChart($scope.chart);
-                });
+                }
             }
         }
     });
