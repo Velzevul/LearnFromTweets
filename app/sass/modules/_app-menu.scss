@@ -12,6 +12,8 @@
   @include transition-duration(0.2s);
 
   &__name {
+    position: relative;
+    z-index: 2;
     display: block;
     width: 100%;
     padding: $global-baseline/6 $global-baseline;
@@ -20,6 +22,23 @@
     line-height: $global-baseline * 2;
 
     text-align: left;
+  }
+
+  &__counter {
+    display: block;
+    height: 16px;
+    min-width: 16px;
+    padding: 0 3px;
+
+    line-height: 16px;
+    font-size: 10px;
+    font-weight: 600;
+
+    text-align: center;
+    color: white;
+
+    background: $color-dc-secondary;
+    border-radius: 3px;
   }
 }
   .am-item--active {
@@ -48,6 +67,7 @@
     left: 100%;
   }
 
+
 .amd-item {
   min-width: $global-baseline * 20;
 
@@ -60,6 +80,14 @@
 
   &:hover {
     background: lighten($color-bg-secondary, 5%);
+  }
+
+  &__counter {
+    @extend .am-item__counter;
+    
+    position: absolute;
+    z-index: 1;
+    top: 6px; right: 18px;
   }
 }
   .amd-item--parent {

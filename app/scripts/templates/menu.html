@@ -9,11 +9,12 @@
          ng-class="{'amd-item--active': item.isOpen,
                     'amd-item--parent': item.children.length,
                     'amd-item--highlighted': item.isHighlighted}"
-         ng-mouseover="item.isHighlighted = false"
-         style="background-color: {{getHighlightColor(item)}} !important;">
+         ng-mouseover="open(item.id)">
 
-         <button class="amd-item__name"
-                 ng-mouseover="open(item.id)">{{item.label}}</button>
+        <button class="amd-item__name">{{item.label}}</button>
+
+        <span class="amd-item__counter"
+              ng-show="filters.active && item.nTweets && item.children.length">{{item.nTweets}}</span>
     </div>
 
     <div ng-show="item.children.length">
@@ -34,10 +35,20 @@
                 <div class="am-item"
                      ng-class="{'am-item--active': rootItem.isOpen,
                                 'am-item--highlighted': rootItem.isHighlighted}"
-                     ng-mouseover="rootItem.isHighlighted = false"
-                     style="background-color: {{getHighlightColor(rootItem)}} !important;">
-                    <button class="am-item__name"
-                            ng-mouseover="open(rootItem.id)">{{rootItem.label}}</button>
+                     ng-mouseover="open(rootItem.id)">
+                    <button class="am-item__name">
+                        <span class="l-list-inline l-list-inline--collapsed">
+                            <span class="l-list-inline__item is-middle-aligned">
+                                {{rootItem.label}}
+                            </span>
+
+                            <span class="l-list-inline__item is-middle-aligned"
+                                  ng-show="filters.active">
+                                <span class="am-item__counter"
+                                      ng-show="rootItem.nTweets">{{rootItem.nTweets}}</span>
+                            </span>
+                        </span>
+                    </button>
                 </div>
 
                 <div class="am-dropdown am-dropdown--root"

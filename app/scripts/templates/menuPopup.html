@@ -1,8 +1,15 @@
 <div class="menu-popup"
      ng-show="tweets.length">
-    <div class="menu-popup__indicator"
+    <div class="menu-popup__counter"
+         ng-show="filters.active && context.nTweets"
          ng-mouseover="show()"
-         ng-mouseleave="hide()">({{context.nTweets}})</div>
+         ng-mouseleave="hide()">{{context.nTweets}}</div>
+
+    <div class="menu-popup__indicator"
+         ng-show="(filters.active && !context.nTweets) ||
+                  (!filters.active && context.nTweets)"
+         ng-mouseover="show()"
+         ng-mouseleave="hide()">...</div>
 
     <div class="popup"
          ng-show="popupVisible"

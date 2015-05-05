@@ -9,6 +9,7 @@ angular.module('tweetsToSoftware')
                 context: '='
             },
             controller: function($scope) {
+                $scope.filters = DataService.getFilters();
                 $scope.popupVisible = false;
 
                 DataService.getTweets($scope.context.id)

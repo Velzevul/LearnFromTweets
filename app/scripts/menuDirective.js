@@ -7,8 +7,6 @@ angular.module('tweetsToSoftware')
             templateUrl: 'scripts/templates/menu.html',
             scope: {},
             controller: function($scope) {
-                var highlightColor = '69,131,255';
-
                 $scope.filters = DataService.getFilters();
 
                 $q.all([
@@ -24,7 +22,7 @@ angular.module('tweetsToSoftware')
                     });
 
                 $scope.$on('filtersChanged', function() {
-                    DataService.getMenuTweets()
+                    DataService.getMenuCounters()
                         .then(calculateIntensity);
                 });
 
@@ -36,7 +34,6 @@ angular.module('tweetsToSoftware')
                         var menuItem = $scope.menuFlat[menuItemId].object;
 
                         menuItem.nTweets = 0;
-                        menuItem.intensity = 0;
                     });
 
                     angular.forEach(Object.keys($scope.menuFlat), function(menuItemId) {
@@ -53,25 +50,9 @@ angular.module('tweetsToSoftware')
                             });
                         }
                     });
-
-                    angular.forEach(Object.keys($scope.menuFlat), function(menuItemId) {
-                        var menuItem = $scope.menuFlat[menuItemId].object;
-
-                        menuItem.intensity = menuItem.nTweets/nTweets;
-                    });
                 }
 
                 $scope.open = MenuService.open;
-
-                $scope.getHighlightColor = function(item) {
-                    var res = '';
-
-                    if ($scope.filters.active) {
-                        res = 'rgba(' + highlightColor + ', ' + item.intensity + ')';
-                    }
-
-                    return res;
-                }
             },
             link: function($scope) {
                 $document.on('click', function(e) {
