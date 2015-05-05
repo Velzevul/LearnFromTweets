@@ -3,7 +3,7 @@
         <div class="-split">
             <div class="l-split__right">
                 <button class="link"
-                        ng-show="filterSet"
+                        ng-show="selectedAuthorName"
                         ng-click="unsetAuthorFilter()">clear filter</button>
             </div>
         </div>
@@ -13,6 +13,7 @@
     <div class="ap-section__body ap-section__body--limited">
         <div ng-repeat="author in authors | orderBy : '-tweetsCount'">
             <div class="author"
+                 ng-class="{'author--selected': author.name == selectedAuthorName}"
                  ng-click="setAuthorFilter(author)">
                 <div class="l-media">
                     <div class="l-media__figure">

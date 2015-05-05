@@ -2,14 +2,15 @@ angular.module('tweetsToSoftware')
     .factory('DataService', function($rootScope, $q, $http) {
         'use strict';
 
-        var filters = {
+        var tweets = [],
+            filters = {
                 active: false,
                 time: null,
                 author: null
             },
             rawData = {
-                tweets: null,
-                domain: null
+                authors: [],
+                domain: []
             },
             filteredData = {
                 tweets: null,
@@ -33,7 +34,7 @@ angular.module('tweetsToSoftware')
                 if (!promise) {
                     promise = $q.all([
                         $http.get('/data/tweets.json'),
-                        $http.get('/data/domain.json'),
+                        $http.get('/data/domain.json')
                     ])
                         .then(function(response) {
                             rawData.tweets = response[0].data;
@@ -47,6 +48,16 @@ angular.module('tweetsToSoftware')
             }
 
             return res;
+        }
+
+        function matchTweetsToConfig(tweets) {
+            // TODO: configure based on the relevancy and command knowledge
+            return tweets;
+        }
+
+        function generateActivity()
+
+        function generateAuthors() {
         }
 
         function filterData() {
@@ -98,20 +109,24 @@ angular.module('tweetsToSoftware')
                 filteredData.activity.push({ time: time, nTweets: activityMap[time] || 0 });
             });
 
+            if (filters.author) {
+                filteredData.authors.push(author);
+            }
+
             angular.forEach(Object.keys(authorsMap), function(author) {
                 filteredData.authors.push(authorsMap[author]);
             });
 
             function matchFilters(tweet) {
-                if (filters.time && filters.time != 'clear') {
+                if (filters.time) {
                     if ((tweet.published < filters.time.lower) ||
                         (tweet.published > filters.time.higher)) {
                         return false;
                     }
                 }
 
-                if (filters.author && filters.author != 'clear') {
-                    if (tweet.author.name != filters.author) {
+                if (filters.author) {
+                    if (tweet.author.name != filters.author.name) {
                         return false;
                     }
                 }
@@ -121,70 +136,72 @@ angular.module('tweetsToSoftware')
         }
 
         return {
-            toggleFilters: function() {
-                filters.active = !filters.active;
-                if (filters.active) {
-                    $rootScope.$broadcast('filtersActivated');
-                }
-            },
-            getFilters: function() {
-                return filters;
-            },
-            setFilters: function(f) {
-                if (f.time) {
-                    filters.time = f.time;
-                }
-
-                if (f.author) {
-                    filters.author = f.author;
-                }
-
-                $rootScope.$broadcast('filtersChanged');
-                filterData();
-            },
+            //toggleFilters: function() {
+            //    filters.active = !filters.active;
+            //    if (filters.active) {
+            //        $rootScope.$broadcast('filtersActivated');
+            //    }
+            //},
+            //getFilters: function() {
+            //    return filters;
+            //},
+            //setFilters: function(f) {
+            //    if (f.time !== undefined) {
+            //        filters.time = f.time;
+            //        $rootScope.$broadcast('timeFiltersChanged');
+            //    }
+            //
+            //    if (f.author !== undefined) {
+            //        filters.author = f.author;
+            //        $rootScope.$broadcast('authorFiltersChanged');
+            //    }
+            //
+            //    $rootScope.$broadcast('filtersChanged');
+            //    filterData();
+            //},
             getDomain: function() {
                 return load()
                     .then(function() {
                         return rawData.domain;
                     });
             },
-            getTweets: function(menuItemId) {
-                return load()
-                    .then(function() {
-                        var result;
-
-                        if (menuItemId) {
-                            result = filteredData.tweetsByItems[menuItemId];
-                        } else {
-                            result = filteredData.tweets;
-                        }
-
-                        return result;
-                    });
-            },
-            getActivity: function() {
-                return load()
-                    .then(function() {
-                        return {
-                            activity: filteredData.activity,
-                            nTweets: filteredData.tweets.length
-                        };
-                    });
-            },
-            getMenuTweets: function() {
-                return load()
-                    .then(function() {
-                        return {
-                            menuTweets: filteredData.menuTweets,
-                            nTweets: filteredData.tweets.length
-                        };
-                    });
-            },
-            getAuthors: function() {
-                return load()
-                    .then(function() {
-                        return filteredData.authors;
-                    });
-            }
+            //getTweets: function(menuItemId) {
+            //    return load()
+            //        .then(function() {
+            //            var result;
+            //
+            //            if (menuItemId) {
+            //                result = filteredData.tweetsByItems[menuItemId];
+            //            } else {
+            //                result = filteredData.tweets;
+            //            }
+            //
+            //            return result;
+            //        });
+            //},
+            //getActivity: function() {
+            //    return load()
+            //        .then(function() {
+            //            return {
+            //                activity: filteredData.activity,
+            //                nTweets: filteredData.tweets.length
+            //            };
+            //        });
+            //},
+            //getMenuTweets: function() {
+            //    return load()
+            //        .then(function() {
+            //            return {
+            //                menuTweets: filteredData.menuTweets,
+            //                nTweets: filteredData.tweets.length
+            //            };
+            //        });
+            //},
+            //getAuthors: function() {
+            //    return load()
+            //        .then(function() {
+            //            return filteredData.authors;
+            //        });
+            //}
         }
     });

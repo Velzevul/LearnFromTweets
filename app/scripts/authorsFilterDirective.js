@@ -12,26 +12,29 @@ angular.module('tweetsToSoftware')
                         $scope.authors = response;
                     });
 
-                $scope.$on('filtersChanged', function() {
+                $scope.$on('timeFiltersChanged', function() {
                     DataService.getAuthors()
                         .then(function(response) {
                             $scope.authors = response;
+
+                            if ($scope.selectedAuthor) {
+                            }
                         });
                 });
 
                 $scope.setAuthorFilter = function(author) {
-                    $scope.filterSet = true;
+                    $scope.selectedAuthor = author;
 
                     DataService.setFilters({
-                        author: author.name
+                        author: author
                     });
                 };
 
                 $scope.unsetAuthorFilter = function() {
-                    $scope.filterSet = false;
+                    $scope.selectedAuthor = null;
 
                     DataService.setFilters({
-                        author: 'clear'
+                        author: null
                     });
                 };
 

@@ -31,8 +31,12 @@ angular.module('tweetsToSoftware')
                         .ticks(d3.time.hours)
                         .innerTickSize(6)
                         .outerTickSize(1)
-                        .tickFormat(function(d) { return ''; }),
+                        .tickFormat(function(d) {
+                            return '';
+                        }),
                     yAxis = d3.svg.axis()
+                        .ticks(5)
+                        .tickFormat(d3.format('f'))
                         .orient('left');
 
                 var area = d3.svg.area(),
@@ -61,10 +65,14 @@ angular.module('tweetsToSoftware')
                         .attr('height', height + margin.top + margin.bottom);
 
                     x.range([0, width])
-                        .domain(d3.extent(domain, function(d) { return parseDate(d); }));
+                        .domain([d3.min(domain, function(d) {
+                            return parseDate(d);
+                        }), d3.max(domain, function(d) {
+                            return parseDate(d);
+                        })]);
 
                     y.range([height, 0])
-                        .domain([0, d3.max(data, function(item) { return item.nTweets; }) + 1]);
+                        .domain([0, d3.max(data, function(item) { return item.nTweets; }) + 5]);
 
                     daysAxis.scale(x);
                     halfDaysAxis.scale(x);
@@ -93,13 +101,13 @@ angular.module('tweetsToSoftware')
                         .call(yAxis);
                 }
 
-                function drawGhostChart(data) {
+                function drawGhostChart(data, className) {
                     console.log('draw ghost chart');
 
-                    $('.ghost-area').remove();
+                    $('.' + className).remove();
 
                     canvas.append('path')
-                        .attr('class', 'ghost-area')
+                        .attr('class', className)
                         .attr('d', area(data));
                 }
 
