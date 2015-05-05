@@ -3,21 +3,17 @@ angular.module('tweetsToSoftware')
         'use strict';
 
         var tweets = [],
+            domain = [],
             filters = {
                 active: false,
                 time: null,
                 author: null
             },
-            rawData = {
-                authors: [],
-                domain: []
-            },
             filteredData = {
                 tweets: null,
                 tweetsByItems: null,
-                authors: null,
-                activity: null,
-                menuTweets: null
+                menuCounters: null,
+                authorCounters: null
             },
             loaded,
             promise;
@@ -37,8 +33,8 @@ angular.module('tweetsToSoftware')
                         $http.get('/data/domain.json')
                     ])
                         .then(function(response) {
-                            rawData.tweets = response[0].data;
-                            rawData.domain = response[1].data;
+                            tweets = response[0].data;
+                            domain = response[1].data;
 
                             filterData();
                         });
@@ -50,31 +46,17 @@ angular.module('tweetsToSoftware')
             return res;
         }
 
-        function matchTweetsToConfig(tweets) {
-            // TODO: configure based on the relevancy and command knowledge
-            return tweets;
-        }
-
-        function generateActivity()
-
-        function generateAuthors() {
-        }
-
         function filterData() {
             console.log('refilter');
 
             filteredData = {
                 tweets: [],
                 tweetsByItems: {},
-                activity: [],
-                authors: [],
-                menuTweets: {}
+                menuCounters: {},
+                authorCounters: {}
             };
 
-            var activityMap = {},
-                authorsMap = {};
-
-            angular.forEach(rawData.tweets, function(tweet) {
+            angular.forEach(tweets, function(tweet) {
                if (matchFilters(tweet)) {
                    filteredData.tweets.push(tweet);
 
@@ -84,37 +66,19 @@ angular.module('tweetsToSoftware')
                        filteredData.tweetsByItems[tweet.commandId] = [tweet];
                    }
 
-                   if (filteredData.menuTweets[tweet.commandId]) {
-                       filteredData.menuTweets[tweet.commandId] += 1;
+                   if (filteredData.menuCounters[tweet.commandId]) {
+                       filteredData.menuCounters[tweet.commandId] += 1;
                    } else {
-                       filteredData.menuTweets[tweet.commandId] = 1;
+                       filteredData.menuCounters[tweet.commandId] = 1;
                    }
 
-                   if (authorsMap[tweet.author.name]) {
-                       authorsMap[tweet.author.name].tweetsCount += 1;
+                   if (filteredData.authorCounters[tweet.author.name]) {
+                       filteredData.authorCounters[tweet.author.name].tweetsCount += 1;
                    } else {
-                       authorsMap[tweet.author.name] = tweet.author;
-                       authorsMap[tweet.author.name].tweetsCount = 1;
-                   }
-
-                   if (activityMap[tweet.published]) {
-                       activityMap[tweet.published] += 1;
-                   } else {
-                       activityMap[tweet.published] = 1;
+                       filteredData.authorCounters[tweet.author.name] = tweet.author;
+                       filteredData.authorCounters[tweet.author.name].tweetsCount = 1;
                    }
                }
-            });
-
-            angular.forEach(rawData.domain, function(time) {
-                filteredData.activity.push({ time: time, nTweets: activityMap[time] || 0 });
-            });
-
-            if (filters.author) {
-                filteredData.authors.push(author);
-            }
-
-            angular.forEach(Object.keys(authorsMap), function(author) {
-                filteredData.authors.push(authorsMap[author]);
             });
 
             function matchFilters(tweet) {
@@ -136,72 +100,63 @@ angular.module('tweetsToSoftware')
         }
 
         return {
-            //toggleFilters: function() {
-            //    filters.active = !filters.active;
-            //    if (filters.active) {
-            //        $rootScope.$broadcast('filtersActivated');
-            //    }
-            //},
-            //getFilters: function() {
-            //    return filters;
-            //},
-            //setFilters: function(f) {
-            //    if (f.time !== undefined) {
-            //        filters.time = f.time;
-            //        $rootScope.$broadcast('timeFiltersChanged');
-            //    }
-            //
-            //    if (f.author !== undefined) {
-            //        filters.author = f.author;
-            //        $rootScope.$broadcast('authorFiltersChanged');
-            //    }
-            //
-            //    $rootScope.$broadcast('filtersChanged');
-            //    filterData();
-            //},
+            toggleFilters: function() {
+                filters.active = !filters.active;
+                if (filters.active) {
+                    $rootScope.$broadcast('filtersActivated');
+                }
+            },
+            getFilters: function() {
+                return filters;
+            },
+            setFilters: function(f) {
+                if (f.time !== undefined) {
+                    filters.time = f.time;
+                    $rootScope.$broadcast('timeFiltersChanged');
+                }
+
+                if (f.author !== undefined) {
+                    filters.author = f.author;
+                    $rootScope.$broadcast('authorFiltersChanged');
+                }
+
+                $rootScope.$broadcast('filtersChanged');
+                filterData();
+            },
             getDomain: function() {
                 return load()
                     .then(function() {
-                        return rawData.domain;
+                        return domain;
                     });
             },
-            //getTweets: function(menuItemId) {
-            //    return load()
-            //        .then(function() {
-            //            var result;
-            //
-            //            if (menuItemId) {
-            //                result = filteredData.tweetsByItems[menuItemId];
-            //            } else {
-            //                result = filteredData.tweets;
-            //            }
-            //
-            //            return result;
-            //        });
-            //},
-            //getActivity: function() {
-            //    return load()
-            //        .then(function() {
-            //            return {
-            //                activity: filteredData.activity,
-            //                nTweets: filteredData.tweets.length
-            //            };
-            //        });
-            //},
-            //getMenuTweets: function() {
-            //    return load()
-            //        .then(function() {
-            //            return {
-            //                menuTweets: filteredData.menuTweets,
-            //                nTweets: filteredData.tweets.length
-            //            };
-            //        });
-            //},
-            //getAuthors: function() {
-            //    return load()
-            //        .then(function() {
-            //            return filteredData.authors;
-            //        });
-            //}
+            getTweets: function(menuItemId) {
+                return load()
+                    .then(function() {
+                        var result;
+
+                        if (menuItemId) {
+                            result = filteredData.tweetsByItems[menuItemId];
+                        } else {
+                            result = filteredData.tweets;
+                        }
+
+                        return result;
+                    });
+            },
+            getMenuCounters: function() {
+                return load()
+                    .then(function() {
+                        return {
+                            menuTweets: filteredData.menuCounters,
+                            nTweets: filteredData.tweets.length
+                        };
+                    });
+            },
+            getAuthorCounters: function() {
+                return load()
+                    .then(function() {
+                        return filteredData.authorCounters;
+                    });
+            }
         }
     });

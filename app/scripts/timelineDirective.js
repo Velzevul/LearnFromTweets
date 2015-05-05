@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('timeline', function($window, $q, $timeout, DataService) {
+    .directive('timeline', function($window, $q, $timeout, DataService, ActivityService) {
         'use strict';
 
         return {
@@ -23,10 +23,16 @@ angular.module('tweetsToSoftware')
                             return moment(d).format('MMM Do');
                         }),
                     halfDaysAxis = d3.svg.axis()
-                        .ticks(d3.time.hours, 12)
+                        .ticks(d3.time.hours, 3)
                         .innerTickSize(12)
                         .outerTickSize(0)
-                        .tickFormat(function(d) { return ''; }),
+                        .tickFormat(function(d) {
+                            if (d.getHours()) {
+                                return moment(d).format('HH:00');
+                            } else {
+                                return '';
+                            }
+                        }),
                     hoursAxis = d3.svg.axis()
                         .ticks(d3.time.hours)
                         .innerTickSize(6)
@@ -116,16 +122,24 @@ angular.module('tweetsToSoftware')
 
                     $('.line, .area, .dot').remove();
 
+                    var matchingData = [];
+                    angular.forEach(data, function(dataPoint) {
+                        if ((dataPoint.parsedTime >= $scope.lowerTimeBound) &&
+                            (dataPoint.parsedTime <= $scope.upperTimeBound)) {
+                            matchingData.push(dataPoint);
+                        }
+                    });
+
                     canvas.append('path')
                         .attr('class', 'area')
-                        .attr('d', area(data));
+                        .attr('d', area(matchingData));
 
                     canvas.append('path')
                         .attr('class', 'line')
-                        .attr('d', line(data));
+                        .attr('d', line(matchingData));
 
                     canvas.selectAll('.dot')
-                            .data(data)
+                            .data(matchingData)
                         .enter().append('circle')
                             .attr('class', 'dot')
                             .attr('r', 2.5)
@@ -138,6 +152,14 @@ angular.module('tweetsToSoftware')
                     $('.brush').remove();
 
                     brush.x(x)
+                        .on('brush', function() {
+                            var b = brush.extent();
+
+                            $scope.lowerTimeBound = b[0];
+                            $scope.upperTimeBound = b[1];
+
+                            drawChart($scope.chart);
+                        })
                         .on('brushend', setTimeFilter);
 
                     canvas.append("g")
@@ -147,27 +169,21 @@ angular.module('tweetsToSoftware')
                         .attr("height", height);
                 }
 
-                $(window).on('resize', function() {
-                    clearTimeout(redrawTimeoutId);
-                    redrawTimeoutId = $timeout(function() {
-                        $q.all([
-                            DataService.getActivity(),
-                            DataService.getDomain()
-                        ])
-                            .then(function(response) {
-                                angular.forEach(response[0].activity, function(item) {
-                                    item.parsedTime = parseDate(item.time);
-                                });
-
-                                drawAxes(response[0].activity, response[1]);
-                                drawGhostChart(response[0].activity);
-                                drawChart(response[0].activity);
-                                setBrush();
-                            });
-                    }, 300).$$timeoutId;
-                });
-
                 $scope.filterSet = false;
+
+                function setTimeFilter() {
+                    var b = brush.extent();
+
+                    DataService.setFilters({
+                        time: {
+                            lower: moment(b[0]).format('YYYY-MM-DD HH:MM:SS'),
+                            higher: moment(b[1]).format('YYYY-MM-DD HH:MM:SS')
+                        }
+                    });
+
+                    $scope.filterSet = true;
+                }
+
                 $scope.unsetTimeFilter = function() {
                     var b = brush.extent();
 
@@ -181,61 +197,74 @@ angular.module('tweetsToSoftware')
                     });
 
                     $scope.filterSet = false;
+                    drawChart($scope.chart);
                 };
-
-                function setTimeFilter() {
-                    var b = brush.extent();
-
-                    $scope.lowerTimeBound = moment(b[0]).format('MMM DD HH:00');
-                    $scope.upperTimeBound = moment(b[1]).format('MMM DD HH:00');
-
-                    DataService.setFilters({
-                        time: {
-                            lower: moment(b[0]).format('YYYY-MM-DD HH:MM:SS'),
-                            higher: moment(b[1]).format('YYYY-MM-DD HH:MM:SS')
-                        }
-                    });
-
-                    $scope.filterSet = true;
-                }
-
-                $scope.$on('filtersChanged', function() {
-                    DataService.getActivity()
-                        .then(function(response) {
-                            angular.forEach(response.activity, function(item) {
-                                item.parsedTime = parseDate(item.time);
-                            });
-
-                            $scope.nTweets = response.nTweets;
-                            drawChart(response.activity);
-                            setBrush();
-                        });
-                });
 
                 $scope.$on('filtersActivated', function() {
                     $timeout(function() {
                         $q.all([
-                            DataService.getActivity(),
+                            ActivityService.get(),
                             DataService.getDomain()
                         ])
                             .then(function(response) {
-                                angular.forEach(response[0].activity, function(item) {
-                                    item.parsedTime = parseDate(item.time);
-                                });
+                                var filter = DataService.getFilters();
 
-                                $scope.nTweets = response[0].nTweets;
-                                $scope.domainLowerBound = moment(response[1][response[1].length - 1]).format('MMM DD HH:MM');
-                                $scope.domainUpperBound = moment(response[1][0]).format('MMM DD HH:MM');
+                                $scope.activity = response[0];
+                                $scope.domain = response[1];
 
-                                $scope.lowerTimeBound = $scope.domainLowerBound;
-                                $scope.upperTimeBound = $scope.domainUpperBound;
+                                if (filter.author) {
+                                    $scope.ghost = $scope.activity[filter.author.name];
+                                    $scope.chart = $scope.activity[filter.author.name];
+                                } else {
+                                    $scope.ghost = $scope.activity.total;
+                                    $scope.chart = $scope.activity.total;
+                                }
 
-                                drawAxes(response[0].activity, response[1]);
-                                drawGhostChart(response[0].activity);
-                                drawChart(response[0].activity);
+                                $scope.domainLowerBound = moment($scope.domain[0]).toDate();
+                                $scope.domainUpperBound = moment($scope.domain[$scope.domain.length - 1]).toDate();
+
+                                if (!$scope.lowerTimeBound) {
+                                    $scope.lowerTimeBound = $scope.domainLowerBound;
+                                }
+
+                                if (!$scope.upperTimeBound) {
+                                    $scope.upperTimeBound = $scope.domainUpperBound;
+                                }
+
+                                drawAxes($scope.activity.total, $scope.domain);
+                                drawGhostChart($scope.activity.total, 'ghost-total');
+
+                                drawGhostChart($scope.ghost, 'ghost-area');
+                                drawChart($scope.chart);
                                 setBrush();
                             });
                     });
+                });
+
+                $(window).on('resize', function() {
+                    clearTimeout(redrawTimeoutId);
+                    redrawTimeoutId = $timeout(function() {
+                        drawAxes($scope.activity.total, $scope.domain);
+
+                        drawGhostChart($scope.ghost, 'ghost-area');
+                        drawChart($scope.chart);
+                        setBrush();
+                    }, 300).$$timeoutId;
+                });
+
+                $scope.$on('authorFiltersChanged', function() {
+                    var filter = DataService.getFilters();
+
+                    if (filter.author) {
+                        $scope.ghost = $scope.activity[filter.author.name];
+                        $scope.chart = $scope.activity[filter.author.name];
+                    } else {
+                        $scope.ghost = $scope.activity.total;
+                        $scope.chart = $scope.activity.total;
+                    }
+
+                    drawGhostChart($scope.ghost, 'ghost-area');
+                    drawChart($scope.chart);
                 });
             }
         }

@@ -14,7 +14,7 @@ angular.module('tweetsToSoftware')
                 $q.all([
                     MenuService.get(),
                     MenuService.getFlat(),
-                    DataService.getMenuTweets()
+                    DataService.getMenuCounters()
                 ])
                     .then(function(data) {
                         $scope.menu = data[0];

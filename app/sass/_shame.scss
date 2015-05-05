@@ -38,17 +38,20 @@
   stroke-width: 1px;
 }
 
-
 .area {
   fill: rgba($color-dc-secondary, 0.3);
 }
 
-.ghost-area {
-  fill: rgba($color-border, 0.3);
+.ghost-total {
+  fill: rgba($color-border, 0.2);
 }
 
-.bar {
-  fill: $color-dc-secondary;
+.ghost-area {
+  fill: rgba($color-border, 0.5);
+}
+
+.dot {
+  fill: rgba($color-dc-secondary, 0.8);
 }
 
 .brush .extent {

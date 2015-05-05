@@ -1,8 +1,8 @@
 angular.module('tweetsToSoftware')
-    .factory('AuthorService', function($http) {
+    .factory('ActivityService', function($http) {
         'use strict';
 
-        var authors,
+        var activity,
             loaded,
             promise;
 
@@ -16,9 +16,15 @@ angular.module('tweetsToSoftware')
                 res = deferred.promise;
             } else {
                 if (!promise) {
-                    promise = $http.get('/data/authors.json')
+                    promise = $http.get('/data/activity.json')
                         .then(function(response) {
-                            authors = response.data;
+                            activity = response.data;
+
+                            angular.forEach(activity, function(category) {
+                                 angular.forEach(category, function(item) {
+                                     item.parsedTime = moment(item.time).toDate();
+                                 });
+                            });
                         });
                 }
 
@@ -32,7 +38,7 @@ angular.module('tweetsToSoftware')
             get: function() {
                 return load()
                     .then(function() {
-                        return authors;
+                        return activity;
                     });
             }
         };
