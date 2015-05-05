@@ -4,7 +4,7 @@ angular.module('tweetsToSoftware')
 
         return {
             restrict: 'E',
-            templateUrl: 'scripts/templates/menu.html',
+            templateUrl: 'templates/menu.html',
             scope: {},
             controller: function($scope) {
                 $scope.filters = DataService.getFilters();
