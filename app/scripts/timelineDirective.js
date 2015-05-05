@@ -72,13 +72,15 @@ angular.module('tweetsToSoftware')
 
                     x.range([0, width])
                         .domain([d3.min(domain, function(d) {
-                            return parseDate(d);
+                            var bound = parseDate(d);
+                            bound.setMinutes(0);
+                            return bound;
                         }), d3.max(domain, function(d) {
                             return parseDate(d);
                         })]);
 
                     y.range([height, 0])
-                        .domain([0, d3.max(data, function(item) { return item.nTweets; }) + 5]);
+                        .domain([0, d3.max(data, function(item) { return item.nTweets; }) + 2]);
 
                     daysAxis.scale(x);
                     halfDaysAxis.scale(x);
@@ -122,11 +124,14 @@ angular.module('tweetsToSoftware')
 
                     $('.line, .area, .dot').remove();
 
+                    $scope.nTweets = 0;
+
                     var matchingData = [];
                     angular.forEach(data, function(dataPoint) {
                         if ((dataPoint.parsedTime >= $scope.lowerTimeBound) &&
                             (dataPoint.parsedTime <= $scope.upperTimeBound)) {
                             matchingData.push(dataPoint);
+                            $scope.nTweets += dataPoint.nTweets;
                         }
                     });
 
@@ -176,8 +181,8 @@ angular.module('tweetsToSoftware')
 
                     DataService.setFilters({
                         time: {
-                            lower: moment(b[0]).format('YYYY-MM-DD HH:MM:SS'),
-                            higher: moment(b[1]).format('YYYY-MM-DD HH:MM:SS')
+                            lower: b[0],
+                            upper: b[1]
                         }
                     });
 
@@ -193,7 +198,7 @@ angular.module('tweetsToSoftware')
                     $scope.upperTimeBound = $scope.domainUpperBound;
 
                     DataService.setFilters({
-                        time: 'clear'
+                        time: null
                     });
 
                     $scope.filterSet = false;
@@ -220,8 +225,8 @@ angular.module('tweetsToSoftware')
                                     $scope.chart = $scope.activity.total;
                                 }
 
-                                $scope.domainLowerBound = moment($scope.domain[0]).toDate();
-                                $scope.domainUpperBound = moment($scope.domain[$scope.domain.length - 1]).toDate();
+                                $scope.domainLowerBound = moment($scope.domain[0]).minutes(0).toDate();
+                                $scope.domainUpperBound = moment($scope.domain[$scope.domain.length - 1]).minutes(0).toDate();
 
                                 if (!$scope.lowerTimeBound) {
                                     $scope.lowerTimeBound = $scope.domainLowerBound;

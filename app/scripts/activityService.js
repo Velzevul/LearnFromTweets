@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .factory('ActivityService', function($http) {
+    .factory('ActivityService', function($http, DataService) {
         'use strict';
 
         var activity,
@@ -23,6 +23,7 @@ angular.module('tweetsToSoftware')
                             angular.forEach(activity, function(category) {
                                  angular.forEach(category, function(item) {
                                      item.parsedTime = moment(item.time).toDate();
+                                     item.parsedTime.setMinutes(0);
                                  });
                             });
                         });
@@ -39,6 +40,39 @@ angular.module('tweetsToSoftware')
                 return load()
                     .then(function() {
                         return activity;
+                    });
+            },
+            getCounters: function() {
+                return load()
+                    .then(function() {
+                        var counters = {},
+                            filters = DataService.getFilters(),
+                            upperBound,
+                            lowerBound;
+
+                        if (filters.time) {
+                            lowerBound = filters.time.lower;
+                            upperBound = filters.time.upper;
+                        }
+
+                        angular.forEach(activity, function(collection, key) {
+                            if (key == 'total') { return; }
+
+                            counters[key] = 0;
+
+                            angular.forEach(collection, function(dataPoint) {
+                                if (filters.time) {
+                                    if ((dataPoint.parsedTime >= lowerBound) &&
+                                        (dataPoint.parsedTime <= upperBound)) {
+                                        counters[key] += dataPoint.nTweets;
+                                    }
+                                } else {
+                                    counters[key] += dataPoint.nTweets;
+                                }
+                            });
+                        });
+
+                        return counters;
                     });
             }
         };

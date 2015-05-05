@@ -12,8 +12,7 @@ angular.module('tweetsToSoftware')
             filteredData = {
                 tweets: null,
                 tweetsByItems: null,
-                menuCounters: null,
-                authorCounters: null
+                menuCounters: null
             },
             loaded,
             promise;
@@ -71,20 +70,13 @@ angular.module('tweetsToSoftware')
                    } else {
                        filteredData.menuCounters[tweet.commandId] = 1;
                    }
-
-                   if (filteredData.authorCounters[tweet.author.name]) {
-                       filteredData.authorCounters[tweet.author.name].tweetsCount += 1;
-                   } else {
-                       filteredData.authorCounters[tweet.author.name] = tweet.author;
-                       filteredData.authorCounters[tweet.author.name].tweetsCount = 1;
-                   }
                }
             });
 
             function matchFilters(tweet) {
                 if (filters.time) {
-                    if ((tweet.published < filters.time.lower) ||
-                        (tweet.published > filters.time.higher)) {
+                    if ((moment(tweet.published).toDate() < filters.time.lower) ||
+                        (moment(tweet.published).toDate() > filters.time.upper)) {
                         return false;
                     }
                 }
@@ -150,12 +142,6 @@ angular.module('tweetsToSoftware')
                             menuTweets: filteredData.menuCounters,
                             nTweets: filteredData.tweets.length
                         };
-                    });
-            },
-            getAuthorCounters: function() {
-                return load()
-                    .then(function() {
-                        return filteredData.authorCounters;
                     });
             }
         }

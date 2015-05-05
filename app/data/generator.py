@@ -25,15 +25,17 @@ def generateActivity():
     for dt in rrule.rrule(rrule.HOURLY, dtstart=initial_date, until=now):
         domain.append(str(dt))
         n_tweets = randint(0,10)
-        activity['total'].append({
-            'time': str(dt),
-            'nTweets': n_tweets
-        })
 
         tweet_authors = []
         for i in range(n_tweets):
             random_author = authors[randint(0,len(authors)-1)]
             tweet_authors.append(random_author['name'])
+
+        activity['total'].append({
+            'time': str(dt),
+            'nTweets': n_tweets,
+            'authors': tweet_authors
+        })
 
         authors_counter = Counter(tweet_authors)
 
@@ -47,6 +49,7 @@ def generateActivity():
                 'time': str(dt),
                 'nTweets': author_tweets
             })
+
 
     return domain, activity
 
@@ -83,15 +86,19 @@ def generateCommandPercentage():
 def generateDummyTweets(activity):
     tweets = []
     menu_items = getMenuItems()
+
     authors = load(open('authors.json'))
+    authors_map = {}
+    for author in authors:
+        authors_map[author['name']] = author
+
     fake = Factory.create()
 
     for entry in activity:
         for i in range(entry['nTweets']):
-            random_author = authors[randint(0,len(authors)-1)]
             random_menu_item = menu_items[randint(0,len(menu_items)-1)]
 
-            tweet = { 'author': random_author,
+            tweet = { 'author': authors_map[entry['authors'][i]],
                       'commandId': random_menu_item,
                       'published': entry['time'],
                       'text': fake.sentence() }

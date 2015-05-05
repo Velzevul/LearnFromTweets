@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('authorsFilter', function($q, AuthorService, DataService) {
+    .directive('authorsFilter', function($q, AuthorService, ActivityService, DataService) {
         'use strict';
 
         return {
@@ -9,17 +9,25 @@ angular.module('tweetsToSoftware')
             controller: function($scope) {
                 $q.all([
                     AuthorService.get(),
-                    DataService.getAuthorCounters()
+                    ActivityService.getCounters()
                 ])
                     .then(function(response) {
                         $scope.authors = response[0];
-                        $scope.authorCounters = response[1];
+                        var authorCounters = response[1];
+
+                        angular.forEach($scope.authors, function(author) {
+                            author.tweetsCount = authorCounters[author.name];
+                        });
                     });
 
-                $scope.$on('timeFiltersChanged', function() {
-                    DataService.getAuthorCounters()
+                $scope.$on('filtersChanged', function() {
+                    ActivityService.getCounters()
                         .then(function(response) {
-                            $scope.authorCounters = response;
+                            var authorCounters = response;
+
+                            angular.forEach($scope.authors, function(author) {
+                                author.tweetsCount = authorCounters[author.name];
+                            });
                         });
                 });
 
