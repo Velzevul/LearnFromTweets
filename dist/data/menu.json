@@ -1,0 +1,630 @@
+[
+  {
+    "label": "File",
+    "children": [
+      {
+        "label": "New File"
+      },
+      {
+        "label": "New From Template",
+        "children": [
+          {
+            "label": "IOS App Design"
+          },
+          {
+            "label": "IOS UI Design"
+          },
+          {
+            "label": "Mac App Design"
+          },
+          {
+            "label": "Material Design"
+          }
+        ]
+      },
+      {
+        "label": "Open"
+      },
+      {
+        "label": "Open Recent",
+        "children": [
+          {
+            "label": "Clear Items"
+          }
+        ]
+      },
+      {
+        "label": "Close"
+      },
+      {
+        "label": "Save"
+      },
+      {
+        "label": "Duplicate"
+      },
+      {
+        "label": "Rename"
+      },
+      {
+        "label": "Move To"
+      },
+      {
+        "label": "Revert To",
+        "children": [
+          {
+            "label": "Browse All Versions"
+          }
+        ]
+      },
+      {
+        "label": "Export"
+      },
+      {
+        "label": "Export Artboards To Pdf"
+      },
+      {
+        "label": "Save as Template"
+      },
+      {
+        "label": "Page Setup"
+      },
+      {
+        "label": "Print"
+      }
+    ]
+  },
+  {
+    "label": "Edit",
+    "children": [
+      {
+        "label": "Undo"
+      },
+      {
+        "label": "Redo"
+      },
+      {
+        "label": "Cut"
+      },
+      {
+        "label": "Copy"
+      },
+      {
+        "label": "Paste"
+      },
+      {
+        "label": "Paste in Place"
+      },
+      {
+        "label": "Paste and Match Style"
+      },
+      {
+        "label": "Duplicate"
+      },
+      {
+        "label": "Delete"
+      },
+      {
+        "label": "Select All"
+      },
+      {
+        "label": "Scale"
+      },
+      {
+        "label": "Copy Style"
+      },
+      {
+        "label": "Paste Style"
+      },
+      {
+        "label": "Set Style as Default"
+      },
+      {
+        "label": "Pick Color"
+      },
+      {
+        "label": "Copy CSS Attributes"
+      },
+      {
+        "label": "Spelling",
+        "children": [
+          {
+            "label": "Show Spelling and Grammar"
+          },
+          {
+            "label": "Check Spelling"
+          },
+          {
+            "label": "Check Spelling as You Type"
+          }
+        ]
+      },
+      {
+        "label": "Start Dictation"
+      },
+      {
+        "label": "Emoji and Symbols"
+      }
+    ]
+  },
+  {
+    "label": "Insert",
+    "children": [
+      {
+        "label": "Vector"
+      },
+      {
+        "label": "Pencil"
+      },
+      {
+        "label": "Shape",
+        "children": [
+          { 
+            "label": "Line" 
+          },
+          { 
+            "label": "Arrow" 
+          },
+          { 
+            "label": "Rectangle" 
+          },
+          { 
+            "label": "Oval" 
+          },
+          { 
+            "label": "Rounded" 
+          },
+          { 
+            "label": "Star" 
+          },
+          { 
+            "label": "Polygon" 
+          },
+          { 
+            "label": "Triangle" 
+          }
+        ]
+      },
+      { 
+        "label": "Text" 
+      },
+      { 
+        "label": "Image" 
+      },
+      { 
+        "label": "Artboard" 
+      },
+      { 
+        "label": "Slice" 
+      },
+      { 
+        "label": "Symbols" 
+      },
+      { 
+        "label": "Styled Text" 
+      }
+    ]
+  },
+  {
+    "label": "Layer",
+    "children": [
+      { 
+        "label": "Create Symbol"
+      },
+      { 
+        "label": "Create Shared Style"
+      },
+      { 
+        "label": "Round to Nearest Pixel Edge"
+      },
+      { 
+        "label": "Style",
+        "children": [
+          {
+            "label": "Add Fill"
+          },
+          {
+            "label": "Add Border"
+          },
+          {
+            "label": "Add Inner Shadow"
+          },
+          {
+            "label": "Fill Options"
+          },
+          {
+            "label": "Border Options"
+          },
+          {
+            "label": "Remove Unused Styles"
+          }
+        ]
+      },
+      {
+        "label": "Combine",
+        "children": [
+          {
+            "label": "Union"
+          },
+          {
+            "label": "Subtract"
+          },
+          {
+            "label": "Intersect"
+          },
+          {
+            "label": "Difference"
+          },
+          {
+            "label": "Reset"
+          }
+        ]
+      },
+      {
+        "label": "Transform",
+        "children": [
+          {
+            "label": "Transform Layer"
+          },
+          {
+            "label": "Rotate Layer"
+          },
+          {
+            "label": "Flip Horizontal"
+          },
+          {
+            "label": "Flip Vertical"
+          }
+        ]
+      },
+      {
+        "label": "Paths",
+        "children": [
+          {
+            "label": "Join"
+          },
+          {
+            "label": "Split"
+          },
+          {
+            "label": "Flatten"
+          },
+          {
+            "label": "Close Paths"
+          },
+          {
+            "label": "Reverse Order"
+          },
+          {
+            "label": "Vectorize Stroke"
+          },
+          {
+            "label": "Scissors"
+          },
+          {
+            "label": "Rotate Copies"
+          }
+        ]
+      },
+      {
+        "label": "Image",
+        "children": [
+          {
+            "label": "Replace"
+          },
+          {
+            "label": "Set to Original Size"
+          },
+          {
+            "label": "Reduce Image Size"
+          },
+          {
+            "label": "Convert to 9-Slice Image"
+          }
+        ]
+      },
+      {
+        "label": "Flatten Selection to Bitmap"
+      },
+      {
+        "label": "Use as Mask"
+      },
+      {
+        "label": "Mask mode",
+        "children": [
+          {
+            "label": "Outline Mask"
+          },
+          {
+            "label": "Alpha Mask"
+          }
+        ]
+      },
+      {
+        "label": "Ignore Underlaying Mask"
+      },
+      {
+        "label": "Mask with Selected Shape"
+      }
+    ]
+  },
+  {
+    "label": "Type",
+    "children": [
+      {
+        "label": "Bold"
+      },
+      {
+        "label": "Italic"
+      },
+      {
+        "label": "Underline"
+      },
+      {
+        "label": "Bigger"
+      },
+      {
+        "label": "Smaller"
+      },
+      {
+        "label": "Uppercase"
+      },
+      {
+        "label": "Lowercase"
+      },
+      {
+        "label": "Change Font"
+      },
+      {
+        "label": "Select Similar"
+      },
+      {
+        "label": "Convert Text to Outlines"
+      },
+      {
+        "label": "Text on Path"
+      },
+      {
+        "label": "Kern",
+        "children": [
+          {
+            "label": "Use Default"
+          },
+          {
+            "label": "Use None"
+          },
+          {
+            "label": "Tighten"
+          },
+          {
+            "label": "Loosen"
+          }
+        ]
+      },
+      {
+        "label": "Ligature",
+        "children": [
+          {
+            "label": "Use Default"
+          },
+          {
+            "label": "Use None"
+          },
+          {
+            "label": "Use All"
+          }
+        ]
+      },
+      {
+        "label": "Baseline",
+        "children": [
+          {
+            "label": "Use Default"
+          },
+          {
+            "label": "Subscript"
+          },
+          {
+            "label": "Superscript"
+          },
+          {
+            "label": "Raise"
+          },
+          {
+            "label": "Lower"
+          }
+        ]
+      },
+      {
+        "label": "Align Left"
+      },
+      {
+        "label": "Center"
+      },
+      {
+        "label": "Justify"
+      },
+      {
+        "label": "Align Right"
+      }
+    ]
+  },
+  {
+    "label": "Arange",
+    "children": [
+      {
+        "label": "Forward"
+      },
+      {
+        "label": "Move To Front"
+      },
+      {
+        "label": "Backward"
+      },
+      {
+        "label": "Move to Back"
+      },
+      {
+        "label": "Align Objects",
+        "children": [
+          {
+            "label": "Left"
+          },
+          {
+            "label": "Horizontally"
+          },
+          {
+            "label": "Right"
+          },
+          {
+            "label": "Top"
+          },
+          {
+            "label": "Vertically"
+          },
+          {
+            "label": "Bottom"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Plugins",
+    "children": [
+      {
+        "label": "Custom Plugin"
+      },
+      {
+        "label": "Run Last Plugin"
+      },
+      {
+        "label": "Reveal Plugins Folder"
+      }
+    ]
+  },
+  {
+    "label": "View",
+    "children": [
+      {
+        "label": "Zoom In"
+      },
+      {
+        "label": "Zoom Out"
+      },
+      {
+        "label": "Actual Size"
+      },
+      {
+        "label": "Center Canvas"
+      },
+      {
+        "label": "Zoom Selection"
+      },
+      {
+        "label": "Center Selection"
+      },
+      {
+        "label": "Show Layers List"
+      },
+      {
+        "label": "Show Inspector"
+      },
+      {
+        "label": "Hide Layers and Inspector"
+      },
+      {
+        "label": "Presentation Mode"
+      },
+      {
+        "label": "Layer List",
+        "children": [
+          {
+            "label": "Auto-Expand Groups in Layers List"
+          },
+          {
+            "label": "Collapse Artboards and Groups"
+          },
+          {
+            "label": "Reveal in Layer List"
+          },
+          {
+            "label": "Show Slices"
+          },
+          {
+            "label": "Show Layers"
+          }
+        ]
+      },
+      {
+        "label": "Canvas",
+        "children": [
+          {
+            "label": "Show Smart Guides"
+          },
+          {
+            "label": "Show Selection Handles"
+          },
+          {
+            "label": "Show Layer Highlights"
+          },
+          {
+            "label": "Show Artboard Shadow"
+          },
+          {
+            "label": "Show Rulers"
+          },
+          {
+            "label": "Show Pixels"
+          },
+          {
+            "label": "Show Pixels Grid"
+          },
+          {
+            "label": "Show Grid"
+          },
+          {
+            "label": "Show Layout"
+          },
+          {
+            "label": "Hide All Layout and Grids"
+          },
+          {
+            "label": "Grid Settings"
+          },
+          {
+            "label": "Layout Settings"
+          }
+        ]
+      },
+      {
+        "label": "Show Colors"
+      },
+      {
+        "label": "Show Fonts"
+      },
+      {
+        "label": "Hide Toolbar"
+      },
+      {
+        "label": "Customize Toolbar"
+      },
+      {
+        "label": "Enter Full Screen"
+      }
+    ]
+  },
+  {
+    "label": "Window",
+    "children": [
+      {
+        "label": "Minimize"
+      },
+      {
+        "label": "Zoom"
+      },
+      {
+        "label": "Bring All To Front"
+      }
+    ]
+  }
+]
