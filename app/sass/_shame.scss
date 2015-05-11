@@ -61,3 +61,26 @@
   fill: none;
   shape-rendering: crispEdges;
 }
+
+.tick {
+  font-size: 12px;
+}
+
+.axis--grid {
+  .domain {
+    display: none;
+  }
+
+  .tick line {
+    stroke: $color-bg-secondary;
+  }
+}
+
+.timeline-tweet {
+  stroke: $color-border;
+  stroke-width: 1px;
+}
+  .timeline-tweet--following {
+      stroke: $color-dc-secondary;
+      stroke-width: 3px;
+  }

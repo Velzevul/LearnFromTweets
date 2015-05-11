@@ -30711,7 +30711,7 @@ var ngControllerDirective = [function() {
 
 // ngCsp is not implemented as a proper directive any more, because we need it be processed while we
 // bootstrap the system (before $parse is instantiated), for this reason we just have
-// the csp.isOpen() fn that looks for ng-csp attribute anywhere in the current doc
+// the csp.isActive() fn that looks for ng-csp attribute anywhere in the current doc
 
 /**
  * @ngdoc directive
@@ -38601,12 +38601,10 @@ var minlengthDirective = function() {
     return _moment;
 
 }));
-/* angular-moment.js / v0.10.0 / (c) 2013, 2014, 2015 Uri Shaked / MIT Licence */
+/* angular-moment.js / v0.10.1 / (c) 2013, 2014, 2015 Uri Shaked / MIT Licence */
 
-'format global';
+'format amd';
 /* global define */
-'deps angular';
-'deps moment';
 
 (function () {
 	'use strict';

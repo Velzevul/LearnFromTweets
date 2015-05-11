@@ -493,7 +493,7 @@ angular.module('tweetsToSoftware')
         }
 
         function filterData() {
-            console.log('refilter');
+            //console.log('refilter');
 
             filteredData = {
                 tweets: [],
@@ -1106,7 +1106,7 @@ angular.module('tweetsToSoftware')
                 canvas.attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
 
                 function drawAxes(data, domain) {
-                    console.log('draw axes');
+                    //console.log('draw axes');
 
                     var width = $('#timeline').width() - margin.right - margin.left;
 
@@ -1153,7 +1153,7 @@ angular.module('tweetsToSoftware')
                 }
 
                 function drawGhostChart(data, className) {
-                    console.log('draw ghost chart');
+                    //console.log('draw ghost chart');
 
                     $('.' + className).remove();
 
@@ -1163,7 +1163,7 @@ angular.module('tweetsToSoftware')
                 }
 
                 function drawChart(data) {
-                    console.log('draw chart');
+                    //console.log('draw chart');
 
                     $('.line, .area, .dot').remove();
 
@@ -1196,7 +1196,7 @@ angular.module('tweetsToSoftware')
                 }
 
                 function setBrush() {
-                    console.log('set brush');
+                    //console.log('set brush');
                     $('.brush').remove();
 
                     brush.x(x)

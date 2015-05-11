@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('timeline', function($window, $q, $timeout, DataService, ActivityService) {
+    .directive('timeline', function($window, $q, $timeout, DataService, AuthorService) {
         'use strict';
 
         return {
@@ -7,10 +7,10 @@ angular.module('tweetsToSoftware')
             templateUrl: 'templates/timeline.html',
             scope: {},
             link: function($scope, elem) {
-                var margin = {top: 24, right: 24, bottom: 50, left: 50},
-                    parseDate = d3.time.format('%Y-%m-%d %H:%M:%S').parse,
+                var margin = {top: 24, right: 24, bottom: 50, left: 24},
                     height = 250 - margin.top - margin.bottom,
-                    redrawTimeoutId = null;
+                    authorCircleRadius = 12,
+                    circlesMargin = 6;
 
                 var x = d3.time.scale(),
                     y = d3.scale.linear();
@@ -23,7 +23,7 @@ angular.module('tweetsToSoftware')
                             return moment(d).format('MMM Do');
                         }),
                     halfDaysAxis = d3.svg.axis()
-                        .ticks(d3.time.hours, 3)
+                        .ticks(d3.time.hours, 6)
                         .innerTickSize(12)
                         .outerTickSize(0)
                         .tickFormat(function(d) {
@@ -37,33 +37,21 @@ angular.module('tweetsToSoftware')
                         .ticks(d3.time.hours)
                         .innerTickSize(6)
                         .outerTickSize(1)
-                        .tickFormat(function(d) {
-                            return '';
-                        }),
-                    yAxis = d3.svg.axis()
-                        .ticks(5)
-                        .tickFormat(d3.format('f'))
-                        .orient('left');
+                        .tickFormat(''),
+                    gridAxis = d3.svg.axis()
+                        .ticks(d3.time.hours)
+                        .tickSize(height)
+                        .tickFormat('');
 
-                var area = d3.svg.area(),
-                    line = d3.svg.line(),
-                    svg = d3.select('#timeline').append('svg'),
+                var svg = d3.select('#timeline').append('svg'),
                     canvas = svg.append('g'),
-                    brush = d3.svg.brush();
+                    circles;
 
-                area.interpolate("monotone")
-                    .x(function(d) { return x(d.parsedTime); })
-                    .y0(height)
-                    .y1(function(d) { return y(d.nTweets); });
+                canvas.attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
+                    .attr('id', 'svg-canvas');
 
-                line.interpolate("monotone")
-                    .x(function(d) { return x(d.parsedTime); })
-                    .y(function(d) { return y(d.nTweets); });
-
-                canvas.attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
-
-                function drawAxes(data, domain) {
-                    console.log('draw axes');
+                function drawAxes() {
+                    //console.log('draw axes');
 
                     var width = $('#timeline').width() - margin.right - margin.left;
 
@@ -71,21 +59,24 @@ angular.module('tweetsToSoftware')
                         .attr('height', height + margin.top + margin.bottom);
 
                     x.range([0, width])
-                        .domain([d3.min(domain, function(d) {
-                            var bound = parseDate(d);
+                        .domain([d3.min($scope.domain, function(d) {
+                            var bound = moment(d).toDate();
                             bound.setMinutes(0);
                             return bound;
-                        }), d3.max(domain, function(d) {
-                            return parseDate(d);
+                        }), d3.max($scope.domain, function(d) {
+                            var bound = moment(d).toDate();
+                            bound.setMinutes(0);
+                            bound.setHours(bound.getHours() + 1);
+                            return bound;
                         })]);
 
                     y.range([height, 0])
-                        .domain([0, d3.max(data, function(item) { return item.nTweets; }) + 2]);
+                        .domain([0, 10]);
 
                     daysAxis.scale(x);
                     halfDaysAxis.scale(x);
                     hoursAxis.scale(x);
-                    yAxis.scale(y);
+                    gridAxis.scale(x);
 
                     $('.axis').remove();
 
@@ -105,126 +96,173 @@ angular.module('tweetsToSoftware')
                         .call(hoursAxis);
 
                     canvas.append('g')
-                        .attr('class', 'axis')
-                        .call(yAxis);
+                        .attr('class', 'axis axis--grid')
+                        .call(gridAxis);
                 }
 
-                function drawGhostChart(data, className) {
-                    console.log('draw ghost chart');
+                //function drawGhostChart(data, className) {
+                //    console.log('draw ghost chart');
+                //
+                //    $('.' + className).remove();
+                //
+                //    canvas.append('path')
+                //        .attr('class', className)
+                //        .attr('d', area(data));
+                //}
 
-                    $('.' + className).remove();
+                //function drawChart(data) {
+                //    console.log('draw chart');
+                //
+                //    $('.line, .area, .dot').remove();
+                //
+                //    $scope.nTweets = 0;
+                //
+                //    var matchingData = [];
+                //    angular.forEach(data, function(dataPoint) {
+                //        if ((dataPoint.parsedTime >= $scope.lowerTimeBound) &&
+                //            (dataPoint.parsedTime <= $scope.upperTimeBound)) {
+                //            matchingData.push(dataPoint);
+                //            $scope.nTweets += dataPoint.nTweets;
+                //        }
+                //    });
+                //
+                //    canvas.append('path')
+                //        .attr('class', 'area')
+                //        .attr('d', area(matchingData));
+                //
+                //    canvas.append('path')
+                //        .attr('class', 'line')
+                //        .attr('d', line(matchingData));
+                //
+                //    canvas.selectAll('.dot')
+                //            .data(matchingData)
+                //        .enter().append('circle')
+                //            .attr('class', 'dot')
+                //            .attr('r', 2.5)
+                //            .attr('cx', function(d) { return x(d.parsedTime); })
+                //            .attr('cy', function(d) { return y(d.nTweets); });
+                //}
 
-                    canvas.append('path')
-                        .attr('class', className)
-                        .attr('d', area(data));
-                }
+                function drawPortraits() {
+                    var defs = svg.append('defs');
 
-                function drawChart(data) {
-                    console.log('draw chart');
-
-                    $('.line, .area, .dot').remove();
-
-                    $scope.nTweets = 0;
-
-                    var matchingData = [];
-                    angular.forEach(data, function(dataPoint) {
-                        if ((dataPoint.parsedTime >= $scope.lowerTimeBound) &&
-                            (dataPoint.parsedTime <= $scope.upperTimeBound)) {
-                            matchingData.push(dataPoint);
-                            $scope.nTweets += dataPoint.nTweets;
+                    angular.forEach($scope.authors, function(a) {
+                        if (!document.getElementById('bg-author-' + a.name)) {
+                            defs
+                                .append("pattern")
+                                    .attr("id", "bg-author-" + a.name)
+                                    .attr('width', authorCircleRadius * 2)
+                                    .attr('height', authorCircleRadius * 2)
+                                .append("image")
+                                    .attr("xlink:href", a.avatar)
+                                    .attr('width', authorCircleRadius * 2)
+                                    .attr('height', authorCircleRadius * 2);
                         }
                     });
+                }
 
-                    canvas.append('path')
-                        .attr('class', 'area')
-                        .attr('d', area(matchingData));
+                function drawCircles() {
+                    var positions = [],
+                        delta = 2 * authorCircleRadius + circlesMargin;
 
-                    canvas.append('path')
-                        .attr('class', 'line')
-                        .attr('d', line(matchingData));
-
-                    canvas.selectAll('.dot')
-                            .data(matchingData)
+                    circles = canvas.selectAll('.tweet-circle')
+                            .data($scope.tweets)
                         .enter().append('circle')
-                            .attr('class', 'dot')
-                            .attr('r', 2.5)
-                            .attr('cx', function(d) { return x(d.parsedTime); })
-                            .attr('cy', function(d) { return y(d.nTweets); });
+                            .attr('class', 'timeline-tweet')
+                            .attr('r', authorCircleRadius)
+                            .attr('cx', function(d) { return x(d.published); })
+                            .attr('cy', function() {
+                                var cx = Math.round10(parseFloat(this.attributes['cx'].value), -2),
+                                    cy = height - authorCircleRadius - circlesMargin,
+                                    positionFound = false;
+
+                                debugger;
+
+                                while (!positionFound) {
+                                    positionFound = true;
+
+                                    for (var i=0; i<positions.length; i++) {
+                                        var pos = positions[i],
+                                            d = Math.round10(Math.sqrt((cx-pos.x)*(cx-pos.x) + (cy-pos.y)*(cy-pos.y)), -2);
+
+                                        if (d < delta) {
+                                            cy -= Math.round10((cy - pos.y) + Math.sqrt(delta*delta - (cx - pos.x)*(cx - pos.x)), -2);
+                                            positionFound = false;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                positions.push({x: cx, y: cy});
+
+                                return cy;
+                            })
+                            .style('fill', function(d) { return 'url(#bg-author-' + d.author.name + ')' });
                 }
 
-                function setBrush() {
-                    console.log('set brush');
-                    $('.brush').remove();
+                //function setBrush() {
+                //    console.log('set brush');
+                //    $('.brush').remove();
+                //
+                //    brush.x(x)
+                //        .on('brush', function() {
+                //            var b = brush.extent();
+                //
+                //            $scope.lowerTimeBound = b[0];
+                //            $scope.upperTimeBound = b[1];
+                //
+                //            drawChart($scope.chart);
+                //            setBrush();
+                //        })
+                //        .on('brushend', setTimeFilter);
+                //
+                //    canvas.append("g")
+                //        .attr("class", "brush")
+                //        .call(brush)
+                //        .selectAll("rect")
+                //        .attr("height", height);
+                //}
 
-                    brush.x(x)
-                        .on('brush', function() {
-                            var b = brush.extent();
+                //$scope.filterSet = false;
 
-                            $scope.lowerTimeBound = b[0];
-                            $scope.upperTimeBound = b[1];
+                //function setTimeFilter() {
+                //    var b = brush.extent();
+                //
+                //    DataService.setFilters({
+                //        time: {
+                //            lower: b[0],
+                //            upper: b[1]
+                //        }
+                //    });
+                //
+                //    $scope.filterSet = true;
+                //}
 
-                            drawChart($scope.chart);
-                            setBrush();
-                        })
-                        .on('brushend', setTimeFilter);
-
-                    canvas.append("g")
-                        .attr("class", "brush")
-                        .call(brush)
-                        .selectAll("rect")
-                        .attr("height", height);
-                }
-
-                $scope.filterSet = false;
-
-                function setTimeFilter() {
-                    var b = brush.extent();
-
-                    DataService.setFilters({
-                        time: {
-                            lower: b[0],
-                            upper: b[1]
-                        }
-                    });
-
-                    $scope.filterSet = true;
-                }
-
-                $scope.unsetTimeFilter = function() {
-                    var b = brush.extent();
-
-                    d3.selectAll('.brush').call(brush.clear());
-
-                    $scope.lowerTimeBound = $scope.domainLowerBound;
-                    $scope.upperTimeBound = $scope.domainUpperBound;
-
-                    DataService.setFilters({
-                        time: null
-                    });
-
-                    $scope.filterSet = false;
-                    drawChart($scope.chart);
-                };
+                //$scope.unsetTimeFilter = function() {
+                //    d3.selectAll('.brush').call(brush.clear());
+                //
+                //    $scope.lowerTimeBound = $scope.domainLowerBound;
+                //    $scope.upperTimeBound = $scope.domainUpperBound;
+                //
+                //    DataService.setFilters({
+                //        time: null
+                //    });
+                //
+                //    $scope.filterSet = false;
+                //    drawChart($scope.chart);
+                //};
 
                 $scope.$on('filtersActivated', function() {
                     $timeout(function() {
                         $q.all([
-                            ActivityService.get(),
-                            DataService.getDomain()
+                            DataService.getTweets(),
+                            DataService.getDomain(),
+                            AuthorService.get()
                         ])
                             .then(function(response) {
-                                var filter = DataService.getFilters();
-
-                                $scope.activity = response[0];
+                                $scope.tweets = response[0];
                                 $scope.domain = response[1];
-
-                                if (filter.author) {
-                                    $scope.ghost = $scope.activity[filter.author.name];
-                                    $scope.chart = $scope.activity[filter.author.name];
-                                } else {
-                                    $scope.ghost = $scope.activity.total;
-                                    $scope.chart = $scope.activity.total;
-                                }
+                                $scope.authors = response[2];
 
                                 $scope.domainLowerBound = moment($scope.domain[0]).minutes(0).toDate();
                                 $scope.domainUpperBound = moment($scope.domain[$scope.domain.length - 1]).minutes(0).toDate();
@@ -237,44 +275,42 @@ angular.module('tweetsToSoftware')
                                     $scope.upperTimeBound = $scope.domainUpperBound;
                                 }
 
-                                drawAxes($scope.activity.total, $scope.domain);
-                                drawGhostChart($scope.activity.total, 'ghost-total');
+                                drawAxes();
+                                drawPortraits();
 
-                                drawGhostChart($scope.ghost, 'ghost-area');
-                                drawChart($scope.chart);
-                                setBrush();
+                                drawCircles($scope.tweets);
+                                //setBrush();
                             });
                     });
                 });
 
-                $(window).on('resize', function() {
-                    clearTimeout(redrawTimeoutId);
-                    redrawTimeoutId = $timeout(function() {
-                        drawAxes($scope.activity.total, $scope.domain);
+                //$(window).on('resize', function() {
+                //    clearTimeout(redrawTimeoutId);
+                //    redrawTimeoutId = $timeout(function() {
+                //        drawAxes($scope.domain);
+                //
+                //        drawChart($scope.tweets);
+                //        setBrush();
+                //    }, 300).$$timeoutId;
+                //});
 
-                        drawGhostChart($scope.ghost, 'ghost-area');
-                        drawChart($scope.chart);
-                        setBrush();
-                    }, 300).$$timeoutId;
-                });
-
-                $scope.$on('authorFiltersChanged', changeListener);
-
-                function changeListener() {
-                    var filter = DataService.getFilters();
-
-                    if (filter.author) {
-                        $scope.ghost = $scope.activity[filter.author.name];
-                        $scope.chart = $scope.activity[filter.author.name];
-                    } else {
-                        $scope.ghost = $scope.activity.total;
-                        $scope.chart = $scope.activity.total;
-                    }
-
-                    drawGhostChart($scope.ghost, 'ghost-area');
-                    drawChart($scope.chart);
-                    setBrush();
-                }
+                //$scope.$on('authorFiltersChanged', changeListener);
+                //
+                //function changeListener() {
+                //    var filter = DataService.getFilters();
+                //
+                //    if (filter.author) {
+                //        $scope.ghost = $scope.activity[filter.author.name];
+                //        $scope.chart = $scope.activity[filter.author.name];
+                //    } else {
+                //        $scope.ghost = $scope.activity.total;
+                //        $scope.chart = $scope.activity.total;
+                //    }
+                //
+                //    drawGhostChart($scope.ghost, 'ghost-area');
+                //    drawChart($scope.chart);
+                //    setBrush();
+                //}
             }
         }
     });

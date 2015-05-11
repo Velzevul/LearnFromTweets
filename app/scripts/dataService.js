@@ -3,6 +3,7 @@ angular.module('tweetsToSoftware')
         'use strict';
 
         var tweets = [],
+            // TODO: save the top limit of tweets in domain (have both X and Y axis limits)
             domain = [],
             commandRelevancyData = {},
             commandVocabularyData = {},
@@ -46,6 +47,10 @@ angular.module('tweetsToSoftware')
                             commandRelevancyData = response[2].data;
                             commandVocabularyData = response[3].data;
 
+                            angular.forEach(tweets, function(t) {
+                                t.published = moment(t.published).toDate();
+                            });
+
                             filterData();
                         });
                 }
@@ -57,7 +62,7 @@ angular.module('tweetsToSoftware')
         }
 
         function filterData() {
-            console.log('refilter');
+            //console.log('refilter');
 
             filteredData = {
                 tweets: [],
@@ -159,15 +164,19 @@ angular.module('tweetsToSoftware')
                         return domain;
                     });
             },
-            getTweets: function(menuItemId) {
+            getTweets: function() {
+                return load()
+                    .then(function() {
+                        return tweets;
+                    });
+            },
+            getMenuItemTweets: function(menuItemId) {
                 return load()
                     .then(function() {
                         var result;
 
                         if (menuItemId) {
                             result = filteredData.tweetsByItems[menuItemId];
-                        } else {
-                            result = filteredData.tweets;
                         }
 
                         return result;

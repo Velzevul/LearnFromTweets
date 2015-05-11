@@ -6,7 +6,8 @@
   "scripts": {
     "preinstall": "bundle",
     "postinstall": "./node_modules/.bin/bower install",
-    "start": "./node_modules/.bin/grunt"
+    "start": "./node_modules/.bin/grunt",
+    "deploy": "./node_modules/.bin/grunt dist && git push heroku master"
   },
   "dependencies": {
     "grunt": "^0.4.5",

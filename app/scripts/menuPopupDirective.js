@@ -12,13 +12,13 @@ angular.module('tweetsToSoftware')
                 $scope.filters = DataService.getFilters();
                 $scope.popupVisible = false;
 
-                DataService.getTweets($scope.context.id)
+                DataService.getMenuItemTweets($scope.context.id)
                     .then(function(response) {
                          $scope.tweets = response;
                     });
 
                 $scope.$on('filtersChanged', function() {
-                    DataService.getTweets($scope.context.id)
+                    DataService.getMenuItemTweets($scope.context.id)
                         .then(function(response) {
                             $scope.tweets = response;
                         });

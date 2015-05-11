@@ -12,7 +12,7 @@ def saveJson(data, filename):
 
 def generateActivity():
     now = datetime.now()
-    initial_date = now - timedelta(days=1)
+    initial_date = now - timedelta(hours=12)
     authors = load(open('authors.json'))
     domain = []
     activity = {
@@ -24,7 +24,7 @@ def generateActivity():
 
     for dt in rrule.rrule(rrule.HOURLY, dtstart=initial_date, until=now):
         domain.append(str(dt))
-        n_tweets = randint(0,10)
+        n_tweets = randint(0,5)
 
         tweet_authors = []
         for i in range(n_tweets):
@@ -94,13 +94,18 @@ def generateDummyTweets(activity):
 
     fake = Factory.create()
 
+
     for entry in activity:
+        tweet_minutes = [randint(0, 59) for i in range(entry['nTweets'])]
+        tweet_minutes.sort()
+
         for i in range(entry['nTweets']):
             random_menu_item = menu_items[randint(0,len(menu_items)-1)]
+            time = datetime.strptime(entry['time'], '%Y-%m-%d %H:%M:%S').replace(minute=tweet_minutes[i])
 
             tweet = { 'author': authors_map[entry['authors'][i]],
                       'commandId': random_menu_item,
-                      'published': entry['time'],
+                      'published': str(time),
                       'text': fake.sentence() }
 
             tweets.append(tweet)
@@ -121,3 +126,7 @@ def main():
 
     command_relevancy = generateCommandPercentage()
     saveJson(command_relevancy, 'commandRelevancy')
+
+
+if __name__ == '__main__':
+    main()
