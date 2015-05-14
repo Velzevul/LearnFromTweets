@@ -77,10 +77,16 @@
 }
 
 .timeline-tweet {
-  stroke: $color-border;
-  stroke-width: 1px;
+  stroke: darken($color-border, 20%);
+  stroke-width: 0;
+
+  opacity: 0.2;
 }
+  .timeline-tweet--matching {
+    stroke-width: 1px;
+    opacity: 1;
+  }
   .timeline-tweet--following {
-      stroke: $color-dc-secondary;
-      stroke-width: 3px;
+    stroke: $color-dc-secondary;
+    stroke-width: 3px;
   }

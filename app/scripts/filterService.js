@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .factory('FilterService', function($rootScope) {
+    .factory('FilterService', function() {
         'use strict';
 
         var filters = {
@@ -15,8 +15,8 @@ angular.module('tweetsToSoftware')
         return {
             matchTweet: function(tweet) {
                 if (filters.time) {
-                    if ((moment(tweet.published).minutes(0).toDate() <= filters.time.lower) ||
-                        (moment(tweet.published).minutes(0).toDate() >= filters.time.upper)) {
+                    if ((moment(tweet.published).toDate() <= filters.time.lower) ||
+                        (moment(tweet.published).toDate() >= filters.time.upper)) {
                         return false;
                     }
                 }

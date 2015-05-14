@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('authorsFilter', function($q, filterFilter, TweetService, AuthorService, FilterService) {
+    .directive('authorsFilter', function($q, TweetService, AuthorService, FilterService) {
         'use strict';
 
         return {

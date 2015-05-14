@@ -3,6 +3,7 @@ angular.module('tweetsToSoftware')
         'use strict';
 
         var tweets,
+            domain = [],
             tweetCommandMap = {},
             tweetAuthorMap = {},
             // TODO: save the top limit of tweets in domain (have both X and Y axis limits)
@@ -32,9 +33,13 @@ angular.module('tweetsToSoftware')
                 res = deferred.promise;
             } else {
                 if (!promise) {
-                    promise = $http.get('/data/tweets.json')
+                    promise = $q.all([
+                        $http.get('/data/tweets.json'),
+                        $http.get('/data/domain.json')
+                    ])
                         .then(function(response) {
-                            tweets = response.data;
+                            tweets = response[0].data;
+                            domain = response[1].data;
 
                             angular.forEach(tweets, function(t) {
                                 t.published = moment(t.published).toDate();
@@ -42,6 +47,7 @@ angular.module('tweetsToSoftware')
                                 if (!tweetAuthorMap[t.author.name]) {
                                     tweetAuthorMap[t.author.name] = [];
                                 }
+
                                 tweetAuthorMap[t.author.name].push(t);
 
                                 var commandTree = reconstructCommandTree(t.command.id);
@@ -50,6 +56,7 @@ angular.module('tweetsToSoftware')
                                     if (!tweetCommandMap[command]) {
                                         tweetCommandMap[command] = [];
                                     }
+
                                     tweetCommandMap[command].push(t);
                                 })
 
@@ -88,6 +95,12 @@ angular.module('tweetsToSoftware')
                 return load()
                     .then(function() {
                         return tweetAuthorMap[commandId] ? tweetAuthorMap[commandId] : [];
+                    });
+            },
+            getDomain: function() {
+                return load()
+                    .then(function() {
+                        return domain;
                     });
             }
         }

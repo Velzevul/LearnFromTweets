@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .factory('AuthorService', function($http) {
+    .factory('AuthorService', function($q, $http) {
         'use strict';
 
         var authors,
