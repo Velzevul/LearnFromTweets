@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('timeline', function($window, $q, $timeout, TweetService, AuthorService, MenuService, FilterService) {
+    .directive('timeline', function($window, $q, $timeout, TweetService, AuthorService, MenuService, FilterService, Notification) {
         'use strict';
 
         return {
@@ -14,7 +14,7 @@ angular.module('tweetsToSoftware')
                     authorCircleRadius = 12,
                     circlesMargin = 6,
                     showTimeoutId = null,
-                    showDelay = 50,
+                    showDelay = 150,
                     authors = [],
                     tweets = [],
                     domain = [],
@@ -110,39 +110,6 @@ angular.module('tweetsToSoftware')
                         .call(gridAxis);
                 }
 
-                //function drawChart(data) {
-                //    console.log('draw chart');
-                //
-                //    $('.line, .area, .dot').remove();
-                //
-                //    $scope.nTweets = 0;
-                //
-                //    var matchingData = [];
-                //    angular.forEach(data, function(dataPoint) {
-                //        if ((dataPoint.parsedTime >= $scope.lowerTimeBound) &&
-                //            (dataPoint.parsedTime <= $scope.upperTimeBound)) {
-                //            matchingData.push(dataPoint);
-                //            $scope.nTweets += dataPoint.nTweets;
-                //        }
-                //    });
-                //
-                //    canvas.append('path')
-                //        .attr('class', 'area')
-                //        .attr('d', area(matchingData));
-                //
-                //    canvas.append('path')
-                //        .attr('class', 'line')
-                //        .attr('d', line(matchingData));
-                //
-                //    canvas.selectAll('.dot')
-                //            .data(matchingData)
-                //        .enter().append('circle')
-                //            .attr('class', 'dot')
-                //            .attr('r', 2.5)
-                //            .attr('cx', function(d) { return x(d.parsedTime); })
-                //            .attr('cy', function(d) { return y(d.nTweets); });
-                //}
-
                 function drawPortraitPatterns() {
                     var defs = svg.append('defs');
 
@@ -200,16 +167,18 @@ angular.module('tweetsToSoftware')
 
                                 return cy;
                             })
-                            .style('fill', function(d) { return 'url(#bg-author-' + d.author.name + ')' });
-                            //.on('mouseover', function(d) {
-                            //    clearTimeout(showTimeoutId);
-                            //
-                            //    showTimeoutId = $timeout(function() {
-                            //        MenuService.hideAll();
-                            //        MenuService.open(d.commandId);
-                            //        MenuService.highlight(d.commandId);
-                            //    }, showDelay).$$timeoutId;
-                            //});
+                            .style('fill', function(d) { return 'url(#bg-author-' + d.author.name + ')'; })
+                            .on('mouseover', function(d) {
+                                clearTimeout(showTimeoutId);
+
+                                Notification.tweet = d;
+
+                                showTimeoutId = $timeout(function() {
+                                    MenuService.hideAll();
+                                    MenuService.open(d.command.id);
+                                    MenuService.highlight(d.command.id);
+                                }, showDelay).$$timeoutId;
+                            });
                 }
 
                 function filterCircles() {
@@ -239,13 +208,12 @@ angular.module('tweetsToSoftware')
 
                             console.log(b[0], b[1]);
 
-                            filterCircles();
-                        })
-                        .on('brushend', function() {
                             $scope.filters.time = {
                                 lower: $scope.lowerTimeBound,
                                 upper: $scope.upperTimeBound
                             };
+
+                            filterCircles();
                         });
 
                     canvas.append("g")
@@ -293,9 +261,9 @@ angular.module('tweetsToSoftware')
                         }
 
                         drawAxes();
+                        setBrush();
                         drawCircles();
                         filterCircles();
-                        setBrush();
                     });
                 })
 
@@ -311,9 +279,9 @@ angular.module('tweetsToSoftware')
 
                     redrawTimeoutId = $timeout(function() {
                         drawAxes();
+                        setBrush();
                         drawCircles();
                         filterCircles();
-                        setBrush();
                     }, 300).$$timeoutId;
                 });
 

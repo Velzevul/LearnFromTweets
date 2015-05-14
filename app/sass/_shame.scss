@@ -80,6 +80,8 @@
   stroke: darken($color-border, 20%);
   stroke-width: 0;
 
+  cursor: pointer;
+
   opacity: 0.2;
 }
   .timeline-tweet--matching {
