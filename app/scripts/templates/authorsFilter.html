@@ -3,7 +3,7 @@
         <div class="-split">
             <div class="l-split__right">
                 <button class="link"
-                        ng-show="selectedAuthor.name"
+                        ng-show="filters.author.name"
                         ng-click="unsetAuthorFilter()">clear filter</button>
             </div>
         </div>
@@ -12,46 +12,7 @@
 
     <div class="ap-section__body ap-section__body--limited">
         <div ng-repeat="author in authors | orderBy : '-tweetsCount'">
-            <div class="author"
-                 ng-class="{'author--selected': author.name == selectedAuthor.name}"
-                 ng-click="setAuthorFilter(author)">
-                <div class="l-media">
-                    <div class="l-media__figure">
-                        <div class="author__avatar"
-                             style="background-image: url({{author.avatar}});"></div>
-                    </div>
-
-                    <div class="l-media__body">
-                        <div class="l-split">
-                            <div class="l-split__right">
-                                <div class="author__tweets">{{author.tweetsCount}} tweets</div>
-                            </div>
-
-                            <div class="l-split__left">
-                                <div class="author__name">@{{author.name}}</div>
-                            </div>
-                        </div>
-
-                        <div class="author__follow">
-                            <div class="l-list-inline l-list-inline--x-small"
-                                 ng-show="author.isFollowing">
-                                <div class="l-list-inline__item">
-                                    You follow @{{author.name}}
-                                </div>
-
-                                <div class="l-list-inline__item">
-                                    <button class="link link--danger"
-                                            ng-click="toggleFollow($event, author)">unfollow</button>
-                                </div>
-                            </div>
-
-                            <button class="link"
-                                    ng-click="toggleFollow($event, author)"
-                                    ng-hide="author.isFollowing">follow @{{author.name}}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <author author="author"></author>
         </div>
     </div>
 </div>

@@ -1,8 +1,7 @@
 <div class="widget-notification">
-    <div ng-mouseover="showCommand()"
-         ng-mouseleave="hideCommand()">
+    <div ng-mouseover="show()"
+         ng-mouseleave="hide()">
         <div class="widget-notification__author-avatar"
-             style="background-image: url({{notification.tweet.author.avatar}});"></div>
-        <div class="widget-notification__timestamp">{{notification.tweet.posted}}</div>
+             style="background-image: url({{notification.author.avatar}});"></div>
     </div>
 </div>

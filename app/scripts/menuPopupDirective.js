@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('menuPopup', function($timeout, DataService) {
+    .directive('menuPopup', function($timeout, filterFilter, TweetService, FilterService) {
         'use strict';
 
         return {
@@ -9,20 +9,26 @@ angular.module('tweetsToSoftware')
                 context: '='
             },
             controller: function($scope) {
-                $scope.filters = DataService.getFilters();
+                $scope.filters = FilterService.get();
+                $scope.matchTweet = FilterService.matchTweet;
                 $scope.popupVisible = false;
 
-                DataService.getMenuItemTweets($scope.context.id)
+                function filter() {
+                    $scope.filtered = filterFilter($scope.tweets, FilterService.matchTweet);
+                }
+
+                TweetService.getByCommand($scope.context.id)
                     .then(function(response) {
-                         $scope.tweets = response;
+                        $scope.tweets = response;
+                        filter();
                     });
 
-                $scope.$on('filtersChanged', function() {
-                    DataService.getMenuItemTweets($scope.context.id)
-                        .then(function(response) {
-                            $scope.tweets = response;
-                        });
-                });
+                $scope.$watchGroup([
+                    'filters.highlightRelevant',
+                    'filters.highlightUnfamiliar',
+                    'filters.author',
+                    'filters.time'
+                ], filter);
 
                 var showTimeoutId = null,
                     hideTimeoutId = null,
@@ -30,21 +36,25 @@ angular.module('tweetsToSoftware')
                     hideDelay = 20;
 
                 $scope.show = function() {
-                    clearTimeout(showTimeoutId);
-                    clearTimeout(hideTimeoutId);
+                    if (!$scope.context.children) {
+                        clearTimeout(showTimeoutId);
+                        clearTimeout(hideTimeoutId);
 
-                    showTimeoutId = $timeout(function() {
-                        $scope.popupVisible = true;
-                    }, showDelay).$$timeoutId;
+                        showTimeoutId = $timeout(function() {
+                            $scope.popupVisible = true;
+                        }, showDelay).$$timeoutId;
+                    }
                 };
 
                 $scope.hide = function() {
-                    clearTimeout(showTimeoutId);
-                    clearTimeout(hideTimeoutId);
+                    if (!$scope.context.children) {
+                        clearTimeout(showTimeoutId);
+                        clearTimeout(hideTimeoutId);
 
-                    hideTimeoutId = $timeout(function() {
-                        $scope.popupVisible = false;
-                    }, hideDelay).$$timeoutId;
+                        hideTimeoutId = $timeout(function () {
+                            $scope.popupVisible = false;
+                        }, hideDelay).$$timeoutId;
+                    }
                 };
             }
         };

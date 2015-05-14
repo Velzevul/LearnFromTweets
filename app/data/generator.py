@@ -6,64 +6,26 @@ from faker import Factory
 from collections import Counter
 
 
+TWEETS_HISTORY = 12
+TWEETS_PER_HOUR = 5
+
+
 def saveJson(data, filename):
     with open('{0}.json'.format(filename),'w') as f:
         dump(data, f, indent='    ')
 
-def generateActivity():
-    now = datetime.now()
-    initial_date = now - timedelta(hours=12)
-    authors = load(open('authors.json'))
-    domain = []
-    activity = {
-        'total': []
-    }
 
-    for author in authors:
-        activity[author['name']] = []
-
-    for dt in rrule.rrule(rrule.HOURLY, dtstart=initial_date, until=now):
-        domain.append(str(dt))
-        n_tweets = randint(0,5)
-
-        tweet_authors = []
-        for i in range(n_tweets):
-            random_author = authors[randint(0,len(authors)-1)]
-            tweet_authors.append(random_author['name'])
-
-        activity['total'].append({
-            'time': str(dt),
-            'nTweets': n_tweets,
-            'authors': tweet_authors
-        })
-
-        authors_counter = Counter(tweet_authors)
-
-        for author in authors:
-            author_tweets = 0
-
-            if author['name'] in authors_counter.keys():
-                author_tweets = authors_counter[author['name']]
-
-            activity[author['name']].append({
-                'time': str(dt),
-                'nTweets': author_tweets
-            })
-
-
-    return domain, activity
-
-def getMenuItems():
+def getMenuItemIds():
     def storeItemId(item, path):
         if path is None:
             item_id = item['label']
         else:
             item_id = path + '/' + item['label']
 
-        try:
+        if 'children' in item.keys():
             for child in item['children']:
                 storeItemId(child, item_id)
-        except KeyError:
+        else:
             item_ids.append(item_id)
 
     menu = load(open('menu.json'))
@@ -74,8 +36,9 @@ def getMenuItems():
 
     return item_ids
 
+
 def generateCommandPercentage():
-    menu_items = getMenuItems()
+    menu_items = getMenuItemIds()
     res = {}
 
     for item in menu_items:
@@ -83,49 +46,54 @@ def generateCommandPercentage():
 
     return res
 
-def generateDummyTweets(activity):
-    tweets = []
-    menu_items = getMenuItems()
 
-    authors = load(open('authors.json'))
-    authors_map = {}
-    for author in authors:
-        authors_map[author['name']] = author
+def generateDummyTweets(history_hours, tweets_per_hour, command_relevancy, command_vocabulary):
+    tweets = []
+    domain = []
 
     fake = Factory.create()
+    authors = load(open('authors.json'))
+    menu_item_ids = getMenuItemIds()
+    
+    now = datetime.now()
+    initial_date = now - timedelta(hours=history_hours)
 
+    for dt in rrule.rrule(rrule.HOURLY, dtstart=initial_date, until=now):
+        domain.append(str(dt.replace(minute=0, second=0)))
 
-    for entry in activity:
-        tweet_minutes = [randint(0, 59) for i in range(entry['nTweets'])]
+        n_tweets = randint(0, tweets_per_hour)
+        tweet_minutes = [randint(0, 59) for i in range(n_tweets)]
         tweet_minutes.sort()
 
-        for i in range(entry['nTweets']):
-            random_menu_item = menu_items[randint(0,len(menu_items)-1)]
-            time = datetime.strptime(entry['time'], '%Y-%m-%d %H:%M:%S').replace(minute=tweet_minutes[i])
+        for i in range(n_tweets):
+            random_author = authors[randint(0, len(authors)-1)]
+            random_menu_item_id = menu_item_ids[randint(0,len(menu_item_ids)-1)]
+            time = dt.replace(minute=tweet_minutes[i])
 
-            tweet = { 'author': authors_map[entry['authors'][i]],
-                      'commandId': random_menu_item,
-                      'published': str(time),
-                      'text': fake.sentence() }
+            command = { 'id': random_menu_item_id,
+                        'relevancy':  command_relevancy[random_menu_item_id],
+                        'familiarity': command_vocabulary[random_menu_item_id] }
 
-            tweets.append(tweet)
+            tweet   = { 'author': random_author,
+                        'command': command,
+                        'published': str(time),
+                        'text': fake.sentence() }
 
+            tweets.append(tweet);
 
-    return tweets
+    return domain, tweets
+
 
 def main():
-    domain, activity = generateActivity()
-    saveJson(domain, 'domain')
-    saveJson(activity, 'activity')
-
-    tweets = generateDummyTweets(activity['total'])
-    saveJson(tweets, 'tweets')
-
     command_vocabulary = generateCommandPercentage()
     saveJson(command_vocabulary, 'commandVocabulary')
 
     command_relevancy = generateCommandPercentage()
     saveJson(command_relevancy, 'commandRelevancy')
+
+    domain, tweets = generateDummyTweets(TWEETS_HISTORY, TWEETS_PER_HOUR, command_relevancy, command_vocabulary)
+    saveJson(domain, 'domain')
+    saveJson(tweets, 'tweets')
 
 
 if __name__ == '__main__':

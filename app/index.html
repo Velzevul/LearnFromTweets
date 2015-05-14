@@ -26,6 +26,11 @@
         </div>
     </div>
 
+    <div ng-repeat="t in tweets | filter:matchTweet"
+         style="font-size: 8px; line-height: 12px;">
+        {{t.published}}
+    </div>
+
     <activity-panel></activity-panel>
 
     <!-- build:js scripts/dependencies.concat.js -->
@@ -41,22 +46,22 @@
     <script src="scripts/templates.js"></script>
     <script src="scripts/app.js"></script>
 
+    <script src="scripts/notificationValue.js"></script>
+
     <script src="scripts/mainController.js"></script>
 
+    <script src="scripts/filterService.js"></script>
     <script src="scripts/menuService.js"></script>
-    <script src="scripts/notificationService.js"></script>
-    <script src="scripts/dataService.js"></script>
+    <script src="scripts/tweetService.js"></script>
     <script src="scripts/authorService.js"></script>
     <script src="scripts/activityService.js"></script>
 
     <script src="scripts/menuDirective.js"></script>
     <script src="scripts/tweetDirective.js"></script>
-
+    <script src="scripts/authorDirective.js"></script>
     <script src="scripts/tweetsWidgetDirective.js"></script>
     <script src="scripts/widgetNotificationDirective.js"></script>
-    <script src="scripts/menuNotificationDirective.js"></script>
     <script src="scripts/menuPopupDirective.js"></script>
-
     <script src="scripts/activityPanelDirective.js"></script>
     <script src="scripts/authorsFilterDirective.js"></script>
     <script src="scripts/timelineDirective.js"></script>

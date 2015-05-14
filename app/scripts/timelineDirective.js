@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('timeline', function($window, $q, $timeout, DataService, AuthorService) {
+    .directive('timeline', function($window, $q, $timeout, DataService, AuthorService, MenuService) {
         'use strict';
 
         return {
@@ -10,7 +10,9 @@ angular.module('tweetsToSoftware')
                 var margin = {top: 24, right: 24, bottom: 50, left: 24},
                     height = 250 - margin.top - margin.bottom,
                     authorCircleRadius = 12,
-                    circlesMargin = 6;
+                    circlesMargin = 6,
+                    showTimeoutId = null,
+                    showDelay = 50;
 
                 var x = d3.time.scale(),
                     y = d3.scale.linear();
@@ -143,7 +145,7 @@ angular.module('tweetsToSoftware')
                 //            .attr('cy', function(d) { return y(d.nTweets); });
                 //}
 
-                function drawPortraits() {
+                function drawPortraitPatterns() {
                     var defs = svg.append('defs');
 
                     angular.forEach($scope.authors, function(a) {
@@ -176,8 +178,6 @@ angular.module('tweetsToSoftware')
                                     cy = height - authorCircleRadius - circlesMargin,
                                     positionFound = false;
 
-                                debugger;
-
                                 while (!positionFound) {
                                     positionFound = true;
 
@@ -197,7 +197,16 @@ angular.module('tweetsToSoftware')
 
                                 return cy;
                             })
-                            .style('fill', function(d) { return 'url(#bg-author-' + d.author.name + ')' });
+                            .style('fill', function(d) { return 'url(#bg-author-' + d.author.name + ')' })
+                            .on('mouseover', function(d) {
+                                clearTimeout(showTimeoutId);
+
+                                showTimeoutId = $timeout(function() {
+                                    MenuService.hideAll();
+                                    MenuService.open(d.commandId);
+                                    MenuService.highlight(d.commandId);
+                                }, showDelay).$$timeoutId;
+                            });
                 }
 
                 //function setBrush() {
@@ -276,7 +285,7 @@ angular.module('tweetsToSoftware')
                                 }
 
                                 drawAxes();
-                                drawPortraits();
+                                drawPortraitPatterns();
 
                                 drawCircles($scope.tweets);
                                 //setBrush();

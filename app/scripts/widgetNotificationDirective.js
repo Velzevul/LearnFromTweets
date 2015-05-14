@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('widgetNotification', function($timeout, MenuService) {
+    .directive('widgetNotification', function($timeout, MenuService, Notification) {
         'use strict';
 
         return {
@@ -12,17 +12,19 @@ angular.module('tweetsToSoftware')
                 var showTimeoutId = null,
                     showDelay = 50;
 
-                $scope.showCommand = function() {
+                $scope.show = function() {
                     clearTimeout(showTimeoutId);
 
                     showTimeoutId = $timeout(function() {
+                        Notification.tweet = $scope.notification;
+
                         MenuService.hideAll();
-                        MenuService.open($scope.notification.command);
-                        MenuService.highlight($scope.notification.command);
+                        MenuService.open($scope.notification.command.id);
+                        MenuService.highlight($scope.notification.command.id);
                     }, showDelay).$$timeoutId;
                 };
 
-                $scope.hideCommand = function() {
+                $scope.hide = function() {
                     clearTimeout(showTimeoutId);
                 }
             }

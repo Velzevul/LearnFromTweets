@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('tweet', function($timeout) {
+    .directive('tweet', function() {
         'use strict';
 
         return {

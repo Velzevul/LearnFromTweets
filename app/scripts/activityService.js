@@ -1,8 +1,9 @@
 angular.module('tweetsToSoftware')
-    .factory('ActivityService', function($http, DataService) {
+    .factory('ActivityService', function($http, FilterService) {
         'use strict';
 
         var activity,
+            domain,
             loaded,
             promise;
 
@@ -46,7 +47,7 @@ angular.module('tweetsToSoftware')
                 return load()
                     .then(function() {
                         var counters = {},
-                            filters = DataService.getFilters(),
+                            filters = FilterService.get(),
                             upperBound,
                             lowerBound;
 

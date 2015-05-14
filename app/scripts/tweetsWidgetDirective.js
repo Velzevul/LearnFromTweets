@@ -1,21 +1,21 @@
 angular.module('tweetsToSoftware')
-    .directive('tweetsWidget', function($timeout, NotificationService, DataService) {
-        'use strict';
+    .directive('tweetsWidget', function($timeout, TweetService, FilterService) {
+    'use strict';
 
-        return {
-            restrict: 'E',
-            templateUrl: 'templates/tweetsWidget.html',
-            scope: {},
-            controller: function($scope) {
-                NotificationService.get()
-                    .then(function(data) {
-                        $scope.data = data;
-                    });
+    return {
+        restrict: 'E',
+        templateUrl: 'templates/tweetsWidget.html',
+        scope: {},
+        controller: function($scope) {
+            TweetService.getLatest(3)
+                .then(function(tweets) {
+                    $scope.latest = tweets;
+                });
 
-                NotificationService.listen();
-
-                $scope.toggleFilters = DataService.toggleFilters;
-                $scope.filters = DataService.getFilters();
-            }
+            $scope.filters = FilterService.get();
+            $scope.toggleFilters = function() {
+                $scope.filters.active = !$scope.filters.active;
+            };
         }
-    });
+    }
+});

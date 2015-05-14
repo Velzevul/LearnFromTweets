@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('activityPanel', function(DataService) {
+    .directive('activityPanel', function(FilterService) {
         'use strict';
 
         return {
@@ -7,9 +7,10 @@ angular.module('tweetsToSoftware')
             templateUrl: 'templates/activityPanel.html',
             scope: {},
             controller: function($scope) {
-                $scope.filters = DataService.getFilters();
-                $scope.toggleFilters = DataService.toggleFilters;
-                $scope.setFilters = DataService.setFilters;
+                $scope.filters = FilterService.get();
+                $scope.toggleFilters = function() {
+                    $scope.filters.active = !$scope.filters.active;
+                };
             }
         };
     });

@@ -17,14 +17,27 @@ angular.module('tweetsToSoftware')
                 res = deferred.promise;
             } else {
                 if (!promise) {
-                    promise = $http.get('/data/menu.json')
+                    promise = $q.all([
+                        $http.get('/data/menu.json'),
+                        $http.get('/data/commandRelevancy.json'),
+                        $http.get('/data/commandVocabulary.json')
+                    ])
                         .then(function(response) {
-                            menu = response.data;
+                            var relevancy   = response[1].data,
+                                familiarity = response[2].data;
+
+                            menu = response[0].data;
 
                             function updateMap(item, index, parents) {
+                                if (parents.length == 0) {
+                                    item.root = true;
+                                }
+
                                 var label = parents.length ? [parents[parents.length - 1], item['label']].join('/') : item['label'];
 
-                                item.id = label;
+                                item.id          = label;
+                                item.relevancy   = relevancy[label];
+                                item.familiarity = familiarity[label];
 
                                 menuFlat[label] = {
                                     index: index,
@@ -45,6 +58,8 @@ angular.module('tweetsToSoftware')
                             angular.forEach(menu, function(item, index) {
                                 updateMap(item, index, []);
                             });
+
+                            loaded = true;
                         });
                 }
 
@@ -54,15 +69,15 @@ angular.module('tweetsToSoftware')
             return res;
         }
 
-        function getItemTree(itemPath) {
+        function getItemTree(itemId) {
             var result = [];
 
-            if (menuFlat[itemPath]) {
-                angular.forEach(menuFlat[itemPath].parents, function(parent) {
+            if (menuFlat[itemId]) {
+                angular.forEach(menuFlat[itemId].parents, function(parent) {
                     result.push(menuFlat[parent].object);
                 });
 
-                result.push(menuFlat[itemPath].object);
+                result.push(menuFlat[itemId].object);
             }
 
             return result;
@@ -88,8 +103,8 @@ angular.module('tweetsToSoftware')
                        return menuFlat;
                     });
             },
-            open: function(itemPath) {
-                var itemTree = getItemTree(itemPath),
+            open: function(itemId) {
+                var itemTree = getItemTree(itemId),
                     result = false;
 
                 if (itemTree.length) {
@@ -104,8 +119,8 @@ angular.module('tweetsToSoftware')
 
                 return result;
             },
-            highlight: function(itemPath) {
-                var itemTree = getItemTree(itemPath),
+            highlight: function(itemId) {
+                var itemTree = getItemTree(itemId),
                     result = false;
 
                 if (itemTree.length) {

@@ -454,7 +454,7 @@ angular.module('tweetsToSoftware')
             filteredData = {
                 tweets: null,
                 tweetsByItems: null,
-                menuItemsPrivacy: null,
+                menuPersonalized: null,
                 menuCounters: null
             },
             loaded,
@@ -498,7 +498,7 @@ angular.module('tweetsToSoftware')
             filteredData = {
                 tweets: [],
                 tweetsByItems: {},
-                menuItemsPrivacy: {},
+                menuPersonalized: {},
                 menuCounters: {}
             };
 
@@ -522,17 +522,17 @@ angular.module('tweetsToSoftware')
                        filters.highlightUnknown &&
                        (commandRelevancyData[tweet.commandId] >= commandRelevancyThreshold) &&
                        (commandVocabularyData[tweet.commandId] <= commandVocabularyThreshold)) {
-                       filteredData.menuItemsPrivacy[tweet.commandId] = true;
+                       filteredData.menuPersonalized[tweet.commandId] = true;
                    } else if (filters.highlightRelevant &&
                               !filters.highlightUnknown &&
                               (commandRelevancyData[tweet.commandId] >= commandRelevancyThreshold)) {
-                       filteredData.menuItemsPrivacy[tweet.commandId] = true;
+                       filteredData.menuPersonalized[tweet.commandId] = true;
                    } else if (filters.highlightUnknown &&
                               !filters.highlightRelevant &&
                               (commandVocabularyData[tweet.commandId] <= commandVocabularyThreshold)) {
-                       filteredData.menuItemsPrivacy[tweet.commandId] = true;
+                       filteredData.menuPersonalized[tweet.commandId] = true;
                    } else {
-                       filteredData.menuItemsPrivacy[tweet.commandId] = false;
+                       filteredData.menuPersonalized[tweet.commandId] = false;
                    }
                }
             });
@@ -618,7 +618,7 @@ angular.module('tweetsToSoftware')
             getMenuItemsPrivacy: function() {
                 return load()
                     .then(function() {
-                        return filteredData.menuItemsPrivacy;
+                        return filteredData.menuPersonalized;
                     });
             }
         }

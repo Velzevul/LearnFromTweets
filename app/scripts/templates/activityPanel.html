@@ -18,7 +18,7 @@
                 <div class="ap-section">
                     <div class="l-block-small">
                         <div class="ap-section__header">
-                            <div class="ap-section__title">Personalization (matching commands' indicators are highlighted in red)</div>
+                            <div class="ap-section__title">Personalization</div>
                         </div>
                     </div>
 
@@ -26,23 +26,21 @@
                         <div class="l-list-inline__item">
                             <label>
                                 <input type="checkbox"
-                                       ng-click="setFilters({highlightUnknown: !filters.highlightUnknown})"
-                                       ng-checked="filters.highlightUnknown"/> Highlight commands I do not know
+                                       ng-model="filters.highlightUnfamiliar"> Show commands I do not know
                             </label>
                         </div>
 
                         <div class="l-list-inline__item">
                             <label>
                                 <input type="checkbox"
-                                       ng-click="setFilters({highlightRelevant: !filters.highlightRelevant})"
-                                       ng-checked="filters.highlightRelevant"/> Highlight commands relevant to my work
+                                       ng-model="filters.highlightRelevant"> Show commands relevant to my work
                             </label>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <timeline></timeline>
+            <!--<timeline></timeline>-->
         </div><!--
         --><div class="grid__item one-third">
             <authors-filter></authors-filter>
