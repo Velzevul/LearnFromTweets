@@ -1,11 +1,4 @@
 angular.module('tweetsToSoftware')
-    .controller('mainController', function($scope, TweetService, FilterService) {
+    .controller('mainController', function($scope) {
         'use strict';
-
-        $scope.matchTweet = FilterService.matchTweet;
-
-        TweetService.get()
-            .then(function(tweets) {
-                $scope.tweets = tweets;
-            });
     });

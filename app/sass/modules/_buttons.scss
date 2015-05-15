@@ -1,0 +1,20 @@
+.button-empty {
+  display: block;
+  width: $global-baseline*6;
+
+  font-size: 12px;
+  line-height: $global-baseline*2;
+
+  text-align: center;
+
+  border: 2px solid $color-border;
+  border-radius: 3px;
+}
+  .button-empty--success {
+    color: $color-dc-quaternary;
+    border-color: $color-dc-quaternary;
+  }
+  .button-empty--danger {
+    color: $color-dc-tertiary;
+    border-color: $color-dc-tertiary;
+  }

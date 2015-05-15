@@ -1,9 +1,10 @@
 .author {
-  padding: $global-baseline/2 0;
+  padding: $global-baseline*3/4 0;
 
   &__avatar {
     width: $global-baseline * 2.5;
     height: $global-baseline * 2.5;
+    margin: 0 $global-baseline/2;
 
     border-radius: 50%;
     border: 1px solid $color-border;
@@ -14,13 +15,36 @@
   
   &__name {
     font-weight: 600;
+    line-height: 18px;
   }
 
-  &__follow {
-    font-weight: 12px;
-    line-height: 16px;
+  &__tweets {
+    line-height: 18px;
+  }
 
+  &__follow-action {
+    display: none;
+  }
+
+  &__follow-status {
+    display: block;
+    width: $global-baseline*6 + 6px;
+
+    font-size: 12px;
+    line-height: $global-baseline*2;
+
+    text-align: center;
     color: $color-tx-muted;
+  }
+
+  &:hover {
+    .author__follow-action {
+      display: block;
+    }
+
+    .author__follow-status {
+      display: none;
+    }
   }
 }
   .author--selected {

@@ -107,7 +107,7 @@ angular.module('tweetsToSoftware')
 
                     canvas.append('g')
                         .attr('class', 'axis axis--grid')
-                        .call(gridAxis);
+                        .call(gridAxis)
                 }
 
                 function drawPortraitPatterns() {
@@ -178,6 +178,9 @@ angular.module('tweetsToSoftware')
                                     MenuService.open(d.command.id);
                                     MenuService.highlight(d.command.id);
                                 }, showDelay).$$timeoutId;
+                            })
+                            .on('click', function(d) {
+                                $scope.filters.author = d.author;
                             });
                 }
 
@@ -191,36 +194,40 @@ angular.module('tweetsToSoftware')
                                     classList += ' timeline-tweet--matching';
                                 }
 
+                                if (d.author.isFollowing) {
+                                    classList += ' timeline-tweet--following'
+                                }
+
                                 return classList;
                             });
                     }
                 }
 
                 function setBrush() {
-                    $('.brush').remove();
-
-                    brush.x(x)
-                        .on('brush', function() {
-                            var b = brush.extent();
-
-                            $scope.lowerTimeBound = b[0];
-                            $scope.upperTimeBound = b[1];
-
-                            console.log(b[0], b[1]);
-
-                            $scope.filters.time = {
-                                lower: $scope.lowerTimeBound,
-                                upper: $scope.upperTimeBound
-                            };
-
-                            filterCircles();
-                        });
-
-                    canvas.append("g")
-                        .attr("class", "brush")
-                        .call(brush)
-                        .selectAll("rect")
-                        .attr("height", height);
+                    //$('.brush').remove();
+                    //
+                    //brush.x(x)
+                    //    .on('brush', function() {
+                    //        var b = brush.extent();
+                    //
+                    //        $scope.lowerTimeBound = b[0];
+                    //        $scope.upperTimeBound = b[1];
+                    //
+                    //        console.log(b[0], b[1]);
+                    //
+                    //        $scope.filters.time = {
+                    //            lower: $scope.lowerTimeBound,
+                    //            upper: $scope.upperTimeBound
+                    //        };
+                    //
+                    //        filterCircles();
+                    //    });
+                    //
+                    //canvas.append("g")
+                    //    .attr("class", "brush")
+                    //    .call(brush)
+                    //    .selectAll("rect")
+                    //    .attr("height", height);
                 }
 
                 $scope.resetTimeFilter = function() {
