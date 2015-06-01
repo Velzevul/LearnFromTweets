@@ -18,17 +18,26 @@
         </div>
 
         <div class="l-justified__item is-middle-aligned">
-            <div class="author__follow-action">
+            <div class="l-hoverchange"
+                 ng-show="author.isFollowing">
+                <div class="l-hoverchange__content-hover">
+                    <button class="button-empty button-empty--danger"
+                            ng-show="author.isFollowing"
+                            ng-click="toggleFollow($event)">unfollow</button>
+                </div>
+
+                <div class="l-hoverchange__content-normal">
+                    <div class="author__follow-status"
+                         ng-show="author.isFollowing">following</div>
+                </div>
+            </div>
+
+            <div class="author__follow-action"
+                 ng-hide="author.isFollowing">
                 <button class="button-empty button-empty--success"
                         ng-hide="author.isFollowing"
                         ng-click="toggleFollow($event)">follow</button>
-                <button class="button-empty button-empty--danger"
-                        ng-show="author.isFollowing"
-                        ng-click="toggleFollow($event)">unfollow</button>
             </div>
-
-            <div class="author__follow-status"
-                 ng-show="author.isFollowing">following</div>
         </div>
     </div>
 </div>

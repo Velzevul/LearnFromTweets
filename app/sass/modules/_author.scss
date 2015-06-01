@@ -23,11 +23,10 @@
   }
 
   &__follow-action {
-    display: none;
+    // ...
   }
 
   &__follow-status {
-    display: block;
     width: $global-baseline*6 + 6px;
 
     font-size: 12px;
@@ -35,16 +34,6 @@
 
     text-align: center;
     color: $color-tx-muted;
-  }
-
-  &:hover {
-    .author__follow-action {
-      display: block;
-    }
-
-    .author__follow-status {
-      display: none;
-    }
   }
 }
   .author--selected {

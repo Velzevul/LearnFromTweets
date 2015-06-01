@@ -1,0 +1,29 @@
+/**
+ *  HOVERCHANGE LAYOUT
+ *
+ *  content that changes on hover
+ *
+ *  .l-hoverchange
+ *    &__content-normal
+ *    &__content-hover
+ *
+ */
+.l-hoverchange {
+  // ...
+
+  &__content-normal {
+    display: block;
+
+    .l-hoverchange:hover & {
+      display: none;
+    }
+  }
+
+  &__content-hover {
+    display: none;
+
+    .l-hoverchange:hover & {
+      display: block;
+    }
+  }
+}
