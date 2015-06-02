@@ -2,6 +2,8 @@
   position: relative;
   z-index: 10;
 
+  padding: 6px;
+
   &__slot {
     position: relative;
   }
@@ -18,9 +20,6 @@
     width: 100%;
     padding: $global-baseline/6 $global-baseline;
 
-    font-size: 12px;
-    line-height: $global-baseline * 2;
-
     text-align: left;
   }
 }
@@ -33,12 +32,22 @@
 
 .am-dropdown {
   position: absolute;
+  padding: 3px;
 
   background: white;
-  border: 1px solid #cccccc;
+  border: 1px solid $color-border-secondary;
+  box-shadow: 2px 2px 5px rgba(black, 0.3);
 
   &__slot {
     position: relative;
+  }
+
+  &__divider {
+    width: 100%;
+    height: 1px;
+
+    background: $color-border-secondary;
+    margin: 3px 0;
   }
 }
   .am-dropdown--root {

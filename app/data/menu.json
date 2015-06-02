@@ -6,6 +6,9 @@
         "label": "New File"
       },
       {
+        "divider": true
+      },
+      {
         "label": "New From Template",
         "children": [
           {

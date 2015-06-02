@@ -8,24 +8,26 @@
 // typography
   $global-font-family: sans-serif;
   $global-font-family-soft: sans-serif;
-  $global-font-size: 14px;
-  $global-line-height: $global-baseline * 2;
+  $global-font-size: 12px;
+  $global-line-height: 18px;
 
   $content-area-line-height: 32px;
 
 // colors
-  $color-tx:          #444444;
-  $color-tx-muted: #a6a6a6;
-  $color-tx-darkened: #202020;
+  $color-tx:          #363636;
+  $color-tx-muted:    #808080;
+  $color-tx-darkened: $color-tx;
 
   $color-bg:            #FFFFFF;
-  $color-bg-secondary:  #e7e7e7;
+  $color-bg-secondary:  #D6D6D6;
+  $color-bg-tertiary:   #939393;
 
-  $color-border: darken($color-bg-secondary, 15%);
+  $color-border: #646464;
+  $color-border-secondary: #a0a0a0;
 
-  $color-dc-primary: #faff00;
-  $color-dc-secondary: #4583ff;
-  $color-dc-tertiary: #ff4d39;
+  $color-dc-primary:    #faff00;
+  $color-dc-secondary:  #4583ff;
+  $color-dc-tertiary:   #ff4d39;
   $color-dc-quaternary: #22c145;
 
 // layout

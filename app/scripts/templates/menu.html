@@ -55,9 +55,14 @@
 
                 <div class="am-dropdown am-dropdown--root"
                      ng-show="rootItem.isOpen">
-                    <div class="am-dropdown__slot"
-                         ng-repeat="item in rootItem.children"
-                         ng-include="'menuDropdown'"></div>
+                    <div ng-repeat="item in rootItem.children">
+                        <div class="am-dropdown__slot"
+                             ng-hide="item.divider"
+                             ng-include="'menuDropdown'"></div>
+
+                        <div class="am-dropdown__divider"
+                             ng-show="item.divider"></div>
+                    </div>
                 </div>
             </div>
         </li>
