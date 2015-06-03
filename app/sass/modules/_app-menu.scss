@@ -77,7 +77,7 @@
     position: relative;
 
     &:after {
-      @include simple-arrow($global-baseline/3, darken($color-border, 15%), 'quadrant-2', 0, 10px, 'right');
+      @include simple-arrow($global-baseline/3, darken($color-border, 15%), 'quadrant-2', 0, 8px, 'right');
     }
   }
   .amd-item--active {

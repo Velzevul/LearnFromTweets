@@ -18,6 +18,9 @@
             "label": "IOS UI Design"
           },
           {
+            "divider": true
+          },
+          {
             "label": "Mac App Design"
           },
           {

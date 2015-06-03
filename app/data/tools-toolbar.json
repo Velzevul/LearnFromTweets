@@ -1,0 +1,104 @@
+[
+  {
+    "icon": "move",
+    "label": ""
+  },
+  {
+    "icon": "rectangular-marquee-group",
+    "label": ""
+  },
+  {
+    "icon": "lasso-group",
+    "label": ""
+  },
+  {
+    "icon": "quick-selection-group",
+    "label": ""
+  },
+  {
+    "icon": "crop-group",
+    "label": ""
+  },
+  {
+    "icon": "eyedropper-group",
+    "label": ""
+  },
+  {
+    "divider": true
+  },
+  {
+    "icon": "spot-healing-brunsh-group",
+    "label": ""
+  },
+  {
+    "icon": "brush-group",
+    "label": ""
+  },
+  {
+    "icon": "clone-stapm-group",
+    "label": ""
+  },
+  {
+    "icon": "history-brush-group",
+    "label": ""
+  },
+  {
+    "icon": "eraser-group",
+    "label": ""
+  },
+  {
+    "icon": "gradient-group",
+    "label": ""
+  },
+  {
+    "icon": "blur-group",
+    "label": ""
+  },
+  {
+    "icon": "dodge-group",
+    "label": ""
+  },
+  {
+    "divider": true
+  },
+  {
+    "icon": "pen-group",
+    "label": ""
+  },
+  {
+    "icon": "horizontal-type-group",
+    "label": ""
+  },
+  {
+    "icon": "path-selection-group",
+    "label": ""
+  },
+  {
+    "icon": "rectangle-group",
+    "label": ""
+  },
+  {
+    "divider": true
+  },
+  {
+    "icon": "hand-group",
+    "label": ""
+  },
+  {
+    "icon": "zoom",
+    "label": ""
+  },
+  {
+    "icon": "background",
+    "large": true,
+    "label": ""
+  },
+  {
+    "icon": "quick-mask",
+    "label": ""
+  },
+  {
+    "icon": "screen-mode-group",
+    "label": ""
+  }
+]

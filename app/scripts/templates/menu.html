@@ -22,9 +22,14 @@
     <div ng-show="item.children.length">
         <div class="am-dropdown am-dropdown--nested"
              ng-show="item.isOpen">
-            <div class="am-dropdown__slot"
-                 ng-repeat="item in item.children"
-                 ng-include="'menuDropdown'"></div>
+            <div ng-repeat="item in item.children">
+                <div class="am-dropdown__slot"
+                     ng-hide="item.divider"
+                     ng-include="'menuDropdown'"></div>
+
+                <div class="am-dropdown__divider"
+                     ng-show="item.divider"></div>
+            </div>
         </div>
     </div>
 </script>
