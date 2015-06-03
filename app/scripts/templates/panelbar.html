@@ -1,0 +1,11 @@
+<div class="toolbar toolbar--right">
+    <div ng-repeat="panel in panels">
+        <div class="toolbar__slot"
+             ng-if="!panel.divider">
+            <panel panel="panel"></panel>
+        </div>
+
+        <div class="toolbar__divider"
+             ng-if="tool.divider"></div>
+    </div>
+</div>

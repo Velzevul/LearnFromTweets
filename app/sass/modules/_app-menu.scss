@@ -2,7 +2,7 @@
   position: relative;
   z-index: 10;
 
-  padding: 6px;
+  padding: 3px;
 
   &__slot {
     position: relative;
@@ -18,8 +18,10 @@
     z-index: 2;
     display: block;
     width: 100%;
-    padding: $global-baseline/6 $global-baseline;
+    padding: 0 $global-baseline;
 
+    line-height: 20px;
+    
     text-align: left;
   }
 }
@@ -34,7 +36,7 @@
   position: absolute;
   padding: 3px;
 
-  background: white;
+  background: #f0f0f0;
   border: 1px solid $color-border-secondary;
   box-shadow: 2px 2px 5px rgba(black, 0.3);
 
@@ -60,7 +62,8 @@
   }
 
 .amd-item {
-  min-width: $global-baseline * 20;
+  padding-right: 84px;
+  white-space: nowrap;
 
   @include transition-property(background-color);
   @include transition-duration(0.2s);
@@ -77,7 +80,7 @@
     position: relative;
 
     &:after {
-      @include simple-arrow($global-baseline/3, darken($color-border, 15%), 'quadrant-2', 0, 8px, 'right');
+      @include simple-arrow($global-baseline/3, darken($color-border, 15%), 'quadrant-2', 0, 6px, 'right');
     }
   }
   .amd-item--active {

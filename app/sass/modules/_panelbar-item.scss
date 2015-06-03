@@ -1,0 +1,39 @@
+.panelbar-item {
+  position: relative;
+
+  &__dropdown {
+    position: absolute;
+    top: 0;
+    right: 100%;
+  }
+}
+
+.pi-panelname {
+  display: block;
+  width: 100%;
+
+  padding-right: $global-baseline/2;
+
+  text-align: left;
+
+  &:focus {
+    outline: none;
+  }
+
+  &__icon {
+    display: block;
+    width: 28px;
+    height: 28px;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  &__label {
+    // ...
+  }
+}
+
+.pi-panel {
+
+}

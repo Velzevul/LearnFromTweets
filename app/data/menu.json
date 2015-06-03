@@ -1,358 +1,1224 @@
 [
   {
+    "id": "file",
+    "parents": [],
     "label": "File",
     "children": [
       {
-        "label": "New File"
+        "id": "new",
+        "parents": ["file"],
+        "label": "New..."
+      },
+      {
+        "id": "open",
+        "parents": ["file"],
+        "label": "Open..."
+      },
+      {
+        "id": "browse-in-bridge",
+        "parents": ["file"],
+        "label": "Browse in Bridge..."
+      },
+      {
+        "id": "open-as",
+        "parents": ["file"],
+        "label": "Open As..."
+      },
+      {
+        "id": "open-as-smart-object",
+        "parents": ["file"],
+        "label": "Open As Smart Object..."
+      },
+      {
+        "id": "open-recent",
+        "parents": ["file"],
+        "label": "Open Recent",
+        "children": [
+          {
+            "id": "clear-recent-file-list",
+            "parents": ["file", "open-recent"],
+            "label": "Clear Recent File List"
+          }
+        ]
       },
       {
         "divider": true
       },
       {
-        "label": "New From Template",
+        "id": "close",
+        "parents": ["file"],
+        "label": "Close"
+      },
+      {
+        "id": "close-all",
+        "parents": ["file"],
+        "label": "Close All"
+      },
+      {
+        "id": "close-and-go-to-bridge",
+        "parents": ["file"],
+        "label": "Close and Go to Bridge..."
+      },
+      {
+        "id": "save",
+        "parents": ["file"],
+        "label": "Save"
+      },
+      {
+        "id": "save-as",
+        "parents": ["file"],
+        "label": "Save As..."
+      },
+      {
+        "id": "check-in",
+        "parents": ["file"],
+        "label": "Check In..."
+      },
+      {
+        "id": "revert",
+        "parents": ["file"],
+        "label": "Revert"
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "extract-assets",
+        "parents": ["file"],
+        "label": "Extract Assets..."
+      },
+      {
+        "id": "generate",
+        "parents": ["file"],
+        "label": "Generate",
         "children": [
           {
-            "label": "IOS App Design"
+            "id": "image-assets",
+            "parents": ["file", "generate"],
+            "label": "Image Assets"
+          }
+        ]
+      },
+      {
+        "id": "save-for-web",
+        "parents": ["file"],
+        "label": "Save For Web..."
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "place-embedded",
+        "parents": ["file"],
+        "label": "Place Embedded..."
+      },
+      {
+        "id": "place-linked",
+        "parents": ["file"],
+        "label": "Place Linked..."
+      },
+      {
+        "id": "package",
+        "parents": ["file"],
+        "label": "Package..."
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "import",
+        "parents": ["file"],
+        "label": "Import",
+        "children": [
+          {
+            "id": "variable-data-sets",
+            "parents": ["file", "import"],
+            "label": "Variable Data Sets..."
           },
           {
-            "label": "IOS UI Design"
+            "id": "video-frames-to-layers",
+            "parents": ["file", "import"],
+            "label": "Video Frames To Layers..."
+          },
+          {
+            "id": "notes",
+            "parents": ["file", "import"],
+            "label": "Notes..."
+          },
+          {
+            "id": "wia-support",
+            "parents": ["file", "import"],
+            "label": "WIA Support..."
+          }
+        ]
+      },
+      {
+        "id": "export",
+        "parents": ["file"],
+        "label": "Export",
+        "children": [
+          {
+            "id": "data-sets-as-files",
+            "parents": ["file", "export"],
+            "label": "Data Sets As Files..."
+          },
+          {
+            "id": "paths-to-illustrator",
+            "parents": ["file", "export"],
+            "label": "Paths to Illustrator..."
+          },
+          {
+            "id": "render-video",
+            "parents": ["file", "export"],
+            "label": "Render Video..."
+          },
+          {
+            "id": "zoomify",
+            "parents": ["file", "export"],
+            "label": "Zoomify..."
           },
           {
             "divider": true
           },
           {
-            "label": "Mac App Design"
+            "id": "color-lookup-tables",
+            "parents": ["file", "export"],
+            "label": "Color Lookup Tables..."
+          }
+        ]
+      },
+      {
+        "id": "share-on-behance",
+        "parents": ["file"],
+        "label": "Share On Behance..."
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "automate",
+        "parents": ["file"],
+        "label": "Automate",
+        "children": [
+          {
+            "id": "batch",
+            "parents": ["file", "automate"],
+            "label": "Batch..."
           },
           {
-            "label": "Material Design"
+            "id": "pdf-presentation",
+            "parents": ["file", "automate"],
+            "label": "PDF Presentation..."
+          },
+          {
+            "id": "create-droplet",
+            "parents": ["file", "automate"],
+            "label": "Create Droplet..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "crop-and-straighten-photos",
+            "parents": ["file", "automate"],
+            "label": "Crop and Straighten Photos"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "contact-sheet-ii",
+            "parents": ["file", "automate"],
+            "label": "Contact Sheet II..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "conditional-mode-change",
+            "parents": ["file", "automate"],
+            "label": "Conditional Mode Change..."
+          },
+          {
+            "id": "fit-image",
+            "parents": ["file", "automate"],
+            "label": "Fit Image..."
+          },
+          {
+            "id": "lens-correction",
+            "parents": ["file", "automate"],
+            "label": "Lens Correction..."
+          },
+          {
+            "id": "marge-to-hdr-pro",
+            "parents": ["file", "automate"],
+            "label": "Merge to HDR Pro..."
+          },
+          {
+            "id": "photomerge",
+            "parents": ["file", "automate"],
+            "label": "Photomerge..."
           }
         ]
       },
       {
-        "label": "Open"
-      },
-      {
-        "label": "Open Recent",
+        "id": "scripts",
+        "parents": ["file"],
+        "label": "Scripts",
         "children": [
           {
-            "label": "Clear Items"
-          }
-        ]
-      },
-      {
-        "label": "Close"
-      },
-      {
-        "label": "Save"
-      },
-      {
-        "label": "Duplicate"
-      },
-      {
-        "label": "Rename"
-      },
-      {
-        "label": "Move To"
-      },
-      {
-        "label": "Revert To",
-        "children": [
+            "id": "image-processor",
+            "parents": ["file", "scripts"],
+            "label": "Image Processor..."
+          },
           {
-            "label": "Browse All Versions"
+            "divider": true
+          },
+          {
+            "id": "delete-all-empty-layers",
+            "parents": ["file", "scripts"],
+            "label": "Delete All Empty Layers"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "flatten-all-layer-effects",
+            "parents": ["file", "scripts"],
+            "label": "Flatten All Layer Effects"
+          },
+          {
+            "id": "flatten-all-masks",
+            "parents": ["file", "scripts"],
+            "label": "Flatten All Masks"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer-comps-to-files",
+            "parents": ["file", "scripts"],
+            "label": "Layer Comps to Files..."
+          },
+          {
+            "id": "layer-comps-to-pdf",
+            "parents": ["file", "scripts"],
+            "label": "Layer Comps to PDF..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "export-layers-to-files",
+            "parents": ["file", "scripts"],
+            "label": "Export Layers to Files..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "scripts-event-manager",
+            "parents": ["file", "scripts"],
+            "label": "Scripts Event Manager..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "load-files-into-stack",
+            "parents": ["file", "scripts"],
+            "label": "Load Files into Stack..."
+          },
+          {
+            "id": "load-multiple-dicom-files",
+            "parents": ["file", "scripts"],
+            "label": "Load Multiple DICOM files..."
+          },
+          {
+            "id": "statistics",
+            "parents": ["file", "scripts"],
+            "label": "Statistics"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "browse",
+            "parents": ["file", "scripts"],
+            "label": "Browse"
           }
         ]
       },
       {
-        "label": "Export"
+        "divider": true
       },
       {
-        "label": "Export Artboards To Pdf"
+        "id": "file-info",
+        "parents": ["file"],
+        "label": "File Info..."
       },
       {
-        "label": "Save as Template"
+        "divider": true
       },
       {
-        "label": "Page Setup"
+        "id": "print",
+        "parents": ["file"],
+        "label": "Print..."
       },
       {
-        "label": "Print"
+        "id": "print-one-copy",
+        "parents": ["file"],
+        "label": "Print One Copy"
+      },
+      {
+        "id": "exit",
+        "parents": ["file"],
+        "label": "Exit"
       }
     ]
   },
   {
+    "id": "edit",
+    "parents": [],
     "label": "Edit",
     "children": [
       {
+        "id": "undo",
+        "parents": ["edit"],
         "label": "Undo"
       },
       {
-        "label": "Redo"
+        "id": "step-forward",
+        "parents": ["edit"],
+        "label": "Step Forward"
       },
       {
+        "id": "step-backward",
+        "parents": ["edit"],
+        "label": "Step Backward"
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "fade",
+        "parents": ["edit"],
+        "label": "Fade..."
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "cut",
+        "parents": ["edit"],
         "label": "Cut"
       },
       {
+        "id": "copy",
+        "parents": ["edit"],
         "label": "Copy"
       },
       {
+        "id": "copy-merged",
+        "parents": ["edit"],
+        "label": "Copy Merged"
+      },
+      {
+        "id": "paste",
+        "parents": ["edit"],
         "label": "Paste"
       },
       {
-        "label": "Paste in Place"
-      },
-      {
-        "label": "Paste and Match Style"
-      },
-      {
-        "label": "Duplicate"
-      },
-      {
-        "label": "Delete"
-      },
-      {
-        "label": "Select All"
-      },
-      {
-        "label": "Scale"
-      },
-      {
-        "label": "Copy Style"
-      },
-      {
-        "label": "Paste Style"
-      },
-      {
-        "label": "Set Style as Default"
-      },
-      {
-        "label": "Pick Color"
-      },
-      {
-        "label": "Copy CSS Attributes"
-      },
-      {
-        "label": "Spelling",
+        "id": "paste-special",
+        "parents": ["edit"],
+        "label": "Paste Special",
         "children": [
           {
-            "label": "Show Spelling and Grammar"
+            "id": "paste-in-place",
+            "parents": ["edit", "paste-special"],
+            "label": "Paste in Place"
           },
           {
-            "label": "Check Spelling"
+            "id": "paste-into",
+            "parents": ["edit", "paste-special"],
+            "label": "Paste Into"
           },
           {
-            "label": "Check Spelling as You Type"
+            "id": "paste-outside",
+            "parents": ["edit", "paste-special"],
+            "label": "Paste Outside"
           }
         ]
       },
       {
-        "label": "Start Dictation"
+        "id": "clear",
+        "parents": ["edit"],
+        "label": "Clear"
       },
       {
-        "label": "Emoji and Symbols"
-      }
-    ]
-  },
-  {
-    "label": "Insert",
-    "children": [
-      {
-        "label": "Vector"
+        "divider": true
       },
       {
-        "label": "Pencil"
+        "id": "check-spelling",
+        "parents": ["edit"],
+        "label": "Check Spelling..."
       },
       {
-        "label": "Shape",
-        "children": [
-          { 
-            "label": "Line" 
-          },
-          { 
-            "label": "Arrow" 
-          },
-          { 
-            "label": "Rectangle" 
-          },
-          { 
-            "label": "Oval" 
-          },
-          { 
-            "label": "Rounded" 
-          },
-          { 
-            "label": "Star" 
-          },
-          { 
-            "label": "Polygon" 
-          },
-          { 
-            "label": "Triangle" 
-          }
-        ]
-      },
-      { 
-        "label": "Text" 
-      },
-      { 
-        "label": "Image" 
-      },
-      { 
-        "label": "Artboard" 
-      },
-      { 
-        "label": "Slice" 
-      },
-      { 
-        "label": "Symbols" 
-      },
-      { 
-        "label": "Styled Text" 
-      }
-    ]
-  },
-  {
-    "label": "Layer",
-    "children": [
-      { 
-        "label": "Create Symbol"
-      },
-      { 
-        "label": "Create Shared Style"
-      },
-      { 
-        "label": "Round to Nearest Pixel Edge"
-      },
-      { 
-        "label": "Style",
-        "children": [
-          {
-            "label": "Add Fill"
-          },
-          {
-            "label": "Add Border"
-          },
-          {
-            "label": "Add Inner Shadow"
-          },
-          {
-            "label": "Fill Options"
-          },
-          {
-            "label": "Border Options"
-          },
-          {
-            "label": "Remove Unused Styles"
-          }
-        ]
+        "id": "find-and-replace-text",
+        "parents": ["edit"],
+        "label": "Find and Replace Text..."
       },
       {
-        "label": "Combine",
-        "children": [
-          {
-            "label": "Union"
-          },
-          {
-            "label": "Subtract"
-          },
-          {
-            "label": "Intersect"
-          },
-          {
-            "label": "Difference"
-          },
-          {
-            "label": "Reset"
-          }
-        ]
+        "divider": true
       },
       {
+        "id": "fill",
+        "parents": ["edit"],
+        "label": "Fill..."
+      },
+      {
+        "id": "stroke",
+        "parents": ["edit"],
+        "label": "Stroke..."
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "content-aware-scale",
+        "parents": ["edit"],
+        "label": "Content-Aware Scale"
+      },
+      {
+        "id": "puppet-warp",
+        "parents": ["edit"],
+        "label": "Puppet Warp"
+      },
+      {
+        "id": "perspective-warp",
+        "parents": ["edit"],
+        "label": "Perspective Warp"
+      },
+      {
+        "id": "free-transform",
+        "parents": ["edit"],
+        "label": "Free Transform"
+      },
+      {
+        "id": "transform",
+        "parents": ["edit"],
         "label": "Transform",
         "children": [
           {
-            "label": "Transform Layer"
+            "id": "again",
+            "parents": ["edit", "transform"],
+            "label": "Again"
           },
           {
-            "label": "Rotate Layer"
+            "divider": true
           },
           {
+            "id": "scale",
+            "parents": ["edit", "transform"],
+            "label": "Scale"
+          },
+          {
+            "id": "rotate",
+            "parents": ["edit", "transform"],
+            "label": "Rotate"
+          },
+          {
+            "id": "skew",
+            "parents": ["edit", "transform"],
+            "label": "Skew"
+          },
+          {
+            "id": "distort",
+            "parents": ["edit", "transform"],
+            "label": "Distort"
+          },
+          {
+            "id": "perspective",
+            "parents": ["edit", "transform"],
+            "label": "Perspective"
+          },
+          {
+            "id": "warp",
+            "parents": ["edit", "transform"],
+            "label": "Warp"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "rotate-180",
+            "parents": ["edit", "transform"],
+            "label": "Rotate 180°"
+          },
+          {
+            "id": "rotate-90-clockwise",
+            "parents": ["edit", "transform"],
+            "label": "Rotate 90° Clockwise"
+          },
+          {
+            "id": "rotate-90-counter-clockwise",
+            "parents": ["edit", "transform"],
+            "label": "Rotate 90° Counter Clockwise"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "flip-horizontal",
+            "parents": ["edit", "transform"],
             "label": "Flip Horizontal"
           },
           {
+            "id": "flip-vertical",
+            "parents": ["edit", "transform"],
             "label": "Flip Vertical"
           }
         ]
       },
       {
-        "label": "Paths",
+        "id": "auto-align-layers",
+        "parents": ["edit"],
+        "label": "Auto-Align Layers..."
+      },
+      {
+        "id": "auto-blend-layers",
+        "parents": ["edit"],
+        "label": "Auto-Blend Layers..."
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "define-brush-preset",
+        "parents": ["edit"],
+        "label": "Define Brush Preset..."
+      },
+      {
+        "id": "define-pattern",
+        "parents": ["edit"],
+        "label": "Define Pattern..."
+      },
+      {
+        "id": "define-custom-shape",
+        "parents": ["edit"],
+        "label": "Define Custom Shape..."
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "purge",
+        "parents": ["edit"],
+        "label": "Purge",
         "children": [
           {
-            "label": "Join"
+            "id": "undo-purge",
+            "parents": ["edit", "purge"],
+            "label": "Undo"
           },
           {
-            "label": "Split"
+            "id": "clipboard",
+            "parents": ["edit", "purge"],
+            "label": "Clipboard"
           },
           {
-            "label": "Flatten"
+            "id": "histories",
+            "parents": ["edit", "purge"],
+            "label": "Histories"
           },
           {
-            "label": "Close Paths"
+            "id": "all",
+            "parents": ["edit", "purge"],
+            "label": "All"
           },
           {
-            "label": "Reverse Order"
+            "divider": true
           },
           {
-            "label": "Vectorize Stroke"
-          },
-          {
-            "label": "Scissors"
-          },
-          {
-            "label": "Rotate Copies"
+            "id": "video-cache",
+            "parents": ["edit", "purge"],
+            "label": "Video Cache"
           }
         ]
       },
       {
-        "label": "Image",
+        "divider": true
+      },
+      {
+        "id": "adobe-pdf-presets",
+        "parents": ["edit"],
+        "label": "Adobe PDF Presets..."
+      },
+      {
+        "id": "presets",
+        "parents": ["edit"],
+        "label": "Presets",
         "children": [
           {
-            "label": "Replace"
+            "id": "preset-manager",
+            "parents": ["edit", "presets"],
+            "label": "Preset Manager..."
           },
           {
-            "label": "Set to Original Size"
+            "id": "migrate-presets",
+            "parents": ["edit", "presets"],
+            "label": "Migrate Presets"
           },
           {
-            "label": "Reduce Image Size"
-          },
-          {
-            "label": "Convert to 9-Slice Image"
+            "id": "export-import-presets",
+            "parents": ["edit", "presets"],
+            "label": "Export/Import Presets..."
           }
         ]
       },
       {
-        "label": "Flatten Selection to Bitmap"
+        "id": "remote-connections",
+        "parents": ["edit"],
+        "label": "Remote Connections..."
       },
       {
-        "label": "Use as Mask"
+        "divider": true
       },
       {
-        "label": "Mask mode",
-        "children": [
-          {
-            "label": "Outline Mask"
-          },
-          {
-            "label": "Alpha Mask"
-          }
-        ]
+        "id": "color-settings",
+        "parents": ["edit"],
+        "label": "Color Settings..."
       },
       {
-        "label": "Ignore Underlaying Mask"
+        "id": "assign-profile",
+        "parents": ["edit"],
+        "label": "Assign Profile..."
       },
       {
-        "label": "Mask with Selected Shape"
+        "id": "convert-to-profile",
+        "parents": ["edit"],
+        "label": "Convert to Profile..."
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "keyboard-shortcuts",
+        "parents": ["edit"],
+        "label": "Keyboard Shortcuts..."
+      },
+      {
+        "id": "menus",
+        "parents": ["edit"],
+        "label": "Menus..."
+      },
+      {
+        "id": "preferences",
+        "parents": ["edit"],
+        "label": "Preferences"
+      },
+      {
+        "id": "your-account",
+        "parents": ["edit"],
+        "label": "your-account@email.com"
       }
     ]
   },
+  {
+    "id": "image",
+    "label": "Image",
+    "children": [
+      {
+        "id": "mode",
+        "parents": ["image"],
+        "label": "Mode",
+        "children": [
+          {
+            "id": "bitmap",
+            "parents": ["image", "mode"],
+            "label": "Bitmap"
+          },
+          {
+            "id": "grayscale",
+            "parents": ["image", "mode"],
+            "label": "Grayscale"
+          },
+          {
+            "id": "duotone",
+            "parents": ["image", "mode"],
+            "label": "Duotone"
+          },
+          {
+            "id": "indexed-color",
+            "parents": ["image", "mode"],
+            "label": "Indexed Color..."
+          },
+          {
+            "id": "rgb-color",
+            "parents": ["image", "mode"],
+            "label": "RGB Color"
+          },
+          {
+            "id": "cmyk-color",
+            "parents": ["image", "mode"],
+            "label": "CMYK Color"
+          },
+          {
+            "id": "lab-color",
+            "parents": ["image", "mode"],
+            "label": "Lab Color"
+          },
+          {
+            "id": "multichannel",
+            "parents": ["image", "mode"],
+            "label": "Multichannel"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "8-bits-channel",
+            "parents": ["image", "mode"],
+            "label": "8 Bits/Channel"
+          },
+          {
+            "id": "16-bits-channel",
+            "parents": ["image", "mode"],
+            "label": "16 Bits/Channel"
+          },
+          {
+            "id": "32-bits-channel",
+            "parents": ["image", "mode"],
+            "label": "32 Bits/Channel"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "color-table",
+            "parents": ["image", "mode"],
+            "label": "Color Table"
+          }
+        ]
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "adjustments",
+        "parents": ["image"],
+        "label": "Adjustments",
+        "children": [
+          {
+            "id": "brightness-contrast",
+            "parents": ["image", "adjustments"],
+            "label": "Brightness/Contrast..."
+          },
+          {
+            "id": "levels",
+            "parents": ["image", "adjustments"],
+            "label": "Levels..."
+          },
+          {
+            "id": "curves",
+            "parents": ["image", "adjustments"],
+            "label": "Curves..."
+          },
+          {
+            "id": "exposure",
+            "parents": ["image", "adjustments"],
+            "label": "Exposure..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "vibrance",
+            "parents": ["image", "adjustments"],
+            "label": "Vibrance..."
+          },
+          {
+            "id": "hue-saturation",
+            "parents": ["image", "adjustments"],
+            "label": "Hue/Saturation..."
+          },
+          {
+            "id": "color-balance",
+            "parents": ["image", "adjustments"],
+            "label": "Color Balance..."
+          },
+          {
+            "id": "black-and-white",
+            "parents": ["image", "adjustments"],
+            "label": "Black & White..."
+          },
+          {
+            "id": "photo-filter",
+            "parents": ["image", "adjustments"],
+            "label": "Photo Filter..."
+          },
+          {
+            "id": "channel-mixer",
+            "parents": ["image", "adjustments"],
+            "label": "Channel Mixer..."
+          },
+          {
+            "id": "color-lookup",
+            "parents": ["image", "adjustments"],
+            "label": "Color Lookup..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "invert",
+            "parents": ["image", "adjustments"],
+            "label": "Invert"
+          },
+          {
+            "id": "posterize",
+            "parents": ["image", "adjustments"],
+            "label": "Posterize..."
+          },
+          {
+            "id": "threshold",
+            "parents": ["image", "adjustments"],
+            "label": "Threshold..."
+          },
+          {
+            "id": "gradient-map",
+            "parents": ["image", "adjustments"],
+            "label": "Gradient Map..."
+          },
+          {
+            "id": "selective-color",
+            "parents": ["image", "adjustments"],
+            "label": "Selective Color..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "shadow-highlights",
+            "parents": ["image", "adjustments"],
+            "label": "Shadow/Highlights..."
+          },
+          {
+            "id": "hdr-toning",
+            "parents": ["image", "adjustments"],
+            "label": "HDR Toning..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "desaturate",
+            "parents": ["image", "adjustments"],
+            "label": "Desaturate"
+          },
+          {
+            "id": "match-color",
+            "parents": ["image", "adjustments"],
+            "label": "Match Color..."
+          },
+          {
+            "id": "replace-color",
+            "parents": ["image", "adjustments"],
+            "label": "Replace Color..."
+          },
+          {
+            "id": "equalize",
+            "parents": ["image", "adjustments"],
+            "label": "Equalize..."
+          }
+        ]
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "auto-tone",
+        "parents": ["image"],
+        "label": "Auto Tone"
+      },
+      {
+        "id": "auto-contrast",
+        "parents": ["image"],
+        "label": "Auto Contrast"
+      },
+      {
+        "id": "auto-color",
+        "parents": ["image"],
+        "label": "Auto Color"
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "image-size",
+        "parents": ["image"],
+        "label": "Image Size..."
+      },
+      {
+        "id": "canvas-size",
+        "parents": ["image"],
+        "label": "Canvas Size..."
+      },
+      {
+        "id": "image-rotation",
+        "parents": ["image"],
+        "label": "Image Rotation...",
+        "children": [
+          {
+            "id": "rotate-180-degrees",
+            "parents": ["image", "image-rotation"],
+            "label": "180°"
+          },
+          {
+            "id": "rotate-90-degrees-clockwise",
+            "parents": ["image", "image-rotation"],
+            "label": "90° Clockwise"
+          },
+          {
+            "id": "rotate-90-degrees-counter-clockwise",
+            "parents": ["image", "image-rotation"],
+            "label": "90° Counter Clockwise"
+          },
+          {
+            "id": "rotate-arbitrary",
+            "parents": ["image", "image-rotation"],
+            "label": "Arbitrary..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "flip-canvas-horizontal",
+            "parents": ["image", "image-rotation"],
+            "label": "Flip Canvas Horizontal"
+          },
+          {
+            "id": "flip-canvas-vertical",
+            "parents": ["image", "image-rotation"],
+            "label": "Flip Canvas Vertical"
+          }
+        ]
+      },
+      {
+        "id": "crop",
+        "parents": ["image"],
+        "label": "Crop"
+      },
+      {
+        "id": "trim",
+        "parents": ["image"],
+        "label": "Trim..."
+      },
+      {
+        "id": "reveal-all",
+        "parents": ["image"],
+        "label": "Reveal All..."
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "duplicate",
+        "parents": ["image"],
+        "label": "Duplicate..."
+      },
+      {
+        "id": "apply-image",
+        "parents": ["image"],
+        "label": "Apply Image..."
+      },
+      {
+        "id": "calculations",
+        "parents": ["image"],
+        "label": "Calculations..."
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "variables",
+        "parents": ["image"],
+        "label": "Variables",
+        "children": [
+          {
+            "id": "define",
+            "parents": ["image", "variables"],
+            "label": "Define..."
+          },
+          {
+            "id": "data-sets",
+            "parents": ["image", "variables"],
+            "label": "Data Sets..."
+          }
+        ]
+      },
+      {
+        "id": "apply-data-set",
+        "parents": ["image"],
+        "label": "Apply Data Set..."
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "trap",
+        "parents": ["image"],
+        "label": "Trap..."
+      },
+      {
+        "divider": true
+      },
+      {
+        "id": "analysis",
+        "parents": ["image"],
+        "label": "Analysis",
+        "children": [
+          {
+            "id": "set-measurement-scale",
+            "parents": ["image", "analysis"],
+            "label": "Set Measurement Scale",
+            "children": [
+              {
+                "id": "set-meaurement-scale-default",
+                "parents": ["image", "analysis", "set-measurement-scale"],
+                "label": "Default"
+              },
+              {
+                "id": "set-meaurement-scale-custom",
+                "parents": ["image", "analysis", "set-measurement-scale"],
+                "label": "Custom..."
+              }
+            ]
+          },
+          {
+            "id": "select-data-points",
+            "parents": ["image", "analysis"],
+            "label": "Select Data Points",
+            "children": [
+              {
+                "id": "select-data-points-custom",
+                "parents": ["image", "analysis", "select-data-points"],
+                "label": "Custom"
+              }
+            ]
+          },
+          {
+            "id": "record-measurements",
+            "parents": ["image", "analysis"],
+            "label": "Record Measurements"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "ruler-tool",
+            "parents": ["image", "analysis"],
+            "label": "Ruler Tool"
+          },
+          {
+            "id": "count-tool",
+            "parents": ["image", "analysis"],
+            "label": "Count Tool"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "place-scale-marker",
+            "parents": ["image", "analysis"],
+            "label": "Place Scale Marker..."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "layer",
+    "label": "Layer",
+    "children": [
+      {
+        "id": "layer-new",
+        "parents": ["layer"],
+        "label": "New",
+        "children": [
+          {
+            "id": "layer-new-layer",
+            "parents": ["layer", "layer-new"],
+            "label": "Layer..."
+          },
+          {
+            "id": "layer-new-layer-from-background",
+            "parents": ["layer", "layer-new"],
+            "label": "Layer From Background..."
+          },
+          {
+            "id": "layer-new-group",
+            "parents": ["layer", "layer-new"],
+            "label": "Group..."
+          },
+          {
+            "id": "layer-new-group-from-layers",
+            "parents": ["layer", "layer-new"],
+            "label": "Group From Layers..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer-new-layer-via-copy",
+            "parents": ["layer", "layer-new"],
+            "label": "Layer Via Copy"
+          },
+          {
+            "id": "layer-new-layer-via-cut",
+            "parents": ["layer", "layer-new"],
+            "label": "Layer Via Cut"
+          }
+        ]
+      },
+      {
+        "id": "layer-copy-css",
+        "parents": ["layer"],
+        "label": "Copy CSS"
+      },
+      {
+        "id": "layer-duplicate-layer",
+        "parents": ["layer"],
+        "label": "Duplicate Layer..."
+      },
+      {
+        "id": "layer-delete",
+        "parents": ["layer"],
+        "label": "Delete",
+        "children": [
+          {
+            "id": "layer-delete-layer",
+            "parents": ["layer", "layer-delete"],
+            "label": "Layer"
+          },
+          {
+            "id": "layer-delete-hidden-layers",
+            "parents": ["layer", "layer-delete"],
+            "label": "Hidden Layers"
+          }
+        ]
+      },
+      {
+        "id": "layer-rename-layer",
+        "parents": ["layer"],
+        "label": "Rename Layer..."
+      }
+    ]
+  },
+
+
+
+
   {
     "label": "Type",
     "children": [
@@ -455,7 +1321,7 @@
     ]
   },
   {
-    "label": "Arange",
+    "label": "Select",
     "children": [
       {
         "label": "Forward"
@@ -495,7 +1361,7 @@
     ]
   },
   {
-    "label": "Plugins",
+    "label": "Filter",
     "children": [
       {
         "label": "Custom Plugin"
@@ -509,7 +1375,7 @@
     ]
   },
   {
-    "label": "View",
+    "label": "3D",
     "children": [
       {
         "label": "Zoom In"
@@ -620,7 +1486,35 @@
     ]
   },
   {
+    "label": "View",
+    "children": [
+      {
+        "label": "Minimize"
+      },
+      {
+        "label": "Zoom"
+      },
+      {
+        "label": "Bring All To Front"
+      }
+    ]
+  },
+  {
     "label": "Window",
+    "children": [
+      {
+        "label": "Minimize"
+      },
+      {
+        "label": "Zoom"
+      },
+      {
+        "label": "Bring All To Front"
+      }
+    ]
+  },
+  {
+    "label": "Help",
     "children": [
       {
         "label": "Minimize"

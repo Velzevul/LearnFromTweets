@@ -1,5 +1,6 @@
 .toolbar {
   position: absolute;
+  top: $global-baseline * 4;
   padding: 3px;
 
   background: $color-bg-secondary;
@@ -17,7 +18,9 @@
     background: $color-border-secondary;
   }
 }
-  .toolbar--tools {
-    top: $global-baseline * 4;
+  .toolbar--left {
     left: $global-baseline/2;
+  }
+  .toolbar--right {
+    right: $global-baseline/2;
   }
