@@ -1,11 +1,13 @@
-<div class="toolbar">
+<div class="toolbar toolbar--tools">
     <div ng-repeat="tool in tools">
         <div class="toolbar__slot"
-             ng-hide="item.divider">
-            <toolbar-item tool="tool"></toolbar-item>
+             ng-hide="tool.divider">
+            <!--<toolbar-item tool="tool"></toolbar-item>-->
+
+            {{tool.icon}}
         </div>
 
         <div class="toolbar__divider"
-             ng-show="item.divider"></div>
+             ng-show="tool.divider"></div>
     </div>
 </div>

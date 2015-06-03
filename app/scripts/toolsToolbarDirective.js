@@ -10,7 +10,6 @@ angular.module('tweetsToSoftware')
                 ToolbarService.loaded
                     .then(function() {
                         $scope.tools = ToolbarService.toolbars['tools'];
-                        debugger;
                     });
             }
         }
