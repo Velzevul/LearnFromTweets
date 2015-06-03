@@ -1,0 +1,84 @@
+.toolbar-item {
+  position: relative;
+
+  &__dropdown {
+    position: absolute;
+    z-index: 1;
+    top: 0; left: 98%;
+    padding: 3px;
+    min-width: 100px;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    background: #DCDCDC;
+    border: 1px solid $color-bg-tertiary;
+  }
+}
+
+.ti-tool {
+  display: block;
+  width: 100%;
+
+  text-align: left;
+
+  &:focus {
+    outline: none;
+  }
+
+  &__icon {
+    display: block;
+    width: 33px;
+    height: 26px;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+    &__icon--large {
+      height: 51px;
+    }
+}
+
+.ti-subtool {
+  display: block;
+  width: 100%;
+
+  padding-left: 20px;
+  padding-right: $global-baseline;
+
+  text-align: left;
+
+  &:focus {
+    outline: none;
+  }
+
+  &__icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  &__label {
+    font-size: 11px;
+    line-height: 20px;
+  }
+}
+  .ti-subtool--first {
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      height: 4px;
+      width: 4px;
+      top: 8px;
+      left: 8px;
+
+      background: $color-tx;
+    }
+  }

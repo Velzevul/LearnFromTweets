@@ -4,7 +4,7 @@ angular.module('tweetsToSoftware')
 
         return {
             restrict: 'E',
-            templateUrl: 'templates/toolsToolbar.html',
+            templateUrl: 'templates/toolbar.html',
             scope: {},
             controller: function($scope) {
                 ToolbarService.loaded

@@ -1,13 +1,11 @@
 <div class="toolbar toolbar--tools">
     <div ng-repeat="tool in tools">
         <div class="toolbar__slot"
-             ng-hide="tool.divider">
-            <!--<toolbar-item tool="tool"></toolbar-item>-->
-
-            {{tool.icon}}
+             ng-if="!tool.divider">
+            <toolbar-item tool="tool"></toolbar-item>
         </div>
 
         <div class="toolbar__divider"
-             ng-show="tool.divider"></div>
+             ng-if="tool.divider"></div>
     </div>
 </div>

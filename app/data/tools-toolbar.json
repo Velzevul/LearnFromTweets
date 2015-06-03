@@ -1,104 +1,406 @@
 [
   {
-    "icon": "move",
+    "id": "move",
     "label": ""
   },
   {
-    "icon": "rectangular-marquee-group",
-    "label": ""
+    "id": "rectangular-marquee-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "rectangular-marquee",
+        "label": "Rectangular Marquee Tool"
+      },
+      {
+        "id": "elliptical-marquee",
+        "label": "Elliptical Marquee Tool"
+      },
+      {
+        "id": "single-row-marquee",
+        "label": "Single Column Marquee Tool"
+      },
+      {
+        "id": "single-column-marquee",
+        "label": "Single Column Marquee Tool"
+      }
+    ]
   },
   {
-    "icon": "lasso-group",
-    "label": ""
+    "id": "lasso-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "lasso",
+        "label": "Lasso Tool"
+      },
+      {
+        "id": "polygonal-lasso",
+        "label": "Polygonal Lasso Tool"
+      },
+      {
+        "id": "magnetic-lasso",
+        "label": "Magnetic Lasso Tool"
+      }
+    ]
   },
   {
-    "icon": "quick-selection-group",
-    "label": ""
+    "id": "quick-selection-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "quick-selection",
+        "label": "Quick Selection Tool"
+      },
+      {
+        "id": "magic-wand",
+        "label": "Magic Wand Tool"
+      }
+    ]
   },
   {
-    "icon": "crop-group",
-    "label": ""
+    "id": "crop-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "crop",
+        "label": "Crop Tool"
+      },
+      {
+        "id": "perspective-crop",
+        "label": "Perspective Crop Tool"
+      },
+      {
+        "id": "slice",
+        "label": "Slice Tool"
+      },
+      {
+        "id": "slice-select",
+        "label": "Slice Select Tool"
+      }
+    ]
   },
   {
-    "icon": "eyedropper-group",
-    "label": ""
+    "id": "eyedropper-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "eyedropper",
+        "label": "Eyedropper Tool"
+      },
+      {
+        "id": "3d-material-eyedropper",
+        "label": "3D Material Eyedropper Tool"
+      },
+      {
+        "id": "color-sampler",
+        "label": "Color Sampler Tool"
+      },
+      {
+        "id": "ruler",
+        "label": "Ruler Tool"
+      },
+      {
+        "id": "note",
+        "label": "Note Tool"
+      },
+      {
+        "id": "count",
+        "label": "Count Tool"
+      }
+    ]
   },
   {
     "divider": true
   },
   {
-    "icon": "spot-healing-brunsh-group",
-    "label": ""
+    "id": "spot-healing-brush-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "spot-healing-brush",
+        "label": "Spot Healing Brush Tool"
+      },
+      {
+        "id": "healing-brush",
+        "label": "Healing Brush Tool"
+      },
+      {
+        "id": "patch",
+        "label": "Patch Tool"
+      },
+      {
+        "id": "content-aware-move",
+        "label": "Content Aware Move Tool"
+      },
+      {
+        "id": "red-eye",
+        "label": "Red Eye Tool"
+      }
+    ]
   },
   {
-    "icon": "brush-group",
-    "label": ""
+    "id": "brush-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "brush",
+        "label": "Brush Tool"
+      },
+      {
+        "id": "pencil",
+        "label": "Pencil Tool"
+      },
+      {
+        "id": "color-replacement",
+        "label": "Color Replacement Tool"
+      },
+      {
+        "id": "mixed-brush",
+        "label": "Mixed Brush Tool"
+      }
+    ]
   },
   {
-    "icon": "clone-stapm-group",
-    "label": ""
+    "id": "clone-stamp-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "clone-stamp",
+        "label": "Clone Stamp Tool"
+      },
+      {
+        "id": "pattern-stamp",
+        "label": "Pattern Stamp Tool"
+      }
+    ]
   },
   {
-    "icon": "history-brush-group",
-    "label": ""
+    "id": "history-brush-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "history-brush",
+        "label": "History Brush Tool"
+      },
+      {
+        "id": "art-history-brush",
+        "label": "Art History Brush Tool"
+      }
+    ]
   },
   {
-    "icon": "eraser-group",
-    "label": ""
+    "id": "eraser-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "eraser",
+        "label": "Eraser Tool"
+      },
+      {
+        "id": "background-eraser",
+        "label": "Background Eraser Tool"
+      },
+      {
+        "id": "magic-eraser",
+        "label": "Magic Eraser Tool"
+      }
+    ]
   },
   {
-    "icon": "gradient-group",
-    "label": ""
+    "id": "gradient-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "gradient",
+        "label": "Gradient Tool"
+      },
+      {
+        "id": "paint-bucket",
+        "label": "Paint Bucket Tool"
+      },
+      {
+        "id": "3d-material-drop",
+        "label": "3D Material Drop Tool"
+      }
+    ]
   },
   {
-    "icon": "blur-group",
-    "label": ""
+    "id": "blur-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "blur",
+        "label": "Blur Tool"
+      },
+      {
+        "id": "sharpen",
+        "label": "Sharpen Tool"
+      },
+      {
+        "id": "smudge",
+        "label": "Smudge Tool"
+      }
+    ]
   },
   {
-    "icon": "dodge-group",
-    "label": ""
+    "id": "dodge-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "dodge",
+        "label": "Dodge Tool"
+      },
+      {
+        "id": "burn",
+        "label": "Burn Tool"
+      },
+      {
+        "id": "sponge",
+        "label": "Sponge Tool"
+      }
+    ]
   },
   {
     "divider": true
   },
   {
-    "icon": "pen-group",
-    "label": ""
+    "id": "pen-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "pen",
+        "label": "Pen Tool"
+      },
+      {
+        "id": "freeform-pen",
+        "label": "Freeform Pen Tool"
+      },
+      {
+        "id": "add-anchor-point",
+        "label": "Add Anchor Point Tool"
+      },
+      {
+        "id": "delete-anchor-point",
+        "label": "Delete Anchor Point Tool"
+      },
+      {
+        "id": "convert-point",
+        "label": "Convert Point Tool"
+      }
+    ]
   },
   {
-    "icon": "horizontal-type-group",
-    "label": ""
+    "id": "horizontal-type-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "horizontal-type",
+        "label": "Horizontal Type Tool"
+      },
+      {
+        "id": "vertical-type",
+        "label": "Vertical Type Tool"
+      },
+      {
+        "id": "horizontal-type-mask",
+        "label": "Horizontal Type Mask Tool"
+      },
+      {
+        "id": "vertical-type-mask",
+        "label": "Vertical Type Mask"
+      }
+    ]
   },
   {
-    "icon": "path-selection-group",
-    "label": ""
+    "id": "path-selection-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "path-selection",
+        "label": "Path Select Tool"
+      },
+      {
+        "id": "direct-selection",
+        "label": "Direct Selection Tool"
+      }
+    ]
   },
   {
-    "icon": "rectangle-group",
-    "label": ""
+    "id": "rectangle-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "rectangle",
+        "label": "Rectangle Tool"
+      },
+      {
+        "id": "rounded-rectangle",
+        "label": "Rounded Rectangle Tool"
+      },
+      {
+        "id": "ellipse",
+        "label": "Ellipse Tool"
+      },
+      {
+        "id": "polygon",
+        "label": "Polygon Tool"
+      },
+      {
+        "id": "line",
+        "label": "Line Tool"
+      },
+      {
+        "id": "custom-shape",
+        "label": "Custom Shape Tool"
+      }
+    ]
   },
   {
     "divider": true
   },
   {
-    "icon": "hand-group",
+    "id": "hand-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "hand",
+        "label": "Hand Tool"
+      },
+      {
+        "id": "rotate-view",
+        "label": "Rotate View Tool"
+      }
+    ]
+  },
+  {
+    "id": "zoom",
     "label": ""
   },
   {
-    "icon": "zoom",
+    "id": "background",
+    "largeIcon": true,
     "label": ""
   },
   {
-    "icon": "background",
-    "large": true,
+    "id": "quick-mask",
     "label": ""
   },
   {
-    "icon": "quick-mask",
-    "label": ""
-  },
-  {
-    "icon": "screen-mode-group",
-    "label": ""
+    "id": "screen-mode-group",
+    "label": "",
+    "subtools": [
+      {
+        "id": "standard-screen-mode",
+        "label": "Standard Screen Mode"
+      },
+      {
+        "id": "full-screen-mode-with-menubar",
+        "label": "Full Screen Mode With Menu Bar"
+      },
+      {
+        "id": "full-screen-mode",
+        "label": "Full Screen Mode"
+      }
+    ]
   }
 ]

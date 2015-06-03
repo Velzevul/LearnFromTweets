@@ -120,7 +120,6 @@
         'layouts/hoverchange';
 
 @import 'modules/topbar',
-        'modules/toolbar',
         'modules/app-menu',
         'modules/tweets-widget',
         'modules/widget-notification',
@@ -129,7 +128,9 @@
         'modules/popup',
         'modules/app-panel',
         'modules/author',
-        'modules/buttons';
+        'modules/buttons',
+        'modules/toolbar',
+        'modules/toolbar-item';
 
 @import 'states',
         'dev-grid',
