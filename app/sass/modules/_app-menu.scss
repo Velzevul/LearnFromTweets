@@ -26,9 +26,6 @@
   }
 }
   .am-item--active {
-    background: darken($color-bg-secondary, 10%);
-  }
-  .am-item--highlighted {
     background: rgba($color-dc-secondary, 0.5);
   }
 
@@ -73,7 +70,7 @@
   }
 
   &:hover {
-    background: lighten($color-bg-secondary, 5%);
+    background: rgba($color-dc-secondary, 0.5);
   }
 }
   .amd-item--parent {
@@ -84,8 +81,5 @@
     }
   }
   .amd-item--active {
-    background: lighten($color-bg-secondary, 5%);
-  }
-  .amd-item--highlighted {
     background: rgba($color-dc-secondary, 0.5);
   }

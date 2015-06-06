@@ -6,7 +6,7 @@
   {
     "id": "rectangular-marquee-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "rectangular-marquee",
         "label": "Rectangular Marquee Tool"
@@ -28,7 +28,7 @@
   {
     "id": "lasso-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "lasso",
         "label": "Lasso Tool"
@@ -46,7 +46,7 @@
   {
     "id": "quick-selection-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "quick-selection",
         "label": "Quick Selection Tool"
@@ -60,7 +60,7 @@
   {
     "id": "crop-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "crop",
         "label": "Crop Tool"
@@ -82,7 +82,7 @@
   {
     "id": "eyedropper-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "eyedropper",
         "label": "Eyedropper Tool"
@@ -115,7 +115,7 @@
   {
     "id": "spot-healing-brush-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "spot-healing-brush",
         "label": "Spot Healing Brush Tool"
@@ -141,7 +141,7 @@
   {
     "id": "brush-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "brush",
         "label": "Brush Tool"
@@ -163,7 +163,7 @@
   {
     "id": "clone-stamp-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "clone-stamp",
         "label": "Clone Stamp Tool"
@@ -177,7 +177,7 @@
   {
     "id": "history-brush-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "history-brush",
         "label": "History Brush Tool"
@@ -191,7 +191,7 @@
   {
     "id": "eraser-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "eraser",
         "label": "Eraser Tool"
@@ -209,7 +209,7 @@
   {
     "id": "gradient-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "gradient",
         "label": "Gradient Tool"
@@ -227,7 +227,7 @@
   {
     "id": "blur-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "blur",
         "label": "Blur Tool"
@@ -245,7 +245,7 @@
   {
     "id": "dodge-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "dodge",
         "label": "Dodge Tool"
@@ -266,7 +266,7 @@
   {
     "id": "pen-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "pen",
         "label": "Pen Tool"
@@ -292,7 +292,7 @@
   {
     "id": "horizontal-type-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "horizontal-type",
         "label": "Horizontal Type Tool"
@@ -314,7 +314,7 @@
   {
     "id": "path-selection-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "path-selection",
         "label": "Path Select Tool"
@@ -328,7 +328,7 @@
   {
     "id": "rectangle-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "rectangle",
         "label": "Rectangle Tool"
@@ -361,7 +361,7 @@
   {
     "id": "hand-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "hand",
         "label": "Hand Tool"
@@ -388,7 +388,7 @@
   {
     "id": "screen-mode-group",
     "label": "",
-    "subtools": [
+    "children": [
       {
         "id": "standard-screen-mode",
         "label": "Standard Screen Mode"

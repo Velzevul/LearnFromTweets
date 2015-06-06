@@ -1,107 +1,68 @@
 angular.module('tweetsToSoftware')
-    .factory('TweetService', function($q, $http) {
+    .factory('TweetService', function($http) {
         'use strict';
 
-        var tweets,
-            domain = [],
-            tweetCommandMap = {},
-            tweetAuthorMap = {},
-            // TODO: save the top limit of tweets in domain (have both X and Y axis limits)
-            loaded,
+        var tweets = {
+                all: [],
+                byId: {},
+                byAuthor: {},
+                byCommand: {},
+                byPanel: {},
+                byTool: {}
+            },
             promise;
 
-        function load() {
-            var res = null;
+        promise = $http.get('/data/tweets.json')
+            .then(function(response) {
+                tweets.all = response.data;
 
-            function reconstructCommandTree(commandId) {
-                var path = commandId.split('/'),
-                    pathCopy = [],
-                    tree = [];
-
-                angular.forEach(path, function(pathItem) {
-                    pathCopy.push(pathItem);
-                    tree.push(pathCopy.join('/'));
+                populateMap(tweets.all, tweets.byId, true, function(item) {
+                    return item.id;
                 });
+                populateMap(tweets.all, tweets.byAuthor, false, function(item) {
+                    return item.author.screenName;
+                });
+                populateMap(tweets.all, tweets.byCommand, false, function(item) {
+                    return item.tweet.commands || [];
+                });
+                populateMap(tweets.all, tweets.byTool, false, function(item) {
+                    return item.tweet.tools || [];
+                });
+                populateMap(tweets.all, tweets.byPanel, false, function(item) {
+                    return item.tweet.panels || [];
+                });
+            });
 
-                return tree;
-            }
+        function populateMap(all, map, uniqueFlag, propertyRetrievalCallback) {
+            angular.forEach(all, function(one) {
+                var property = propertyRetrievalCallback(one);
 
-            if (loaded) {
-                var deferred = $q.defer();
-
-                deferred.resolve();
-                res = deferred.promise;
-            } else {
-                if (!promise) {
-                    promise = $q.all([
-                        $http.get('/data/tweets.json'),
-                        $http.get('/data/domain.json')
-                    ])
-                        .then(function(response) {
-                            tweets = response[0].data;
-                            domain = response[1].data;
-
-                            angular.forEach(tweets, function(t) {
-                                t.published = moment(t.published).toDate();
-
-                                if (!tweetAuthorMap[t.author.name]) {
-                                    tweetAuthorMap[t.author.name] = [];
-                                }
-
-                                tweetAuthorMap[t.author.name].push(t);
-
-                                var commandTree = reconstructCommandTree(t.command.id);
-
-                                angular.forEach(commandTree, function(command) {
-                                    if (!tweetCommandMap[command]) {
-                                        tweetCommandMap[command] = [];
-                                    }
-
-                                    tweetCommandMap[command].push(t);
-                                })
-
-                            });
-
-                            loaded = true;
-                        });
+                if (Object.prototype.toString.call(property) === '[object Array]') {
+                    angular.forEach(property, storeInMap);
+                } else {
+                    storeInMap(one);
                 }
 
-                res = promise;
-            }
+                function storeInMap(obj) {
+                    if (map[property]) {
+                        if (uniqueFlag) {
+                            console.error('entry already exists:', map[property], obj);
+                        } else {
+                            if (Object.prototype.toString.call(map[property]) !== '[object Array]') {
+                                map[property] = [map[property]];
+                            }
 
-            return res;
+                            map[property].push(obj);
+                        }
+                    } else {
+                        map[property] = obj;
+                    }
+                }
+            });
         }
 
         return {
-            get: function() {
-                return load()
-                    .then(function() {
-                        return tweets;
-                    });
-            },
-            getLatest: function(n) {
-                return load()
-                    .then(function() {
-                        return tweets.slice(tweets.length - n);
-                    });
-            },
-            getByCommand: function(commandId) {
-                return load()
-                    .then(function() {
-                        return tweetCommandMap[commandId] ? tweetCommandMap[commandId] : [];
-                    });
-            },
-            getByAuthor: function(commandId) {
-                return load()
-                    .then(function() {
-                        return tweetAuthorMap[commandId] ? tweetAuthorMap[commandId] : [];
-                    });
-            },
-            getDomain: function() {
-                return load()
-                    .then(function() {
-                        return domain;
-                    });
-            }
+            loaded: promise,
+            tweets: tweets
         }
     });

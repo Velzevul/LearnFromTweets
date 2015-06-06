@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('panelbar', function(ToolbarService) {
+    .directive('panelbar', function(MenuService) {
         'use strict';
 
         return {
@@ -7,9 +7,9 @@ angular.module('tweetsToSoftware')
             templateUrl: 'templates/panelbar.html',
             scope: {},
             controller: function($scope) {
-                ToolbarService.loaded
+                MenuService.loaded
                     .then(function() {
-                        $scope.panels = ToolbarService.toolbars['panels'];
+                        $scope.panels = MenuService.panelbar.all;
                     });
             }
         }

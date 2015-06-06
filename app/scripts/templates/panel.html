@@ -1,7 +1,6 @@
 <div class="panelbar-item">
     <button class="pi-panelname"
-            ng-click="toggleDropdown()">
-
+            ng-click="openPanel()">
         <div class="l-list-inline l-list-inline--collapsed">
             <div class="l-list-inline__item is-middle-aligned">
                 <div class="pi-panelname__icon"
@@ -15,7 +14,7 @@
     </button>
 
     <div class="panelbar-item__dropdown"
-         ng-show="dropdownShown">
+         ng-show="panel.isOpen">
         <img ng-src="/images/{{panel.id}}-panel.png" alt="{{panel.label}}"/>
     </div>
 </div>

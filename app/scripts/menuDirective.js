@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('menu', function($q, $document, MenuService, FilterService, Notification) {
+    .directive('menu', function($q, $document, MenuService, FilterService) {
        'use strict';
 
         return {
@@ -7,19 +7,17 @@ angular.module('tweetsToSoftware')
             templateUrl: 'templates/menu.html',
             scope: {},
             controller: function($scope) {
-                $scope.filters = FilterService.get();
-                $scope.notification = Notification;
+                //$scope.filters = FilterService.get();
+                //$scope.notification = Notification;
 
-                $q.all([
-                    MenuService.get(),
-                    MenuService.getFlat()
-                ])
-                    .then(function(data) {
-                        $scope.menu = data[0];
-                        $scope.menuFlat = data[1];
+                MenuService.loaded
+                    .then(function() {
+                        $scope.menu = MenuService.menu.all;
                     });
 
-                $scope.open = MenuService.open;
+                $scope.open = function(menuItem) {
+                    MenuService.open(menuItem, MenuService.menu);
+                };
             },
             link: function($scope) {
                 $document.on('click', function(e) {
@@ -29,7 +27,7 @@ angular.module('tweetsToSoftware')
                             $(e.target).hasClass('menu-popup__indicator');
 
                     if (!isPopup && !isTrigger) {
-                        MenuService.hideAll();
+                        MenuService.deactivate(MenuService.menu);
                         $scope.$apply()
                     }
                 });

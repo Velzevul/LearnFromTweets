@@ -9,26 +9,26 @@ angular.module('tweetsToSoftware')
                 context: '='
             },
             controller: function($scope) {
-                $scope.filters = FilterService.get();
-                $scope.matchTweet = FilterService.matchTweet;
+                //$scope.filters = FilterService.get();
+                //$scope.matchTweet = FilterService.matchTweet;
                 $scope.popupVisible = false;
 
-                function filter() {
-                    $scope.filtered = filterFilter($scope.tweets, FilterService.matchTweet);
-                }
+                //function filter() {
+                //    $scope.filtered = filterFilter($scope.tweets, FilterService.matchTweet);
+                //}
 
-                TweetService.getByCommand($scope.context.id)
-                    .then(function(response) {
-                        $scope.tweets = response;
-                        filter();
-                    });
+                //TweetService.getByCommand($scope.context.id)
+                //    .then(function(response) {
+                //        $scope.tweets = response;
+                //        filter();
+                //    });
 
-                $scope.$watchGroup([
-                    'filters.highlightRelevant',
-                    'filters.highlightUnfamiliar',
-                    'filters.author',
-                    'filters.time'
-                ], filter);
+                //$scope.$watchGroup([
+                //    'filters.highlightRelevant',
+                //    'filters.highlightUnfamiliar',
+                //    'filters.author',
+                //    'filters.time'
+                //], filter);
 
                 var showTimeoutId = null,
                     hideTimeoutId = null,

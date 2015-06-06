@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('panel', function($timeout, ToolbarService) {
+    .directive('panel', function($document, MenuService) {
         'use strict';
 
         return {
@@ -9,11 +9,20 @@ angular.module('tweetsToSoftware')
                 panel: '='
             },
             controller: function($scope) {
-                $scope.dropdownShown = false;
-
-                $scope.toggleDropdown = function() {
-                    $scope.dropdownShown = !$scope.dropdownShown;
+                $scope.openPanel = function() {
+                    MenuService.open($scope.panel, MenuService.panelbar);
                 };
+            },
+            link: function($scope) {
+                $document.on('click', function(e) {
+                    var isPanel = $(e.target).parents('.panelbar-item').length ||
+                            $(e.target).hasClass('panelbar-item');
+
+                    if (!isPanel) {
+                        MenuService.deactivate(MenuService.panelbar);
+                        $scope.$apply()
+                    }
+                });
             }
         };
     });

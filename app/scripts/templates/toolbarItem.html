@@ -1,17 +1,17 @@
 <div class="toolbar-item">
     <button class="ti-tool"
-            ng-click="showDropdown()">
+            ng-click="openSubtools()">
         <div class="ti-tool__icon"
              ng-class="{'ti-tool__icon--large': tool.largeIcon}"
              style="background-image: url('/images/{{tool.id}}.png');"></div>
     </button>
 
     <div class="toolbar-item__dropdown"
-         ng-show="dropdownShown"
-         ng-if="tool.subtools">
+         ng-show="tool.isOpen"
+         ng-if="tool.children">
         <button class="ti-subtool"
                 ng-class="{'ti-subtool--first': $first}"
-                ng-repeat="subtool in tool.subtools">
+                ng-repeat="subtool in tool.children">
             <div class="l-list-inline l-list-inline--x-small">
                 <div class="l-list-inline__item is-middle-aligned">
                     <div class="ti-subtool__icon"
