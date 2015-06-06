@@ -4,7 +4,7 @@ angular.module('tweetsToSoftware')
 
         return {
             restrict: 'E',
-            templateUrl: 'templates/toolbarItem.html',
+            templateUrl: 'toolbarItem.html',
             scope: {
                 tool: '='
             },

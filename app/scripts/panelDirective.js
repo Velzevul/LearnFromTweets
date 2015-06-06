@@ -4,7 +4,7 @@ angular.module('tweetsToSoftware')
 
         return {
             restrict: 'E',
-            templateUrl: 'templates/panel.html',
+            templateUrl: 'panel.html',
             scope: {
                 panel: '='
             },

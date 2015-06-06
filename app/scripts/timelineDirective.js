@@ -4,7 +4,7 @@ angular.module('tweetsToSoftware')
 
         return {
             restrict: 'E',
-            templateUrl: 'templates/timeline.html',
+            templateUrl: 'timeline.html',
             scope: {},
             link: function($scope, elem) {
                 $scope.filters = FilterService.get();

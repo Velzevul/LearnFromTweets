@@ -4,7 +4,7 @@ angular.module('tweetsToSoftware')
 
         return {
             restrict: 'E',
-            templateUrl: 'templates/author.html',
+            templateUrl: 'author.html',
             scope: {
                 author: '='
             },

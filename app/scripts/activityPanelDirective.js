@@ -4,7 +4,7 @@ angular.module('tweetsToSoftware')
 
         return {
             restrict: 'E',
-            templateUrl: 'templates/activityPanel.html',
+            templateUrl: 'activityPanel.html',
             scope: {},
             controller: function($scope) {
                 $scope.filters = FilterService.get();

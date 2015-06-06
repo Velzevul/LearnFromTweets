@@ -4,7 +4,7 @@ angular.module('tweetsToSoftware')
 
         return {
             restrict: 'E',
-            templateUrl: 'templates/menuPopup.html',
+            templateUrl: 'menuPopup.html',
             scope: {
                 context: '='
             },
