@@ -4,7 +4,7 @@ angular.module('tweetsToSoftware')
 
         return {
             restrict: 'E',
-            templateUrl: 'templates/panelbar.html',
+            templateUrl: 'panelbar.html',
             scope: {},
             controller: function($scope) {
                 MenuService.loaded

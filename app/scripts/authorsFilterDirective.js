@@ -4,7 +4,7 @@ angular.module('tweetsToSoftware')
 
         return {
             restrict: 'E',
-            templateUrl: 'templates/authorsFilter.html',
+            templateUrl: 'authorsFilter.html',
             scope: {},
             controller: function($scope) {
                 $scope.filters = FilterService.get();
