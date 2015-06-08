@@ -81,6 +81,7 @@
   }
 
 .amd-item {
+  position: relative;
   padding-right: 84px;
   white-space: nowrap;
 
@@ -96,6 +97,17 @@
 
     right: 14px;
     top: 2px;
+  }
+
+  &__tweets {
+    position: absolute;
+    top: 0;
+    left: 100%;
+
+    white-space: nowrap;
+
+    background: yellow;
+    padding: 10px;
   }
 
   &:hover {

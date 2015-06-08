@@ -21,5 +21,11 @@
     <div class="panelbar-item__dropdown"
          ng-show="panel.isOpen">
         <img ng-src="/images/{{panel.id}}-panel.png" alt="{{panel.label}}"/>
+
+        <div class="panelbar-item__tweets"
+             ng-show="panel.tweetsShown &&
+                      panel.tweets.length > 0">
+            tweets here...
+        </div>
     </div>
 </div>

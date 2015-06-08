@@ -8,8 +8,6 @@
     padding: 3px;
     min-width: 100px;
 
-    overflow: hidden;
-
     white-space: nowrap;
 
     background: #DCDCDC;
@@ -33,6 +31,17 @@
 
   &:focus {
     outline: none;
+  }
+
+  &__tweets {
+    position: absolute;
+    top:0;
+    left: 100%;
+
+    background: yellow;
+    padding: 10px;
+
+    white-space: nowrap;
   }
 
   &__counter {
@@ -69,34 +78,13 @@
 
 .ti-subtool {
   position: relative;
-  display: block;
-  width: 100%;
-
-  padding-left: 20px;
-  padding-right: $global-baseline;
-
-  text-align: left;
-
-  &:focus {
-    outline: none;
-  }
 
   &__counter {
     @extend .ti-tool__counter;
   }
 
-  &__icon {
-    display: block;
-    width: 20px;
-    height: 22px;
-
-    background-position: center center;
-    background-repeat: no-repeat;
-  }
-
-  &__label {
-    font-size: 11px;
-    line-height: 20px;
+  &__tweets {
+    @extend .ti-tool__tweets;
   }
 
   &:hover{
@@ -118,3 +106,31 @@
       background: $color-tx;
     }
   }
+
+.tis-button {
+  display: block;
+  width: 100%;
+
+  padding-left: 20px;
+  padding-right: $global-baseline;
+
+  text-align: left;
+
+  &:focus {
+    outline: none;
+  }
+
+  &__icon {
+    display: block;
+    width: 20px;
+    height: 22px;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  &__label {
+    font-size: 11px;
+    line-height: 20px;
+  }
+}

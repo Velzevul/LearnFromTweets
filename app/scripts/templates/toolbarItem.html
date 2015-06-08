@@ -1,37 +1,60 @@
 <div class="toolbar-item"
      ng-class="{'toolbar-item--open': tool.isOpen}">
-    <button class="ti-tool"
-            ng-click="openSubtools()">
-        <div class="ti-tool__icon"
-             ng-class="{'ti-tool__icon--large': tool.largeIcon}"
-             style="background-image: url('/images/{{tool.id}}.png');"></div>
+    <div class="ti-tool">
+        <button style="display: block;"
+                ng-mouseenter="showTweets(tool)"
+                ng-mouseleave="hideTweets(tool)"
+                ng-click="openSubtools()">
+            <div class="ti-tool__icon"
+                 ng-class="{'ti-tool__icon--large': tool.largeIcon}"
+                 style="background-image: url('/images/{{tool.id}}.png');"></div>
 
-        <div class="ti-tool__counter"
-             ng-show="tool.tweets.length > 0">{{tool.tweets.length}}</div>
-    </button>
+            <div class="ti-tool__counter"
+                 ng-show="tool.tweets.length > 0">{{tool.tweets.length}}</div>
+        </button>
+
+        <div class="ti-tool__tweets"
+             ng-show="!tool.children &&
+                      tool.tweetsShown &&
+                      tool.tweets.length > 0">
+            tweets here...
+        </div>
+    </div>
 
     <div class="toolbar-item__dropdown"
          ng-show="tool.isOpen"
          ng-if="tool.children">
-        <button class="ti-subtool"
-                ng-class="{'ti-subtool--first': $first}"
-                ng-repeat="subtool in tool.children">
-            <div class="l-list-inline l-list-inline--x-small">
-                <div class="l-list-inline__item is-middle-aligned">
-                    <div class="ti-subtool__icon"
-                         style="background-image:
-                                    url('/images/{{subtool.id}}.png');"></div>
-                </div>
+        <div class="ti-subtool"
+             ng-class="{'ti-subtool--first': $first}"
+             ng-repeat="subtool in tool.children"
+             ng-mouseenter="showTweets(subtool)"
+             ng-mouseleave="hideTweets(subtool)">
 
-                <div class="ti-subtool__counter"
-                     ng-show="subtool.tweets.length > 0">
-                    {{subtool.tweets.length}}
-                </div>
+            <button class="tis-button">
+                <div class="l-list-inline l-list-inline--x-small">
+                    <div class="l-list-inline__item is-middle-aligned">
+                        <div class="tis-button__icon"
+                             style="background-image:
+                                        url('/images/{{subtool.id}}.png');"></div>
+                    </div>
 
-                <div class="l-list-inline__item is-middle-aligned">
-                    <div class="ti-subtool__label">{{subtool.label}}</div>
+
+
+                    <div class="l-list-inline__item is-middle-aligned">
+                        <div class="tis-button__label">{{subtool.label}}</div>
+                    </div>
                 </div>
+            </button>
+
+            <div class="ti-subtool__counter"
+                 ng-show="subtool.tweets.length > 0">
+                {{subtool.tweets.length}}
             </div>
-        </button>
+
+            <div class="ti-subtool__tweets"
+                 ng-show="subtool.tweetsShown && subtool.tweets.length > 0">
+                tweets here...
+            </div>
+        </div>
     </div>
 </div>

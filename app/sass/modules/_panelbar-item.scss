@@ -26,6 +26,17 @@
     right: 100%;
   }
 
+  &__tweets {
+    position: absolute;
+    top: 0;
+    right: 100%;
+
+    white-space: nowrap;
+
+    background: yellow;
+    padding: 10px;
+  }
+
   &:hover,
   &--open {
     outline: 1px solid $color-border;

@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .factory('MenuService', function($http, $q) {
+    .factory('MenuService', function($timeout, $http, $q) {
        'use strict';
 
         var menu = {
@@ -14,7 +14,9 @@ angular.module('tweetsToSoftware')
                 all: [],
                 byId: {}
             },
-            promise;
+            promise,
+            showTweetsDelay = 400,
+            hideTweetsDelay = 20;
 
         promise = $q.all([
             $http.get('/data/menu.json'),
@@ -55,9 +57,10 @@ angular.module('tweetsToSoftware')
             });
         }
 
-        function deactivateAll(menu) {
+        function reset(menu) {
             angular.forEach(menu.byId, function(item) {
                 item.isOpen = false;
+                item.tweetsShown = false;
             });
         }
 
@@ -66,15 +69,35 @@ angular.module('tweetsToSoftware')
             menu: menu,
             toolbar: toolbar,
             panelbar: panelbar,
-            deactivate: deactivateAll,
+            reset: reset,
             open: function(item, menu) {
-                deactivateAll(menu);
+                reset(menu);
 
                 angular.forEach(item.parents, function(parent) {
                     parent.isOpen = true;
                 });
 
                 item.isOpen = true;
+            },
+            showTweets: function(item, showDelay) {
+                if (showDelay === undefined) {
+                    showDelay = showTweetsDelay;
+                }
+
+                clearTimeout(item.showTweetsTimeoutId);
+                clearTimeout(item.hideTweetsTimeoutId);
+
+                item.showTweetsTimeoutId = $timeout(function() {
+                    item.tweetsShown = true;
+                }, showDelay).$$timeoutId;
+            },
+            hideTweets: function(item) {
+                clearTimeout(item.showTweetsTimeoutId);
+                clearTimeout(item.hideTweetsTimeoutId);
+
+                item.hideTweetsTimeoutId = $timeout(function () {
+                    item.tweetsShown = false;
+                }, hideTweetsDelay).$$timeoutId;
             },
             registerTweet: function(tweet, menuItemId, menu) {
                 var menuItem = menu.byId[menuItemId];

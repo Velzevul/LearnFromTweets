@@ -1,24 +1,20 @@
 <script type="text/ng-template" id="menuDropdown">
-    <!--<div class="popup"-->
-         <!--ng-show="item.isHighlighted && !item.children.length">-->
-        <!--<div class="p-body">-->
-            <!--<div class="p-body__item">-->
-                <!--<tweet tweet="notification.tweet"></tweet>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<menu-popup context="item"></menu-popup>-->
-
     <div class="amd-item"
          ng-class="{'amd-item--active': item.isOpen,
                     'amd-item--parent': item.children.length}"
-         ng-mouseover="open(item)">
+         ng-mouseenter="open(item)"
+         ng-mouseleave="hide(item)">
 
         <div class="amd-item__counter"
              ng-show="item.tweets.length > 0">{{item.tweets.length}}</div>
 
         <button class="amd-item__name">{{item.label}}</button>
+
+        <div class="amd-item__tweets"
+             ng-show="item.tweetsShown &&
+                      item.tweets.length > 0">
+            tweets here...
+        </div>
     </div>
 
     <div ng-show="item.children.length">
@@ -41,8 +37,6 @@
         <li class="l-list-inline__item"
             ng-repeat="rootItem in menu">
             <div class="app-menu__slot">
-                <!--<menu-popup context="rootItem"></menu-popup>-->
-
                 <div class="am-item"
                      ng-class="{'am-item--active': rootItem.isOpen}"
                      ng-mouseover="open(rootItem)">

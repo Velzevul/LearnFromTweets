@@ -11,6 +11,7 @@ angular.module('tweetsToSoftware')
             controller: function($scope) {
                 $scope.openPanel = function() {
                     MenuService.open($scope.panel, MenuService.panelbar);
+                    MenuService.showTweets($scope.panel, 0);
                 };
             },
             link: function($scope) {
@@ -19,7 +20,7 @@ angular.module('tweetsToSoftware')
                             $(e.target).hasClass('panelbar-item');
 
                     if (!isPanel) {
-                        MenuService.deactivate(MenuService.panelbar);
+                        MenuService.reset(MenuService.panelbar);
                         $scope.$apply()
                     }
                 });

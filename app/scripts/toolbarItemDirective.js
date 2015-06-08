@@ -9,6 +9,9 @@ angular.module('tweetsToSoftware')
                 tool: '='
             },
             controller: function($scope) {
+                $scope.showTweets = MenuService.showTweets;
+                $scope.hideTweets = MenuService.hideTweets;
+
                 $scope.openSubtools = function() {
                     MenuService.open($scope.tool, MenuService.toolbar);
                 };
@@ -19,7 +22,7 @@ angular.module('tweetsToSoftware')
                         $(e.target).hasClass('toolbar-item');
 
                     if (!isTool) {
-                        MenuService.deactivate(MenuService.toolbar);
+                        MenuService.reset(MenuService.toolbar);
                         $scope.$apply();
                     }
                 });
