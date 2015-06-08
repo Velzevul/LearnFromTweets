@@ -38,24 +38,26 @@ angular.module('tweetsToSoftware')
                 var property = propertyRetrievalCallback(one);
 
                 if (Object.prototype.toString.call(property) === '[object Array]') {
-                    angular.forEach(property, storeInMap);
+                    angular.forEach(property, function(key) {
+                        storeInMap(one, key);
+                    });
                 } else {
-                    storeInMap(one);
+                    storeInMap(one, property);
                 }
 
-                function storeInMap(obj) {
-                    if (map[property]) {
+                function storeInMap(obj, key) {
+                    if (map[key]) {
                         if (uniqueFlag) {
-                            console.error('entry already exists:', map[property], obj);
+                            console.error('entry already exists:', map[key], obj);
                         } else {
-                            if (Object.prototype.toString.call(map[property]) !== '[object Array]') {
-                                map[property] = [map[property]];
-                            }
-
-                            map[property].push(obj);
+                            map[key].push(obj);
                         }
                     } else {
-                        map[property] = obj;
+                        if (uniqueFlag) {
+                            map[key] = obj;
+                        } else {
+                            map[key] = [obj];
+                        }
                     }
                 }
             });

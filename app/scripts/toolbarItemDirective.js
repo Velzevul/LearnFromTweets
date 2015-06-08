@@ -20,7 +20,7 @@ angular.module('tweetsToSoftware')
 
                     if (!isTool) {
                         MenuService.deactivate(MenuService.toolbar);
-                        $scope.$apply()
+                        $scope.$apply();
                     }
                 });
             }

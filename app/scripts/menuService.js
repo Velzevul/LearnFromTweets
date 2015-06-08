@@ -75,6 +75,28 @@ angular.module('tweetsToSoftware')
                 });
 
                 item.isOpen = true;
+            },
+            registerTweet: function(tweet, menuItemId, menu) {
+                var menuItem = menu.byId[menuItemId];
+
+                menuItem.tweets.push(tweet);
+
+                angular.forEach(menuItem.parents, function(parent) {
+                    parent.tweets.push(tweet);
+                });
+            },
+            resetTweets: function() {
+                angular.forEach(menu.byId, function(menuItem) {
+                     menuItem.tweets = [];
+                });
+
+                angular.forEach(toolbar.byId, function(tool) {
+                    tool.tweets = [];
+                });
+
+                angular.forEach(panelbar.byId, function(panel) {
+                    panel.tweets = [];
+                });
             }
         };
     });

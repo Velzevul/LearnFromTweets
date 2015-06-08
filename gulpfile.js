@@ -3,13 +3,12 @@ var gulp    = require('gulp'),
     compass = require('gulp-compass'),
     connect = require('gulp-connect'),
     concat  = require('gulp-concat'),
+    gutil   = require('gulp-util');
     html2js = require('gulp-html2js');
 
-// TODO: try plumber
-// function onError(err) {  
-//     gutil.beep();
-//     console.log(err);
-// };
+ function onError(err) {
+     gutil.beep();
+ }
 
 gulp.task('connect', function() {
     connect.server({
@@ -26,9 +25,9 @@ gulp.task('html', function() {
 
 gulp.task('css', function() {
     gulp.src('./app/sass/main.scss')
-        // .pipe(plumber({
-        //     errorHandler: onError
-        // }))
+         .pipe(plumber({
+             errorHandler: onError
+         }))
         .pipe(compass({
             css: './app/css',
             sass: './app/sass'

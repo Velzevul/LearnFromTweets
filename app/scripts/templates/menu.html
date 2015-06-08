@@ -15,6 +15,9 @@
                     'amd-item--parent': item.children.length}"
          ng-mouseover="open(item)">
 
+        <div class="amd-item__counter"
+             ng-show="item.tweets.length > 0">{{item.tweets.length}}</div>
+
         <button class="amd-item__name">{{item.label}}</button>
     </div>
 
@@ -43,17 +46,12 @@
                 <div class="am-item"
                      ng-class="{'am-item--active': rootItem.isOpen}"
                      ng-mouseover="open(rootItem)">
-                    <button class="am-item__name">
-                        <span class="l-list-inline l-list-inline--collapsed">
-                            <span class="l-list-inline__item is-middle-aligned">
-                                {{rootItem.label}}
-                            </span>
+                    <button class="am-item__name">{{rootItem.label}}</button>
 
-                            <span class="l-list-inline__item is-middle-aligned"
-                                  ng-show="filters.active">
-                            </span>
-                        </span>
-                    </button>
+                    <div class="am-item__counter"
+                         ng-show="rootItem.tweets.length > 0">
+                        {{rootItem.tweets.length}}
+                    </div>
                 </div>
 
                 <div class="am-dropdown am-dropdown--root"

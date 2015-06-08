@@ -157,6 +157,9 @@ module.run(["$templateCache", function($templateCache) {
     "                    'amd-item--parent': item.children.length}\"\n" +
     "         ng-mouseover=\"open(item)\">\n" +
     "\n" +
+    "        <div class=\"amd-item__counter\"\n" +
+    "             ng-show=\"item.tweets.length > 0\">{{item.tweets.length}}</div>\n" +
+    "\n" +
     "        <button class=\"amd-item__name\">{{item.label}}</button>\n" +
     "    </div>\n" +
     "\n" +
@@ -185,17 +188,12 @@ module.run(["$templateCache", function($templateCache) {
     "                <div class=\"am-item\"\n" +
     "                     ng-class=\"{'am-item--active': rootItem.isOpen}\"\n" +
     "                     ng-mouseover=\"open(rootItem)\">\n" +
-    "                    <button class=\"am-item__name\">\n" +
-    "                        <span class=\"l-list-inline l-list-inline--collapsed\">\n" +
-    "                            <span class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "                                {{rootItem.label}}\n" +
-    "                            </span>\n" +
+    "                    <button class=\"am-item__name\">{{rootItem.label}}</button>\n" +
     "\n" +
-    "                            <span class=\"l-list-inline__item is-middle-aligned\"\n" +
-    "                                  ng-show=\"filters.active\">\n" +
-    "                            </span>\n" +
-    "                        </span>\n" +
-    "                    </button>\n" +
+    "                    <div class=\"am-item__counter\"\n" +
+    "                         ng-show=\"rootItem.tweets.length > 0\">\n" +
+    "                        {{rootItem.tweets.length}}\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"am-dropdown am-dropdown--root\"\n" +
@@ -266,13 +264,15 @@ catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("panel.html",
-    "<div class=\"panelbar-item\">\n" +
+    "<div class=\"panelbar-item\"\n" +
+    "     ng-class=\"{'panelbar-item--open': panel.isOpen}\">\n" +
     "    <button class=\"pi-panelname\"\n" +
     "            ng-click=\"openPanel()\">\n" +
     "        <div class=\"l-list-inline l-list-inline--collapsed\">\n" +
     "            <div class=\"l-list-inline__item is-middle-aligned\">\n" +
     "                <div class=\"pi-panelname__icon\"\n" +
-    "                     style=\"background-image: url('/images/{{panel.id}}.png');\"></div>\n" +
+    "                     style=\"background-image:\n" +
+    "                                    url('/images/{{panel.id}}.png');\"></div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div class=\"l-list-inline__item is-middle-aligned\">\n" +
@@ -280,6 +280,9 @@ module.run(["$templateCache", function($templateCache) {
     "            </div>\n" +
     "        </div>\n" +
     "    </button>\n" +
+    "\n" +
+    "    <div class=\"panelbar-item__counter\"\n" +
+    "         ng-show=\"panel.tweets.length > 0\">{{panel.tweets.length}}</div>\n" +
     "\n" +
     "    <div class=\"panelbar-item__dropdown\"\n" +
     "         ng-show=\"panel.isOpen\">\n" +
@@ -363,12 +366,16 @@ catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("toolbarItem.html",
-    "<div class=\"toolbar-item\">\n" +
+    "<div class=\"toolbar-item\"\n" +
+    "     ng-class=\"{'toolbar-item--open': tool.isOpen}\">\n" +
     "    <button class=\"ti-tool\"\n" +
     "            ng-click=\"openSubtools()\">\n" +
     "        <div class=\"ti-tool__icon\"\n" +
     "             ng-class=\"{'ti-tool__icon--large': tool.largeIcon}\"\n" +
     "             style=\"background-image: url('/images/{{tool.id}}.png');\"></div>\n" +
+    "\n" +
+    "        <div class=\"ti-tool__counter\"\n" +
+    "             ng-show=\"tool.tweets.length > 0\">{{tool.tweets.length}}</div>\n" +
     "    </button>\n" +
     "\n" +
     "    <div class=\"toolbar-item__dropdown\"\n" +
@@ -380,7 +387,13 @@ module.run(["$templateCache", function($templateCache) {
     "            <div class=\"l-list-inline l-list-inline--x-small\">\n" +
     "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
     "                    <div class=\"ti-subtool__icon\"\n" +
-    "                         style=\"background-image: url('/images/{{subtool.id}}.png');\"></div>\n" +
+    "                         style=\"background-image:\n" +
+    "                                    url('/images/{{subtool.id}}.png');\"></div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"ti-subtool__counter\"\n" +
+    "                     ng-show=\"subtool.tweets.length > 0\">\n" +
+    "                    {{subtool.tweets.length}}\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +

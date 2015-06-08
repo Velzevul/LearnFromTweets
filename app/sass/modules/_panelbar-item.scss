@@ -1,10 +1,34 @@
 .panelbar-item {
   position: relative;
 
-  &__dropdown {
+  &__counter {
     position: absolute;
     top: 0;
+    left: 0;
+
+    width: 15px;
+    height: 15px;
+
+    font-size: 10px;
+    line-height: 15px;
+    font-weight: 600;
+
+    color: white;
+    text-align: center;
+
+    background-color: $color-dc-tertiary;
+    border-radius: 50%;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: -1px;
     right: 100%;
+  }
+
+  &:hover,
+  &--open {
+    outline: 1px solid $color-border;
   }
 }
 
@@ -32,8 +56,4 @@
   &__label {
     // ...
   }
-}
-
-.pi-panel {
-
 }

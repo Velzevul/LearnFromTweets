@@ -10,6 +10,8 @@
 }
 
 .am-item {
+  position: relative;
+
   @include transition-property(background-color);
   @include transition-duration(0.2s);
 
@@ -23,6 +25,26 @@
     line-height: 20px;
     
     text-align: left;
+  }
+
+  &__counter {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 0;
+
+    width: 15px;
+    height: 15px;
+
+    font-size: 10px;
+    line-height: 15px;
+    font-weight: 600;
+
+    color: white;
+    text-align: center;
+
+    background-color: $color-dc-tertiary;
+    border-radius: 50%;
   }
 }
   .am-item--active {
@@ -67,6 +89,13 @@
 
   &__name {
     @extend .am-item__name;
+  }
+
+  &__counter {
+    @extend .am-item__counter;
+
+    right: 14px;
+    top: 2px;
   }
 
   &:hover {

@@ -1,10 +1,12 @@
-<div class="panelbar-item">
+<div class="panelbar-item"
+     ng-class="{'panelbar-item--open': panel.isOpen}">
     <button class="pi-panelname"
             ng-click="openPanel()">
         <div class="l-list-inline l-list-inline--collapsed">
             <div class="l-list-inline__item is-middle-aligned">
                 <div class="pi-panelname__icon"
-                     style="background-image: url('/images/{{panel.id}}.png');"></div>
+                     style="background-image:
+                                    url('/images/{{panel.id}}.png');"></div>
             </div>
 
             <div class="l-list-inline__item is-middle-aligned">
@@ -12,6 +14,9 @@
             </div>
         </div>
     </button>
+
+    <div class="panelbar-item__counter"
+         ng-show="panel.tweets.length > 0">{{panel.tweets.length}}</div>
 
     <div class="panelbar-item__dropdown"
          ng-show="panel.isOpen">

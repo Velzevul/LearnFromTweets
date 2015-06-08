@@ -1,9 +1,13 @@
-<div class="toolbar-item">
+<div class="toolbar-item"
+     ng-class="{'toolbar-item--open': tool.isOpen}">
     <button class="ti-tool"
             ng-click="openSubtools()">
         <div class="ti-tool__icon"
              ng-class="{'ti-tool__icon--large': tool.largeIcon}"
              style="background-image: url('/images/{{tool.id}}.png');"></div>
+
+        <div class="ti-tool__counter"
+             ng-show="tool.tweets.length > 0">{{tool.tweets.length}}</div>
     </button>
 
     <div class="toolbar-item__dropdown"
@@ -15,7 +19,13 @@
             <div class="l-list-inline l-list-inline--x-small">
                 <div class="l-list-inline__item is-middle-aligned">
                     <div class="ti-subtool__icon"
-                         style="background-image: url('/images/{{subtool.id}}.png');"></div>
+                         style="background-image:
+                                    url('/images/{{subtool.id}}.png');"></div>
+                </div>
+
+                <div class="ti-subtool__counter"
+                     ng-show="subtool.tweets.length > 0">
+                    {{subtool.tweets.length}}
                 </div>
 
                 <div class="l-list-inline__item is-middle-aligned">

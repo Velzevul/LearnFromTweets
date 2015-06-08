@@ -212,7 +212,7 @@
                 "layers"
             ],
             "commands": [
-                "filer/noise/add-noise",
+                "filter/noise/add-noise",
                 "filter/render/clouds",
                 "edit/free-transform",
                 "image/trim"
