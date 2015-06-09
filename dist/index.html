@@ -7,27 +7,18 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="scripts/modernizr.js"></script>
 </head>
-<body ng-controller="mainController">
-    <div class="topbar">
-        <menu></menu>
-    </div>
+<body>
+    <menu></menu>
 
-    <div class="toolbar">
-        <div class="l-split">
-            <div class="l-split__right">
-                <tweets-widget></tweets-widget>
-            </div>
+    <toolbar></toolbar>
+    <panelbar></panelbar>
 
-            <div class="l-split__left">
-                <div class="toolbar__mock"></div>
-            </div>
-        </div>
-    </div>
+    <activity></activity>
 
-    <activity-panel></activity-panel>
+    <script src="scripts/dependencies.js"></script>
 
-    <script src="scripts/dependencies.concat.js"></script>
+    <script src="scripts/templates.js"></script>
 
-    <script src="scripts/app.concat.js"></script>
+    <script src="scripts/app.js"></script>
 </body>
 </html>
