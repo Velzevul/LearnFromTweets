@@ -3,52 +3,160 @@ try { module = angular.module("app-templates"); }
 catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("activityPanel.html",
-    "<div class=\"app-panel\" ng-show=\"filters.active\">\n" +
-    "    <div class=\"ap-header\">\n" +
-    "        <div class=\"l-split\">\n" +
-    "            <div class=\"l-split__right\">\n" +
-    "                <button class=\"link\" ng-click=\"toggleFilters()\">(close)</button>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"l-split__left\">\n" +
-    "                <div class=\"ap-header__title\">Tweet acvitity</div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
+  $templateCache.put("activeTweet.html",
+    "<div class=\"active-tweet\"\n" +
+    "     ng-if=\"tweets.active\">\n" +
+    "    <div class=\"is-floated-right\">\n" +
+    "        <button class=\"active-tweet__link\"\n" +
+    "                ng-click=\"deactivate()\">close</button>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"grid grid--full\">\n" +
-    "        <div class=\"grid__item two-thirds\">\n" +
-    "            <div class=\"l-block-small\">\n" +
-    "                <div class=\"ap-section\">\n" +
-    "                    <div class=\"l-block-small\">\n" +
-    "                        <div class=\"ap-section__header\">\n" +
-    "                            <div class=\"ap-section__title\">Personalization</div>\n" +
+    "    <div class=\"l-media\">\n" +
+    "        <div class=\"l-media__figure\">\n" +
+    "            <div class=\"active-tweet__author-avatar\"\n" +
+    "                 style=\"background-image: url('{{tweets.active.author.avatar}}');\"></div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"l-media__body\">\n" +
+    "            <div class=\"l-block-x-small\">\n" +
+    "                <div class=\"l-list-inline l-list-inline--x-small\">\n" +
+    "                    <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "                        <div class=\"active-tweet__author-name\">\n" +
+    "                            {{tweets.active.author.name}}\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "\n" +
-    "                    <div class=\"l-list-inline\">\n" +
-    "                        <div class=\"l-list-inline__item\">\n" +
-    "                            <label>\n" +
-    "                                <input type=\"checkbox\"\n" +
-    "                                       ng-model=\"filters.highlightUnfamiliar\"> Show commands I do not know\n" +
-    "                            </label>\n" +
-    "                        </div>\n" +
-    "\n" +
-    "                        <div class=\"l-list-inline__item\">\n" +
-    "                            <label>\n" +
-    "                                <input type=\"checkbox\"\n" +
-    "                                       ng-model=\"filters.highlightRelevant\"> Show commands relevant to my work\n" +
-    "                            </label>\n" +
+    "                    <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "                        <div class=\"active-tweet__author-screenname\">\n" +
+    "                            @{{tweets.active.author.screenName}}\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
+    "            <div class=\"l-block\">\n" +
+    "                <div class=\"active-tweet__text\">\n" +
+    "                    {{tweets.active.tweet.text}}\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <a href=\"{{tweets.active.tweet.url}}\"\n" +
+    "                   class=\"active-tweet__link\"\n" +
+    "                   target=\"_blank\">\n" +
+    "                    {{tweets.active.tweet.url | characters:35}}\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"l-block-small\">\n" +
+    "                <div class=\"at-commands\">\n" +
+    "                    <div class=\"l-block-x-small\">\n" +
+    "                        <div class=\"at-commands__title\">Tools:</div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"at-commands__item\"\n" +
+    "                         ng-repeat=\"tool in tweets.active.toolRefs\">\n" +
+    "                        <div class=\"l-block-x-small\">\n" +
+    "                            <div class=\"atc-command\"\n" +
+    "                                 ng-mouseenter=\"highlightTool(tool)\"\n" +
+    "                                 ng-mouseleave=\"reset()\">\n" +
+    "                                <div class=\"l-list-inline l-list-inline--x-small\">\n" +
+    "                                    <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "                                        <div class=\"atc-command__icon\"\n" +
+    "                                             style=\"background-image: url('/images/{{tool.id}}.png');\"></div>\n" +
+    "                                    </div>\n" +
+    "\n" +
+    "                                    <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "                                        <div class=\"atc-command__label\">\n" +
+    "                                            {{tool.label}}\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"l-block-small\">\n" +
+    "                <div class=\"at-commands\">\n" +
+    "                    <div class=\"l-block-x-small\">\n" +
+    "                        <div class=\"at-commands__title\">Panels:</div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"at-commands__item\"\n" +
+    "                         ng-repeat=\"panel in tweets.active.panelRefs\">\n" +
+    "                        <div class=\"l-block-x-small\">\n" +
+    "                            <div class=\"atc-command\"\n" +
+    "                                 ng-mouseenter=\"highlightPanel(panel)\"\n" +
+    "                                 ng-mouseleave=\"reset()\">\n" +
+    "                                <div class=\"l-list-inline l-list-inline--x-small\">\n" +
+    "                                    <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "                                        <div class=\"atc-command__icon\"\n" +
+    "                                             style=\"background-image: url('/images/{{panel.id}}.png');\"></div>\n" +
+    "                                    </div>\n" +
+    "\n" +
+    "                                    <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "                                        <div class=\"atc-command__label\">\n" +
+    "                                            {{panel.label}}\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"l-block-small\">\n" +
+    "                <div class=\"at-commands\">\n" +
+    "                    <div class=\"l-block-x-small\">\n" +
+    "                        <div class=\"at-commands__title\">Menu commands:</div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"at-commands__item\"\n" +
+    "                         ng-repeat=\"command in tweets.active.commandRefs\">\n" +
+    "                        <div class=\"l-block-x-small\">\n" +
+    "                            <div class=\"atc-command\"\n" +
+    "                                 ng-mouseenter=\"highlightMenuItem(command)\"\n" +
+    "                                 ng-mouseleave=\"reset()\">\n" +
+    "                                <div class=\"atc-command__label\">\n" +
+    "                                    {{command.id}}\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"active-tweet-placeholder\"\n" +
+    "     ng-if=\"!tweets.active\">\n" +
+    "    Select a tweet to see details\n" +
+    "</div>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("app-templates"); }
+catch(err) { module = angular.module("app-templates", []); }
+module.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("activity.html",
+    "<div class=\"app-body\">\n" +
+    "    <div class=\"activity-panel\">\n" +
+    "        <div class=\"ap-header\">\n" +
+    "            <div class=\"ap-header__title\">\n" +
+    "                Tweets about Photoshop\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"ap-section\">\n" +
     "            <timeline></timeline>\n" +
-    "        </div><!--\n" +
-    "        --><div class=\"grid__item one-third\">\n" +
-    "            <authors-filter></authors-filter>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"ap-section\">\n" +
+    "            <active-tweet></active-tweet>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>");
@@ -274,25 +382,7 @@ catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("timeline.html",
-    "<div class=\"ap-section\">\n" +
-    "    <div class=\"l-block\">\n" +
-    "        <div class=\"l-split\">\n" +
-    "            <div class=\"l-split__right\">\n" +
-    "                <button class=\"link\"\n" +
-    "                        ng-show=\"filters.time\"\n" +
-    "                        ng-click=\"resetTimeFilter()\">clear filter</button>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"l-split__left\">\n" +
-    "                <div class=\"ap-section__title\">{{nTweets}} tweets in {{lowerTimeBound | amDateFormat:'MMM Do h:mm'}} - {{upperTimeBound | amDateFormat:'MMM Do h:mm'}}</div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"timeline-slot\">\n" +
-    "        <div id=\"timeline\"></div>\n" +
-    "    </div>\n" +
-    "</div>");
+    "<div id=\"timeline\"></div>");
 }]);
 })();
 
@@ -429,11 +519,14 @@ module.run(["$templateCache", function($templateCache) {
     "\n" +
     "            <div class=\"l-split\">\n" +
     "                <div class=\"l-split__right\">\n" +
-    "                    <button class=\"tweet__link\">see details</button>\n" +
+    "                    <button class=\"tweet__link\"\n" +
+    "                            ng-click=\"activateTweet(tweet)\">see details</button>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"l-split__left\">\n" +
-    "                    <div class=\"tweet__published\" am-time-ago=\"tweetTime\"></div>\n" +
+    "                    <div class=\"tweet__published\">\n" +
+    "                        {{tweet.published | amDateFormat:'MMMM Do, h:mm a'}}\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +

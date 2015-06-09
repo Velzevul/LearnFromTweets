@@ -1,0 +1,9 @@
+.app-body {
+  min-height: 100%;
+  padding:  $global-baseline * 5
+            $global-baseline * 15
+            $global-baseline * 5
+            $global-baseline * 7;
+
+  background: $color-bg-tertiary;
+}

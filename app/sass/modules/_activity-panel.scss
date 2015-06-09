@@ -1,0 +1,21 @@
+.activity-panel {
+  background: $color-bg-secondary;
+  border: 1px solid $color-border;
+}
+
+.ap-header {
+  padding: $global-baseline*2 $global-baseline*1.5;
+
+  border-bottom: 1px solid $color-border-secondary;
+
+  &__title {
+    font-weight: 300;
+    font-size: 20px;
+  }
+}
+
+.ap-section {
+  padding: $global-baseline*1.5;
+
+  border-bottom: 1px solid $color-border-secondary;
+}

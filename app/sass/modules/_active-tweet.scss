@@ -1,0 +1,81 @@
+.active-tweet {
+  width: $global-baseline*40;
+  margin: 0 auto;
+  padding: $global-baseline;
+
+  font-size: 14px;
+  line-height: 20px;
+
+  background: white;
+  border: 1px solid $color-border-secondary;
+
+  &__link {
+    color: $color-dc-secondary;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__author-avatar {
+    width: $global-baseline * 4;
+    height: $global-baseline * 4;
+
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    border: 1px solid $color-border-secondary;
+    border-radius: 6px;
+  }
+
+  &__author-name {
+    font-weight: 600;
+  }
+
+  &__author-screenname {
+    color: $color-tx-muted;
+  }
+
+  &__text {
+    // ...
+  }
+}
+
+.active-tweet-placeholder {
+  font-weight: 300;
+  font-size: $global-baseline*2;
+  line-height: $global-baseline * 10;
+
+  text-align: center;
+  color: $color-tx-muted;
+}
+
+.at-commands {
+  // ...
+
+  &__title {
+    font-weight: 600;
+    font-size: 12px;
+
+    border-bottom: 1px solid $color-border-secondary;
+  }
+}
+
+.atc-command {
+  display: inline-block;
+
+  &__label {
+    font-size: 12px;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}

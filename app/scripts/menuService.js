@@ -70,6 +70,11 @@ angular.module('tweetsToSoftware')
             toolbar: toolbar,
             panelbar: panelbar,
             reset: reset,
+            resetAll: function() {
+                reset(menu);
+                reset(toolbar);
+                reset(panelbar);
+            },
             open: function(item, menu) {
                 reset(menu);
 

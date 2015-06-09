@@ -8,13 +8,38 @@ angular.module('tweetsToSoftware')
                 byAuthor: {},
                 byCommand: {},
                 byPanel: {},
-                byTool: {}
+                byTool: {},
+                active: null
             },
+            authors = [],
+            domain = [],
             promise;
 
         promise = $http.get('/data/tweets.json')
             .then(function(response) {
                 tweets.all = response.data;
+
+                angular.forEach(tweets.all, function(t) {
+                    t.published = moment(t.published, "h:m a - DD MM YYYY");
+                });
+
+                var processedAuthors = [],
+                    processedDates = [];
+
+                angular.forEach(tweets.all, function(tweet) {
+                    var author = tweet.author,
+                        published = tweet.published;
+
+                    if (processedAuthors.indexOf(author.screenName) == -1) {
+                        authors.push(author);
+                        processedAuthors.push(author.screenName);
+                    }
+
+                    if (processedDates.indexOf(published.format()) == -1) {
+                        domain.push(published.toDate());
+                        processedDates.push(published.format());
+                    }
+                });
 
                 populateMap(tweets.all, tweets.byId, true, function(item) {
                     return item.id;
@@ -65,6 +90,14 @@ angular.module('tweetsToSoftware')
 
         return {
             loaded: promise,
-            tweets: tweets
+            tweets: tweets,
+            authors: authors,
+            domain: domain,
+            activate: function(tweet) {
+                tweets.active = tweet;
+            },
+            deactivate: function() {
+                tweets.active = null;
+            }
         }
     });

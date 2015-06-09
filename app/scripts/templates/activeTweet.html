@@ -1,0 +1,130 @@
+<div class="active-tweet"
+     ng-if="tweets.active">
+    <div class="is-floated-right">
+        <button class="active-tweet__link"
+                ng-click="deactivate()">close</button>
+    </div>
+
+    <div class="l-media">
+        <div class="l-media__figure">
+            <div class="active-tweet__author-avatar"
+                 style="background-image: url('{{tweets.active.author.avatar}}');"></div>
+        </div>
+
+        <div class="l-media__body">
+            <div class="l-block-x-small">
+                <div class="l-list-inline l-list-inline--x-small">
+                    <div class="l-list-inline__item is-middle-aligned">
+                        <div class="active-tweet__author-name">
+                            {{tweets.active.author.name}}
+                        </div>
+                    </div>
+
+                    <div class="l-list-inline__item is-middle-aligned">
+                        <div class="active-tweet__author-screenname">
+                            @{{tweets.active.author.screenName}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="l-block">
+                <div class="active-tweet__text">
+                    {{tweets.active.tweet.text}}
+                </div>
+
+                <a href="{{tweets.active.tweet.url}}"
+                   class="active-tweet__link"
+                   target="_blank">
+                    {{tweets.active.tweet.url | characters:35}}
+                </a>
+            </div>
+
+            <div class="l-block-small">
+                <div class="at-commands">
+                    <div class="l-block-x-small">
+                        <div class="at-commands__title">Tools:</div>
+                    </div>
+
+                    <div class="at-commands__item"
+                         ng-repeat="tool in tweets.active.toolRefs">
+                        <div class="l-block-x-small">
+                            <div class="atc-command"
+                                 ng-mouseenter="highlightTool(tool)"
+                                 ng-mouseleave="reset()">
+                                <div class="l-list-inline l-list-inline--x-small">
+                                    <div class="l-list-inline__item is-middle-aligned">
+                                        <div class="atc-command__icon"
+                                             style="background-image: url('/images/{{tool.id}}.png');"></div>
+                                    </div>
+
+                                    <div class="l-list-inline__item is-middle-aligned">
+                                        <div class="atc-command__label">
+                                            {{tool.label}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="l-block-small">
+                <div class="at-commands">
+                    <div class="l-block-x-small">
+                        <div class="at-commands__title">Panels:</div>
+                    </div>
+
+                    <div class="at-commands__item"
+                         ng-repeat="panel in tweets.active.panelRefs">
+                        <div class="l-block-x-small">
+                            <div class="atc-command"
+                                 ng-mouseenter="highlightPanel(panel)"
+                                 ng-mouseleave="reset()">
+                                <div class="l-list-inline l-list-inline--x-small">
+                                    <div class="l-list-inline__item is-middle-aligned">
+                                        <div class="atc-command__icon"
+                                             style="background-image: url('/images/{{panel.id}}.png');"></div>
+                                    </div>
+
+                                    <div class="l-list-inline__item is-middle-aligned">
+                                        <div class="atc-command__label">
+                                            {{panel.label}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="l-block-small">
+                <div class="at-commands">
+                    <div class="l-block-x-small">
+                        <div class="at-commands__title">Menu commands:</div>
+                    </div>
+
+                    <div class="at-commands__item"
+                         ng-repeat="command in tweets.active.commandRefs">
+                        <div class="l-block-x-small">
+                            <div class="atc-command"
+                                 ng-mouseenter="highlightMenuItem(command)"
+                                 ng-mouseleave="reset()">
+                                <div class="atc-command__label">
+                                    {{command.id}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="active-tweet-placeholder"
+     ng-if="!tweets.active">
+    Select a tweet to see details
+</div>

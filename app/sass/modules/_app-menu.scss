@@ -1,8 +1,12 @@
 .app-menu {
-  position: relative;
-  z-index: 10;
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   padding: 3px;
+
+  background: $color-bg-secondary;
+  border-bottom: 1px solid $color-border;
 
   &__slot {
     position: relative;

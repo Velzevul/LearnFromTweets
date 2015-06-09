@@ -119,14 +119,16 @@
         'layouts/offscreen',
         'layouts/hoverchange';
 
-@import 'modules/topbar',
+@import 'modules/app-body',
         'modules/app-menu',
         'modules/tweet',
         'modules/author',
         'modules/toolbar',
         'modules/toolbar-item',
         'modules/panelbar-item',
-        'modules/tweets-popup';
+        'modules/tweets-popup',
+        'modules/activity-panel',
+        'modules/active-tweet';
 
 @import 'states',
         'dev-grid',

@@ -36,11 +36,14 @@
 
             <div class="l-split">
                 <div class="l-split__right">
-                    <button class="tweet__link">see details</button>
+                    <button class="tweet__link"
+                            ng-click="activateTweet(tweet)">see details</button>
                 </div>
 
                 <div class="l-split__left">
-                    <div class="tweet__published" am-time-ago="tweetTime"></div>
+                    <div class="tweet__published">
+                        {{tweet.published | amDateFormat:'MMMM Do, h:mm a'}}
+                    </div>
                 </div>
             </div>
         </div>

@@ -14,13 +14,13 @@ gulp.task('connect', function() {
     connect.server({
         root: ['./app', './bower_components'],
         port: 3000,
-        livereload: true
+        livereload: false
     });
 });
 
 gulp.task('html', function() {
-    gulp.src('./app/*.html')
-        .pipe(connect.reload());
+    gulp.src('./app/*.html');
+        //.pipe(connect.reload());
 });
 
 gulp.task('css', function() {
@@ -31,13 +31,13 @@ gulp.task('css', function() {
         .pipe(compass({
             css: './app/css',
             sass: './app/sass'
-        }))
-        .pipe(connect.reload());
+        }));
+        //.pipe(connect.reload());
 });
 
 gulp.task('scripts', function() {
-    gulp.src(['./app/scripts/*.js', './app/scripts/utils/*.js'])
-        .pipe(connect.reload());
+    gulp.src(['./app/scripts/*.js', './app/scripts/utils/*.js']);
+        //.pipe(connect.reload());
 });
 
 gulp.task('templates', function() {
@@ -48,8 +48,8 @@ gulp.task('templates', function() {
             useStrict: true
         }))
         .pipe(concat('templates.js'))
-        .pipe(gulp.dest('./app/scripts/templates'))
-        .pipe(connect.reload());
+        .pipe(gulp.dest('./app/scripts/templates'));
+        //.pipe(connect.reload());
 });
 
 gulp.task('watch', function() {

@@ -1,27 +1,17 @@
 angular.module('tweetsToSoftware')
-    .directive('timeline', function($window, $q, $timeout, TweetService, AuthorService, MenuService, FilterService, Notification) {
+    .directive('timeline', function($window, $q, $timeout, TweetService) {
         'use strict';
 
         return {
             restrict: 'E',
             templateUrl: 'timeline.html',
             scope: {},
-            link: function($scope, elem) {
-                $scope.filters = FilterService.get();
-
-                var margin = {top: 24, right: 24, bottom: 50, left: 24},
-                    height = 250 - margin.top - margin.bottom,
+            link: function($scope) {
+                var margin = {top: 0, right: 12, bottom: 48, left: 12},
+                    height = 200 - margin.top - margin.bottom,
                     authorCircleRadius = 12,
                     circlesMargin = 6,
-                    showTimeoutId = null,
-                    showDelay = 150,
-                    authors = [],
-                    tweets = [],
-                    domain = [],
-                    domainLowerBound,
-                    domainUpperBound,
                     redrawTimeoutId;
-
 
                 var x = d3.time.scale(),
                     y = d3.scale.linear();
@@ -62,7 +52,7 @@ angular.module('tweetsToSoftware')
                 canvas.attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
                     .attr('id', 'svg-canvas');
 
-                function drawAxes() {
+                function drawAxes(domain) {
                     var width = $('#timeline').width() - margin.right - margin.left;
 
                     svg.attr('width', width + margin.left + margin.right)
@@ -110,14 +100,14 @@ angular.module('tweetsToSoftware')
                         .call(gridAxis)
                 }
 
-                function drawPortraitPatterns() {
+                function drawPortraitPatterns(authors) {
                     var defs = svg.append('defs');
 
                     angular.forEach(authors, function(a) {
-                        if (!document.getElementById('bg-author-' + a.name)) {
+                        if (!document.getElementById('bg-author-' + a.screenName)) {
                             defs
                                 .append("pattern")
-                                    .attr("id", "bg-author-" + a.name)
+                                    .attr("id", "bg-author-" + a.screenName)
                                     .attr('width', authorCircleRadius * 2)
                                     .attr('height', authorCircleRadius * 2)
                                 .append("image")
@@ -137,7 +127,7 @@ angular.module('tweetsToSoftware')
                     }
 
                     circles = canvas.selectAll('.tweet-circle')
-                            .data(tweets)
+                            .data($scope.tweets.all)
                         .enter().append('circle')
                             .attr('r', authorCircleRadius)
                             .attr('cx', function(d) { return x(d.published); })
@@ -167,20 +157,9 @@ angular.module('tweetsToSoftware')
 
                                 return cy;
                             })
-                            .style('fill', function(d) { return 'url(#bg-author-' + d.author.name + ')'; })
-                            .on('mouseover', function(d) {
-                                clearTimeout(showTimeoutId);
-
-                                Notification.tweet = d;
-
-                                showTimeoutId = $timeout(function() {
-                                    MenuService.hideAll();
-                                    MenuService.open(d.command.id);
-                                    MenuService.highlight(d.command.id);
-                                }, showDelay).$$timeoutId;
-                            })
+                            .style('fill', function(d) { return 'url(#bg-author-' + d.author.screenName + ')'; })
                             .on('click', function(d) {
-                                $scope.filters.author = d.author;
+                                TweetService.activate(d);
                             });
                 }
 
@@ -190,13 +169,14 @@ angular.module('tweetsToSoftware')
                             .attr('class', function(d) {
                                 var classList = 'timeline-tweet';
 
-                                if (FilterService.matchTweet(d)) {
+                                if (($scope.tweets.active == null) ||
+                                    (d == $scope.tweets.active)) {
                                     classList += ' timeline-tweet--matching';
                                 }
 
-                                if (d.author.isFollowing) {
-                                    classList += ' timeline-tweet--following'
-                                }
+                                //if (d.author.isFollowing) {
+                                //    classList += ' timeline-tweet--following'
+                                //}
 
                                 return classList;
                             });
@@ -204,6 +184,7 @@ angular.module('tweetsToSoftware')
                 }
 
                 function setBrush() {
+                    // TODO: uncomment if I do the brush filtering
                     //$('.brush').remove();
                     //
                     //brush.x(x)
@@ -231,84 +212,53 @@ angular.module('tweetsToSoftware')
                 }
 
                 $scope.resetTimeFilter = function() {
-                    d3.selectAll('.brush').call(brush.clear());
-
-                    $scope.lowerTimeBound = $scope.domainLowerBound;
-                    $scope.upperTimeBound = $scope.domainUpperBound;
-
-                    $scope.filters.time = null;
-                    filterCircles();
+                    // TODO: uncomment if I do the brush filtering
+                    //d3.selectAll('.brush').call(brush.clear());
+                    //
+                    //$scope.lowerTimeBound = $scope.domainLowerBound;
+                    //$scope.upperTimeBound = $scope.domainUpperBound;
+                    //
+                    //$scope.filters.time = null;
+                    //filterCircles();
                 };
 
-                $q.all([
-                    TweetService.get(),
-                    TweetService.getDomain(),
-                    AuthorService.get()
-                ])
-                    .then(function(response) {
-                        tweets = response[0];
-                        domain = response[1];
-                        authors = response[2];
+                TweetService.loaded
+                    .then(function() {
+                        $scope.tweets = TweetService.tweets;
 
-                        domainLowerBound = moment(domain[0]).toDate();
-                        domainUpperBound = moment(domain[domain.length - 1]).toDate();
+                        // TODO: uncomment if I do the brush filtering
+                        //domainLowerBound = moment(domain[0]).toDate();
+                        //domainUpperBound = moment(domain[domain.length - 1]).toDate();
+                        //
+                        //
+                        //if (!$scope.lowerTimeBound) {
+                        //    $scope.lowerTimeBound = domainLowerBound;
+                        //}
+                        //
+                        //if (!$scope.upperTimeBound) {
+                        //    $scope.upperTimeBound = domainUpperBound;
+                        //}
 
-                        drawPortraitPatterns();
-                    });
+                        drawPortraitPatterns(TweetService.authors);
 
-                $scope.$watch('filters.active', function() {
-                    // timeout to ensure that the html has been rendered
-                    $timeout(function() {
-                        if (!$scope.lowerTimeBound) {
-                            $scope.lowerTimeBound = domainLowerBound;
-                        }
-
-                        if (!$scope.upperTimeBound) {
-                            $scope.upperTimeBound = domainUpperBound;
-                        }
-
-                        drawAxes();
+                        drawAxes(TweetService.domain);
                         setBrush();
                         drawCircles();
                         filterCircles();
+
+                        $(window).on('resize', function() {
+                            clearTimeout(redrawTimeoutId);
+
+                            redrawTimeoutId = $timeout(function() {
+                                drawAxes(TweetService.domain);
+                                setBrush();
+                                drawCircles();
+                                filterCircles();
+                            }, 300).$$timeoutId;
+                        });
+
+                        $scope.$watch('tweets.active', filterCircles);
                     });
-                })
-
-                $scope.$watchGroup([
-                        'filters.time',
-                        'filters.author',
-                        'filters.highlightRelevant',
-                        'filters.highlightUnfamiliar'
-                    ], filterCircles);
-
-                $(window).on('resize', function() {
-                    clearTimeout(redrawTimeoutId);
-
-                    redrawTimeoutId = $timeout(function() {
-                        drawAxes();
-                        setBrush();
-                        drawCircles();
-                        filterCircles();
-                    }, 300).$$timeoutId;
-                });
-
-                //$scope.$on('authorFiltersChanged', changeListener);
-                //
-                //function changeListener() {
-                //    var filter = DataService.getFilters();
-                //
-                //    if (filter.author) {
-                //        $scope.ghost = $scope.activity[filter.author.name];
-                //        $scope.chart = $scope.activity[filter.author.name];
-                //    } else {
-                //        $scope.ghost = $scope.activity.total;
-                //        $scope.chart = $scope.activity.total;
-                //    }
-                //
-                //    drawGhostChart($scope.ghost, 'ghost-area');
-                //    drawChart($scope.chart);
-                //    setBrush();
-                //}
             }
         }
     });

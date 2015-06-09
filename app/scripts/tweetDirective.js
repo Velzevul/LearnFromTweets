@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('tweet', function() {
+    .directive('tweet', function(TweetService) {
         'use strict';
 
         return {
@@ -9,7 +9,7 @@ angular.module('tweetsToSoftware')
                 tweet: '='
             },
             controller: function($scope) {
-                $scope.tweetTime = moment($scope.tweet.time);
+                $scope.activateTweet = TweetService.activate;
             }
         }
     });

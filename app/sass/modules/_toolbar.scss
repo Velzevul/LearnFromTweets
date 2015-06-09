@@ -1,6 +1,6 @@
 .toolbar {
-  position: absolute;
-  top: $global-baseline * 4;
+  position: fixed;
+  top: $global-baseline * 5;
   padding: 3px;
 
   background: $color-bg-secondary;
