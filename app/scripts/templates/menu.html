@@ -11,9 +11,9 @@
         <button class="amd-item__name">{{item.label}}</button>
 
         <div class="amd-item__tweets"
-             ng-show="item.tweetsShown &&
-                      item.tweets.length > 0">
-            tweets here...
+             ng-if="item.tweetsShown &&
+                    item.tweets.length > 0">
+            <tweets-popup context="item"></tweets-popup>
         </div>
     </div>
 

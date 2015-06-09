@@ -1,0 +1,27 @@
+.tweets-popup {
+  background: white;
+  box-shadow: 0 0 10px rgba(black, 0.6);
+
+  &__header {
+    padding: $global-baseline/2 $global-baseline;
+
+    font-weight: 600;
+
+    background: $color-bg-secondary;
+    border-bottom: 1px solid $color-border-secondary;
+  }
+}
+
+.tp-body {
+  max-height: $global-baseline*25;
+  overflow: auto;
+
+  &__item {
+    padding: $global-baseline;
+
+    border-bottom: 1px solid $color-border-secondary;
+  }
+    &__item--last {
+      border-bottom: none;
+    }
+}

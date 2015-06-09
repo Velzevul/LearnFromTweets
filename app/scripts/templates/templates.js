@@ -153,9 +153,9 @@ module.run(["$templateCache", function($templateCache) {
     "        <button class=\"amd-item__name\">{{item.label}}</button>\n" +
     "\n" +
     "        <div class=\"amd-item__tweets\"\n" +
-    "             ng-show=\"item.tweetsShown &&\n" +
-    "                      item.tweets.length > 0\">\n" +
-    "            tweets here...\n" +
+    "             ng-if=\"item.tweetsShown &&\n" +
+    "                    item.tweets.length > 0\">\n" +
+    "            <tweets-popup context=\"item\"></tweets-popup>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -239,9 +239,9 @@ module.run(["$templateCache", function($templateCache) {
     "        <img ng-src=\"/images/{{panel.id}}-panel.png\" alt=\"{{panel.label}}\"/>\n" +
     "\n" +
     "        <div class=\"panelbar-item__tweets\"\n" +
-    "             ng-show=\"panel.tweetsShown &&\n" +
-    "                      panel.tweets.length > 0\">\n" +
-    "            tweets here...\n" +
+    "             ng-if=\"panel.tweetsShown &&\n" +
+    "                    panel.tweets.length > 0\">\n" +
+    "            <tweets-popup context=\"panel\"></tweets-popup>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>");
@@ -324,10 +324,10 @@ module.run(["$templateCache", function($templateCache) {
   $templateCache.put("toolbarItem.html",
     "<div class=\"toolbar-item\"\n" +
     "     ng-class=\"{'toolbar-item--open': tool.isOpen}\">\n" +
-    "    <div class=\"ti-tool\">\n" +
+    "    <div class=\"ti-tool\"\n" +
+    "         ng-mouseenter=\"showTweets(tool)\"\n" +
+    "         ng-mouseleave=\"hideTweets(tool)\">\n" +
     "        <button style=\"display: block;\"\n" +
-    "                ng-mouseenter=\"showTweets(tool)\"\n" +
-    "                ng-mouseleave=\"hideTweets(tool)\"\n" +
     "                ng-click=\"openSubtools()\">\n" +
     "            <div class=\"ti-tool__icon\"\n" +
     "                 ng-class=\"{'ti-tool__icon--large': tool.largeIcon}\"\n" +
@@ -338,10 +338,10 @@ module.run(["$templateCache", function($templateCache) {
     "        </button>\n" +
     "\n" +
     "        <div class=\"ti-tool__tweets\"\n" +
-    "             ng-show=\"!tool.children &&\n" +
+    "             ng-if=\"!tool.children &&\n" +
     "                      tool.tweetsShown &&\n" +
     "                      tool.tweets.length > 0\">\n" +
-    "            tweets here...\n" +
+    "            <tweets-popup context=\"tool\"></tweets-popup>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -376,8 +376,8 @@ module.run(["$templateCache", function($templateCache) {
     "            </div>\n" +
     "\n" +
     "            <div class=\"ti-subtool__tweets\"\n" +
-    "                 ng-show=\"subtool.tweetsShown && subtool.tweets.length > 0\">\n" +
-    "                tweets here...\n" +
+    "                 ng-if=\"subtool.tweetsShown && subtool.tweets.length > 0\">\n" +
+    "                <tweets-popup context=\"subtool\"></tweets-popup>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -392,32 +392,72 @@ module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("tweet.html",
     "<div class=\"tweet\">\n" +
-    "    <div class=\"l-block-x-small\">\n" +
-    "        <div class=\"l-split\">\n" +
-    "            <div class=\"l-split__right\">\n" +
-    "                <div class=\"tweet__published\" am-time-ago=\"tweet.published\"></div>\n" +
+    "    <div class=\"l-media l-media--med\">\n" +
+    "        <div class=\"l-media__figure\">\n" +
+    "            <div class=\"tweet__author-avatar\"\n" +
+    "                 style=\"background-image: url({{tweet.author.avatar}});\">\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"l-media__body\">\n" +
+    "            <div class=\"l-block-x-small\">\n" +
+    "                <div class=\"l-list-inline l-list-inline--x-small\">\n" +
+    "                    <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "                        <div class=\"tweet__author-name\">\n" +
+    "                            {{tweet.author.name}}\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "                        <div class=\"tweet__author-screen-name\">\n" +
+    "                            @{{tweet.author.screenName}}\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "\n" +
-    "            <div class=\"l-split__left\">\n" +
-    "                <div class=\"l-list-inline l-list-inline--x-small\">\n" +
-    "                    <div class=\"l-list-inline__item\">\n" +
-    "                        <div class=\"tweet__author-avatar\"\n" +
-    "                             style=\"background-image: url({{tweet.author.avatar}});\"></div>\n" +
-    "                    </div>\n" +
+    "            <div class=\"l-block-small\">\n" +
+    "                <div class=\"tweet__text\">\n" +
+    "                    <div>{{tweet.tweet.text}}</div>\n" +
     "\n" +
-    "                    <div class=\"l-list-inline__item\">\n" +
-    "                        <div class=\"tweet__author-name\">@{{tweet.author.name}}</div>\n" +
-    "                    </div>\n" +
+    "                    <a href=\"{{tweet.tweet.url}}\" class=\"tweet__link\"\n" +
+    "                                                            target=\"_blank\">\n" +
+    "                        {{tweet.tweet.url | characters:35}}\n" +
+    "                    </a>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"l-split\">\n" +
+    "                <div class=\"l-split__right\">\n" +
+    "                    <button class=\"tweet__link\">see details</button>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"l-split__left\">\n" +
+    "                    <div class=\"tweet__published\" am-time-ago=\"tweetTime\"></div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "</div>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("app-templates"); }
+catch(err) { module = angular.module("app-templates", []); }
+module.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("tweetsPopup.html",
+    "<div class=\"tweets-popup\">\n" +
+    "    <div class=\"tweets-popup__header\">Tweets for {{context.label}}</div>\n" +
     "\n" +
-    "    <div class=\"l-block-x-small\">\n" +
-    "        <div class=\"tweet__text\">{{tweet.text}}</div>\n" +
+    "    <div class=\"tp-body\">\n" +
+    "        <div class=\"tp-body__item\"\n" +
+    "             ng-class=\"{'tp-body__item--last': $last}\"\n" +
+    "             ng-repeat=\"t in context.tweets\">\n" +
+    "            <tweet tweet=\"t\"></tweet>\n" +
+    "        </div>\n" +
     "    </div>\n" +
-    "\n" +
-    "    here be actions...\n" +
     "</div>");
 }]);
 })();

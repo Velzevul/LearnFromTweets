@@ -12,17 +12,24 @@
  *    &--rev
  *
  */
+$media-modifiers: (
+        'small'    : $global-baseline / 2,
+        'medium'   : $global-baseline * 2,
+        'large'    : $global-baseline * 3,
+        'collapsed': 0
+);
+
 .l-media {
   @extend %cf;
 
   &__figure {
     float: left;
-    margin-right: $global-baseline/2;
+    margin-right: $global-baseline;
 
     .l-media--rev & {
       float: right;
-      margin-right: 0;
-      margin-left: $global-baseline/2;
+      margin-right: 0 !important;
+      margin-left: $global-baseline;
     }
   }
 
@@ -36,5 +43,14 @@
     .no-flexbox & {
       overflow: hidden;
     }
+  }
+}
+@each $modifier-name, $modifier-margin in $media-modifiers {
+  .l-media--#{$modifier-name} > .l-media__figure {
+    margin-right: $modifier-margin;
+  }
+
+  .l-media--rev.l-media--#{$modifier-name} > .l-media__figure {
+    margin-left: $modifier-margin;
   }
 }

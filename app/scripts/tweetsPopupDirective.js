@@ -1,15 +1,14 @@
 angular.module('tweetsToSoftware')
-    .directive('tweet', function() {
+    .directive('tweetsPopup', function() {
         'use strict';
 
         return {
             restrict: 'E',
-            templateUrl: 'tweet.html',
+            templateUrl: 'tweetsPopup.html',
             scope: {
-                tweet: '='
+                context: '='
             },
             controller: function($scope) {
-                $scope.tweetTime = moment($scope.tweet.time);
             }
-        }
+        };
     });

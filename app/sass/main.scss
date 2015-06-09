@@ -121,16 +121,12 @@
 
 @import 'modules/topbar',
         'modules/app-menu',
-        'modules/tweets-widget',
-        'modules/widget-notification',
-        'modules/menu-popup',
         'modules/tweet',
-        'modules/popup',
         'modules/author',
-        'modules/buttons',
         'modules/toolbar',
         'modules/toolbar-item',
-        'modules/panelbar-item';
+        'modules/panelbar-item',
+        'modules/tweets-popup';
 
 @import 'states',
         'dev-grid',

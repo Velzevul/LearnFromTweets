@@ -23,9 +23,9 @@
         <img ng-src="/images/{{panel.id}}-panel.png" alt="{{panel.label}}"/>
 
         <div class="panelbar-item__tweets"
-             ng-show="panel.tweetsShown &&
-                      panel.tweets.length > 0">
-            tweets here...
+             ng-if="panel.tweetsShown &&
+                    panel.tweets.length > 0">
+            <tweets-popup context="panel"></tweets-popup>
         </div>
     </div>
 </div>

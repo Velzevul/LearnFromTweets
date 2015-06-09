@@ -1,26 +1,38 @@
 .tweet {
-  // ...
+  width: $global-baseline * 25;
 
-  &__text {
-    line-height: 18px;
-  }
+  white-space: normal;
   
   &__author-name {
     font-weight: 600;
   }
 
-  &__author-avatar {
-    width: $global-baseline * 2;
-    height: $global-baseline * 2;
+  &__author-screen-name {
+    font-weight: 300;
+    color: $color-tx-muted;
+  }
 
-    border: 1px solid $color-border;
-    border-radius: 50%;
+  &__author-avatar {
+    width: $global-baseline * 3;
+    height: $global-baseline * 3;
+
+    border: 1px solid $color-border-secondary;
+    border-radius: 3px;
     background-size: cover;
     background-position: center center;
   }
 
+  &__link {
+    color: $color-dc-secondary;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
   &__published {
-    font-size: 12px;
+    font-weight: 300;
     color: $color-tx-muted;
   }
 }

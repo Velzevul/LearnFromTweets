@@ -1,9 +1,9 @@
 <div class="toolbar-item"
      ng-class="{'toolbar-item--open': tool.isOpen}">
-    <div class="ti-tool">
+    <div class="ti-tool"
+         ng-mouseenter="showTweets(tool)"
+         ng-mouseleave="hideTweets(tool)">
         <button style="display: block;"
-                ng-mouseenter="showTweets(tool)"
-                ng-mouseleave="hideTweets(tool)"
                 ng-click="openSubtools()">
             <div class="ti-tool__icon"
                  ng-class="{'ti-tool__icon--large': tool.largeIcon}"
@@ -14,10 +14,10 @@
         </button>
 
         <div class="ti-tool__tweets"
-             ng-show="!tool.children &&
+             ng-if="!tool.children &&
                       tool.tweetsShown &&
                       tool.tweets.length > 0">
-            tweets here...
+            <tweets-popup context="tool"></tweets-popup>
         </div>
     </div>
 
@@ -52,8 +52,8 @@
             </div>
 
             <div class="ti-subtool__tweets"
-                 ng-show="subtool.tweetsShown && subtool.tweets.length > 0">
-                tweets here...
+                 ng-if="subtool.tweetsShown && subtool.tweets.length > 0">
+                <tweets-popup context="subtool"></tweets-popup>
             </div>
         </div>
     </div>
