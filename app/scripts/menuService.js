@@ -18,12 +18,16 @@ angular.module('tweetsToSoftware')
             showTweetsDelay = 400,
             hideTweetsDelay = 20;
 
+        console.time('Menu load');
         promise = $q.all([
-            $http.get('/data/menu.json'),
-            $http.get('/data/tools.json'),
-            $http.get('/data/panels.json')
+            $http.get('/data/commandsExtra.json'),
+            $http.get('/data/toolsExtra.json'),
+            $http.get('/data/panelsExtra.json')
         ])
             .then(function(response) {
+                console.timeEnd('Menu load');
+                console.time('Menu processing');
+
                 menu.all = response[0].data;
                 toolbar.all = response[1].data;
                 panelbar.all = response[2].data;
@@ -31,6 +35,7 @@ angular.module('tweetsToSoftware')
                 populateIdMap(menu.all, menu.byId, []);
                 populateIdMap(toolbar.all, toolbar.byId, []);
                 populateIdMap(panelbar.all, panelbar.byId, []);
+                console.timeEnd('Menu processing');
             });
 
         function populateIdMap(all, byId, parents) {

@@ -184,48 +184,34 @@ angular.module('tweetsToSoftware')
         'use strict';
 
         var filters = {
-                active: false,
                 time: null,
-                author: null,
                 highlightRelevant: false,
                 highlightUnfamiliar: false
-            },
-            relevancyThreshold = 85,
-            familiarityThreshold = 20;
+            };
 
         return {
+            filters: filters,
             matchTweet: function(tweet) {
                 if (filters.time) {
-                    if ((moment(tweet.published).toDate() <= filters.time.lower) ||
-                        (moment(tweet.published).toDate() >= filters.time.upper)) {
+                    if ((tweet.published.toDate() <= filters.time.lower) ||
+                        (tweet.published.toDate() >= filters.time.upper)) {
                         return false;
                     }
                 }
 
-                if (filters.author) {
-                    if (tweet.author.name != filters.author.name) {
-                        return false;
-                    }
+                if (filters.highlightRelevant &&
+                    !tweet.hasRelevant) {
+                    return false;
                 }
 
-                if (filters.highlightRelevant) {
-                    if (tweet.command.relevancy < relevancyThreshold) {
-                        return false;
-                    }
-                }
-
-                if (filters.highlightUnfamiliar) {
-                    if (tweet.command.familiarity > familiarityThreshold) {
-                        return false;
-                    }
+                if (filters.highlightUnfamiliar &&
+                    !tweet.hasUnfamiliar) {
+                    return false;
                 }
 
                 return true;
-            },
-            get: function() {
-                return filters;
             }
-        }
+        };
     });
 angular.module('tweetsToSoftware')
     .factory('MenuService', function($timeout, $http, $q) {
@@ -247,12 +233,16 @@ angular.module('tweetsToSoftware')
             showTweetsDelay = 400,
             hideTweetsDelay = 20;
 
+        console.time('Menu load');
         promise = $q.all([
-            $http.get('/data/menu.json'),
-            $http.get('/data/tools.json'),
-            $http.get('/data/panels.json')
+            $http.get('/data/commandsExtra.json'),
+            $http.get('/data/toolsExtra.json'),
+            $http.get('/data/panelsExtra.json')
         ])
             .then(function(response) {
+                console.timeEnd('Menu load');
+                console.time('Menu processing');
+
                 menu.all = response[0].data;
                 toolbar.all = response[1].data;
                 panelbar.all = response[2].data;
@@ -260,6 +250,7 @@ angular.module('tweetsToSoftware')
                 populateIdMap(menu.all, menu.byId, []);
                 populateIdMap(toolbar.all, toolbar.byId, []);
                 populateIdMap(panelbar.all, panelbar.byId, []);
+                console.timeEnd('Menu processing');
             });
 
         function populateIdMap(all, byId, parents) {
@@ -358,7 +349,7 @@ angular.module('tweetsToSoftware')
         };
     });
 angular.module('tweetsToSoftware')
-    .factory('TweetService', function($http) {
+    .factory('TweetService', function($q, $http, MenuService) {
         'use strict';
 
         var tweets = {
@@ -372,32 +363,61 @@ angular.module('tweetsToSoftware')
             },
             authors = [],
             domain = [],
-            promise;
+            promise,
+            relevancyThreshold = 95,
+            familiarityThreshold = 20;
 
-        promise = $http.get('/data/tweets.json')
+        window.p = $http.get('/data/tweets.json');
+
+        console.time('Tweets load');
+        promise = $q.all([
+            $http.get('/data/tweets.json'),
+            MenuService.loaded
+        ])
             .then(function(response) {
-                tweets.all = response.data;
+                console.timeEnd('Tweets load');
+                console.time('Tweets process');
 
-                angular.forEach(tweets.all, function(t) {
-                    t.published = moment(t.published, "h:m a - DD MM YYYY");
-                });
+                tweets.all = response[0].data;
 
                 var processedAuthors = [],
                     processedDates = [];
 
                 angular.forEach(tweets.all, function(tweet) {
-                    var author = tweet.author,
-                        published = tweet.published;
 
-                    if (processedAuthors.indexOf(author.screenName) == -1) {
-                        authors.push(author);
-                        processedAuthors.push(author.screenName);
+                    tweet.published = moment(tweet.published, "h:m a - DD MM YYYY");
+
+                    if (processedAuthors.indexOf(tweet.author.screenName) == -1) {
+                        authors.push(tweet.author);
+                        processedAuthors.push(tweet.author.screenName);
                     }
 
-                    if (processedDates.indexOf(published.format()) == -1) {
-                        domain.push(published.toDate());
-                        processedDates.push(published.format());
+                    if (processedDates.indexOf(tweet.published.format()) == -1) {
+                        domain.push(tweet.published.toDate());
+                        processedDates.push(tweet.published.format());
                     }
+
+                    var tweetContext = [];
+
+                    tweet.commandRefs = getMenus(tweet.tweet.commands, MenuService.menu);
+                    Array.prototype.push.apply(tweetContext, tweet.commandRefs);
+                    tweet.toolRefs = getMenus(tweet.tweet.tools, MenuService.toolbar);
+                    Array.prototype.push.apply(tweetContext, tweet.toolRefs);
+                    tweet.panelRefs = getMenus(tweet.tweet.panels, MenuService.panelbar);
+                    Array.prototype.push.apply(tweetContext, tweet.panelRefs);
+
+                    tweet.hasUnfamiliar = false;
+                    tweet.hasRelevant = false;
+
+                    angular.forEach(tweetContext, function(c) {
+                        if (c.familiarity < familiarityThreshold) {
+                            tweet.hasUnfamiliar = true;
+                        }
+
+                        if (c.relevancy > relevancyThreshold) {
+                            tweet.hasRelevant = true;
+                        }
+                    });
                 });
 
                 populateMap(tweets.all, tweets.byId, true, function(item) {
@@ -415,7 +435,19 @@ angular.module('tweetsToSoftware')
                 populateMap(tweets.all, tweets.byPanel, false, function(item) {
                     return item.tweet.panels || [];
                 });
+
+                console.timeEnd('Tweets process');
             });
+
+        function getMenus(commandIds, menu) {
+            var commands = [];
+
+            angular.forEach(commandIds, function(c) {
+                commands.push(menu.byId[c]);
+            });
+
+            return commands;
+        }
 
         function populateMap(all, map, uniqueFlag, propertyRetrievalCallback) {
             angular.forEach(all, function(one) {
@@ -494,7 +526,7 @@ angular.module('tweetsToSoftware')
     });
 
 angular.module('tweetsToSoftware')
-    .directive('activity', function($q, TweetService, MenuService) {
+    .directive('activity', function($q, TweetService, MenuService, FilterService) {
         'use strict';
 
         return {
@@ -503,69 +535,55 @@ angular.module('tweetsToSoftware')
             scope: {},
             replace: true,
             controller: function($scope) {
+                $scope.filters = FilterService.filters;
+
                 $q.all([
                     TweetService.loaded,
                     MenuService.loaded
                 ])
                     .then(function() {
-                        var tweets = TweetService.tweets.all;
+                        registerTweets(TweetService.tweets.all);
 
-                        MenuService.resetTweets();
-                        angular.forEach(tweets, registerTweet);
-
-                        angular.forEach(tweets, function(tweet) {
-                            if (tweet.tweet.commands) {
-                                var commands = [];
-
-                                angular.forEach(tweet.tweet.commands, function(c) {
-                                    commands.push(MenuService.menu.byId[c]);
-                                });
-
-                                tweet.commandRefs = commands;
-                            }
-
-                            if (tweet.tweet.tools) {
-                                var tools = [];
-
-                                angular.forEach(tweet.tweet.tools, function(t) {
-                                    tools.push(MenuService.toolbar.byId[t]);
-                                });
-
-                                tweet.toolRefs = tools;
-                            }
-
-                            if (tweet.tweet.panels) {
-                                var panels = [];
-
-                                angular.forEach(tweet.tweet.panels, function(p) {
-                                    panels.push(MenuService.panelbar.byId[p]);
-                                });
-
-                                tweet.panelRefs = panels;
-                            }
+                        $scope.$watchGroup([
+                            'filters.time',
+                            'filters.highlightUnfamiliar',
+                            'filters.highlightRelevant'
+                        ], function() {
+                            registerTweets(TweetService.tweets.all);
                         });
                     });
 
+                function registerTweets(tweets) {
+                    console.time('Tweet registration');
 
-                function registerTweet(tweet) {
-                    if (tweet.tweet.commands) {
-                        angular.forEach(tweet.tweet.commands, function(c) {
-                            MenuService.registerTweet(tweet, c, MenuService.menu);
-                        });
-                    }
+                    MenuService.resetTweets();
+                    angular.forEach(tweets, register);
 
-                    if (tweet.tweet.tools) {
-                        angular.forEach(tweet.tweet.tools, function(t) {
-                            MenuService.registerTweet(tweet, t, MenuService.toolbar);
-                        });
-                    }
+                    console.timeEnd('Tweet registration');
 
-                    if (tweet.tweet.panels) {
-                        angular.forEach(tweet.tweet.panels, function(p) {
-                            MenuService.registerTweet(tweet, p, MenuService.panelbar);
-                        });
+                    function register(tweet) {
+                        if (FilterService.matchTweet(tweet)) {
+                            if (tweet.tweet.commands) {
+                                angular.forEach(tweet.tweet.commands, function(c) {
+                                    MenuService.registerTweet(tweet, c, MenuService.menu);
+                                });
+                            }
+
+                            if (tweet.tweet.tools) {
+                                angular.forEach(tweet.tweet.tools, function(t) {
+                                    MenuService.registerTweet(tweet, t, MenuService.toolbar);
+                                });
+                            }
+
+                            if (tweet.tweet.panels) {
+                                angular.forEach(tweet.tweet.panels, function(p) {
+                                    MenuService.registerTweet(tweet, p, MenuService.panelbar);
+                                });
+                            }
+                        }
                     }
                 }
+
             }
         };
     });

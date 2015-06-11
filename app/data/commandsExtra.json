@@ -1,0 +1,2975 @@
+[
+    {
+        "label": "File",
+        "id": "file",
+        "children": [
+            {
+                "familiarity": 16.646971239520724,
+                "relevancy": 3.108392967756135,
+                "label": "New...",
+                "id": "file/new"
+            },
+            {
+                "familiarity": 13.654151709325312,
+                "relevancy": 21.406525469392346,
+                "label": "Open...",
+                "id": "file/open"
+            },
+            {
+                "familiarity": 7.088653937385059,
+                "relevancy": 4.391930228759766,
+                "label": "Browse in Bridge...",
+                "id": "file/browse-in-bridge"
+            },
+            {
+                "familiarity": 61.63074995204626,
+                "relevancy": 70.07748432010874,
+                "label": "Open As...",
+                "id": "file/open-as"
+            },
+            {
+                "familiarity": 22.261026104638347,
+                "relevancy": 0.2506631441413165,
+                "label": "Open As Smart Object...",
+                "id": "file/open-as-smart-object"
+            },
+            {
+                "label": "Open Recent",
+                "id": "file/open-recent",
+                "children": [
+                    {
+                        "familiarity": 76.19270164186054,
+                        "relevancy": 31.608990183632237,
+                        "label": "Clear Recent File List",
+                        "id": "file/open-recent/clear-recent-file-list"
+                    }
+                ]
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 78.53653041041146,
+                "relevancy": 44.29239083169229,
+                "label": "Close",
+                "id": "file/close"
+            },
+            {
+                "familiarity": 47.443337595347636,
+                "relevancy": 62.26701062947916,
+                "label": "Close All",
+                "id": "file/close-all"
+            },
+            {
+                "familiarity": 30.022072376843557,
+                "relevancy": 90.42672114083675,
+                "label": "Close and Go to Bridge...",
+                "id": "file/close-and-go-to-bridge"
+            },
+            {
+                "familiarity": 64.34129349354393,
+                "relevancy": 95.99109245209755,
+                "label": "Save",
+                "id": "file/save"
+            },
+            {
+                "familiarity": 19.204241765198347,
+                "relevancy": 45.915973205218464,
+                "label": "Save As...",
+                "id": "file/save-as"
+            },
+            {
+                "familiarity": 8.067189200825064,
+                "relevancy": 66.71707695768427,
+                "label": "Check In...",
+                "id": "file/check-in"
+            },
+            {
+                "familiarity": 92.94819435042697,
+                "relevancy": 84.30313302399736,
+                "label": "Revert",
+                "id": "file/revert"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 18.702197881478135,
+                "relevancy": 21.916933269011587,
+                "label": "Extract Assets...",
+                "id": "file/extract-assets"
+            },
+            {
+                "label": "Generate",
+                "id": "file/generate",
+                "children": [
+                    {
+                        "familiarity": 14.596278130511319,
+                        "relevancy": 80.21003699880922,
+                        "label": "Image Assets",
+                        "id": "file/generate/image-assets"
+                    }
+                ]
+            },
+            {
+                "familiarity": 22.471148308708887,
+                "relevancy": 81.3308889240057,
+                "label": "Save For Web...",
+                "id": "file/save-for-web"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 92.38547633327521,
+                "relevancy": 93.41042104861643,
+                "label": "Place Embedded...",
+                "id": "file/place-embedded"
+            },
+            {
+                "familiarity": 78.91821721513695,
+                "relevancy": 22.447108181976382,
+                "label": "Place Linked...",
+                "id": "file/place-linked"
+            },
+            {
+                "familiarity": 58.63932720163807,
+                "relevancy": 69.82833551120335,
+                "label": "Package...",
+                "id": "file/package"
+            },
+            {
+                "divider": true
+            },
+            {
+                "label": "Import",
+                "id": "file/import",
+                "children": [
+                    {
+                        "familiarity": 92.24710014379296,
+                        "relevancy": 64.80448928730246,
+                        "label": "Variable Data Sets...",
+                        "id": "file/import/variable-data-sets"
+                    },
+                    {
+                        "familiarity": 71.4963809648606,
+                        "relevancy": 24.67882038230844,
+                        "label": "Video Frames To Layers...",
+                        "id": "file/import/video-frames-to-layers"
+                    },
+                    {
+                        "familiarity": 1.4155042155267084,
+                        "relevancy": 98.73168196000898,
+                        "label": "Notes...",
+                        "id": "file/import/notes"
+                    },
+                    {
+                        "familiarity": 2.0504263081506324,
+                        "relevancy": 96.66561488442818,
+                        "label": "WIA Support...",
+                        "id": "file/import/wia-support"
+                    }
+                ]
+            },
+            {
+                "label": "Export",
+                "id": "file/export",
+                "children": [
+                    {
+                        "familiarity": 98.89656111705138,
+                        "relevancy": 91.23225518697286,
+                        "label": "Data Sets As Files...",
+                        "id": "file/export/data-sets-as-files"
+                    },
+                    {
+                        "familiarity": 28.321098138365773,
+                        "relevancy": 14.13959705627158,
+                        "label": "Paths to Illustrator...",
+                        "id": "file/export/paths-to-illustrator"
+                    },
+                    {
+                        "familiarity": 16.761083138909292,
+                        "relevancy": 84.12635843999223,
+                        "label": "Render Video...",
+                        "id": "file/export/render-video"
+                    },
+                    {
+                        "familiarity": 73.17675116370862,
+                        "relevancy": 96.77851729860267,
+                        "label": "Zoomify...",
+                        "id": "file/export/zoomify"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 22.200446574892986,
+                        "relevancy": 17.27865734397239,
+                        "label": "Color Lookup Tables...",
+                        "id": "file/export/color-lookup-tables"
+                    }
+                ]
+            },
+            {
+                "familiarity": 42.3824999167292,
+                "relevancy": 38.348129765883186,
+                "label": "Share On Behance...",
+                "id": "file/share-on-behance"
+            },
+            {
+                "divider": true
+            },
+            {
+                "label": "Automate",
+                "id": "file/automate",
+                "children": [
+                    {
+                        "familiarity": 1.252339014782189,
+                        "relevancy": 40.26869970495724,
+                        "label": "Batch...",
+                        "id": "file/automate/batch"
+                    },
+                    {
+                        "familiarity": 85.56356830305705,
+                        "relevancy": 58.21667719380955,
+                        "label": "PDF Presentation...",
+                        "id": "file/automate/pdf-presentation"
+                    },
+                    {
+                        "familiarity": 35.02136761419629,
+                        "relevancy": 97.78868239095519,
+                        "label": "Create Droplet...",
+                        "id": "file/automate/create-droplet"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 43.94661678432649,
+                        "relevancy": 76.98962472680938,
+                        "label": "Crop and Straighten Photos",
+                        "id": "file/automate/crop-and-straighten-photos"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 21.442995450253044,
+                        "relevancy": 38.97147348136922,
+                        "label": "Contact Sheet II...",
+                        "id": "file/automate/contact-sheet-ii"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 3.2064701382750527,
+                        "relevancy": 81.68400288913826,
+                        "label": "Conditional Mode Change...",
+                        "id": "file/automate/conditional-mode-change"
+                    },
+                    {
+                        "familiarity": 97.62624196704787,
+                        "relevancy": 8.019556041526709,
+                        "label": "Fit Image...",
+                        "id": "file/automate/fit-image"
+                    },
+                    {
+                        "familiarity": 26.523198826982064,
+                        "relevancy": 31.032592282000117,
+                        "label": "Lens Correction...",
+                        "id": "file/automate/lens-correction"
+                    },
+                    {
+                        "familiarity": 68.96371856479203,
+                        "relevancy": 64.06370367489214,
+                        "label": "Merge to HDR Pro...",
+                        "id": "file/automate/marge-to-hdr-pro"
+                    },
+                    {
+                        "familiarity": 58.83466127227518,
+                        "relevancy": 61.404197988564434,
+                        "label": "Photomerge...",
+                        "id": "file/automate/photomerge"
+                    }
+                ]
+            },
+            {
+                "label": "Scripts",
+                "id": "file/scripts",
+                "children": [
+                    {
+                        "familiarity": 62.31716557923417,
+                        "relevancy": 15.3556934500648,
+                        "label": "Image Processor...",
+                        "id": "file/scripts/image-processor"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 8.631473642580556,
+                        "relevancy": 5.922545922579358,
+                        "label": "Delete All Empty Layers",
+                        "id": "file/scripts/delete-all-empty-layers"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 71.17319015825537,
+                        "relevancy": 44.487706861381994,
+                        "label": "Flatten All Layer Effects",
+                        "id": "file/scriptsflatten-all-layer-effects"
+                    },
+                    {
+                        "familiarity": 44.45728130375277,
+                        "relevancy": 15.165007735672564,
+                        "label": "Flatten All Masks",
+                        "id": "file/scripts/flatten-all-masks"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 60.10049809987128,
+                        "relevancy": 58.83504379964787,
+                        "label": "Layer Comps to Files...",
+                        "id": "file/scripts/layer-comps-to-files"
+                    },
+                    {
+                        "familiarity": 31.985042865867875,
+                        "relevancy": 98.03755348127365,
+                        "label": "Layer Comps to PDF...",
+                        "id": "file/scripts/layer-comps-to-pdf"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 59.50547888324971,
+                        "relevancy": 10.667611496769236,
+                        "label": "Export Layers to Files...",
+                        "id": "file/scripts/export-layers-to-files"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 43.11713302662117,
+                        "relevancy": 38.88866064166082,
+                        "label": "Scripts Event Manager...",
+                        "id": "file/scripts/scripts-event-manager"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 14.96585844624737,
+                        "relevancy": 3.519814999608595,
+                        "label": "Load Files into Stack...",
+                        "id": "file/scripts/load-files-into-stack"
+                    },
+                    {
+                        "familiarity": 84.30313234863777,
+                        "relevancy": 15.168673683472845,
+                        "label": "Load Multiple DICOM files...",
+                        "id": "file/scripts/load-multiple-dicom-files"
+                    },
+                    {
+                        "familiarity": 10.759923061913312,
+                        "relevancy": 50.763559504871345,
+                        "label": "Statistics",
+                        "id": "file/scripts/statistics"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 57.94010227667237,
+                        "relevancy": 22.226743343581067,
+                        "label": "Browse",
+                        "id": "file/scripts/browse"
+                    }
+                ]
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 82.73916262907173,
+                "relevancy": 62.881232857452815,
+                "label": "File Info...",
+                "id": "file/file-info"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 71.67112052650786,
+                "relevancy": 36.58969395366787,
+                "label": "Print...",
+                "id": "file/print"
+            },
+            {
+                "familiarity": 5.62185456783676,
+                "relevancy": 11.14790145993636,
+                "label": "Print One Copy",
+                "id": "file/print-one-copy"
+            },
+            {
+                "familiarity": 56.78349773091777,
+                "relevancy": 34.723492197420505,
+                "label": "Exit",
+                "id": "file/exit"
+            }
+        ]
+    },
+    {
+        "label": "Edit",
+        "id": "edit",
+        "children": [
+            {
+                "familiarity": 96.34366304569367,
+                "relevancy": 99.92449854527901,
+                "label": "Undo",
+                "id": "edit/undo"
+            },
+            {
+                "familiarity": 66.72086060875067,
+                "relevancy": 75.04308885591935,
+                "label": "Step Forward",
+                "id": "edit/step-forward"
+            },
+            {
+                "familiarity": 34.13140520269101,
+                "relevancy": 30.788478359705916,
+                "label": "Step Backward",
+                "id": "edit/step-backward"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 56.47611348943703,
+                "relevancy": 45.831159398148856,
+                "label": "Fade...",
+                "id": "edit/fade"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 17.068256850854368,
+                "relevancy": 82.26689894442143,
+                "label": "Cut",
+                "id": "edit/cut"
+            },
+            {
+                "familiarity": 49.534563987423084,
+                "relevancy": 34.19953440757738,
+                "label": "Copy",
+                "id": "edit/copy"
+            },
+            {
+                "familiarity": 16.957726403021912,
+                "relevancy": 89.98615022150312,
+                "label": "Copy Merged",
+                "id": "edit/copy-merged"
+            },
+            {
+                "familiarity": 0.6950057600287884,
+                "relevancy": 89.10347069207447,
+                "label": "Paste",
+                "id": "edit/paste"
+            },
+            {
+                "label": "Paste Special",
+                "id": "edit/paste-special",
+                "children": [
+                    {
+                        "familiarity": 37.554619475644515,
+                        "relevancy": 70.42038304189214,
+                        "label": "Paste in Place",
+                        "id": "edit/paste-special/paste-in-place"
+                    },
+                    {
+                        "familiarity": 21.911614513585032,
+                        "relevancy": 81.88566970266346,
+                        "label": "Paste Into",
+                        "id": "edit/paste-special/paste-into"
+                    },
+                    {
+                        "familiarity": 53.57835842150157,
+                        "relevancy": 28.045875937453868,
+                        "label": "Paste Outside",
+                        "id": "edit/paste-special/paste-outside"
+                    }
+                ]
+            },
+            {
+                "familiarity": 83.52690570343391,
+                "relevancy": 71.1094746924315,
+                "label": "Clear",
+                "id": "edit/clear"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 50.65794849257023,
+                "relevancy": 78.15034234798587,
+                "label": "Check Spelling...",
+                "id": "edit/check-spelling"
+            },
+            {
+                "familiarity": 5.186729766807774,
+                "relevancy": 15.973736398379867,
+                "label": "Find and Replace Text...",
+                "id": "edit/find-and-replace-text"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 84.81758081420728,
+                "relevancy": 36.64283582300914,
+                "label": "Fill...",
+                "id": "edit/fill"
+            },
+            {
+                "familiarity": 95.90830674052636,
+                "relevancy": 79.44373983547673,
+                "label": "Stroke...",
+                "id": "edit/stroke"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 29.74881696772982,
+                "relevancy": 18.48350050360863,
+                "label": "Content-Aware Scale",
+                "id": "edit/content-aware-scale"
+            },
+            {
+                "familiarity": 56.373376474109406,
+                "relevancy": 23.82262912046813,
+                "label": "Puppet Warp",
+                "id": "edit/puppet-warp"
+            },
+            {
+                "familiarity": 79.06829883331906,
+                "relevancy": 15.354353302941348,
+                "label": "Perspective Warp",
+                "id": "edit/perspective-warp"
+            },
+            {
+                "familiarity": 82.47246297113944,
+                "relevancy": 1.650182138597811,
+                "label": "Free Transform",
+                "id": "edit/free-transform"
+            },
+            {
+                "label": "Transform",
+                "id": "edit/transform",
+                "children": [
+                    {
+                        "familiarity": 39.64056107626778,
+                        "relevancy": 17.269760378658795,
+                        "label": "Again",
+                        "id": "edit/transform/again"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 36.05746600958189,
+                        "relevancy": 97.72932344946906,
+                        "label": "Scale",
+                        "id": "edit/transform/scale"
+                    },
+                    {
+                        "familiarity": 63.43418726135152,
+                        "relevancy": 50.93564846223945,
+                        "label": "Rotate",
+                        "id": "edit/transform/rotate"
+                    },
+                    {
+                        "familiarity": 27.66431716629072,
+                        "relevancy": 47.49575877233033,
+                        "label": "Skew",
+                        "id": "edit/transform/skew"
+                    },
+                    {
+                        "familiarity": 62.036392320562804,
+                        "relevancy": 6.984454565440556,
+                        "label": "Distort",
+                        "id": "edit/transform/distort"
+                    },
+                    {
+                        "familiarity": 81.43506365310743,
+                        "relevancy": 39.62610434866338,
+                        "label": "Perspective",
+                        "id": "edit/transform/perspective"
+                    },
+                    {
+                        "familiarity": 90.16431109435204,
+                        "relevancy": 63.13157186690969,
+                        "label": "Warp",
+                        "id": "edit/transform/warp"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 55.55013128458012,
+                        "relevancy": 12.479136627683529,
+                        "label": "Rotate 180\u00b0",
+                        "id": "edit/transform/rotate-180"
+                    },
+                    {
+                        "familiarity": 57.66106854829485,
+                        "relevancy": 43.01499315769489,
+                        "label": "Rotate 90\u00b0 Clockwise",
+                        "id": "edit/transform/rotate-90-clockwise"
+                    },
+                    {
+                        "familiarity": 73.6557836221607,
+                        "relevancy": 22.36601173254914,
+                        "label": "Rotate 90\u00b0 Counter Clockwise",
+                        "id": "edit/transform/rotate-90-counter-clockwise"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 98.03506887978787,
+                        "relevancy": 17.247836226656776,
+                        "label": "Flip Horizontal",
+                        "id": "edit/transform/flip-horizontal"
+                    },
+                    {
+                        "familiarity": 81.3965599061035,
+                        "relevancy": 29.979972793913255,
+                        "label": "Flip Vertical",
+                        "id": "edit/transform/flip-vertical"
+                    }
+                ]
+            },
+            {
+                "familiarity": 16.2852654266887,
+                "relevancy": 90.79780355214041,
+                "label": "Auto-Align Layers...",
+                "id": "edit/auto-align-layers"
+            },
+            {
+                "familiarity": 76.495842805935,
+                "relevancy": 67.30340288078447,
+                "label": "Auto-Blend Layers...",
+                "id": "edit/auto-blend-layers"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 6.69712056004883,
+                "relevancy": 4.403397522715613,
+                "label": "Define Brush Preset...",
+                "id": "edit/define-brush-preset"
+            },
+            {
+                "familiarity": 37.12100227587709,
+                "relevancy": 15.339152020925207,
+                "label": "Define Pattern...",
+                "id": "edit/define-pattern"
+            },
+            {
+                "familiarity": 83.04486450014008,
+                "relevancy": 9.369021370270115,
+                "label": "Define Custom Shape...",
+                "id": "edit/define-custom-shape"
+            },
+            {
+                "divider": true
+            },
+            {
+                "label": "Purge",
+                "id": "edit/purge/",
+                "children": [
+                    {
+                        "familiarity": 84.8174737761725,
+                        "relevancy": 49.64895894618135,
+                        "label": "Undo",
+                        "id": "edit/purge/undo"
+                    },
+                    {
+                        "familiarity": 66.5567124126602,
+                        "relevancy": 73.36679054913273,
+                        "label": "Clipboard",
+                        "id": "edit/purge/clipboard"
+                    },
+                    {
+                        "familiarity": 86.7658257062284,
+                        "relevancy": 21.75697365158514,
+                        "label": "Histories",
+                        "id": "edit/purge/histories"
+                    },
+                    {
+                        "familiarity": 36.551188447022675,
+                        "relevancy": 62.698754467800455,
+                        "label": "All",
+                        "id": "edit/purge/all"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 7.842722458054707,
+                        "relevancy": 51.69486382870476,
+                        "label": "Video Cache",
+                        "id": "edit/purge/video-cache"
+                    }
+                ]
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 35.00054378554933,
+                "relevancy": 0.09419176625353742,
+                "label": "Adobe PDF Presets...",
+                "id": "edit/adobe-pdf-presets"
+            },
+            {
+                "label": "Presets",
+                "id": "edit/presets",
+                "children": [
+                    {
+                        "familiarity": 92.42967955356082,
+                        "relevancy": 27.67393082324351,
+                        "label": "Preset Manager...",
+                        "id": "edit/presets/preset-manager"
+                    },
+                    {
+                        "familiarity": 27.458162803658613,
+                        "relevancy": 27.25968358372468,
+                        "label": "Migrate Presets",
+                        "id": "edit/presets/migrate-presets"
+                    },
+                    {
+                        "familiarity": 62.50593701604067,
+                        "relevancy": 38.75343383457726,
+                        "label": "Export/Import Presets...",
+                        "id": "edit/presets/export-import-presets"
+                    }
+                ]
+            },
+            {
+                "familiarity": 4.194902023105951,
+                "relevancy": 20.001701143026494,
+                "label": "Remote Connections...",
+                "id": "edit/remote-connections"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 53.85820249353015,
+                "relevancy": 75.66471354714265,
+                "label": "Color Settings...",
+                "id": "edit/color-settings"
+            },
+            {
+                "familiarity": 38.864644170053474,
+                "relevancy": 41.89662189450707,
+                "label": "Assign Profile...",
+                "id": "edit/assign-profile"
+            },
+            {
+                "familiarity": 97.932460903829,
+                "relevancy": 56.78671907771401,
+                "label": "Convert to Profile...",
+                "id": "edit/convert-to-profile"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 35.20551939296057,
+                "relevancy": 4.965491562808144,
+                "label": "Keyboard Shortcuts...",
+                "id": "edit/keyboard-shortcuts"
+            },
+            {
+                "familiarity": 28.391324823326425,
+                "relevancy": 43.618062038236005,
+                "label": "Menus...",
+                "id": "edit/menus"
+            },
+            {
+                "familiarity": 59.828640822518764,
+                "relevancy": 21.16735361788622,
+                "label": "Preferences",
+                "id": "edit/preferences"
+            },
+            {
+                "familiarity": 55.4447405613549,
+                "relevancy": 32.23046826907883,
+                "label": "your-account@email.com",
+                "id": "edit/your-account"
+            }
+        ]
+    },
+    {
+        "label": "Image",
+        "id": "image",
+        "children": [
+            {
+                "label": "Mode",
+                "id": "image/mode",
+                "children": [
+                    {
+                        "familiarity": 40.832481516266284,
+                        "relevancy": 29.02729830238082,
+                        "label": "Bitmap",
+                        "id": "image/mode/bitmap"
+                    },
+                    {
+                        "familiarity": 45.21481106102754,
+                        "relevancy": 94.93576695979284,
+                        "label": "Grayscale",
+                        "id": "image/mode/grayscale"
+                    },
+                    {
+                        "familiarity": 25.45944914446413,
+                        "relevancy": 13.306519520360215,
+                        "label": "Duotone",
+                        "id": "image/mode/duotone"
+                    },
+                    {
+                        "familiarity": 97.76951821946007,
+                        "relevancy": 5.039334685109454,
+                        "label": "Indexed Color...",
+                        "id": "image/mode/indexed-color"
+                    },
+                    {
+                        "familiarity": 22.913333783499702,
+                        "relevancy": 65.22336721464794,
+                        "label": "RGB Color",
+                        "id": "image/mode/rgb-color"
+                    },
+                    {
+                        "familiarity": 35.359983017219164,
+                        "relevancy": 55.03503590636871,
+                        "label": "CMYK Color",
+                        "id": "image/mode/cmyk-color"
+                    },
+                    {
+                        "familiarity": 62.855939133301,
+                        "relevancy": 89.26054582710341,
+                        "label": "Lab Color",
+                        "id": "image/mode/lab-color"
+                    },
+                    {
+                        "familiarity": 92.06820161723834,
+                        "relevancy": 18.669728939218622,
+                        "label": "Multichannel",
+                        "id": "image/mode/multichannel"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 84.89447736289009,
+                        "relevancy": 75.11067065664825,
+                        "label": "8 Bits/Channel",
+                        "id": "image/mode/8-bits-channel"
+                    },
+                    {
+                        "familiarity": 66.87067230896751,
+                        "relevancy": 51.09404958379295,
+                        "label": "16 Bits/Channel",
+                        "id": "image/mode/16-bits-channel"
+                    },
+                    {
+                        "familiarity": 54.75434083258378,
+                        "relevancy": 62.302713447410994,
+                        "label": "32 Bits/Channel",
+                        "id": "image/mode/32-bits-channel"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 4.078251469361593,
+                        "relevancy": 69.5673031749494,
+                        "label": "Color Table",
+                        "id": "image/mode/color-table"
+                    }
+                ]
+            },
+            {
+                "divider": true
+            },
+            {
+                "label": "Adjustments",
+                "id": "image/adjustments",
+                "children": [
+                    {
+                        "familiarity": 43.22659812886266,
+                        "relevancy": 93.51707208859649,
+                        "label": "Brightness/Contrast...",
+                        "id": "image/adjustments/brightness-contrast"
+                    },
+                    {
+                        "familiarity": 62.75824998410887,
+                        "relevancy": 93.52911583315765,
+                        "label": "Levels...",
+                        "id": "image/adjustments/levels"
+                    },
+                    {
+                        "familiarity": 80.57119623170543,
+                        "relevancy": 78.91714582571257,
+                        "label": "Curves...",
+                        "id": "image/adjustments/curves"
+                    },
+                    {
+                        "familiarity": 0.6269169248577566,
+                        "relevancy": 90.91720611923468,
+                        "label": "Exposure...",
+                        "id": "image/adjustments/exposure"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 98.75015043783343,
+                        "relevancy": 89.6714703377992,
+                        "label": "Vibrance...",
+                        "id": "image/adjustments/vibrance"
+                    },
+                    {
+                        "familiarity": 98.92352898929269,
+                        "relevancy": 82.29971659422168,
+                        "label": "Hue/Saturation...",
+                        "id": "image/adjustments/hue-saturation"
+                    },
+                    {
+                        "familiarity": 19.498250985802954,
+                        "relevancy": 7.223993837528142,
+                        "label": "Color Balance...",
+                        "id": "image/adjustments/color-balance"
+                    },
+                    {
+                        "familiarity": 92.49234281318678,
+                        "relevancy": 33.90761682771131,
+                        "label": "Black & White...",
+                        "id": "image/adjustments/black-and-white"
+                    },
+                    {
+                        "familiarity": 11.428139490714395,
+                        "relevancy": 26.005568159102367,
+                        "label": "Photo Filter...",
+                        "id": "image/adjustments/photo-filter"
+                    },
+                    {
+                        "familiarity": 95.17475165690404,
+                        "relevancy": 27.048635662592424,
+                        "label": "Channel Mixer...",
+                        "id": "image/adjustments/channel-mixer"
+                    },
+                    {
+                        "familiarity": 87.33255635572202,
+                        "relevancy": 51.31064689613139,
+                        "label": "Color Lookup...",
+                        "id": "image/adjustments/color-lookup"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 54.14634458011817,
+                        "relevancy": 98.32766041920127,
+                        "label": "Invert",
+                        "id": "image/adjustments/invert"
+                    },
+                    {
+                        "familiarity": 44.200011400187655,
+                        "relevancy": 45.6901883058183,
+                        "label": "Posterize...",
+                        "id": "image/adjustments/posterize"
+                    },
+                    {
+                        "familiarity": 77.14209132968011,
+                        "relevancy": 19.230984341450117,
+                        "label": "Threshold...",
+                        "id": "image/adjustments/threshold"
+                    },
+                    {
+                        "familiarity": 13.955137189959753,
+                        "relevancy": 78.46514972334087,
+                        "label": "Gradient Map...",
+                        "id": "image/adjustments/gradient-map"
+                    },
+                    {
+                        "familiarity": 88.94427679249542,
+                        "relevancy": 27.533399445063466,
+                        "label": "Selective Color...",
+                        "id": "image/adjustments/selective-color"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 7.428224406238259,
+                        "relevancy": 53.578647835444436,
+                        "label": "Shadow/Highlights...",
+                        "id": "image/adjustments/shadow-highlights"
+                    },
+                    {
+                        "familiarity": 87.73511033646535,
+                        "relevancy": 77.64044498819432,
+                        "label": "HDR Toning...",
+                        "id": "image/adjustments/hdr-toning"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 78.64922804142715,
+                        "relevancy": 79.1006016093199,
+                        "label": "Desaturate",
+                        "id": "image/adjustments/desaturate"
+                    },
+                    {
+                        "familiarity": 70.31684173052406,
+                        "relevancy": 41.62426433240122,
+                        "label": "Match Color...",
+                        "id": "image/adjustments/match-color"
+                    },
+                    {
+                        "familiarity": 30.086806594105585,
+                        "relevancy": 43.26971699783253,
+                        "label": "Replace Color...",
+                        "id": "image/adjustments/replace-color"
+                    },
+                    {
+                        "familiarity": 55.8033670533986,
+                        "relevancy": 3.028782743986669,
+                        "label": "Equalize...",
+                        "id": "image/adjustments/equalize"
+                    }
+                ]
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 7.768620086129019,
+                "relevancy": 60.44044072550266,
+                "label": "Auto Tone",
+                "id": "image/auto-tone"
+            },
+            {
+                "familiarity": 20.3781255303336,
+                "relevancy": 33.22932301980656,
+                "label": "Auto Contrast",
+                "id": "image/auto-contrast"
+            },
+            {
+                "familiarity": 75.0140030901999,
+                "relevancy": 49.05138940677212,
+                "label": "Auto Color",
+                "id": "image/auto-color"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 7.590548691737453,
+                "relevancy": 58.76000730437215,
+                "label": "Image Size...",
+                "id": "image/image-size"
+            },
+            {
+                "familiarity": 53.78590504470003,
+                "relevancy": 48.77855963018084,
+                "label": "Canvas Size...",
+                "id": "image/canvas-size"
+            },
+            {
+                "label": "Image Rotation...",
+                "id": "image/image-rotation",
+                "children": [
+                    {
+                        "familiarity": 24.358078694958362,
+                        "relevancy": 40.33341736082979,
+                        "label": "180\u00b0",
+                        "id": "image/image-rotation/rotate-180-degrees"
+                    },
+                    {
+                        "familiarity": 99.61144852077332,
+                        "relevancy": 37.29217299184201,
+                        "label": "90\u00b0 Clockwise",
+                        "id": "image/image-rotation/rotate-90-degrees-clockwise"
+                    },
+                    {
+                        "familiarity": 65.71750837075221,
+                        "relevancy": 75.63132875443152,
+                        "label": "90\u00b0 Counter Clockwise",
+                        "id": "image/image-rotation/rotate-90-degrees-counter-clockwise"
+                    },
+                    {
+                        "familiarity": 72.20859075975044,
+                        "relevancy": 34.22629026972881,
+                        "label": "Arbitrary...",
+                        "id": "image/image-rotation/rotate-arbitrary"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 83.15018949727103,
+                        "relevancy": 88.62795114968978,
+                        "label": "Flip Canvas Horizontal",
+                        "id": "image/image-rotation/flip-canvas-horizontal"
+                    },
+                    {
+                        "familiarity": 33.67460352436504,
+                        "relevancy": 30.151701112603778,
+                        "label": "Flip Canvas Vertical",
+                        "id": "image/image-rotation/flip-canvas-vertical"
+                    }
+                ]
+            },
+            {
+                "familiarity": 82.12809886593718,
+                "relevancy": 29.922487913331096,
+                "label": "Crop",
+                "id": "image/crop"
+            },
+            {
+                "familiarity": 57.43724041561582,
+                "relevancy": 27.66940191397823,
+                "label": "Trim...",
+                "id": "image/trim"
+            },
+            {
+                "familiarity": 40.803724196075144,
+                "relevancy": 91.89159653756566,
+                "label": "Reveal All...",
+                "id": "image/reveal-all"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 49.28854932492332,
+                "relevancy": 52.41531786108526,
+                "label": "Duplicate...",
+                "id": "image/duplicate"
+            },
+            {
+                "familiarity": 6.353671479650758,
+                "relevancy": 52.21121449234337,
+                "label": "Apply Image...",
+                "id": "image/apply-image"
+            },
+            {
+                "familiarity": 91.40291682310006,
+                "relevancy": 33.689594488534155,
+                "label": "Calculations...",
+                "id": "image/calculations"
+            },
+            {
+                "divider": true
+            },
+            {
+                "label": "Variables",
+                "id": "image/variables",
+                "children": [
+                    {
+                        "familiarity": 29.58947548889219,
+                        "relevancy": 60.57583579447423,
+                        "label": "Define...",
+                        "id": "image/variables/define"
+                    },
+                    {
+                        "familiarity": 28.13338223831937,
+                        "relevancy": 74.54829945552896,
+                        "label": "Data Sets...",
+                        "id": "image/variables/data-sets"
+                    }
+                ]
+            },
+            {
+                "familiarity": 93.95171041636917,
+                "relevancy": 84.67508992933703,
+                "label": "Apply Data Set...",
+                "id": "image/apply-data-set"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 54.88200977720625,
+                "relevancy": 40.04480978884081,
+                "label": "Trap...",
+                "id": "image/trap"
+            },
+            {
+                "divider": true
+            },
+            {
+                "label": "Analysis",
+                "id": "image/analysis",
+                "children": [
+                    {
+                        "label": "Set Measurement Scale",
+                        "id": "image/analysis/set-measurement-scale",
+                        "children": [
+                            {
+                                "familiarity": 13.267165506649226,
+                                "relevancy": 59.003254860693986,
+                                "label": "Default",
+                                "id": "image/analysis/set-measurement-scale/set-meaurement-scale-default"
+                            },
+                            {
+                                "familiarity": 82.69667449190237,
+                                "relevancy": 34.66007305888855,
+                                "label": "Custom...",
+                                "id": "image/analysis/set-measurement-scale/set-meaurement-scale-custom"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "Select Data Points",
+                        "id": "image/analysis/select-data-points",
+                        "children": [
+                            {
+                                "familiarity": 89.70203081721476,
+                                "relevancy": 63.27361449455595,
+                                "label": "Custom",
+                                "id": "image/analysis/select-data-points/select-data-points-custom"
+                            }
+                        ]
+                    },
+                    {
+                        "familiarity": 70.34549400885972,
+                        "relevancy": 33.24961282092295,
+                        "label": "Record Measurements",
+                        "id": "image/analysis/record-measurements"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 52.111828035497155,
+                        "relevancy": 89.55256787307245,
+                        "label": "Ruler Tool",
+                        "id": "image/analysis/ruler-tool"
+                    },
+                    {
+                        "familiarity": 55.42413971098193,
+                        "relevancy": 46.28673121765283,
+                        "label": "Count Tool",
+                        "id": "image/analysis/count-tool"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 22.16815259428211,
+                        "relevancy": 31.084483421844933,
+                        "label": "Place Scale Marker...",
+                        "id": "image/analysis/place-scale-marker"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "label": "Layer",
+        "id": "layer",
+        "children": [
+            {
+                "label": "New",
+                "id": "layer/new",
+                "children": [
+                    {
+                        "familiarity": 71.80703817739689,
+                        "relevancy": 88.94018687046601,
+                        "label": "Layer...",
+                        "id": "layer/new/layer"
+                    },
+                    {
+                        "familiarity": 25.765587355009057,
+                        "relevancy": 28.152042887607664,
+                        "label": "Layer From Background...",
+                        "id": "layer/new/layer-from-background"
+                    },
+                    {
+                        "familiarity": 42.602843668697396,
+                        "relevancy": 28.414161912789226,
+                        "label": "Group...",
+                        "id": "layer/new/group"
+                    },
+                    {
+                        "familiarity": 49.16393318197814,
+                        "relevancy": 49.954458583669904,
+                        "label": "Group From Layers...",
+                        "id": "layer/new/group-from-layers"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 29.60402151647684,
+                        "relevancy": 44.124171668851076,
+                        "label": "Layer Via Copy",
+                        "id": "layer/new/layer-via-copy"
+                    },
+                    {
+                        "familiarity": 95.12180192488368,
+                        "relevancy": 13.441731665995027,
+                        "label": "Layer Via Cut",
+                        "id": "layer/new/layer-via-cut"
+                    }
+                ]
+            },
+            {
+                "familiarity": 6.967926575690997,
+                "relevancy": 47.502284124818004,
+                "label": "Copy CSS",
+                "id": "layer/copy-css"
+            },
+            {
+                "familiarity": 3.0630542708116826,
+                "relevancy": 99.79450389374345,
+                "label": "Duplicate Layer...",
+                "id": "layer/duplicate-layer"
+            },
+            {
+                "label": "Delete",
+                "id": "layer/delete",
+                "children": [
+                    {
+                        "familiarity": 28.84858821637343,
+                        "relevancy": 28.983368500037933,
+                        "label": "Layer",
+                        "id": "layer/delete/layer"
+                    },
+                    {
+                        "familiarity": 48.9532980472854,
+                        "relevancy": 91.64673583217228,
+                        "label": "Hidden Layers",
+                        "id": "layer/delete/hidden-layers"
+                    }
+                ]
+            },
+            {
+                "familiarity": 59.949759005820425,
+                "relevancy": 3.67212234732075,
+                "label": "Rename Layer...",
+                "id": "layer/rename-layer"
+            },
+            {
+                "familiarity": 25.223224311136093,
+                "relevancy": 56.89424435018567,
+                "label": "Layer Style",
+                "id": "layer/layer-style"
+            },
+            {
+                "familiarity": 90.74039986877885,
+                "relevancy": 9.953384514391395,
+                "label": "Smart Filter",
+                "id": "layer/smart-filter"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 1.9195850102619039,
+                "relevancy": 3.8154917804039234,
+                "label": "New Fill Layer",
+                "id": "layer/new-fill-layer"
+            },
+            {
+                "label": "New Adjustment Layer",
+                "id": "layer/new-adjustment-layer",
+                "children": [
+                    {
+                        "familiarity": 19.062147560738786,
+                        "relevancy": 6.4640377288348265,
+                        "label": "Brightness/Contrast...",
+                        "id": "layer/new-adjustment-layer/brightness-contrast"
+                    },
+                    {
+                        "familiarity": 42.71862229690081,
+                        "relevancy": 4.905216545934444,
+                        "label": "Levels...",
+                        "id": "layer/new-adjustment-layer/levels"
+                    },
+                    {
+                        "familiarity": 81.39082386192618,
+                        "relevancy": 39.17148924489554,
+                        "label": "Curves...",
+                        "id": "layer/new-adjustment-layer/curves"
+                    },
+                    {
+                        "familiarity": 95.03962362686686,
+                        "relevancy": 6.035061725863889,
+                        "label": "Exposure...",
+                        "id": "layer/new-adjustment-layer/exposure"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 1.629272853387398,
+                        "relevancy": 80.19316619275455,
+                        "label": "Vibrance...",
+                        "id": "layer/new-adjustment-layer/vibrance"
+                    },
+                    {
+                        "familiarity": 68.35242012964825,
+                        "relevancy": 81.72930560392537,
+                        "label": "Hue/Saturation...",
+                        "id": "layer/new-adjustment-layer/hue-saturation"
+                    },
+                    {
+                        "familiarity": 55.980819698352406,
+                        "relevancy": 17.5255942959639,
+                        "label": "Color Balance...",
+                        "id": "layer/new-adjustment-layer/color-balance"
+                    },
+                    {
+                        "familiarity": 47.52471000124467,
+                        "relevancy": 7.012020306039924,
+                        "label": "Black & White...",
+                        "id": "layer/new-adjustment-layer/black-and-white"
+                    },
+                    {
+                        "familiarity": 2.8195241186186992,
+                        "relevancy": 56.40336070639207,
+                        "label": "Photo Filter...",
+                        "id": "layer/new-adjustment-layer/photo-filter"
+                    },
+                    {
+                        "familiarity": 93.62850156841631,
+                        "relevancy": 23.232735737668175,
+                        "label": "Channel Mixer...",
+                        "id": "layer/new-adjustment-layer/channel-mixer"
+                    },
+                    {
+                        "familiarity": 39.05304022027251,
+                        "relevancy": 60.981684228236055,
+                        "label": "Color Lookup...",
+                        "id": "layer/new-adjustment-layer/color-lookup"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 73.07807897563747,
+                        "relevancy": 76.66063722665878,
+                        "label": "Invert...",
+                        "id": "layer/new-adjustment-layer/invert"
+                    },
+                    {
+                        "familiarity": 51.40197038735113,
+                        "relevancy": 49.57465757984411,
+                        "label": "Posterize...",
+                        "id": "layer/new-adjustment-layer/posterize"
+                    },
+                    {
+                        "familiarity": 76.06477685554123,
+                        "relevancy": 60.442671003465605,
+                        "label": "Threshold...",
+                        "id": "layer/new-adjustment-layer/threshold"
+                    },
+                    {
+                        "familiarity": 60.25789058380023,
+                        "relevancy": 80.50256879953876,
+                        "label": "Gradient Map...",
+                        "id": "layer/new-adjustment-layer/gradient-map"
+                    },
+                    {
+                        "familiarity": 80.76945719582585,
+                        "relevancy": 95.91129110093465,
+                        "label": "Selective Color...",
+                        "id": "layer/new-adjustment-layer/selective-color"
+                    }
+                ]
+            },
+            {
+                "familiarity": 65.01754210481872,
+                "relevancy": 80.29121536187776,
+                "label": "Layer Content Options...",
+                "id": "layer/layer-content-options"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 85.22770171293324,
+                "relevancy": 57.884271165983115,
+                "label": "Layer Mask",
+                "id": "layer/layer-mask"
+            },
+            {
+                "familiarity": 91.05060182803497,
+                "relevancy": 55.075413388335,
+                "label": "Vector Mask",
+                "id": "layer/vector-mask"
+            },
+            {
+                "familiarity": 51.971907848035706,
+                "relevancy": 97.29724212251966,
+                "label": "Create Clipping Mask",
+                "id": "layer/create-clipping-mask"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 6.774648626031265,
+                "relevancy": 31.011143687504415,
+                "label": "Smart Objects",
+                "id": "layer/smart-objects"
+            },
+            {
+                "familiarity": 18.20291298633425,
+                "relevancy": 64.61361340501044,
+                "label": "Video Layers",
+                "id": "layer/video-layers"
+            },
+            {
+                "familiarity": 59.8118937614477,
+                "relevancy": 53.653220174274665,
+                "label": "Rasterize",
+                "id": "layer/rasterize"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 29.098623606581985,
+                "relevancy": 23.246326201402844,
+                "label": "New Layer Basd Slice",
+                "id": "layer/new-layer-based-slice"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 55.30368066851595,
+                "relevancy": 18.340083053877265,
+                "label": "Group Layers",
+                "id": "layer/group-layers"
+            },
+            {
+                "familiarity": 70.16339863660441,
+                "relevancy": 70.58319948459487,
+                "label": "Ungroup Layers",
+                "id": "layer/ungroup-layers"
+            },
+            {
+                "familiarity": 87.65095656727775,
+                "relevancy": 57.3516870228273,
+                "label": "Hide Layers",
+                "id": "layer/hide-layers"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 13.088785700677509,
+                "relevancy": 3.8448825541872456,
+                "label": "Arrange",
+                "id": "layer/arrange"
+            },
+            {
+                "familiarity": 45.497014903937696,
+                "relevancy": 79.8938059425188,
+                "label": "Combine Shapes",
+                "id": "layer/combine-shapes"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 81.39318948304344,
+                "relevancy": 38.39272168734135,
+                "label": "Align",
+                "id": "layer/align"
+            },
+            {
+                "familiarity": 38.00615588476709,
+                "relevancy": 9.747973236054063,
+                "label": "Distribute",
+                "id": "layer/distribute"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 26.756283344477772,
+                "relevancy": 64.069321784438,
+                "label": "Lock Layers",
+                "id": "layer/lock-layers"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 65.37755278195382,
+                "relevancy": 81.8696431005267,
+                "label": "Link Layers",
+                "id": "layer/link-layers"
+            },
+            {
+                "familiarity": 96.62466000821497,
+                "relevancy": 21.99815921640664,
+                "label": "Select Linked Layers",
+                "id": "layer/select-linked-layers"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 83.26302478793698,
+                "relevancy": 13.68557443217605,
+                "label": "Merge Down",
+                "id": "layer/merge-down"
+            },
+            {
+                "familiarity": 92.17387720075348,
+                "relevancy": 36.22486277908874,
+                "label": "Merge Visible",
+                "id": "layer/merge-visible"
+            },
+            {
+                "familiarity": 56.78415846676381,
+                "relevancy": 97.74030757415896,
+                "label": "Flatten Image",
+                "id": "layer/flatten-image"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 56.715769056771606,
+                "relevancy": 31.991778519621295,
+                "label": "Matting",
+                "id": "layer/matting"
+            }
+        ]
+    },
+    {
+        "label": "Type",
+        "id": "type",
+        "children": [
+            {
+                "familiarity": 66.48375968428745,
+                "relevancy": 40.77056732495629,
+                "label": "Add Fonts from Typekit...",
+                "id": "type/add-fonts-from-typekit"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 30.060492561434028,
+                "relevancy": 65.96693102618912,
+                "label": "Panels",
+                "id": "type/panels"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 67.33381128355013,
+                "relevancy": 37.40525137399604,
+                "label": "Anti-Alias",
+                "id": "type/anti-alias"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 35.72981484305674,
+                "relevancy": 52.99610142962629,
+                "label": "Orientation",
+                "id": "type/orientation"
+            },
+            {
+                "familiarity": 37.99383862546901,
+                "relevancy": 38.10315561536753,
+                "label": "Open Type",
+                "id": "type/opentype"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 12.14891924802104,
+                "relevancy": 68.10525539636699,
+                "label": "Extrude to 3D",
+                "id": "type/extrude-to-3d"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 69.25723342615068,
+                "relevancy": 71.81377662356797,
+                "label": "Create Work Path",
+                "id": "type/create-work-path"
+            },
+            {
+                "familiarity": 86.3342592609646,
+                "relevancy": 35.1299521394099,
+                "label": "Convert to Shape",
+                "id": "type/convert-to-shape"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 52.129868835633765,
+                "relevancy": 65.57853851551684,
+                "label": "Rasterize Type Layer",
+                "id": "type/rasterize-type-layer"
+            },
+            {
+                "familiarity": 43.372229146717835,
+                "relevancy": 57.10378852516431,
+                "label": "Convert Text Shape Type",
+                "id": "type/convert-text-shape-type"
+            },
+            {
+                "familiarity": 8.945783958100218,
+                "relevancy": 60.95869415689095,
+                "label": "Warp Text...",
+                "id": "type/warp-text"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 17.698640577983216,
+                "relevancy": 31.58045050646452,
+                "label": "Font Preview Size",
+                "id": "type/font-preview-size"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 12.830288806263058,
+                "relevancy": 72.96031395742065,
+                "label": "Language Options",
+                "id": "type/language-options"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 47.889312885336444,
+                "relevancy": 35.910509595131,
+                "label": "Update All Text Layers",
+                "id": "type/update-all-text-layers"
+            },
+            {
+                "familiarity": 10.258278541506572,
+                "relevancy": 97.8209520326614,
+                "label": "Replace All Missing Fonts",
+                "id": "type/replace-all-missing-fonts"
+            },
+            {
+                "familiarity": 34.915336693875496,
+                "relevancy": 80.00891180423659,
+                "label": "Resolve Missing Fonts",
+                "id": "type/resolve-missing-fonts"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 81.92427234279883,
+                "relevancy": 66.70332093240734,
+                "label": "Paste Lorem Ipsum",
+                "id": "type/paste-lorem-ipsum"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 72.95462912748827,
+                "relevancy": 57.16068381489102,
+                "label": "Load Default Type Styles",
+                "id": "type/load-default-type-styles"
+            },
+            {
+                "familiarity": 60.347819889943906,
+                "relevancy": 71.57572429662287,
+                "label": "Save Default Type Styles",
+                "id": "type/save-default-type-styles"
+            }
+        ]
+    },
+    {
+        "label": "Select",
+        "id": "select",
+        "children": [
+            {
+                "familiarity": 79.82402570284837,
+                "relevancy": 34.986586125767836,
+                "label": "All",
+                "id": "select/all"
+            },
+            {
+                "familiarity": 73.289624190273,
+                "relevancy": 74.91288540808996,
+                "label": "Deselect",
+                "id": "selct/deselect"
+            },
+            {
+                "familiarity": 0.3092258594678654,
+                "relevancy": 88.44493035032602,
+                "label": "Reselect",
+                "id": "select/reselect"
+            },
+            {
+                "familiarity": 45.503762962857984,
+                "relevancy": 45.83125463002887,
+                "label": "Inverse",
+                "id": "select/inverse"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 12.759787809346633,
+                "relevancy": 22.970727167112194,
+                "label": "All Layers",
+                "id": "select/all-layers"
+            },
+            {
+                "familiarity": 1.3775546374594105,
+                "relevancy": 41.05645555470251,
+                "label": "Deselect Layers",
+                "id": "select/deselect-layers"
+            },
+            {
+                "familiarity": 81.50268540350721,
+                "relevancy": 9.680740508012631,
+                "label": "Find Layers",
+                "id": "select/find-layers"
+            },
+            {
+                "familiarity": 30.811466276087895,
+                "relevancy": 80.25274151701394,
+                "label": "Isolate Layers",
+                "id": "select/isolate-layers"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 96.71383828618468,
+                "relevancy": 0.40095146963265993,
+                "label": "Color Range...",
+                "id": "select/color-range"
+            },
+            {
+                "familiarity": 53.77706970103793,
+                "relevancy": 18.715478513640782,
+                "label": "Focus Area...",
+                "id": "select/focus-area"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 75.55139490571989,
+                "relevancy": 35.561544685686165,
+                "label": "Refine Mask...",
+                "id": "select/refine-mask"
+            },
+            {
+                "familiarity": 67.52234859576097,
+                "relevancy": 42.79629863654861,
+                "label": "Modify",
+                "id": "select/modify"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 69.57974410147844,
+                "relevancy": 89.87359095569556,
+                "label": "Grow",
+                "id": "select/grow"
+            },
+            {
+                "familiarity": 54.76149032436084,
+                "relevancy": 67.68957404839452,
+                "label": "Similar",
+                "id": "select/similar"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 95.67267741725726,
+                "relevancy": 32.79263293209017,
+                "label": "Transform Selection",
+                "id": "select/transform-selection"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 2.013760988121216,
+                "relevancy": 57.73766231438508,
+                "label": "Edit in Quick Mask Mode",
+                "id": "select/edit-in-quick-mask-mode"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 71.61595745869379,
+                "relevancy": 52.02624212344158,
+                "label": "Load Selection...",
+                "id": "select/load-selection"
+            },
+            {
+                "familiarity": 46.71360707555968,
+                "relevancy": 59.44737837453822,
+                "label": "Save Selection...",
+                "id": "select/save-selection"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 83.30585358436667,
+                "relevancy": 2.3679924698151167,
+                "label": "New 3D Extrusion",
+                "id": "select/new-3d-extrusion"
+            }
+        ]
+    },
+    {
+        "label": "Filter",
+        "id": "filter",
+        "children": [
+            {
+                "familiarity": 51.79675753291231,
+                "relevancy": 72.4607641997689,
+                "label": "Last Filter",
+                "id": "filter/last-filter"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 97.63058467898043,
+                "relevancy": 91.78595444625873,
+                "label": "Convert For Smart Filters",
+                "id": "filter/convert-for-smart-filters"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 67.18899995397844,
+                "relevancy": 73.27114929944048,
+                "label": "Filter Gallery...",
+                "id": "filter/filter-gallery"
+            },
+            {
+                "familiarity": 94.357858916041,
+                "relevancy": 13.522753291302603,
+                "label": "Adaptive Wide Angle...",
+                "id": "filter/adaptive-wide-angle"
+            },
+            {
+                "familiarity": 51.184530825641,
+                "relevancy": 5.989021971119612,
+                "label": "Camera Raw Filter...",
+                "id": "filter/camera-raw-filter"
+            },
+            {
+                "familiarity": 77.78594476823419,
+                "relevancy": 1.6512671326142314,
+                "label": "Lens Correction...",
+                "id": "filter/lens-correction"
+            },
+            {
+                "familiarity": 49.024177693512016,
+                "relevancy": 4.349851860697029,
+                "label": "Liquify...",
+                "id": "filter/liquify"
+            },
+            {
+                "familiarity": 15.32978285985429,
+                "relevancy": 42.727741654755356,
+                "label": "Vanishing Point...",
+                "id": "filter/vanishing-point"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 5.605361081458671,
+                "relevancy": 77.96114957555571,
+                "label": "3D",
+                "id": "filter/3d"
+            },
+            {
+                "label": "Blur",
+                "id": "filter/blur",
+                "children": [
+                    {
+                        "familiarity": 12.064943675369456,
+                        "relevancy": 22.60218112089092,
+                        "label": "Average",
+                        "id": "filter/blur/average"
+                    },
+                    {
+                        "familiarity": 94.63595832022875,
+                        "relevancy": 99.98935157976511,
+                        "label": "Blur",
+                        "id": "filter/blur/blur"
+                    },
+                    {
+                        "familiarity": 75.01135550974216,
+                        "relevancy": 59.78574006656125,
+                        "label": "Blur More...",
+                        "id": "filter/blur/blur-more"
+                    },
+                    {
+                        "familiarity": 81.09840772100651,
+                        "relevancy": 87.15724992998534,
+                        "label": "Box Blur...",
+                        "id": "filter/blur/box-blur"
+                    },
+                    {
+                        "familiarity": 40.36078188550493,
+                        "relevancy": 97.28674014079175,
+                        "label": "Gaussian Blur...",
+                        "id": "filter/blur/gaussian-blur"
+                    },
+                    {
+                        "familiarity": 65.93728727555555,
+                        "relevancy": 56.12143584621245,
+                        "label": "Lens Blur",
+                        "id": "filter/blur/lens-blur"
+                    },
+                    {
+                        "familiarity": 11.619365543142601,
+                        "relevancy": 51.69089853469576,
+                        "label": "Motion Blur",
+                        "id": "filter/blur/motion-blur"
+                    },
+                    {
+                        "familiarity": 65.95764455778391,
+                        "relevancy": 53.25640638947522,
+                        "label": "Radial Blur",
+                        "id": "filter/blur/radial-blur"
+                    },
+                    {
+                        "familiarity": 43.32523992210269,
+                        "relevancy": 91.67766293217622,
+                        "label": "Shape Blur",
+                        "id": "filter/blur/shape-blur"
+                    },
+                    {
+                        "familiarity": 60.66069978190348,
+                        "relevancy": 63.00716007200864,
+                        "label": "Smart Blur",
+                        "id": "filter/blur/smart-blur"
+                    },
+                    {
+                        "familiarity": 56.02552346969454,
+                        "relevancy": 65.87038794153766,
+                        "label": "Surface Blur",
+                        "id": "filter/blur/surface-blur"
+                    }
+                ]
+            },
+            {
+                "familiarity": 10.484443110131448,
+                "relevancy": 81.03759292664449,
+                "label": "Blur Gallery",
+                "id": "filter/blur-gallery"
+            },
+            {
+                "familiarity": 69.25337707664706,
+                "relevancy": 84.03231057139757,
+                "label": "Distort",
+                "id": "filter/distort"
+            },
+            {
+                "label": "Noise",
+                "id": "filter/noise",
+                "children": [
+                    {
+                        "familiarity": 42.371368227520534,
+                        "relevancy": 31.666266581482038,
+                        "label": "Add Noise",
+                        "id": "filter/noise/add-noise"
+                    },
+                    {
+                        "familiarity": 95.36495514768022,
+                        "relevancy": 51.15029359159984,
+                        "label": "Despeckle",
+                        "id": "filter/noise/despeckle"
+                    },
+                    {
+                        "familiarity": 37.06683136979926,
+                        "relevancy": 40.88255392339762,
+                        "label": "Dust and Scratches",
+                        "id": "filter/noise/dust-and-scrathes"
+                    },
+                    {
+                        "familiarity": 26.692729369858426,
+                        "relevancy": 86.92272766785678,
+                        "label": "Median",
+                        "id": "filter/noise/median"
+                    },
+                    {
+                        "familiarity": 97.15055003369646,
+                        "relevancy": 0.7250235932922067,
+                        "label": "Reduce Noise",
+                        "id": "filter/noise/reduce-noise"
+                    }
+                ]
+            },
+            {
+                "familiarity": 71.7002660386333,
+                "relevancy": 18.39471843678373,
+                "label": "Pixelate",
+                "id": "filter/pixelate"
+            },
+            {
+                "label": "Render",
+                "id": "filter/render",
+                "children": [
+                    {
+                        "familiarity": 0.46106503866178983,
+                        "relevancy": 26.922603692302836,
+                        "label": "Flame...",
+                        "id": "filter/render/flame"
+                    },
+                    {
+                        "familiarity": 34.528201223067015,
+                        "relevancy": 59.400568280409026,
+                        "label": "Picture Frame...",
+                        "id": "filter/render/picture-frame"
+                    },
+                    {
+                        "familiarity": 73.82850423291647,
+                        "relevancy": 41.600918383379145,
+                        "label": "Tree...",
+                        "id": "filter/render/tree"
+                    },
+                    {
+                        "divider": true
+                    },
+                    {
+                        "familiarity": 80.52497939900306,
+                        "relevancy": 35.624583718111936,
+                        "label": "Clouds...",
+                        "id": "filter/render/clouds"
+                    },
+                    {
+                        "familiarity": 78.35101346839785,
+                        "relevancy": 50.68894606490252,
+                        "label": "Difference Clouds",
+                        "id": "filter/render/difference-clouds"
+                    },
+                    {
+                        "familiarity": 96.74256468674149,
+                        "relevancy": 29.448015732777797,
+                        "label": "Fibers...",
+                        "id": "filter/render/fibers"
+                    },
+                    {
+                        "familiarity": 37.107325198025876,
+                        "relevancy": 97.6050505144219,
+                        "label": "Lens Flare...",
+                        "id": "filter/render/lens-flare"
+                    },
+                    {
+                        "familiarity": 20.166820931345807,
+                        "relevancy": 31.14115748429428,
+                        "label": "Lighting effect...",
+                        "id": "filter/render/lighting-effect"
+                    }
+                ]
+            },
+            {
+                "familiarity": 16.2529894029497,
+                "relevancy": 96.9218829355906,
+                "label": "Sharpen",
+                "id": "filter/sharpen"
+            },
+            {
+                "familiarity": 53.58898384469367,
+                "relevancy": 53.60491685768548,
+                "label": "Stylize",
+                "id": "filter/stylize"
+            },
+            {
+                "familiarity": 34.60553122754888,
+                "relevancy": 45.02242286001462,
+                "label": "Video",
+                "id": "filter/video"
+            },
+            {
+                "familiarity": 69.74527629471488,
+                "relevancy": 42.41889015957621,
+                "label": "Other",
+                "id": "filter/other"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 64.8042417080131,
+                "relevancy": 78.69876907510339,
+                "label": "Digmarc",
+                "id": "filter/digmarc"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 67.27051512538108,
+                "relevancy": 20.480172418828204,
+                "label": "Browse Filters Online",
+                "id": "filter/browse-filters-online"
+            }
+        ]
+    },
+    {
+        "label": "3D",
+        "id": "3d",
+        "children": [
+            {
+                "familiarity": 93.15457284671587,
+                "relevancy": 47.20605124853105,
+                "label": "New 3D Layer from File...",
+                "id": "3d/new-3d-layer-from-file"
+            },
+            {
+                "familiarity": 46.3419476352398,
+                "relevancy": 4.83764109961875,
+                "label": "Merge 3D Layers",
+                "id": "3d/merge-3d-layers"
+            },
+            {
+                "familiarity": 47.15675133757203,
+                "relevancy": 55.184733404222456,
+                "label": "Export 3D Layer...",
+                "id": "3d/export-3d-layer"
+            },
+            {
+                "familiarity": 79.07937321923514,
+                "relevancy": 38.80582846439135,
+                "label": "Share 3D Layer on Sketchfab...",
+                "id": "3d/share-3d-layer-on-sketchfab"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 69.05618378649638,
+                "relevancy": 21.080668658700198,
+                "label": "Get More Content...",
+                "id": "3d/get-more-content"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 48.76255601440656,
+                "relevancy": 34.055069163210106,
+                "label": "New 3D Extrusion from Selected Layer",
+                "id": "3d/new-3d-extrusion-from-selected-layer"
+            },
+            {
+                "familiarity": 11.251831056343164,
+                "relevancy": 42.94459587750414,
+                "label": "New 3D Extrusion from Selected Path",
+                "id": "3d/new-3d-extrusion-from-selected-path"
+            },
+            {
+                "familiarity": 0.1108876898763489,
+                "relevancy": 71.9383835812502,
+                "label": "New 3D Extrusion from Current Selection",
+                "id": "3d/new-3d-extrusion-from-current-selection"
+            },
+            {
+                "familiarity": 14.53376457707255,
+                "relevancy": 38.896874483190324,
+                "label": "New Mesh From Layer",
+                "id": "3d/new-mesh-from-layer"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 60.33931541801946,
+                "relevancy": 68.05149312338592,
+                "label": "Group Objects",
+                "id": "3d/group-objects"
+            },
+            {
+                "familiarity": 4.920109759916591,
+                "relevancy": 20.868820928763967,
+                "label": "Group All Objects in Scene",
+                "id": "3d/group-all-objects-in-scene"
+            },
+            {
+                "familiarity": 14.958364856470062,
+                "relevancy": 45.52048412471604,
+                "label": "Move Objects to Ground Plane",
+                "id": "3d/move-objects-to-ground-plane"
+            },
+            {
+                "familiarity": 50.58801005355289,
+                "relevancy": 80.68803961919237,
+                "label": "Pach Objects on Ground Plane",
+                "id": "3d/pack-objects-on-ground-plane"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 61.88384027359385,
+                "relevancy": 43.551793276668725,
+                "label": "New Tiles Painting From Layer",
+                "id": "3d/new-tiled-painting-from-layer"
+            },
+            {
+                "familiarity": 70.06124220253015,
+                "relevancy": 35.693633162620706,
+                "label": "Generate UVs...",
+                "id": "3d/generate-uvs"
+            },
+            {
+                "familiarity": 98.56356899904813,
+                "relevancy": 49.780733943866764,
+                "label": "Paint Falloff...",
+                "id": "3d/paint-falloff"
+            },
+            {
+                "familiarity": 55.71605829787531,
+                "relevancy": 81.2986247130001,
+                "label": "Paint System",
+                "id": "3d/paint-system"
+            },
+            {
+                "familiarity": 49.434127707650234,
+                "relevancy": 61.83270776974903,
+                "label": "Paint on Target Texture",
+                "id": "3d/paint-on-target-texture"
+            },
+            {
+                "familiarity": 73.88785478716018,
+                "relevancy": 12.864365582554038,
+                "label": "Select Paintable Areas",
+                "id": "3d/select-paintable-areas"
+            },
+            {
+                "familiarity": 52.537282565932884,
+                "relevancy": 25.782703258599437,
+                "label": "Create Painting Overlay",
+                "id": "3d/create-painting-overlay"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 15.217075574130279,
+                "relevancy": 33.973096652258704,
+                "label": "Split Extrusion",
+                "id": "3d/split-extrusion"
+            },
+            {
+                "familiarity": 13.391305747107673,
+                "relevancy": 21.573188757623363,
+                "label": "Apply Cross Section to Scene",
+                "id": "3d/apply-cross-section-to-scene"
+            },
+            {
+                "familiarity": 69.27025242785109,
+                "relevancy": 64.78586744114193,
+                "label": "Unify Scene for 3D Printing",
+                "id": "3d/unify-scene-for-3d-printing"
+            },
+            {
+                "familiarity": 94.57089319629608,
+                "relevancy": 6.86542581595787,
+                "label": "Add Constraint(s) From",
+                "id": "3d/add-constraints-from"
+            },
+            {
+                "familiarity": 12.486975338291817,
+                "relevancy": 93.47406699665711,
+                "label": "Show/Hide Polygons",
+                "id": "3d/show-hide-polygons"
+            },
+            {
+                "familiarity": 10.695421849789,
+                "relevancy": 77.66876650364024,
+                "label": "Make Work Path from 3D Layer",
+                "id": "3d/make-work-path-from-3d-layer"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 62.739017828671216,
+                "relevancy": 52.52619099786743,
+                "label": "Render",
+                "id": "3d/render"
+            },
+            {
+                "familiarity": 88.28512344783078,
+                "relevancy": 29.368217119772368,
+                "label": "Sketch With Current Brush",
+                "id": "3d/sketch-with-current-brush"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 10.990892713192624,
+                "relevancy": 14.550004731740273,
+                "label": "3D Print Settings...",
+                "id": "3d/3d-print-settings"
+            },
+            {
+                "familiarity": 28.011288311957372,
+                "relevancy": 17.609945333021205,
+                "label": "3D Print...",
+                "id": "3d/3d-print"
+            },
+            {
+                "familiarity": 72.23054888911926,
+                "relevancy": 29.946400624237146,
+                "label": "Cancel 3D Print",
+                "id": "3d/cancel-3d-print"
+            },
+            {
+                "familiarity": 6.0207584344916025,
+                "relevancy": 11.233755031365645,
+                "label": "3D Print Utilities...",
+                "id": "3d/3d-print-utilities"
+            }
+        ]
+    },
+    {
+        "label": "View",
+        "id": "view",
+        "children": [
+            {
+                "familiarity": 3.435652486812568,
+                "relevancy": 67.36298580331014,
+                "label": "Proof Setup",
+                "id": "view/proof-setup"
+            },
+            {
+                "familiarity": 19.878701752395244,
+                "relevancy": 44.538935467247185,
+                "label": "Proof Colors",
+                "id": "view/proof-colors"
+            },
+            {
+                "familiarity": 47.99106206646129,
+                "relevancy": 22.78083769481046,
+                "label": "Gamut Warning",
+                "id": "view/gamut-warning"
+            },
+            {
+                "familiarity": 37.43682461010055,
+                "relevancy": 24.344384238324736,
+                "label": "Pixel Aspect Ratio",
+                "id": "view/pixel-aspect-ratio"
+            },
+            {
+                "familiarity": 26.385072065930594,
+                "relevancy": 69.7760444908874,
+                "label": "Pixel Aspect Ratio Correction",
+                "id": "view/pixel-aspect-ratio-correcetion"
+            },
+            {
+                "familiarity": 76.31848732172911,
+                "relevancy": 66.33195009307934,
+                "label": "32-Bit Preview Options...",
+                "id": "view/32-bit-preview-options"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 94.9026041421278,
+                "relevancy": 89.2038115010545,
+                "label": "Zoom In",
+                "id": "view/zoom-in"
+            },
+            {
+                "familiarity": 33.99495024461403,
+                "relevancy": 30.646148974366525,
+                "label": "Zoom out",
+                "id": "view/zoom-out"
+            },
+            {
+                "familiarity": 95.85066301320084,
+                "relevancy": 42.35150333381446,
+                "label": "Fit On Screen",
+                "id": "view/fit-on-screen"
+            },
+            {
+                "familiarity": 42.21963496083504,
+                "relevancy": 6.568341339590667,
+                "label": "100%",
+                "id": "view/100%"
+            },
+            {
+                "familiarity": 52.55299489084506,
+                "relevancy": 9.54259460637763,
+                "label": "200%",
+                "id": "view/200%"
+            },
+            {
+                "familiarity": 75.38031227827764,
+                "relevancy": 93.72734911707165,
+                "label": "Print Size",
+                "id": "view/print-size"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 44.868764675263776,
+                "relevancy": 99.20843762876362,
+                "label": "Screen Mode",
+                "id": "view/screen-mode"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 66.99214927735287,
+                "relevancy": 75.5895038450849,
+                "label": "Extras",
+                "id": "view/extras"
+            },
+            {
+                "familiarity": 30.18457970699754,
+                "relevancy": 18.836979930231557,
+                "label": "Show",
+                "id": "view/show"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 68.60479880626733,
+                "relevancy": 44.26646922331583,
+                "label": "Rulers",
+                "id": "view/rulers"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 77.02705632865536,
+                "relevancy": 19.84416239268254,
+                "label": "Snap",
+                "id": "view/snap"
+            },
+            {
+                "familiarity": 30.57871018213315,
+                "relevancy": 92.17799641642279,
+                "label": "Snap To",
+                "id": "view/snap-to"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 59.79278133462841,
+                "relevancy": 92.46951648131213,
+                "label": "Lock Guides",
+                "id": "view/lock-guides"
+            },
+            {
+                "familiarity": 19.97381211291528,
+                "relevancy": 64.21068253724052,
+                "label": "Clear Guides",
+                "id": "view/clear-guides"
+            },
+            {
+                "familiarity": 42.66319663859212,
+                "relevancy": 40.54334234090238,
+                "label": "New Guide...",
+                "id": "view/new-guide"
+            },
+            {
+                "familiarity": 86.86172869677226,
+                "relevancy": 20.65513893491463,
+                "label": "New Guide Layout...",
+                "id": "view/new-guide-layout"
+            },
+            {
+                "familiarity": 45.18470338278191,
+                "relevancy": 97.66227947327937,
+                "label": "New Guides From Shape",
+                "id": "view/new-guides-from-shape"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 95.13559270257147,
+                "relevancy": 62.512951463584145,
+                "label": "Lock Slices",
+                "id": "view/lock-slices"
+            },
+            {
+                "familiarity": 47.36277692320171,
+                "relevancy": 36.41158880117702,
+                "label": "Clear Slices",
+                "id": "view/clear-slices"
+            }
+        ]
+    },
+    {
+        "label": "Window",
+        "id": "window",
+        "children": [
+            {
+                "familiarity": 45.837377274433656,
+                "relevancy": 78.35360233872449,
+                "label": "Arrange",
+                "id": "window/arrange"
+            },
+            {
+                "familiarity": 83.4902123249321,
+                "relevancy": 54.82434591975748,
+                "label": "Workspace",
+                "id": "window/workspace"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 40.01205509781245,
+                "relevancy": 38.25446341329862,
+                "label": "Browse Extensions Online...",
+                "id": "window/browse-extensions-online"
+            },
+            {
+                "familiarity": 65.7508833536223,
+                "relevancy": 5.509925178026376,
+                "label": "Extensions",
+                "id": "window/extensions"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 50.83906098256972,
+                "relevancy": 56.40218027690103,
+                "label": "3D",
+                "id": "window/3D"
+            },
+            {
+                "familiarity": 47.371864184818634,
+                "relevancy": 53.388563978659334,
+                "label": "Actions",
+                "id": "window/actions"
+            },
+            {
+                "familiarity": 31.79131525557757,
+                "relevancy": 22.93344219880322,
+                "label": "Adjustments",
+                "id": "window/adjustments"
+            },
+            {
+                "familiarity": 95.84699085577043,
+                "relevancy": 2.7349674355248266,
+                "label": "Brush",
+                "id": "window/brush"
+            },
+            {
+                "familiarity": 41.3817425718919,
+                "relevancy": 1.6673778075389278,
+                "label": "Brush Presets",
+                "id": "window/brush-presets"
+            },
+            {
+                "familiarity": 75.55056136355428,
+                "relevancy": 86.65592718844817,
+                "label": "Channels",
+                "id": "window/channels"
+            },
+            {
+                "familiarity": 94.05861297530355,
+                "relevancy": 47.294661645498515,
+                "label": "Character",
+                "id": "window/character"
+            },
+            {
+                "familiarity": 76.06997757128285,
+                "relevancy": 58.57195662647791,
+                "label": "Character Styles",
+                "id": "window/character-styles"
+            },
+            {
+                "familiarity": 38.935432965904916,
+                "relevancy": 87.3123738553348,
+                "label": "Clone Source",
+                "id": "window/clone-source"
+            },
+            {
+                "familiarity": 71.40066325985983,
+                "relevancy": 62.868301927295576,
+                "label": "Color",
+                "id": "window/color"
+            },
+            {
+                "familiarity": 44.92862592341902,
+                "relevancy": 37.702582265290665,
+                "label": "Histogram",
+                "id": "window/histogram"
+            },
+            {
+                "familiarity": 81.98897978652198,
+                "relevancy": 43.32703429949019,
+                "label": "History",
+                "id": "window/history"
+            },
+            {
+                "familiarity": 59.0475953704682,
+                "relevancy": 71.81788338792889,
+                "label": "Info",
+                "id": "window/info"
+            },
+            {
+                "familiarity": 25.2642746751767,
+                "relevancy": 61.12516368058317,
+                "label": "Layer Comps",
+                "id": "window/layer-comps"
+            },
+            {
+                "familiarity": 2.6253734754681735,
+                "relevancy": 32.04490139037155,
+                "label": "Layers",
+                "id": "window/layers"
+            },
+            {
+                "familiarity": 93.02607471218026,
+                "relevancy": 45.03253758439764,
+                "label": "Libraries",
+                "id": "window/libraries"
+            },
+            {
+                "familiarity": 59.258644657932116,
+                "relevancy": 65.00555211355598,
+                "label": "Measurement Log",
+                "id": "window/measurement-log"
+            },
+            {
+                "familiarity": 86.03491454882291,
+                "relevancy": 67.21431350033876,
+                "label": "Navigator",
+                "id": "window/navigator"
+            },
+            {
+                "familiarity": 47.74092813200211,
+                "relevancy": 94.02317556876575,
+                "label": "Notes",
+                "id": "window/notes"
+            },
+            {
+                "familiarity": 42.05727687137585,
+                "relevancy": 31.931271364982294,
+                "label": "Paragraph",
+                "id": "window/paragraph"
+            },
+            {
+                "familiarity": 36.5492813296684,
+                "relevancy": 22.775982370007565,
+                "label": "Paragraph Styles",
+                "id": "window/paragraph-styles"
+            },
+            {
+                "familiarity": 66.49197145449509,
+                "relevancy": 9.262590694268102,
+                "label": "Paths",
+                "id": "window/paths"
+            },
+            {
+                "familiarity": 58.93041865122808,
+                "relevancy": 18.166642763962383,
+                "label": "Properties",
+                "id": "window/properties"
+            },
+            {
+                "familiarity": 73.1259697036437,
+                "relevancy": 63.61689117244778,
+                "label": "Styles",
+                "id": "window/styles"
+            },
+            {
+                "familiarity": 82.2600404299043,
+                "relevancy": 58.71893667098663,
+                "label": "Swatches",
+                "id": "window/swatches"
+            },
+            {
+                "familiarity": 49.85750753894024,
+                "relevancy": 55.514868610711375,
+                "label": "Timeline",
+                "id": "window/timeline"
+            },
+            {
+                "familiarity": 67.30909258025014,
+                "relevancy": 21.920241660484784,
+                "label": "Tool Presets",
+                "id": "window/tool-presets"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 91.18790540927891,
+                "relevancy": 52.29978828283861,
+                "label": "Options",
+                "id": "window/options"
+            },
+            {
+                "familiarity": 41.044927292550895,
+                "relevancy": 88.24210180895933,
+                "label": "Tools",
+                "id": "window/tools"
+            }
+        ]
+    },
+    {
+        "label": "Help",
+        "id": "help",
+        "children": [
+            {
+                "familiarity": 63.619238017125845,
+                "relevancy": 77.59060716233611,
+                "label": "What's New...",
+                "id": "help/whats-new"
+            },
+            {
+                "familiarity": 61.39169813690811,
+                "relevancy": 87.67188762140414,
+                "label": "Photoshop Online Help...",
+                "id": "help/photoshop-online-help"
+            },
+            {
+                "familiarity": 84.44021733860455,
+                "relevancy": 73.60233012038232,
+                "label": "Photoshop Support Center...",
+                "id": "help/photoshop-support-center"
+            },
+            {
+                "familiarity": 81.17132420950452,
+                "relevancy": 60.33072381703269,
+                "label": "About Photoshop...",
+                "id": "help/about-photoshop"
+            },
+            {
+                "familiarity": 96.41630840551929,
+                "relevancy": 57.393222982438715,
+                "label": "About Plug-In...",
+                "id": "help/about-plugin"
+            },
+            {
+                "familiarity": 5.0415992352178085,
+                "relevancy": 67.83648523466115,
+                "label": "Legal Notices...",
+                "id": "help/legal-notices"
+            },
+            {
+                "familiarity": 47.90163698623451,
+                "relevancy": 15.501298776864347,
+                "label": "Manage Extensions...",
+                "id": "help/manage-extensions"
+            },
+            {
+                "familiarity": 75.00463757072832,
+                "relevancy": 52.06415685037818,
+                "label": "Browse Add-Ons...",
+                "id": "help/browse-add-ons"
+            },
+            {
+                "familiarity": 59.798183082566005,
+                "relevancy": 5.755597951806923,
+                "label": "Welcome...",
+                "id": "help/welcome"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 60.86459338739033,
+                "relevancy": 85.68280581605889,
+                "label": "System Info...",
+                "id": "help/system-info"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 32.43063655527726,
+                "relevancy": 41.42534315637062,
+                "label": "Manage My Account...",
+                "id": "help/manage-my-account"
+            },
+            {
+                "familiarity": 15.835666496070754,
+                "relevancy": 97.97213348699944,
+                "label": "Sign Out",
+                "id": "help/sign-out"
+            },
+            {
+                "familiarity": 80.96510715853667,
+                "relevancy": 16.57186878935636,
+                "label": "Updates...",
+                "id": "help/updates"
+            },
+            {
+                "divider": true
+            },
+            {
+                "familiarity": 44.334975270257914,
+                "relevancy": 5.910150259353141,
+                "label": "Photoshop Online...",
+                "id": "help/photoshop-online"
+            },
+            {
+                "familiarity": 24.559944110766907,
+                "relevancy": 30.471470677765964,
+                "label": "Photoshop Resources Online...",
+                "id": "help/photoshop-resources-online"
+            }
+        ]
+    }
+]

@@ -146,9 +146,23 @@ module.run(["$templateCache", function($templateCache) {
     "<div class=\"app-body\">\n" +
     "    <div class=\"activity-panel\">\n" +
     "        <div class=\"ap-header\">\n" +
-    "            <div class=\"ap-header__title\">\n" +
-    "                Tweets about Photoshop\n" +
+    "            <div class=\"l-block-small\">\n" +
+    "                <div class=\"ap-header__title\">\n" +
+    "                    Tweets about Photoshop\n" +
+    "                </div>\n" +
     "            </div>\n" +
+    "\n" +
+    "            <div class=\"l-block-small\">\n" +
+    "                <label>\n" +
+    "                    <input type=\"checkbox\"\n" +
+    "                           ng-model=\"filters.highlightUnfamiliar\"> Only tweets for unfamiliar commands\n" +
+    "                </label>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <label>\n" +
+    "                <input type=\"checkbox\"\n" +
+    "                       ng-model=\"filters.highlightRelevant\"> Only tweets for relevant commands\n" +
+    "            </label>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"ap-section\">\n" +

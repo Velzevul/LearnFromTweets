@@ -101,7 +101,7 @@ gulp.task('templates', function() {
 gulp.task('watch', function() {
     gulp.watch('./app/*.html', ['html']);
     gulp.watch('./app/sass/**/*.scss', ['css']);
-    gulp.watch('./app/scripts/*.js', ['scripts']);
+    gulp.watch('./app/scripts/*.js', ['app']);
     gulp.watch('./app/scripts/templates/*.html', ['templates']);
     gulp.watch('./app/images/**/*.{png,jpg}', ['images']);
     gulp.watch('./app/data/*.json', ['data']);
