@@ -2078,10 +2078,14 @@ iframe {
 }
 
 .brush .extent {
-  stroke: #ff4d39;
-  stroke-opacity: 0.6;
-  stroke-width: 2px;
-  fill: none;
+  stroke: none;
+  fill: white;
+  fill-opacity: 0.4;
+}
+
+.brush__handle {
+  stroke: none;
+  fill: #4583ff;
   shape-rendering: crispEdges;
 }
 
@@ -2108,7 +2112,7 @@ iframe {
   opacity: 1;
 }
 
-.timeline-tweet--following {
-  stroke: #22c145;
+.timeline-tweet--active {
+  stroke: #4583ff;
   stroke-width: 3px;
 }

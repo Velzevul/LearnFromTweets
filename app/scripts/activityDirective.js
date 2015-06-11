@@ -30,29 +30,31 @@ angular.module('tweetsToSoftware')
                     console.time('Tweet registration');
 
                     MenuService.resetTweets();
-                    angular.forEach(tweets, register);
+                    angular.forEach(tweets, function(t) {
+                        if (FilterService.matchTweet(t)) {
+                            register(t);
+                        }
+                    });
 
                     console.timeEnd('Tweet registration');
 
                     function register(tweet) {
-                        if (FilterService.matchTweet(tweet)) {
-                            if (tweet.tweet.commands) {
-                                angular.forEach(tweet.tweet.commands, function(c) {
-                                    MenuService.registerTweet(tweet, c, MenuService.menu);
-                                });
-                            }
+                        if (tweet.tweet.commands) {
+                            angular.forEach(tweet.tweet.commands, function(c) {
+                                MenuService.registerTweet(tweet, c, MenuService.menu);
+                            });
+                        }
 
-                            if (tweet.tweet.tools) {
-                                angular.forEach(tweet.tweet.tools, function(t) {
-                                    MenuService.registerTweet(tweet, t, MenuService.toolbar);
-                                });
-                            }
+                        if (tweet.tweet.tools) {
+                            angular.forEach(tweet.tweet.tools, function(t) {
+                                MenuService.registerTweet(tweet, t, MenuService.toolbar);
+                            });
+                        }
 
-                            if (tweet.tweet.panels) {
-                                angular.forEach(tweet.tweet.panels, function(p) {
-                                    MenuService.registerTweet(tweet, p, MenuService.panelbar);
-                                });
-                            }
+                        if (tweet.tweet.panels) {
+                            angular.forEach(tweet.tweet.panels, function(p) {
+                                MenuService.registerTweet(tweet, p, MenuService.panelbar);
+                            });
                         }
                     }
                 }

@@ -43,9 +43,11 @@ angular.module('tweetsToSoftware')
                     }
 
                     if (processedDates.indexOf(tweet.published.format()) == -1) {
-                        domain.push(tweet.published.toDate());
+                        domain.push(tweet.published);
                         processedDates.push(tweet.published.format());
                     }
+
+                    domain.sort();
 
                     var tweetContext = [];
 

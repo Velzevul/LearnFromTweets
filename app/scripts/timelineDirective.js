@@ -124,18 +124,18 @@ angular.module('tweetsToSoftware')
                         filteredTweets = [],
                         delta = 2 * authorCircleRadius + circlesMargin;
 
-                    angular.forEach($scope.tweets.all, function(t) {
-                        if (FilterService.matchTweet(t)) {
-                            filteredTweets.push(t);
-                        }
-                    });
+                    //angular.forEach($scope.tweets.all, function(t) {
+                    //    if (FilterService.matchTweet(t)) {
+                    //        filteredTweets.push(t);
+                    //    }
+                    //});
 
                     if (circles) {
                         circles.remove();
                     }
 
                     circles = canvas.selectAll('.tweet-circle')
-                            .data(filteredTweets)
+                            .data($scope.tweets.all)
                         .enter().append('circle')
                             .attr('r', authorCircleRadius)
                             .attr('cx', function(d) { return x(d.published); })
@@ -177,11 +177,15 @@ angular.module('tweetsToSoftware')
                     if (circles) {
                         circles
                             .attr('class', function(d) {
-                                var classList = 'timeline-tweet';
+                                var classList = 'timeline-tweet ';
 
-                                if (($scope.tweets.active == null) ||
-                                    (d == $scope.tweets.active)) {
-                                    classList += ' timeline-tweet--matching';
+                                if (FilterService.matchTweet(d)) {
+                                    classList += 'timeline-tweet--matching ';
+                                }
+
+                                if ($scope.tweets.active == d) {
+                                    classList += 'timeline-tweet--matching ';
+                                    classList += 'timeline-tweet--active ';
                                 }
 
                                 //if (d.author.isFollowing) {
@@ -194,61 +198,49 @@ angular.module('tweetsToSoftware')
                 }
 
                 function setBrush() {
-                    // TODO: uncomment if I do the brush filtering
-                    //$('.brush').remove();
-                    //
-                    //brush.x(x)
-                    //    .on('brush', function() {
-                    //        var b = brush.extent();
-                    //
-                    //        $scope.lowerTimeBound = b[0];
-                    //        $scope.upperTimeBound = b[1];
-                    //
-                    //        console.log(b[0], b[1]);
-                    //
-                    //        $scope.filters.time = {
-                    //            lower: $scope.lowerTimeBound,
-                    //            upper: $scope.upperTimeBound
-                    //        };
-                    //
-                    //        filterCircles();
-                    //    });
-                    //
-                    //canvas.append("g")
-                    //    .attr("class", "brush")
-                    //    .call(brush)
-                    //    .selectAll("rect")
-                    //    .attr("height", height);
-                }
+                    $('.brush').remove();
 
-                $scope.resetTimeFilter = function() {
-                    // TODO: uncomment if I do the brush filtering
-                    //d3.selectAll('.brush').call(brush.clear());
-                    //
-                    //$scope.lowerTimeBound = $scope.domainLowerBound;
-                    //$scope.upperTimeBound = $scope.domainUpperBound;
-                    //
-                    //$scope.filters.time = null;
-                    //filterCircles();
-                };
+                    brush.x(x)
+                        //.extent([$scope.lowerTimeBound, $scope.upperTimeBound])
+                        .on('brush', function() {
+                            var b = brush.extent(),
+                                minimalBrushLength = 30000;
+
+                            $scope.lowerTimeBound = b[0];
+                            $scope.upperTimeBound = b[1];
+
+                            if (b[1] - b[0] < minimalBrushLength) {
+                                $scope.filters.time = null;
+                            } else {
+                                $scope.filters.time = {
+                                    lower: $scope.lowerTimeBound,
+                                    upper: $scope.upperTimeBound
+                                };
+                            }
+
+                            filterCircles();
+                        });
+
+                    canvas.append("g")
+                        .attr("class", "brush")
+                        .call(brush)
+                        .selectAll("rect")
+                        .attr("height", height);
+
+                    canvas.selectAll(".resize")
+                        .append("rect")
+                        .attr('class', 'brush__handle')
+                        .attr("height", height)
+                        .attr("width", 2);
+                }
 
                 TweetService.loaded
                     .then(function() {
                         $scope.tweets = TweetService.tweets;
                         $scope.filters = FilterService.filters;
 
-                        // TODO: uncomment if I do the brush filtering
-                        //domainLowerBound = moment(domain[0]).toDate();
-                        //domainUpperBound = moment(domain[domain.length - 1]).toDate();
-                        //
-                        //
-                        //if (!$scope.lowerTimeBound) {
-                        //    $scope.lowerTimeBound = domainLowerBound;
-                        //}
-                        //
-                        //if (!$scope.upperTimeBound) {
-                        //    $scope.upperTimeBound = domainUpperBound;
-                        //}
+                        $scope.upperTimeBound = TweetService.domain[0].toDate();
+                        $scope.lowerTimeBound = TweetService.domain[TweetService.domain.length - 1].toDate();
 
                         drawPortraitPatterns(TweetService.authors);
 
