@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-    .directive('timeline', function($window, $q, $timeout, TweetService) {
+    .directive('timeline', function($window, $q, $timeout, TweetService, FilterService) {
         'use strict';
 
         return {
@@ -119,15 +119,23 @@ angular.module('tweetsToSoftware')
                 }
 
                 function drawCircles() {
+                    console.time('Redraw circles');
                     var positions = [],
+                        filteredTweets = [],
                         delta = 2 * authorCircleRadius + circlesMargin;
+
+                    angular.forEach($scope.tweets.all, function(t) {
+                        if (FilterService.matchTweet(t)) {
+                            filteredTweets.push(t);
+                        }
+                    });
 
                     if (circles) {
                         circles.remove();
                     }
 
                     circles = canvas.selectAll('.tweet-circle')
-                            .data($scope.tweets.all)
+                            .data(filteredTweets)
                         .enter().append('circle')
                             .attr('r', authorCircleRadius)
                             .attr('cx', function(d) { return x(d.published); })
@@ -161,6 +169,8 @@ angular.module('tweetsToSoftware')
                             .on('click', function(d) {
                                 TweetService.activate(d);
                             });
+
+                    console.timeEnd('Redraw circles');
                 }
 
                 function filterCircles() {
@@ -225,6 +235,7 @@ angular.module('tweetsToSoftware')
                 TweetService.loaded
                     .then(function() {
                         $scope.tweets = TweetService.tweets;
+                        $scope.filters = FilterService.filters;
 
                         // TODO: uncomment if I do the brush filtering
                         //domainLowerBound = moment(domain[0]).toDate();
@@ -258,6 +269,15 @@ angular.module('tweetsToSoftware')
                         });
 
                         $scope.$watch('tweets.active', filterCircles);
+
+                        $scope.$watchGroup([
+                            'filters.time',
+                            'filters.highlightRelevant',
+                            'filters.highlightUnfamiliar'
+                        ], function() {
+                            drawCircles();
+                            filterCircles();
+                        });
                     });
             }
         }
