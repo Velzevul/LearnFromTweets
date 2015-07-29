@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from datetime import timedelta
 import tweepy
 import pytz
 
@@ -21,7 +20,7 @@ class Tweet(models.Model):
     retweet_count = models.IntegerField()
     text = models.CharField(max_length=255, default='')
     author = models.ForeignKey(Author, db_column='author_screen_name')
-    # retweet_authors = models.ManyToManyField(Author)
+    retweet_authors = models.ManyToManyField(Author, related_name='retweet_authors')
     # original_tweet = models.ForeignKey('self')
     # entities (?)
     # commands
@@ -43,7 +42,14 @@ def create_tweet(tweet_id):
         Tweet.objects.get(pk=tweet_id)
         print('Tweet already exists...')
     except Tweet.DoesNotExist:
-        retrieved_tweet = api.get_status(tweet_id)
+        try:
+            retrieved_tweet = api.get_status(tweet_id)
+            retweets = retrieved_tweet.retweets()
+        except:
+            # handle API query limitations here
+            print('Error')
+            return
+
         created_at_tz = pytz.timezone(timezone.get_current_timezone_name()).localize(retrieved_tweet.created_at)
         tweet = Tweet(
             id=retrieved_tweet.id,
@@ -62,8 +68,21 @@ def create_tweet(tweet_id):
                 name=retrieved_tweet.author.name,
                 profile_image_url=retrieved_tweet.author.profile_image_url
             )
-
-        author.save()
+            author.save()
 
         tweet.author = author
+        tweet.save()
+
+        for rt in retweets:
+            try:
+                rt_author = Author.objects.get(pk=rt.author.screen_name)
+            except Author.DoesNotExist:
+                rt_author = Author(
+                    screen_name=rt.author.screen_name,
+                    name=rt.author.name,
+                    profile_image_url=rt.author.profile_image_url
+                )
+                rt_author.save()
+            tweet.retweet_authors.add(rt_author);
+
         tweet.save()
