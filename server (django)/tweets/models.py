@@ -23,9 +23,9 @@ class Tweet(models.Model):
     author = models.ForeignKey(Author, db_column='author_screen_name')
     # retweet_authors = models.ManyToManyField(Author)
     # original_tweet = models.ForeignKey('self')
+    # entities (?)
     # commands
     # preview_image_url
-    # entities (?)
 
     def __str__(self):
         return self.text
@@ -40,8 +40,8 @@ api = tweepy.API(auth)
 
 def create_tweet(tweet_id):
     try:
-        tweet = Tweet.objects.get(pk=tweet_id)
-        author_screen_name = tweet.author.screen_name
+        Tweet.objects.get(pk=tweet_id)
+        print('Tweet already exists...')
     except Tweet.DoesNotExist:
         retrieved_tweet = api.get_status(tweet_id)
         created_at_tz = pytz.timezone(timezone.get_current_timezone_name()).localize(retrieved_tweet.created_at)
@@ -54,16 +54,16 @@ def create_tweet(tweet_id):
         )
         author_screen_name = retrieved_tweet.author.screen_name
 
-    try:
-        author = Author.objects.get(pk=author_screen_name)
-    except Author.DoesNotExist:
-        author = Author(
-            screen_name=retrieved_tweet.author.screen_name,
-            name=retrieved_tweet.author.name,
-            profile_image_url=retrieved_tweet.author.profile_image_url
-        )
+        try:
+            author = Author.objects.get(pk=author_screen_name)
+        except Author.DoesNotExist:
+            author = Author(
+                screen_name=retrieved_tweet.author.screen_name,
+                name=retrieved_tweet.author.name,
+                profile_image_url=retrieved_tweet.author.profile_image_url
+            )
 
-    author.save()
+        author.save()
 
-    tweet.author = author
-    tweet.save()
+        tweet.author = author
+        tweet.save()
