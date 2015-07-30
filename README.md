@@ -1,4 +1,4 @@
-Frontend Boilerplate
+Switter
 ===========
 
 Preconfigured Grunt with standard tasks:

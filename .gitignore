@@ -3,6 +3,6 @@ app/css/
 node_modules/
 bower_components/
 npm-debug.log
-.idea
 app/scripts/templates.js
-**/*/__pycache__
+.ruby-version
+.ruby-gemset
