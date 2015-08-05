@@ -6,3 +6,5 @@ npm-debug.log
 app/scripts/templates.js
 .ruby-version
 .ruby-gemset
+.idea/
+dist/

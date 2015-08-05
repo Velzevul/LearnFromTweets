@@ -10,7 +10,7 @@ var gulp    = require('gulp'),
     html2js = require('gulp-html2js');
 
 function onError(err) {
- gutil.beep();
+    gutil.beep();
 }
 
 gulp.task('connect', function() {
