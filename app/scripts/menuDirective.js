@@ -31,6 +31,9 @@ angular.module('tweetsToSoftware')
             }, 'parents');
 
             $scope.menuOpen = true;
+          } else if (menuItem.isOpen) {
+            MenuService.menu.close();
+            $scope.menuOpen = false;
           }
         }
       },

@@ -2,46 +2,42 @@
   <div ng-repeat="tool in tools">
     <div class="toolbar__slot"
          ng-if="!tool.divider">
-      <div class="tool"
-           ng-class="{'tool--open': tool.isOpen}">
-        <button class="t-primary"
+      <div class="t-item">
+        <button class="t-item__icon"
+                ng-class="{'t-item__icon--large': tool.largeIcon}"
+                style="background-image: url('/images/{{tool.id}}.png');"
                 ng-click="clickOpen(tool)"
-                ng-mouseenter="hoverOpen(tool)">
-          <div class="t-primary__icon"
-               ng-class="{'t-primary__icon--large': tool.largeIcon}"
-               style="background-image: url('/images/{{tool.id}}.png');"></div>
+                ng-mouseenter="hoverOpen(tool)"></button>
 
-          <div class="t-primary__counter"
-               ng-show="tool.tweetsCount > 0">{{tool.tweetsCount}}
-          </div>
-        </button>
+        <div class="t-item__counter"
+             ng-show="tool.tweetsCount > 0">{{tool.tweetsCount}}</div>
+      </div>
 
-        <div class="tool__dropdown"
-             ng-show="tool.isOpen"
-             ng-if="tool.children.length">
-          <div class="t-secondary"
-               ng-class="{'t-secondary--first': $first}"
-               ng-repeat="subtool in tool.children">
-
-            <button class="ts-button"
-                    ng-mouseover="hoverOpen(subtool)">
+      <div class="t-dropdown"
+           ng-show="tool.isOpen"
+           ng-if="tool.children.length">
+        <div class="t-dropdown__slot"
+             ng-repeat="subtool in tool.children">
+          <div class="td-item"
+               ng-class="{'td-item--first': $index == 0}">
+            <button ng-click="clickOpen(subtool)"
+                    ng-mouseenter="hoverOpen(subtool)">
               <div class="l-list-inline l-list-inline--x-small">
                 <div class="l-list-inline__item is-middle-aligned">
-                  <div class="ts-button__icon"
+                  <div class="td-item__icon"
+                       ng-class="{'td-item__icon--large': subtool.largeIcon}"
                        style="background-image:
                        url('/images/{{subtool.id}}.png');"></div>
                 </div>
 
                 <div class="l-list-inline__item is-middle-aligned">
-                  <div class="ts-button__label">{{subtool.label}}</div>
+                  <div class="td-item__label">{{subtool.label}}</div>
                 </div>
               </div>
             </button>
 
-            <div class="t-secondary__counter"
-                 ng-show="subtool.tweetsCount > 0">
-              {{subtool.tweetsCount}}
-            </div>
+            <div class="td-item__counter"
+                 ng-show="tool.tweetsCount > 0">{{tool.tweetsCount}}</div>
           </div>
         </div>
       </div>

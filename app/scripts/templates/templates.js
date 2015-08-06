@@ -407,46 +407,42 @@ module.run(["$templateCache", function($templateCache) {
     "  <div ng-repeat=\"tool in tools\">\n" +
     "    <div class=\"toolbar__slot\"\n" +
     "         ng-if=\"!tool.divider\">\n" +
-    "      <div class=\"tool\"\n" +
-    "           ng-class=\"{'tool--open': tool.isOpen}\">\n" +
-    "        <button class=\"t-primary\"\n" +
+    "      <div class=\"t-item\">\n" +
+    "        <button class=\"t-item__icon\"\n" +
+    "                ng-class=\"{'t-item__icon--large': tool.largeIcon}\"\n" +
+    "                style=\"background-image: url('/images/{{tool.id}}.png');\"\n" +
     "                ng-click=\"clickOpen(tool)\"\n" +
-    "                ng-mouseenter=\"hoverOpen(tool)\">\n" +
-    "          <div class=\"t-primary__icon\"\n" +
-    "               ng-class=\"{'t-primary__icon--large': tool.largeIcon}\"\n" +
-    "               style=\"background-image: url('/images/{{tool.id}}.png');\"></div>\n" +
+    "                ng-mouseenter=\"hoverOpen(tool)\"></button>\n" +
     "\n" +
-    "          <div class=\"t-primary__counter\"\n" +
-    "               ng-show=\"tool.tweetsCount > 0\">{{tool.tweetsCount}}\n" +
-    "          </div>\n" +
-    "        </button>\n" +
+    "        <div class=\"t-item__counter\"\n" +
+    "             ng-show=\"tool.tweetsCount > 0\">{{tool.tweetsCount}}</div>\n" +
+    "      </div>\n" +
     "\n" +
-    "        <div class=\"tool__dropdown\"\n" +
-    "             ng-show=\"tool.isOpen\"\n" +
-    "             ng-if=\"tool.children.length\">\n" +
-    "          <div class=\"t-secondary\"\n" +
-    "               ng-class=\"{'t-secondary--first': $first}\"\n" +
-    "               ng-repeat=\"subtool in tool.children\">\n" +
-    "\n" +
-    "            <button class=\"ts-button\"\n" +
-    "                    ng-mouseover=\"hoverOpen(subtool)\">\n" +
+    "      <div class=\"t-dropdown\"\n" +
+    "           ng-show=\"tool.isOpen\"\n" +
+    "           ng-if=\"tool.children.length\">\n" +
+    "        <div class=\"t-dropdown__slot\"\n" +
+    "             ng-repeat=\"subtool in tool.children\">\n" +
+    "          <div class=\"td-item\"\n" +
+    "               ng-class=\"{'td-item--first': $index == 0}\">\n" +
+    "            <button ng-click=\"clickOpen(subtool)\"\n" +
+    "                    ng-mouseenter=\"hoverOpen(subtool)\">\n" +
     "              <div class=\"l-list-inline l-list-inline--x-small\">\n" +
     "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "                  <div class=\"ts-button__icon\"\n" +
+    "                  <div class=\"td-item__icon\"\n" +
+    "                       ng-class=\"{'td-item__icon--large': subtool.largeIcon}\"\n" +
     "                       style=\"background-image:\n" +
     "                       url('/images/{{subtool.id}}.png');\"></div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "                  <div class=\"ts-button__label\">{{subtool.label}}</div>\n" +
+    "                  <div class=\"td-item__label\">{{subtool.label}}</div>\n" +
     "                </div>\n" +
     "              </div>\n" +
     "            </button>\n" +
     "\n" +
-    "            <div class=\"t-secondary__counter\"\n" +
-    "                 ng-show=\"subtool.tweetsCount > 0\">\n" +
-    "              {{subtool.tweetsCount}}\n" +
-    "            </div>\n" +
+    "            <div class=\"td-item__counter\"\n" +
+    "                 ng-show=\"tool.tweetsCount > 0\">{{tool.tweetsCount}}</div>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +

@@ -52,6 +52,10 @@
     border-radius: 50%;
   }
 
+  & > button:focus {
+    outline: none;
+  }
+
   &:hover {
     background: rgba($color-dc-secondary, 0.5);
   }
@@ -109,12 +113,8 @@
     top: 2px;
   }
 
-  &__tweets {
-    position: absolute;
-    top: 0;
-    left: 100%;
-
-    white-space: nowrap;
+  & > button:focus {
+    outline: none;
   }
 
   &:hover {
