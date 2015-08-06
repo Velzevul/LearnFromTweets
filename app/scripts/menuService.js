@@ -51,6 +51,10 @@ function MenuItem(item, parents) {
     this.label = item.label;
     this.tweetsCount = 0;
 
+    if (item.largeIcon) {
+      this.largeIcon = item.largeIcon;
+    }
+
     this.isOpen = false;
 
     this.children = [];

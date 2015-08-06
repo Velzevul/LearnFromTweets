@@ -272,7 +272,7 @@ module.run(["$templateCache", function($templateCache) {
     "         ng-click=\"clickOpen(item)\">\n" +
     "\n" +
     "        <div class=\"md-item__counter\"\n" +
-    "             ng-show=\"item.tweets.length > 0\">{{item.tweets.length}}</div>\n" +
+    "             ng-show=\"item.tweetsCount > 0\">{{item.tweetsCount}}</div>\n" +
     "\n" +
     "        <button class=\"md-item__name\">{{item.label}}</button>\n" +
     "    </div>\n" +
@@ -333,36 +333,36 @@ catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("panel.html",
-    "<div class=\"panelbar-item\"\n" +
-    "     ng-class=\"{'panelbar-item--open': panel.isOpen}\">\n" +
-    "    <button class=\"pi-panelname\"\n" +
-    "            ng-click=\"openPanel()\">\n" +
-    "        <div class=\"l-list-inline l-list-inline--collapsed\">\n" +
-    "            <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "                <div class=\"pi-panelname__icon\"\n" +
-    "                     style=\"background-image:\n" +
-    "                                    url('/images/{{panel.id}}.png');\"></div>\n" +
-    "            </div>\n" +
+    "<div class=\"panel\"\n" +
+    "     ng-class=\"{'panel--open': panel.isOpen}\">\n" +
+    "  <button class=\"p-name\"\n" +
+    "          ng-click=\"openPanel()\">\n" +
+    "    <div class=\"l-list-inline l-list-inline--collapsed\">\n" +
+    "      <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "        <div class=\"p-name__icon\"\n" +
+    "             style=\"background-image: url('/images/{{panel.id}}.png');\"></div>\n" +
+    "      </div>\n" +
     "\n" +
-    "            <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "                <div class=\"pi-panelname__label\">{{panel.label}}</div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </button>\n" +
-    "\n" +
-    "    <div class=\"panelbar-item__counter\"\n" +
-    "         ng-show=\"panel.tweets.length > 0\">{{panel.tweets.length}}</div>\n" +
-    "\n" +
-    "    <div class=\"panelbar-item__dropdown\"\n" +
-    "         ng-show=\"panel.isOpen\">\n" +
-    "        <img ng-src=\"/images/{{panel.id}}-panel.png\" alt=\"{{panel.label}}\"/>\n" +
-    "\n" +
-    "        <div class=\"panelbar-item__tweets\"\n" +
-    "             ng-if=\"panel.tweetsShown &&\n" +
-    "                    panel.tweets.length > 0\">\n" +
-    "            <tweets-popup context=\"panel\"></tweets-popup>\n" +
-    "        </div>\n" +
+    "      <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "        <div class=\"p-name__label\">{{panel.label}}</div>\n" +
+    "      </div>\n" +
     "    </div>\n" +
+    "  </button>\n" +
+    "\n" +
+    "  <div class=\"panel__counter\"\n" +
+    "       ng-show=\"panel.tweets.length > 0\">{{panel.tweets.length}}\n" +
+    "  </div>\n" +
+    "\n" +
+    "  <div class=\"panel__dropdown\"\n" +
+    "       ng-show=\"panel.isOpen\">\n" +
+    "    <img ng-src=\"/images/{{panel.id}}-panel.png\" alt=\"{{panel.label}}\"/>\n" +
+    "\n" +
+    "    <div class=\"panel__tweets\"\n" +
+    "         ng-if=\"panel.tweetsShown &&\n" +
+    "                    panel.tweets.length > 0\">\n" +
+    "      <tweets-popup context=\"panel\"></tweets-popup>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
     "</div>");
 }]);
 })();
@@ -374,15 +374,15 @@ module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("panelbar.html",
     "<div class=\"toolbar toolbar--right\">\n" +
-    "    <div ng-repeat=\"panel in panels\">\n" +
-    "        <div class=\"toolbar__slot\"\n" +
-    "             ng-if=\"!panel.divider\">\n" +
-    "            <panel panel=\"panel\"></panel>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div class=\"toolbar__divider\"\n" +
-    "             ng-if=\"tool.divider\"></div>\n" +
+    "  <div ng-repeat=\"panel in panels\">\n" +
+    "    <div class=\"toolbar__slot\"\n" +
+    "         ng-if=\"!panel.divider\">\n" +
+    "      <panel panel=\"panel\"></panel>\n" +
     "    </div>\n" +
+    "\n" +
+    "    <div class=\"toolbar__divider\"\n" +
+    "         ng-if=\"tool.divider\"></div>\n" +
+    "  </div>\n" +
     "</div>");
 }]);
 })();
@@ -402,18 +402,8 @@ try { module = angular.module("app-templates"); }
 catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("toolbar.html",
-    "<div class=\"toolbar toolbar--left\">\n" +
-    "    <div ng-repeat=\"tool in tools\">\n" +
-    "        <div class=\"toolbar__slot\"\n" +
-    "             ng-if=\"!tool.divider\">\n" +
-    "            <toolbar-item tool=\"tool\"></toolbar-item>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div class=\"toolbar__divider\"\n" +
-    "             ng-if=\"tool.divider\"></div>\n" +
-    "    </div>\n" +
-    "</div>");
+  $templateCache.put("tool.html",
+    "");
 }]);
 })();
 
@@ -422,66 +412,58 @@ try { module = angular.module("app-templates"); }
 catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("toolbarItem.html",
-    "<div class=\"toolbar-item\"\n" +
-    "     ng-class=\"{'toolbar-item--open': tool.isOpen}\">\n" +
-    "    <div class=\"ti-tool\"\n" +
-    "         ng-mouseenter=\"showTweets(tool)\"\n" +
-    "         ng-mouseleave=\"hideTweets(tool)\">\n" +
-    "        <button style=\"display: block;\"\n" +
-    "                ng-click=\"openSubtools()\">\n" +
-    "            <div class=\"ti-tool__icon\"\n" +
-    "                 ng-class=\"{'ti-tool__icon--large': tool.largeIcon}\"\n" +
-    "                 style=\"background-image: url('/images/{{tool.id}}.png');\"></div>\n" +
+  $templateCache.put("toolbar.html",
+    "<div class=\"toolbar toolbar--left\">\n" +
+    "  <div ng-repeat=\"tool in tools\">\n" +
+    "    <div class=\"toolbar__slot\"\n" +
+    "         ng-if=\"!tool.divider\">\n" +
+    "      <div class=\"tool\"\n" +
+    "           ng-class=\"{'tool--open': tool.isOpen}\">\n" +
+    "        <button class=\"t-primary\"\n" +
+    "                ng-click=\"clickOpen()\"\n" +
+    "                ng-mouseenter=\"hoverOpen()\">\n" +
+    "          <div class=\"t-primary__icon\"\n" +
+    "               ng-class=\"{'t-primary__icon--large': tool.largeIcon}\"\n" +
+    "               style=\"background-image: url('/images/{{tool.id}}.png');\"></div>\n" +
     "\n" +
-    "            <div class=\"ti-tool__counter\"\n" +
-    "                 ng-show=\"tool.tweets.length > 0\">{{tool.tweets.length}}</div>\n" +
+    "          <div class=\"t-primary__counter\"\n" +
+    "               ng-show=\"tool.tweetsCount > 0\">{{tool.tweetsCount}}\n" +
+    "          </div>\n" +
     "        </button>\n" +
     "\n" +
-    "        <div class=\"ti-tool__tweets\"\n" +
-    "             ng-if=\"!tool.children &&\n" +
-    "                      tool.tweetsShown &&\n" +
-    "                      tool.tweets.length > 0\">\n" +
-    "            <tweets-popup context=\"tool\"></tweets-popup>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "        <div class=\"tool__dropdown\"\n" +
+    "             ng-show=\"tool.isOpen\"\n" +
+    "             ng-if=\"tool.children\">\n" +
+    "          <div class=\"t-secondary\"\n" +
+    "               ng-class=\"{'t-secondary--first': $first}\"\n" +
+    "               ng-repeat=\"subtool in tool.children\">\n" +
     "\n" +
-    "    <div class=\"toolbar-item__dropdown\"\n" +
-    "         ng-show=\"tool.isOpen\"\n" +
-    "         ng-if=\"tool.children\">\n" +
-    "        <div class=\"ti-subtool\"\n" +
-    "             ng-class=\"{'ti-subtool--first': $first}\"\n" +
-    "             ng-repeat=\"subtool in tool.children\"\n" +
-    "             ng-mouseenter=\"showTweets(subtool)\"\n" +
-    "             ng-mouseleave=\"hideTweets(subtool)\">\n" +
-    "\n" +
-    "            <button class=\"tis-button\">\n" +
-    "                <div class=\"l-list-inline l-list-inline--x-small\">\n" +
-    "                    <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "                        <div class=\"tis-button__icon\"\n" +
-    "                             style=\"background-image:\n" +
-    "                                        url('/images/{{subtool.id}}.png');\"></div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "                    <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "                        <div class=\"tis-button__label\">{{subtool.label}}</div>\n" +
-    "                    </div>\n" +
+    "            <button class=\"ts-button\">\n" +
+    "              <div class=\"l-list-inline l-list-inline--x-small\">\n" +
+    "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "                  <div class=\"ts-button__icon\"\n" +
+    "                       style=\"background-image:\n" +
+    "                       url('/images/{{subtool.id}}.png');\"></div>\n" +
     "                </div>\n" +
+    "\n" +
+    "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "                  <div class=\"ts-button__label\">{{subtool.label}}</div>\n" +
+    "                </div>\n" +
+    "              </div>\n" +
     "            </button>\n" +
     "\n" +
-    "            <div class=\"ti-subtool__counter\"\n" +
-    "                 ng-show=\"subtool.tweets.length > 0\">\n" +
-    "                {{subtool.tweets.length}}\n" +
+    "            <div class=\"t-secondary__counter\"\n" +
+    "                 ng-show=\"subtool.tweetsCount > 0\">\n" +
+    "              {{subtool.tweetsCount}}\n" +
     "            </div>\n" +
-    "\n" +
-    "            <div class=\"ti-subtool__tweets\"\n" +
-    "                 ng-if=\"subtool.tweetsShown && subtool.tweets.length > 0\">\n" +
-    "                <tweets-popup context=\"subtool\"></tweets-popup>\n" +
-    "            </div>\n" +
+    "          </div>\n" +
     "        </div>\n" +
+    "      </div>\n" +
     "    </div>\n" +
+    "\n" +
+    "    <div class=\"toolbar__divider\"\n" +
+    "         ng-if=\"tool.divider\"></div>\n" +
+    "  </div>\n" +
     "</div>");
 }]);
 })();

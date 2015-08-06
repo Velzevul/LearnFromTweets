@@ -1,12 +1,12 @@
 (function(window) {
-    'use strict';
+  'use strict';
 
-    var app = angular.module('tweetsToSoftware',
-        [
-            'app-templates',
-            'angularMoment',
-            'truncate'
-        ]);
+  var app = angular.module('tweetsToSoftware',
+    [
+      'app-templates',
+      'angularMoment',
+      'truncate'
+    ]);
 
-    window.app = app;
+  window.app = app;
 })(window);

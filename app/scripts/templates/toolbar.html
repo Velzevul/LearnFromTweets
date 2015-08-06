@@ -1,11 +1,52 @@
 <div class="toolbar toolbar--left">
-    <div ng-repeat="tool in tools">
-        <div class="toolbar__slot"
-             ng-if="!tool.divider">
-            <toolbar-item tool="tool"></toolbar-item>
-        </div>
+  <div ng-repeat="tool in tools">
+    <div class="toolbar__slot"
+         ng-if="!tool.divider">
+      <div class="tool"
+           ng-class="{'tool--open': tool.isOpen}">
+        <button class="t-primary"
+                ng-click="clickOpen()"
+                ng-mouseenter="hoverOpen()">
+          <div class="t-primary__icon"
+               ng-class="{'t-primary__icon--large': tool.largeIcon}"
+               style="background-image: url('/images/{{tool.id}}.png');"></div>
 
-        <div class="toolbar__divider"
-             ng-if="tool.divider"></div>
+          <div class="t-primary__counter"
+               ng-show="tool.tweetsCount > 0">{{tool.tweetsCount}}
+          </div>
+        </button>
+
+        <div class="tool__dropdown"
+             ng-show="tool.isOpen"
+             ng-if="tool.children">
+          <div class="t-secondary"
+               ng-class="{'t-secondary--first': $first}"
+               ng-repeat="subtool in tool.children">
+
+            <button class="ts-button">
+              <div class="l-list-inline l-list-inline--x-small">
+                <div class="l-list-inline__item is-middle-aligned">
+                  <div class="ts-button__icon"
+                       style="background-image:
+                       url('/images/{{subtool.id}}.png');"></div>
+                </div>
+
+                <div class="l-list-inline__item is-middle-aligned">
+                  <div class="ts-button__label">{{subtool.label}}</div>
+                </div>
+              </div>
+            </button>
+
+            <div class="t-secondary__counter"
+                 ng-show="subtool.tweetsCount > 0">
+              {{subtool.tweetsCount}}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="toolbar__divider"
+         ng-if="tool.divider"></div>
+  </div>
 </div>

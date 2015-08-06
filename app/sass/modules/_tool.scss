@@ -1,4 +1,4 @@
-.toolbar-item {
+.tool {
   position: relative;
 
   &__dropdown {
@@ -18,11 +18,11 @@
     outline: 1px solid $color-border;
   }
 }
-  .toolbar-item--open {
+  .tool--open {
     outline: 1px solid $color-border;
   }
 
-.ti-tool {
+.t-primary {
   position: relative;
   display: block;
   width: 100%;
@@ -73,22 +73,22 @@
     }
 }
 
-.ti-subtool {
+.t-secondary {
   position: relative;
 
   &__counter {
-    @extend .ti-tool__counter;
+    @extend .t-primary__counter;
   }
 
   &__tweets {
-    @extend .ti-tool__tweets;
+    @extend .t-primary__tweets;
   }
 
   &:hover{
     outline: 1px solid $color-border;
   }
 }
-  .ti-subtool--first {
+  .t-secondary--first {
     position: relative;
 
     &:before {
@@ -104,7 +104,7 @@
     }
   }
 
-.tis-button {
+.ts-button {
   display: block;
   width: 100%;
 
