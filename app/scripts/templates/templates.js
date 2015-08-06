@@ -402,16 +402,6 @@ try { module = angular.module("app-templates"); }
 catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("tool.html",
-    "");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("app-templates"); }
-catch(err) { module = angular.module("app-templates", []); }
-module.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("toolbar.html",
     "<div class=\"toolbar toolbar--left\">\n" +
     "  <div ng-repeat=\"tool in tools\">\n" +
@@ -420,8 +410,8 @@ module.run(["$templateCache", function($templateCache) {
     "      <div class=\"tool\"\n" +
     "           ng-class=\"{'tool--open': tool.isOpen}\">\n" +
     "        <button class=\"t-primary\"\n" +
-    "                ng-click=\"clickOpen()\"\n" +
-    "                ng-mouseenter=\"hoverOpen()\">\n" +
+    "                ng-click=\"clickOpen(tool)\"\n" +
+    "                ng-mouseenter=\"hoverOpen(tool)\">\n" +
     "          <div class=\"t-primary__icon\"\n" +
     "               ng-class=\"{'t-primary__icon--large': tool.largeIcon}\"\n" +
     "               style=\"background-image: url('/images/{{tool.id}}.png');\"></div>\n" +
@@ -433,12 +423,13 @@ module.run(["$templateCache", function($templateCache) {
     "\n" +
     "        <div class=\"tool__dropdown\"\n" +
     "             ng-show=\"tool.isOpen\"\n" +
-    "             ng-if=\"tool.children\">\n" +
+    "             ng-if=\"tool.children.length\">\n" +
     "          <div class=\"t-secondary\"\n" +
     "               ng-class=\"{'t-secondary--first': $first}\"\n" +
     "               ng-repeat=\"subtool in tool.children\">\n" +
     "\n" +
-    "            <button class=\"ts-button\">\n" +
+    "            <button class=\"ts-button\"\n" +
+    "                    ng-mouseover=\"hoverOpen(subtool)\">\n" +
     "              <div class=\"l-list-inline l-list-inline--x-small\">\n" +
     "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
     "                  <div class=\"ts-button__icon\"\n" +
@@ -464,7 +455,8 @@ module.run(["$templateCache", function($templateCache) {
     "    <div class=\"toolbar__divider\"\n" +
     "         ng-if=\"tool.divider\"></div>\n" +
     "  </div>\n" +
-    "</div>");
+    "</div>\n" +
+    "");
 }]);
 })();
 
