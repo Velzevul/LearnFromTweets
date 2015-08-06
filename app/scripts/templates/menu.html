@@ -1,61 +1,56 @@
 <script type="text/ng-template" id="menuDropdown">
-    <div class="amd-item"
-         ng-class="{'amd-item--active': item.isOpen,
-                    'amd-item--parent': item.children.length}"
-         ng-mouseenter="open(item)"
-         ng-mouseleave="hide(item)">
+    <div class="md-item"
+         ng-class="{'md-item--open': item.isOpen,
+                    'md-item--parent': item.children.length}"
+         ng-mouseenter="hoverOpen(item)"
+         ng-click="clickOpen(item)">
 
-        <div class="amd-item__counter"
+        <div class="md-item__counter"
              ng-show="item.tweets.length > 0">{{item.tweets.length}}</div>
 
-        <button class="amd-item__name">{{item.label}}</button>
-
-        <div class="amd-item__tweets"
-             ng-if="item.tweetsShown &&
-                    item.tweets.length > 0">
-            <tweets-popup context="item"></tweets-popup>
-        </div>
+        <button class="md-item__name">{{item.label}}</button>
     </div>
 
     <div ng-show="item.children.length">
-        <div class="am-dropdown am-dropdown--nested"
+        <div class="m-dropdown m-dropdown--nested"
              ng-show="item.isOpen">
             <div ng-repeat="item in item.children">
-                <div class="am-dropdown__slot"
+                <div class="m-dropdown__slot"
                      ng-hide="item.divider"
                      ng-include="'menuDropdown'"></div>
 
-                <div class="am-dropdown__divider"
+                <div class="m-dropdown__divider"
                      ng-show="item.divider"></div>
             </div>
         </div>
     </div>
 </script>
 
-<div class="app-menu">
+<div class="menu">
     <ul class="l-list-inline l-list-inline--collapsed">
         <li class="l-list-inline__item"
-            ng-repeat="rootItem in menu">
-            <div class="app-menu__slot">
-                <div class="am-item"
-                     ng-class="{'am-item--active': rootItem.isOpen}"
-                     ng-mouseover="open(rootItem)">
-                    <button class="am-item__name">{{rootItem.label}}</button>
+            ng-repeat="rootItem in menuItems">
+            <div class="menu__slot">
+                <div class="m-item"
+                     ng-class="{'m-item--open': rootItem.isOpen}"
+                     ng-mouseenter="hoverOpen(rootItem)"
+                     ng-click="clickOpen(rootItem)">
+                    <button class="m-item__name">{{rootItem.label}}</button>
 
-                    <div class="am-item__counter"
-                         ng-show="rootItem.tweets.length > 0">
-                        {{rootItem.tweets.length}}
+                    <div class="m-item__counter"
+                         ng-show="rootItem.tweetsCount > 0">
+                        {{rootItem.tweetsCount}}
                     </div>
                 </div>
 
-                <div class="am-dropdown am-dropdown--root"
+                <div class="m-dropdown m-dropdown--root"
                      ng-show="rootItem.isOpen">
                     <div ng-repeat="item in rootItem.children">
-                        <div class="am-dropdown__slot"
+                        <div class="m-dropdown__slot"
                              ng-hide="item.divider"
                              ng-include="'menuDropdown'"></div>
 
-                        <div class="am-dropdown__divider"
+                        <div class="m-dropdown__divider"
                              ng-show="item.divider"></div>
                     </div>
                 </div>

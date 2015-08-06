@@ -1,39 +1,50 @@
 angular.module('tweetsToSoftware')
-    .directive('menu', function($q, $document, MenuService) {
-       'use strict';
+  .directive('menu', function($q, $document, MenuService, $timeout) {
+    'use strict';
 
-        return {
-            restrict: 'E',
-            templateUrl: 'menu.html',
-            scope: {},
-            controller: function($scope) {
-                MenuService.loaded
-                    .then(function() {
-                        $scope.menu = MenuService.menu.all;
-                    });
+    return {
+      restrict: 'E',
+      templateUrl: 'menu.html',
+      scope: {},
+      controller: function($scope) {
+        $scope.menuOpen = false;
 
-                $scope.open = function(menuItem) {
-                    MenuService.open(menuItem, MenuService.menu);
+        MenuService.loaded
+          .then(function() {
+            $scope.menuItems = MenuService.menu.all;
+          });
 
-                    if (!menuItem.children) {
-                        MenuService.showTweets(menuItem)
-                    }
-                };
+        $scope.hoverOpen = function(menuItem) {
+          if ($scope.menuOpen) {
+            MenuService.menu.close();
 
-                $scope.hide = MenuService.hideTweets;
-            },
-            link: function($scope) {
-                $document.on('click', function(e) {
-                    var isPopup = $(e.target).parents('.popup').length ||
-                            $(e.target).hasClass('popup'),
-                        isTrigger = $(e.target).parents('.menu-popup__indicator').length ||
-                            $(e.target).hasClass('menu-popup__indicator');
-
-                    if (!isPopup && !isTrigger) {
-                        MenuService.reset(MenuService.menu);
-                        $scope.$apply();
-                    }
-                });
-            }
+            menuItem.propagate(function(i) {
+              i.isOpen = true;
+            }, 'parents');
+          }
         };
-    });
+
+        $scope.clickOpen = function(menuItem) {
+          if (!$scope.menuOpen) {
+            menuItem.propagate(function(i) {
+              i.isOpen = true;
+            }, 'parents');
+
+            $scope.menuOpen = true;
+          }
+        }
+      },
+      link: function($scope) {
+        $document.on('click', function(e) {
+          var isMenu = $(e.target).parents('.menu').length ||
+            $(e.target).hasClass('menu');
+
+          if (!isMenu) {
+            MenuService.menu.close();
+            $scope.menuOpen = false;
+            $scope.$apply();
+          }
+        });
+      }
+    };
+  });

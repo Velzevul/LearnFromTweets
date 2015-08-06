@@ -1,135 +1,132 @@
-angular.module('tweetsToSoftware')
-    .factory('MenuService', function($timeout, $http, $q) {
-       'use strict';
+function Menu() {
+  this.all = [];
+  this.byId = {};
+}
 
-        var menu = {
-                all: [],
-                byId: {}
-            },
-            toolbar = {
-                all: [],
-                byId: {}
-            },
-            panelbar = {
-                all: [],
-                byId: {}
-            },
-            promise,
-            showTweetsDelay = 400,
-            hideTweetsDelay = 20;
+Menu.prototype.populate = function(items) {
+  var self = this;
 
-        console.time('Menu load');
-        promise = $q.all([
-            $http.get('/data/commandsExtra.json'),
-            $http.get('/data/toolsExtra.json'),
-            $http.get('/data/panelsExtra.json')
-        ])
-            .then(function(response) {
-                console.timeEnd('Menu load');
-                console.time('Menu processing');
+  items.forEach(function(item) {
+    self.all.push(new MenuItem(item, []));
+  });
+  populateIdMap(this.all, this.byId);
 
-                menu.all = response[0].data;
-                toolbar.all = response[1].data;
-                panelbar.all = response[2].data;
-
-                populateIdMap(menu.all, menu.byId, []);
-                populateIdMap(toolbar.all, toolbar.byId, []);
-                populateIdMap(panelbar.all, panelbar.byId, []);
-                console.timeEnd('Menu processing');
-            });
-
-        function populateIdMap(all, byId, parents) {
-            angular.forEach(all, function(one) {
-                if (!one.divider) {
-                    one.parents = parents;
-
-                    if (byId[one.id]) {
-                        console.error('entry already exists:', byId[one.id], one);
-                    } else {
-                        byId[one.id] = one;
-                    }
-
-                    if (one.children) {
-                        var childParents = [];
-                        angular.forEach(parents, function(parent) {
-                            childParents.push(parent);
-                        });
-                        childParents.push(one);
-
-                        populateIdMap(one.children, byId, childParents);
-                    }
-                }
-            });
+  function populateIdMap(all, target) {
+    all.forEach(function(one) {
+      if (!one.divider) {
+        if (target[one.id]) {
+          console.error('entry already exists:', target[one.id], one);
+        } else {
+          target[one.id] = one;
         }
 
-        function reset(menu) {
-            angular.forEach(menu.byId, function(item) {
-                item.isOpen = false;
-                item.tweetsShown = false;
-            });
+        if (one.children) {
+          populateIdMap(one.children, target);
         }
-
-        return {
-            loaded: promise,
-            menu: menu,
-            toolbar: toolbar,
-            panelbar: panelbar,
-            reset: reset,
-            resetAll: function() {
-                reset(menu);
-                reset(toolbar);
-                reset(panelbar);
-            },
-            open: function(item, menu) {
-                reset(menu);
-
-                angular.forEach(item.parents, function(parent) {
-                    parent.isOpen = true;
-                });
-
-                item.isOpen = true;
-            },
-            showTweets: function(item, showDelay) {
-                if (showDelay === undefined) {
-                    showDelay = showTweetsDelay;
-                }
-
-                clearTimeout(item.showTweetsTimeoutId);
-                clearTimeout(item.hideTweetsTimeoutId);
-
-                item.showTweetsTimeoutId = $timeout(function() {
-                    item.tweetsShown = true;
-                }, showDelay).$$timeoutId;
-            },
-            hideTweets: function(item) {
-                clearTimeout(item.showTweetsTimeoutId);
-                clearTimeout(item.hideTweetsTimeoutId);
-
-                item.hideTweetsTimeoutId = $timeout(function () {
-                    item.tweetsShown = false;
-                }, hideTweetsDelay).$$timeoutId;
-            },
-            registerTweet: function(tweet, menuItemId, menu) {
-                var menuItem = menu.byId[menuItemId];
-
-                menuItem.tweets.push(tweet);
-
-                angular.forEach(menuItem.parents, function(parent) {
-                    parent.tweets.push(tweet);
-                });
-            },
-            resetTweets: function() {
-                angular.forEach(menu.byId, function(menuItem) {
-                     menuItem.tweets = [];
-                });
-
-                angular.forEach(toolbar.byId, function(tool) {
-                    tool.tweets = [];
-                });
-
-                angular.forEach(panelbar.byId, function(panel) {
-                    panel.tweets = [];
-                });
-            }
-        };
+      }
     });
+  }
+};
+
+Menu.prototype.close = function() {
+  this.all.forEach(function(item) {
+    item.propagate(function(i) {
+      i.isOpen = false;
+    }, 'children');
+  });
+};
+
+Menu.prototype.resetCounters = function() {
+  this.all.forEach(function(item) {
+    item.propagate(function(i) {
+      i.tweetsCount = 0;
+    });
+  });
+};
+
+function MenuItem(item, parents) {
+  if (!item.divider) {
+    var self = this;
+    this.id = item.id;
+    this.label = item.label;
+    this.tweetsCount = 0;
+
+    this.isOpen = false;
+
+    this.children = [];
+    this.parents = parents;
+
+    if (item.children) {
+      var childParents = [];
+      parents.forEach(function(p) {
+        childParents.push(p);
+      });
+      childParents.push(this);
+
+      item.children.forEach(function(child) {
+        self.children.push(new MenuItem(child, childParents));
+      });
+    }
+  } else {
+    this.divider = true;
+  }
+}
+
+MenuItem.prototype.propagate = function(callback, prop) {
+  callback(this);
+
+  if (this[prop]) {
+    this[prop].forEach(function(obj) {
+      if (!obj.divider) {
+        obj.propagate(callback, prop);
+      }
+    });
+  }
+};
+
+angular.module('tweetsToSoftware')
+  .factory('MenuService', function($timeout, $http, $q) {
+    'use strict';
+
+    var menu = new Menu(),
+        toolbar = new Menu(),
+        panelbar = new Menu(),
+        promise;
+
+    console.time('Menu load');
+    promise = $q.all([
+      $http.get('/data/commandsExtra.json'),
+      $http.get('/data/toolsExtra.json'),
+      $http.get('/data/panelsExtra.json')
+    ])
+      .then(function(response) {
+        console.timeEnd('Menu load');
+        console.time('Menu processing');
+
+        menu.populate(response[0].data);
+        toolbar.populate(response[1].data);
+        panelbar.populate(response[2].data);
+
+        console.timeEnd('Menu processing');
+      });
+
+    return {
+      loaded: promise,
+      menu: menu,
+      toolbar: toolbar,
+      panelbar: panelbar,
+      resetTweets: function() {
+        angular.forEach(menu.byId, function(menuItem) {
+          menuItem.tweets = [];
+        });
+
+        angular.forEach(toolbar.byId, function(tool) {
+          tool.tweets = [];
+        });
+
+        angular.forEach(panelbar.byId, function(panel) {
+          panel.tweets = [];
+        });
+      }
+    };
+  });

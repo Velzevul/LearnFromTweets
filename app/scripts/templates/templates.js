@@ -144,35 +144,37 @@ module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("activity.html",
     "<div class=\"app-body\">\n" +
-    "    <div class=\"activity-panel\">\n" +
-    "        <div class=\"ap-header\">\n" +
-    "            <div class=\"l-block-small\">\n" +
-    "                <div class=\"ap-header__title\">\n" +
-    "                    Tweets about Photoshop\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"l-block-small\">\n" +
-    "                <label>\n" +
-    "                    <input type=\"checkbox\"\n" +
-    "                           ng-model=\"filters.highlightUnfamiliar\"> Only tweets for unfamiliar commands\n" +
-    "                </label>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <label>\n" +
-    "                <input type=\"checkbox\"\n" +
-    "                       ng-model=\"filters.highlightRelevant\"> Only tweets for relevant commands\n" +
-    "            </label>\n" +
+    "  <div class=\"activity-panel\">\n" +
+    "    <div class=\"ap-header\">\n" +
+    "      <div class=\"l-block-small\">\n" +
+    "        <div class=\"ap-header__title\">\n" +
+    "          Tweets about Photoshop\n" +
     "        </div>\n" +
+    "      </div>\n" +
     "\n" +
-    "        <div class=\"ap-section\">\n" +
-    "            <timeline></timeline>\n" +
-    "        </div>\n" +
+    "      <div class=\"l-block-small\">\n" +
+    "        <label>\n" +
+    "          <input type=\"checkbox\"\n" +
+    "                 ng-model=\"filters.highlightUnfamiliar\"> Only tweets for\n" +
+    "          unfamiliar commands\n" +
+    "        </label>\n" +
+    "      </div>\n" +
     "\n" +
-    "        <div class=\"ap-section\">\n" +
-    "            <active-tweet></active-tweet>\n" +
-    "        </div>\n" +
+    "      <label>\n" +
+    "        <input type=\"checkbox\"\n" +
+    "               ng-model=\"filters.highlightRelevant\"> Only tweets for relevant\n" +
+    "        commands\n" +
+    "      </label>\n" +
     "    </div>\n" +
+    "\n" +
+    "    <div class=\"ap-section\">\n" +
+    "      <timeline></timeline>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"ap-section\">\n" +
+    "      <active-tweet></active-tweet>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
     "</div>");
 }]);
 })();
@@ -263,63 +265,58 @@ module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("menu.html",
     "<script type=\"text/ng-template\" id=\"menuDropdown\">\n" +
-    "    <div class=\"amd-item\"\n" +
-    "         ng-class=\"{'amd-item--active': item.isOpen,\n" +
-    "                    'amd-item--parent': item.children.length}\"\n" +
-    "         ng-mouseenter=\"open(item)\"\n" +
-    "         ng-mouseleave=\"hide(item)\">\n" +
+    "    <div class=\"md-item\"\n" +
+    "         ng-class=\"{'md-item--open': item.isOpen,\n" +
+    "                    'md-item--parent': item.children.length}\"\n" +
+    "         ng-mouseenter=\"hoverOpen(item)\"\n" +
+    "         ng-click=\"clickOpen(item)\">\n" +
     "\n" +
-    "        <div class=\"amd-item__counter\"\n" +
+    "        <div class=\"md-item__counter\"\n" +
     "             ng-show=\"item.tweets.length > 0\">{{item.tweets.length}}</div>\n" +
     "\n" +
-    "        <button class=\"amd-item__name\">{{item.label}}</button>\n" +
-    "\n" +
-    "        <div class=\"amd-item__tweets\"\n" +
-    "             ng-if=\"item.tweetsShown &&\n" +
-    "                    item.tweets.length > 0\">\n" +
-    "            <tweets-popup context=\"item\"></tweets-popup>\n" +
-    "        </div>\n" +
+    "        <button class=\"md-item__name\">{{item.label}}</button>\n" +
     "    </div>\n" +
     "\n" +
     "    <div ng-show=\"item.children.length\">\n" +
-    "        <div class=\"am-dropdown am-dropdown--nested\"\n" +
+    "        <div class=\"m-dropdown m-dropdown--nested\"\n" +
     "             ng-show=\"item.isOpen\">\n" +
     "            <div ng-repeat=\"item in item.children\">\n" +
-    "                <div class=\"am-dropdown__slot\"\n" +
+    "                <div class=\"m-dropdown__slot\"\n" +
     "                     ng-hide=\"item.divider\"\n" +
     "                     ng-include=\"'menuDropdown'\"></div>\n" +
     "\n" +
-    "                <div class=\"am-dropdown__divider\"\n" +
+    "                <div class=\"m-dropdown__divider\"\n" +
     "                     ng-show=\"item.divider\"></div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</script>\n" +
     "\n" +
-    "<div class=\"app-menu\">\n" +
+    "<div class=\"menu\">\n" +
     "    <ul class=\"l-list-inline l-list-inline--collapsed\">\n" +
     "        <li class=\"l-list-inline__item\"\n" +
-    "            ng-repeat=\"rootItem in menu\">\n" +
-    "            <div class=\"app-menu__slot\">\n" +
-    "                <div class=\"am-item\"\n" +
-    "                     ng-class=\"{'am-item--active': rootItem.isOpen}\"\n" +
-    "                     ng-mouseover=\"open(rootItem)\">\n" +
-    "                    <button class=\"am-item__name\">{{rootItem.label}}</button>\n" +
+    "            ng-repeat=\"rootItem in menuItems\">\n" +
+    "            <div class=\"menu__slot\">\n" +
+    "                <div class=\"m-item\"\n" +
+    "                     ng-class=\"{'m-item--open': rootItem.isOpen}\"\n" +
+    "                     ng-mouseenter=\"hoverOpen(rootItem)\"\n" +
+    "                     ng-click=\"clickOpen(rootItem)\">\n" +
+    "                    <button class=\"m-item__name\">{{rootItem.label}}</button>\n" +
     "\n" +
-    "                    <div class=\"am-item__counter\"\n" +
-    "                         ng-show=\"rootItem.tweets.length > 0\">\n" +
-    "                        {{rootItem.tweets.length}}\n" +
+    "                    <div class=\"m-item__counter\"\n" +
+    "                         ng-show=\"rootItem.tweetsCount > 0\">\n" +
+    "                        {{rootItem.tweetsCount}}\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"am-dropdown am-dropdown--root\"\n" +
+    "                <div class=\"m-dropdown m-dropdown--root\"\n" +
     "                     ng-show=\"rootItem.isOpen\">\n" +
     "                    <div ng-repeat=\"item in rootItem.children\">\n" +
-    "                        <div class=\"am-dropdown__slot\"\n" +
+    "                        <div class=\"m-dropdown__slot\"\n" +
     "                             ng-hide=\"item.divider\"\n" +
     "                             ng-include=\"'menuDropdown'\"></div>\n" +
     "\n" +
-    "                        <div class=\"am-dropdown__divider\"\n" +
+    "                        <div class=\"m-dropdown__divider\"\n" +
     "                             ng-show=\"item.divider\"></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -545,6 +542,24 @@ module.run(["$templateCache", function($templateCache) {
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "</div>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("app-templates"); }
+catch(err) { module = angular.module("app-templates", []); }
+module.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("tweetList.html",
+    "<div class=\"tweet-list\">\n" +
+    "  <div class=\"tweet-list__title\">Tweets for the last 3 hours</div>\n" +
+    "\n" +
+    "  <div class=\"tweet-list__body\">\n" +
+    "    <tweet data=\"t\"\n" +
+    "           ng-repeat=\"t in tweets\">\n" +
+    "    </tweet>\n" +
+    "  </div>\n" +
     "</div>");
 }]);
 })();
