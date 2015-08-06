@@ -11,6 +11,14 @@ angular.module('tweetsToSoftware')
           .then(function() {
             $scope.panels = MenuService.panelbar.all;
           });
+
+        $scope.open = function(panel) {
+          panel.isOpen = true;
+        };
+
+        $scope.hide = function() {
+          MenuService.panelbar.close();
+        };
       }
     }
   });

@@ -58,6 +58,9 @@
     background-color: $color-dc-tertiary;
     border-radius: 50%;
   }
+    &__counter--rev {
+      left: 0;
+    }
 
   & > button:focus {
     outline: none;
@@ -87,6 +90,10 @@
     position: relative;
   }
 }
+  .t-dropdown--rev {
+    left: auto;
+    right: 98%;
+  }
 
 .td-item {
   position: relative;

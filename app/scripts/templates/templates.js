@@ -332,58 +332,44 @@ try { module = angular.module("app-templates"); }
 catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("panel.html",
-    "<div class=\"panel\"\n" +
-    "     ng-class=\"{'panel--open': panel.isOpen}\">\n" +
-    "  <button class=\"p-name\"\n" +
-    "          ng-click=\"openPanel()\">\n" +
-    "    <div class=\"l-list-inline l-list-inline--collapsed\">\n" +
-    "      <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "        <div class=\"p-name__icon\"\n" +
-    "             style=\"background-image: url('/images/{{panel.id}}.png');\"></div>\n" +
-    "      </div>\n" +
-    "\n" +
-    "      <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "        <div class=\"p-name__label\">{{panel.label}}</div>\n" +
-    "      </div>\n" +
-    "    </div>\n" +
-    "  </button>\n" +
-    "\n" +
-    "  <div class=\"panel__counter\"\n" +
-    "       ng-show=\"panel.tweets.length > 0\">{{panel.tweets.length}}\n" +
-    "  </div>\n" +
-    "\n" +
-    "  <div class=\"panel__dropdown\"\n" +
-    "       ng-show=\"panel.isOpen\">\n" +
-    "    <img ng-src=\"/images/{{panel.id}}-panel.png\" alt=\"{{panel.label}}\"/>\n" +
-    "\n" +
-    "    <div class=\"panel__tweets\"\n" +
-    "         ng-if=\"panel.tweetsShown &&\n" +
-    "                    panel.tweets.length > 0\">\n" +
-    "      <tweets-popup context=\"panel\"></tweets-popup>\n" +
-    "    </div>\n" +
-    "  </div>\n" +
-    "</div>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("app-templates"); }
-catch(err) { module = angular.module("app-templates", []); }
-module.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("panelbar.html",
     "<div class=\"toolbar toolbar--right\">\n" +
     "  <div ng-repeat=\"panel in panels\">\n" +
     "    <div class=\"toolbar__slot\"\n" +
+    "         ng-mouseenter=\"open(panel)\"\n" +
+    "         ng-mouseleave=\"hide()\"\n" +
     "         ng-if=\"!panel.divider\">\n" +
-    "      <panel panel=\"panel\"></panel>\n" +
+    "      <div class=\"t-item\"\n" +
+    "           ng-class=\"{'t-item--open': panel.isOpen}\">\n" +
+    "        <button>\n" +
+    "          <div class=\"l-list-inline l-list-inline--x-small\">\n" +
+    "            <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "              <div class=\"t-item__icon\"\n" +
+    "                   style=\"background-image: url('/images/{{panel.id}}.png');\">\n" +
+    "              </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "              <div class=\"t-item__label\">{{panel.label}}</div>\n" +
+    "            </div>\n" +
+    "          </div>\n" +
+    "        </button>\n" +
+    "\n" +
+    "        <div class=\"t-item__counter t-item__counter--rev\"\n" +
+    "             ng-show=\"panel.tweetsCount > 0\">{{panel.tweetsCount}}</div>\n" +
+    "      </div>\n" +
+    "\n" +
+    "      <div class=\"t-dropdown t-dropdown--rev\"\n" +
+    "           ng-show=\"panel.isOpen\">\n" +
+    "        <img ng-src=\"/images/{{panel.id}}-panel.png\" alt=\"{{panel.label}}\"/>\n" +
+    "      </div>\n" +
     "    </div>\n" +
     "\n" +
     "    <div class=\"toolbar__divider\"\n" +
     "         ng-if=\"tool.divider\"></div>\n" +
     "  </div>\n" +
-    "</div>");
+    "</div>\n" +
+    "");
 }]);
 })();
 
@@ -407,12 +393,14 @@ module.run(["$templateCache", function($templateCache) {
     "  <div ng-repeat=\"tool in tools\">\n" +
     "    <div class=\"toolbar__slot\"\n" +
     "         ng-if=\"!tool.divider\">\n" +
-    "      <div class=\"t-item\">\n" +
+    "      <div class=\"t-item\"\n" +
+    "           ng-click=\"clickOpen(tool)\"\n" +
+    "           ng-mouseenter=\"hoverOpen(tool)\"\n" +
+    "           ng-class=\"{'t-item--open': tool.isOpen}\">\n" +
     "        <button class=\"t-item__icon\"\n" +
     "                ng-class=\"{'t-item__icon--large': tool.largeIcon}\"\n" +
-    "                style=\"background-image: url('/images/{{tool.id}}.png');\"\n" +
-    "                ng-click=\"clickOpen(tool)\"\n" +
-    "                ng-mouseenter=\"hoverOpen(tool)\"></button>\n" +
+    "                style=\"background-image: url('/images/{{tool.id}}.png');\">\n" +
+    "        </button>\n" +
     "\n" +
     "        <div class=\"t-item__counter\"\n" +
     "             ng-show=\"tool.tweetsCount > 0\">{{tool.tweetsCount}}</div>\n" +
@@ -424,9 +412,9 @@ module.run(["$templateCache", function($templateCache) {
     "        <div class=\"t-dropdown__slot\"\n" +
     "             ng-repeat=\"subtool in tool.children\">\n" +
     "          <div class=\"td-item\"\n" +
+    "               ng-mouseenter=\"hoverOpen(subtool)\"\n" +
     "               ng-class=\"{'td-item--first': $index == 0}\">\n" +
-    "            <button ng-click=\"clickOpen(subtool)\"\n" +
-    "                    ng-mouseenter=\"hoverOpen(subtool)\">\n" +
+    "            <button>\n" +
     "              <div class=\"l-list-inline l-list-inline--x-small\">\n" +
     "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
     "                  <div class=\"td-item__icon\"\n" +

@@ -2,12 +2,14 @@
   <div ng-repeat="tool in tools">
     <div class="toolbar__slot"
          ng-if="!tool.divider">
-      <div class="t-item">
+      <div class="t-item"
+           ng-click="clickOpen(tool)"
+           ng-mouseenter="hoverOpen(tool)"
+           ng-class="{'t-item--open': tool.isOpen}">
         <button class="t-item__icon"
                 ng-class="{'t-item__icon--large': tool.largeIcon}"
-                style="background-image: url('/images/{{tool.id}}.png');"
-                ng-click="clickOpen(tool)"
-                ng-mouseenter="hoverOpen(tool)"></button>
+                style="background-image: url('/images/{{tool.id}}.png');">
+        </button>
 
         <div class="t-item__counter"
              ng-show="tool.tweetsCount > 0">{{tool.tweetsCount}}</div>
@@ -19,9 +21,9 @@
         <div class="t-dropdown__slot"
              ng-repeat="subtool in tool.children">
           <div class="td-item"
+               ng-mouseenter="hoverOpen(subtool)"
                ng-class="{'td-item--first': $index == 0}">
-            <button ng-click="clickOpen(subtool)"
-                    ng-mouseenter="hoverOpen(subtool)">
+            <button>
               <div class="l-list-inline l-list-inline--x-small">
                 <div class="l-list-inline__item is-middle-aligned">
                   <div class="td-item__icon"
