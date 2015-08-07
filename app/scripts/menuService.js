@@ -51,6 +51,8 @@ function MenuItem(item, parents) {
     this.label = item.label;
     this.tweetsCount = 0;
 
+    // TODO: add promoted and banned commands
+
     if (item.largeIcon) {
       this.largeIcon = item.largeIcon;
     }
