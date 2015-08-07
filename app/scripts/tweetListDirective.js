@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('tweetList', function (TweetService, MenuService, FilterService) {
+  .directive('tweetList', function (TweetService) {
     'use strict';
 
     return {
@@ -7,7 +7,10 @@ angular.module('tweetsToSoftware')
       templateUrl: 'tweetList.html',
       scope: {},
       controller: function ($scope) {
-        $scope.tweets = TweetService.tweets.all;
+        TweetService.loaded
+          .then(function() {
+            $scope.tweets = TweetService.tweets;
+          });
       }
     };
   });

@@ -451,55 +451,56 @@ module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("tweet.html",
     "<div class=\"tweet\">\n" +
-    "    <div class=\"l-media l-media--med\">\n" +
-    "        <div class=\"l-media__figure\">\n" +
-    "            <div class=\"tweet__author-avatar\"\n" +
-    "                 style=\"background-image: url({{tweet.author.avatar}});\">\n" +
-    "            </div>\n" +
-    "        </div>\n" +
+    "  <div ng-if=\"data.\"></div>\n" +
+    "  <!--<div class=\"l-media l-media&#45;&#45;med\">-->\n" +
+    "  <!--<div class=\"l-media__figure\">-->\n" +
+    "  <!--<div class=\"tweet__author-avatar\"-->\n" +
+    "  <!--style=\"background-image: url({{tweet.author.avatar}});\">-->\n" +
+    "  <!--</div>-->\n" +
+    "  <!--</div>-->\n" +
     "\n" +
-    "        <div class=\"l-media__body\">\n" +
-    "            <div class=\"l-block-x-small\">\n" +
-    "                <div class=\"l-list-inline l-list-inline--x-small\">\n" +
-    "                    <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "                        <div class=\"tweet__author-name\">\n" +
-    "                            {{tweet.author.name}}\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
+    "  <!--<div class=\"l-media__body\">-->\n" +
+    "  <!--<div class=\"l-block-x-small\">-->\n" +
+    "  <!--<div class=\"l-list-inline l-list-inline&#45;&#45;x-small\">-->\n" +
+    "  <!--<div class=\"l-list-inline__item is-middle-aligned\">-->\n" +
+    "  <!--<div class=\"tweet__author-name\">-->\n" +
+    "  <!--{{tweet.author.name}}-->\n" +
+    "  <!--</div>-->\n" +
+    "  <!--</div>-->\n" +
     "\n" +
-    "                    <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "                        <div class=\"tweet__author-screen-name\">\n" +
-    "                            @{{tweet.author.screenName}}\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
+    "  <!--<div class=\"l-list-inline__item is-middle-aligned\">-->\n" +
+    "  <!--<div class=\"tweet__author-screen-name\">-->\n" +
+    "  <!--@{{tweet.author.screenName}}-->\n" +
+    "  <!--</div>-->\n" +
+    "  <!--</div>-->\n" +
+    "  <!--</div>-->\n" +
+    "  <!--</div>-->\n" +
     "\n" +
-    "            <div class=\"l-block-small\">\n" +
-    "                <div class=\"tweet__text\">\n" +
-    "                    <div>{{tweet.tweet.text}}</div>\n" +
+    "  <!--<div class=\"l-block-small\">-->\n" +
+    "  <!--<div class=\"tweet__text\">-->\n" +
+    "  <!--<div>{{tweet.tweet.text}}</div>-->\n" +
     "\n" +
-    "                    <a href=\"{{tweet.tweet.url}}\" class=\"tweet__link\"\n" +
-    "                                                            target=\"_blank\">\n" +
-    "                        {{tweet.tweet.url | characters:35}}\n" +
-    "                    </a>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
+    "  <!--<a href=\"{{tweet.tweet.url}}\" class=\"tweet__link\"-->\n" +
+    "  <!--target=\"_blank\">-->\n" +
+    "  <!--{{tweet.tweet.url | characters:35}}-->\n" +
+    "  <!--</a>-->\n" +
+    "  <!--</div>-->\n" +
+    "  <!--</div>-->\n" +
     "\n" +
-    "            <div class=\"l-split\">\n" +
-    "                <div class=\"l-split__right\">\n" +
-    "                    <button class=\"tweet__link\"\n" +
-    "                            ng-click=\"activateTweet(tweet)\">see details</button>\n" +
-    "                </div>\n" +
+    "  <!--<div class=\"l-split\">-->\n" +
+    "  <!--<div class=\"l-split__right\">-->\n" +
+    "  <!--<button class=\"tweet__link\"-->\n" +
+    "  <!--ng-click=\"activateTweet(tweet)\">see details</button>-->\n" +
+    "  <!--</div>-->\n" +
     "\n" +
-    "                <div class=\"l-split__left\">\n" +
-    "                    <div class=\"tweet__published\">\n" +
-    "                        {{tweet.published | amDateFormat:'MMMM Do, h:mm a'}}\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "  <!--<div class=\"l-split__left\">-->\n" +
+    "  <!--<div class=\"tweet__published\">-->\n" +
+    "  <!--{{tweet.published | amDateFormat:'MMMM Do, h:mm a'}}-->\n" +
+    "  <!--</div>-->\n" +
+    "  <!--</div>-->\n" +
+    "  <!--</div>-->\n" +
+    "  <!--</div>-->\n" +
+    "  <!--</div>-->\n" +
     "</div>");
 }]);
 })();
@@ -511,12 +512,12 @@ module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("tweetList.html",
     "<div class=\"tweet-list\">\n" +
-    "  <div class=\"tweet-list__title\">Tweets for the last 3 hours</div>\n" +
+    "  <div class=\"tweet-list__title\">Tweets since {{postedAfter}}</div>\n" +
     "\n" +
     "  <div class=\"tweet-list__body\">\n" +
-    "    <tweet data=\"t\"\n" +
-    "           ng-repeat=\"t in tweets\">\n" +
-    "    </tweet>\n" +
+    "    <div ng-repeat=\"t in tweets.all | limitTo: tweets.showItems\">\n" +
+    "      {{t.text}}\n" +
+    "    </div>\n" +
     "  </div>\n" +
     "</div>");
 }]);
