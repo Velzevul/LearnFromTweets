@@ -100,12 +100,14 @@
 @import 'configs/variables',
         'configs/resets';
 
+
 @import 'utilities/clearfix-p',
         'utilities/center-p',
         'utilities/arrow-m',
         'utilities/breakpoint-m',
         'utilities/em-f',
         'utilities/nounit-f';
+
 
 @import 'layouts/wrap',
         'layouts/grid',
@@ -119,6 +121,8 @@
         'layouts/offscreen',
         'layouts/hoverchange';
 
+@import 'fonts';
+
 @import 'modules/app-body',
         'modules/menu',
         'modules/tweet',
@@ -126,7 +130,8 @@
         'modules/toolbar',
         'modules/tweets-popup',
         'modules/activity-panel',
-        'modules/active-tweet';
+        'modules/active-tweet',
+        'modules/icons';
 
 @import 'states',
         'dev-grid',

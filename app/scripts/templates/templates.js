@@ -451,56 +451,116 @@ module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("tweet.html",
     "<div class=\"tweet\">\n" +
-    "  <div ng-if=\"data.\"></div>\n" +
-    "  <!--<div class=\"l-media l-media&#45;&#45;med\">-->\n" +
-    "  <!--<div class=\"l-media__figure\">-->\n" +
-    "  <!--<div class=\"tweet__author-avatar\"-->\n" +
-    "  <!--style=\"background-image: url({{tweet.author.avatar}});\">-->\n" +
-    "  <!--</div>-->\n" +
-    "  <!--</div>-->\n" +
+    "  <div class=\"l-tweet-content\"\n" +
+    "       ng-show=\"data.retweetedStatus\">\n" +
+    "    <div class=\"l-tweet-content__icon is-right-aligned\">\n" +
+    "      <i class=\"icon t-icon-retweet-indicator\"></i>\n" +
+    "    </div>\n" +
     "\n" +
-    "  <!--<div class=\"l-media__body\">-->\n" +
-    "  <!--<div class=\"l-block-x-small\">-->\n" +
-    "  <!--<div class=\"l-list-inline l-list-inline&#45;&#45;x-small\">-->\n" +
-    "  <!--<div class=\"l-list-inline__item is-middle-aligned\">-->\n" +
-    "  <!--<div class=\"tweet__author-name\">-->\n" +
-    "  <!--{{tweet.author.name}}-->\n" +
-    "  <!--</div>-->\n" +
-    "  <!--</div>-->\n" +
+    "    <div class=\"tweet__extra\">\n" +
+    "      {{data.author.name}} retweeted\n" +
+    "    </div>\n" +
+    "  </div>\n" +
     "\n" +
-    "  <!--<div class=\"l-list-inline__item is-middle-aligned\">-->\n" +
-    "  <!--<div class=\"tweet__author-screen-name\">-->\n" +
-    "  <!--@{{tweet.author.screenName}}-->\n" +
-    "  <!--</div>-->\n" +
-    "  <!--</div>-->\n" +
-    "  <!--</div>-->\n" +
-    "  <!--</div>-->\n" +
+    "  <div class=\"l-tweet-content\">\n" +
+    "    <div class=\"l-list-inline l-list-inline--collapsed\">\n" +
+    "      <div class=\"l-list-inline__item\">\n" +
+    "        <div class=\"t-author\">\n" +
+    "          <div class=\"l-tweet-content__icon\">\n" +
+    "            <img src=\"{{tweet.author.profileImageUrl}}\"\n" +
+    "                 alt=\"{{tweet.author.name}}\"\n" +
+    "                 class=\"t-author__avatar\"/>\n" +
+    "          </div>\n" +
     "\n" +
-    "  <!--<div class=\"l-block-small\">-->\n" +
-    "  <!--<div class=\"tweet__text\">-->\n" +
-    "  <!--<div>{{tweet.tweet.text}}</div>-->\n" +
+    "          <div class=\"l-list-inline l-list-inline--collapsed\">\n" +
+    "            <div class=\"l-list-inline__item\">\n" +
+    "              <div class=\"t-author__name\">{{tweet.author.name}}</div>\n" +
+    "            </div>\n" +
     "\n" +
-    "  <!--<a href=\"{{tweet.tweet.url}}\" class=\"tweet__link\"-->\n" +
-    "  <!--target=\"_blank\">-->\n" +
-    "  <!--{{tweet.tweet.url | characters:35}}-->\n" +
-    "  <!--</a>-->\n" +
-    "  <!--</div>-->\n" +
-    "  <!--</div>-->\n" +
+    "            <div class=\"l-list-inline__item\">\n" +
+    "              <div class=\"t-author__screen-name tweet__extra\">@{{tweet.author.screenName}}</div>\n" +
+    "            </div>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
     "\n" +
-    "  <!--<div class=\"l-split\">-->\n" +
-    "  <!--<div class=\"l-split__right\">-->\n" +
-    "  <!--<button class=\"tweet__link\"-->\n" +
-    "  <!--ng-click=\"activateTweet(tweet)\">see details</button>-->\n" +
-    "  <!--</div>-->\n" +
+    "      <div class=\"l-list-inline__item\">\n" +
+    "        <div class=\"tweet__extra tweet__extra--pre-dot\">1h</div>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "  <!--<div class=\"l-split__left\">-->\n" +
-    "  <!--<div class=\"tweet__published\">-->\n" +
-    "  <!--{{tweet.published | amDateFormat:'MMMM Do, h:mm a'}}-->\n" +
-    "  <!--</div>-->\n" +
-    "  <!--</div>-->\n" +
-    "  <!--</div>-->\n" +
-    "  <!--</div>-->\n" +
-    "  <!--</div>-->\n" +
+    "    <div class=\"l-block-small\">\n" +
+    "      {{tweet.text}}\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"l-block-small\">\n" +
+    "      <div class=\"tweet__preview-image\"\n" +
+    "           style=\"background: url('//placehold.it/600x400');\"></div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"l-block-small\">\n" +
+    "      <div class=\"t-share-table\">\n" +
+    "        <div class=\"l-list-inline l-list-inline--collapsed\">\n" +
+    "          <div class=\"l-list-inline__item\">\n" +
+    "            <div class=\"t-share-table__cell\">\n" +
+    "              <div class=\"t-stat\">\n" +
+    "                <div class=\"t-stat__title tweet__extra\">retweets</div>\n" +
+    "                <div class=\"t-stat__value\">{{tweet.retweetedBy.length}}</div>\n" +
+    "              </div>\n" +
+    "            </div>\n" +
+    "          </div>\n" +
+    "\n" +
+    "          <div class=\"l-list-inline__item\">\n" +
+    "            <div class=\"t-share-table__cell\">\n" +
+    "              <div class=\"t-stat\">\n" +
+    "                <div class=\"t-stat__title tweet__extra\">favorites</div>\n" +
+    "                <div class=\"t-stat__value\">{{tweet.favoriteCount}}</div>\n" +
+    "              </div>\n" +
+    "            </div>\n" +
+    "          </div>\n" +
+    "\n" +
+    "          <div class=\"l-list-inline__item\">\n" +
+    "            <div class=\"t-share-table__cell t-share-table__cell--pre-border\">\n" +
+    "              <div class=\"l-list-inline l-list-inline--x-small\">\n" +
+    "                <div class=\"l-list-inline__item\"\n" +
+    "                     ng-repeat=\"author in tweet.retweetedBy\">\n" +
+    "                  <div class=\"t-retweet\">\n" +
+    "                    <img src=\"{{author.profileImageUrl}}\"\n" +
+    "                         alt=\"author.name\"\n" +
+    "                         class=\"t-retweet__user-avatar\"/>\n" +
+    "                  </div>\n" +
+    "                </div>\n" +
+    "              </div>\n" +
+    "            </div>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"l-block-small\">\n" +
+    "      <div class=\"tweet__extra\">\n" +
+    "        {{tweet.createdAt | amDateFormat:'MMMM Do, h:mm a'}}\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"tweet__extra\">\n" +
+    "      <div class=\"l-list-inline\">\n" +
+    "        <div class=\"l-list-inline__item\">\n" +
+    "          <div class=\"tweet__action\">\n" +
+    "            <i class=\"icon t-icon-retweet\"></i>\n" +
+    "            {{tweet.retweetedBy.length}}\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"l-list-inline__item\">\n" +
+    "          <div class=\"tweet__action\">\n" +
+    "            <i class=\"icon t-icon-favorite\"></i>\n" +
+    "            {{tweet.favoriteCount}}\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
     "</div>");
 }]);
 })();
@@ -515,9 +575,8 @@ module.run(["$templateCache", function($templateCache) {
     "  <div class=\"tweet-list__title\">Tweets since {{postedAfter}}</div>\n" +
     "\n" +
     "  <div class=\"tweet-list__body\">\n" +
-    "    <div ng-repeat=\"t in tweets.all | limitTo: tweets.showItems\">\n" +
-    "      {{t.text}}\n" +
-    "    </div>\n" +
+    "    <tweet ng-repeat=\"t in tweets.all | limitTo: tweets.showItems\"\n" +
+    "           data=\"t\"></tweet>\n" +
     "  </div>\n" +
     "</div>");
 }]);

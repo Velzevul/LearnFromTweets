@@ -2,8 +2,7 @@
   <div class="tweet-list__title">Tweets since {{postedAfter}}</div>
 
   <div class="tweet-list__body">
-    <div ng-repeat="t in tweets.all | limitTo: tweets.showItems">
-      {{t.text}}
-    </div>
+    <tweet ng-repeat="t in tweets.all | limitTo: tweets.showItems"
+           data="t"></tweet>
   </div>
 </div>

@@ -1,52 +1,112 @@
 <div class="tweet">
-  <div ng-if="data."></div>
-  <!--<div class="l-media l-media&#45;&#45;med">-->
-  <!--<div class="l-media__figure">-->
-  <!--<div class="tweet__author-avatar"-->
-  <!--style="background-image: url({{tweet.author.avatar}});">-->
-  <!--</div>-->
-  <!--</div>-->
+  <div class="l-tweet-content"
+       ng-show="data.retweetedStatus">
+    <div class="l-tweet-content__icon is-right-aligned">
+      <i class="icon t-icon-retweet-indicator"></i>
+    </div>
 
-  <!--<div class="l-media__body">-->
-  <!--<div class="l-block-x-small">-->
-  <!--<div class="l-list-inline l-list-inline&#45;&#45;x-small">-->
-  <!--<div class="l-list-inline__item is-middle-aligned">-->
-  <!--<div class="tweet__author-name">-->
-  <!--{{tweet.author.name}}-->
-  <!--</div>-->
-  <!--</div>-->
+    <div class="tweet__extra">
+      {{data.author.name}} retweeted
+    </div>
+  </div>
 
-  <!--<div class="l-list-inline__item is-middle-aligned">-->
-  <!--<div class="tweet__author-screen-name">-->
-  <!--@{{tweet.author.screenName}}-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
+  <div class="l-tweet-content">
+    <div class="l-list-inline l-list-inline--collapsed">
+      <div class="l-list-inline__item">
+        <div class="t-author">
+          <div class="l-tweet-content__icon">
+            <img src="{{tweet.author.profileImageUrl}}"
+                 alt="{{tweet.author.name}}"
+                 class="t-author__avatar"/>
+          </div>
 
-  <!--<div class="l-block-small">-->
-  <!--<div class="tweet__text">-->
-  <!--<div>{{tweet.tweet.text}}</div>-->
+          <div class="l-list-inline l-list-inline--collapsed">
+            <div class="l-list-inline__item">
+              <div class="t-author__name">{{tweet.author.name}}</div>
+            </div>
 
-  <!--<a href="{{tweet.tweet.url}}" class="tweet__link"-->
-  <!--target="_blank">-->
-  <!--{{tweet.tweet.url | characters:35}}-->
-  <!--</a>-->
-  <!--</div>-->
-  <!--</div>-->
+            <div class="l-list-inline__item">
+              <div class="t-author__screen-name tweet__extra">@{{tweet.author.screenName}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <!--<div class="l-split">-->
-  <!--<div class="l-split__right">-->
-  <!--<button class="tweet__link"-->
-  <!--ng-click="activateTweet(tweet)">see details</button>-->
-  <!--</div>-->
+      <div class="l-list-inline__item">
+        <div class="tweet__extra tweet__extra--pre-dot">1h</div>
+      </div>
+    </div>
 
-  <!--<div class="l-split__left">-->
-  <!--<div class="tweet__published">-->
-  <!--{{tweet.published | amDateFormat:'MMMM Do, h:mm a'}}-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
+    <div class="l-block-small">
+      {{tweet.text}}
+    </div>
+
+    <div class="l-block-small">
+      <div class="tweet__preview-image"
+           style="background: url('//placehold.it/600x400');"></div>
+    </div>
+
+    <div class="l-block-small">
+      <div class="t-share-table">
+        <div class="l-list-inline l-list-inline--collapsed">
+          <div class="l-list-inline__item">
+            <div class="t-share-table__cell">
+              <div class="t-stat">
+                <div class="t-stat__title tweet__extra">retweets</div>
+                <div class="t-stat__value">{{tweet.retweetedBy.length}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="l-list-inline__item">
+            <div class="t-share-table__cell">
+              <div class="t-stat">
+                <div class="t-stat__title tweet__extra">favorites</div>
+                <div class="t-stat__value">{{tweet.favoriteCount}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="l-list-inline__item">
+            <div class="t-share-table__cell t-share-table__cell--pre-border">
+              <div class="l-list-inline l-list-inline--x-small">
+                <div class="l-list-inline__item"
+                     ng-repeat="author in tweet.retweetedBy">
+                  <div class="t-retweet">
+                    <img src="{{author.profileImageUrl}}"
+                         alt="author.name"
+                         class="t-retweet__user-avatar"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="l-block-small">
+      <div class="tweet__extra">
+        {{tweet.createdAt | amDateFormat:'MMMM Do, h:mm a'}}
+      </div>
+    </div>
+
+    <div class="tweet__extra">
+      <div class="l-list-inline">
+        <div class="l-list-inline__item">
+          <div class="tweet__action">
+            <i class="icon t-icon-retweet"></i>
+            {{tweet.retweetedBy.length}}
+          </div>
+        </div>
+
+        <div class="l-list-inline__item">
+          <div class="tweet__action">
+            <i class="icon t-icon-favorite"></i>
+            {{tweet.favoriteCount}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

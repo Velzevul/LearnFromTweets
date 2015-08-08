@@ -6,9 +6,10 @@ angular.module('tweetsToSoftware')
       restrict: 'E',
       templateUrl: 'tweet.html',
       scope: {
-        tweet: '='
+        data: '='
       },
       controller: function($scope) {
+        $scope.tweet = $scope.data.retweetedStatus || $scope.data;
       }
     }
   });

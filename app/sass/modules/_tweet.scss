@@ -1,38 +1,194 @@
+/**
+ *  TWEET MODULE
+ *
+ *  styling for tweet in the timeline
+ *
+ *  .l-tweet-content
+ *    &__icon
+ *
+ *  .tweet
+ *    &__extra
+ *      &--pre-dot
+ *    &__preview-image
+ *    &__action
+ *    &--is-open
+ *
+ *  .t-author
+ *    &__avatar
+ *    &__name
+ *    &__screen-name
+ *
+ *  .t-share-table
+ *    &__cell
+ *      &--post-border
+ *
+ *  .t-stat
+ *    &__title
+ *    &__value
+ *
+ *  .t-retweet
+ *    &__user-avatar
+ *
+ *  .t-icon-retweet-indicator
+ *  .t-icon-retweet
+ *  .t-icon-favorite
+ *
+ */
+
+$t-color: #292f33;
+$t-color-muted: #8899a6;
+$t-border: 1px solid #e1e8ed;
+
+.l-tweet-content {
+  position: relative;
+  padding-left: 58px;
+
+  &__icon {
+    position: absolute;
+    left: 0; top: 0px;
+    width: 48px;
+  }
+}
+
 .tweet {
-  width: $global-baseline * 25;
+  width: 588px;
+  min-height: 51px;
+  padding: 9px 12px;
 
-  white-space: normal;
-  
-  &__author-name {
-    font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+
+  color: $t-color;
+
+  background: white;
+  border-left: $t-border;
+  border-right: $t-border;
+  border-top: $t-border;
+
+  &__preview-image {
+    // ...
   }
 
-  &__author-screen-name {
-    font-weight: 300;
-    color: $color-tx-muted;
+  &__extra {
+    font-size: 13px;
+    color: $t-color-muted;
   }
-
-  &__author-avatar {
-    width: $global-baseline * 3;
-    height: $global-baseline * 3;
-
-    border: 1px solid $color-border-secondary;
-    border-radius: 3px;
-    background-size: cover;
-    background-position: center center;
-  }
-
-  &__link {
-    color: $color-dc-secondary;
-    text-decoration: underline;
-
-    &:hover {
-      text-decoration: none;
+    &__extra--pre-dot {
+      &:before {
+        content: '\00b7';
+        display: inline-block;
+        margin-right: 3px;
+      }
     }
+
+  &__action {
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+  .tweet--is-last {
+    border-bottom: $t-border;
+  }
+  .tweet--is-open {
+    border-radius: 6px;
+    border-bottom: $t-border;
   }
 
-  &__published {
-    font-weight: 300;
-    color: $color-tx-muted;
+.t-author {
+  // ...
+
+  &__avatar {
+    display: block;
+    width: 48px;
+    height: 48px;
+    margin-top: 3px;
+
+    border-radius: 5px;
+  }
+
+  &__name {
+    font-weight: bold;
+  }
+
+  &__screen-name {
+    // ...
+  }
+}
+
+.t-share-table {
+  border-top: $t-border;
+  border-bottom: $t-border;
+
+  &__cell {
+    padding: 6px 12px;
+  }
+    &__cell--pre-border {
+      border-left: $t-border;
+    }
+}
+
+.t-stat {
+  // ...
+
+  &__title {
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  &__value {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+
+    color: #1F98C7;
+  }
+}
+
+.t-retweet {
+  padding: 7px 0;
+
+  &__user-avatar {
+    display: block;
+    width: 24px;
+    height: 24px;
+
+    border-radius: 3px;
+  }
+}
+
+.t-icon-retweet-indicator {
+  &:before {
+    content: "\e600";
+    display: block;
+    width: 14px;
+    height: 14px;
+    margin: 2px 0;
+
+    font-size: 8px;
+    line-height: 14px;
+
+    color: white;
+    text-align: center;
+
+    background: #77b255;
+    border-radius: 2px;
+  }
+}
+
+.t-icon-retweet {
+  margin-right: 6px;
+
+  &:before {
+    line-height: 18px;
+    content: "\e600";
+  }
+}
+
+.t-icon-favorite {
+  margin-right: 6px;
+
+  &:before {
+    line-height: 18px;
+    content: "\e601";
   }
 }
