@@ -1,8 +1,13 @@
 <div class="tweet-list">
-  <div class="tweet-list__title">Tweets since {{postedAfter}}</div>
+  <div class="l-block">
+    <div class="tweet-list__title">Tweets since {{postedAfter}}</div>
+  </div>
 
   <div class="tweet-list__body">
     <tweet ng-repeat="t in tweets.all | limitTo: tweets.showItems"
+           class="tweet"
+           ng-class="{'tweet--is-first': $first,
+                      'tweet--is-last':  $last}"
            data="t"></tweet>
   </div>
 </div>

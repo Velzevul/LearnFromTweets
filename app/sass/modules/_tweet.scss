@@ -51,7 +51,6 @@ $t-border: 1px solid #e1e8ed;
 }
 
 .tweet {
-  width: 588px;
   min-height: 51px;
   padding: 9px 12px;
 
@@ -64,6 +63,12 @@ $t-border: 1px solid #e1e8ed;
   border-left: $t-border;
   border-right: $t-border;
   border-top: $t-border;
+
+  cursor: pointer;
+
+  &:hover {
+    background: #f5f8fa;
+  }
 
   &__preview-image {
     // ...
@@ -88,10 +93,17 @@ $t-border: 1px solid #e1e8ed;
 }
   .tweet--is-last {
     border-bottom: $t-border;
+    border-radius: 0 0 6px 6px;
+  }
+  .tweet--is-first {
+    border-top: $t-border;
+    border-radius: 6px 6px 0 0;
   }
   .tweet--is-open {
     border-radius: 6px;
     border-bottom: $t-border;
+
+    cursor: default;
   }
 
 .t-author {
@@ -177,6 +189,7 @@ $t-border: 1px solid #e1e8ed;
 
 .t-icon-retweet {
   margin-right: 6px;
+  color: #ccd6dd;
 
   &:before {
     line-height: 18px;
@@ -186,6 +199,7 @@ $t-border: 1px solid #e1e8ed;
 
 .t-icon-favorite {
   margin-right: 6px;
+  color: #ccd6dd;
 
   &:before {
     line-height: 18px;

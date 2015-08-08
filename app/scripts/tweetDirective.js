@@ -5,6 +5,7 @@ angular.module('tweetsToSoftware')
     return {
       restrict: 'E',
       templateUrl: 'tweet.html',
+      replace: true,
       scope: {
         data: '='
       },

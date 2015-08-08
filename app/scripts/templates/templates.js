@@ -450,7 +450,7 @@ catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("tweet.html",
-    "<div class=\"tweet\">\n" +
+    "<div>\n" +
     "  <div class=\"l-tweet-content\"\n" +
     "       ng-show=\"data.retweetedStatus\">\n" +
     "    <div class=\"l-tweet-content__icon is-right-aligned\">\n" +
@@ -572,10 +572,15 @@ module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("tweetList.html",
     "<div class=\"tweet-list\">\n" +
-    "  <div class=\"tweet-list__title\">Tweets since {{postedAfter}}</div>\n" +
+    "  <div class=\"l-block\">\n" +
+    "    <div class=\"tweet-list__title\">Tweets since {{postedAfter}}</div>\n" +
+    "  </div>\n" +
     "\n" +
     "  <div class=\"tweet-list__body\">\n" +
     "    <tweet ng-repeat=\"t in tweets.all | limitTo: tweets.showItems\"\n" +
+    "           class=\"tweet\"\n" +
+    "           ng-class=\"{'tweet--is-first': $first,\n" +
+    "                      'tweet--is-last':  $last}\"\n" +
     "           data=\"t\"></tweet>\n" +
     "  </div>\n" +
     "</div>");

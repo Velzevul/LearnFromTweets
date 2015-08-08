@@ -1,5 +1,6 @@
 .toolbar {
   position: fixed;
+  z-index: 9;
   top: $global-baseline * 5;
   padding: 3px;
 
