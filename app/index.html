@@ -1,56 +1,62 @@
 <!doctype html>
 <html lang="en"
       ng-app="tweetsToSoftware">
-  <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no"/>
-    <link rel="stylesheet"
-          href="css/main.css">
-    <!-- build:[src] scripts/ -->
-    <script src="modernizr/modernizr.js"></script>
-    <!-- /build -->
-  </head>
-  <body>
-    <menu></menu>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no"/>
+  <link rel="stylesheet"
+        href="css/main.css">
+  <!-- build:[src] scripts/ -->
+  <script src="modernizr/modernizr.js"></script>
+  <!-- /build -->
+</head>
+<body>
+  <menu></menu>
 
-    <toolbar></toolbar>
-    <panelbar></panelbar>
+  <toolbar></toolbar>
+  <panelbar></panelbar>
 
-    <!--<activity></activity>-->
-    <tweet-list></tweet-list>
+  <div class="app-body">
+    <div class="app-body__tweet-list">
+      <tweet-list></tweet-list>
+    </div>
 
-    <!-- build:js scripts/dependencies.js -->
-    <script src="jquery/dist/jquery.js"></script>
-    <script src="angular/angular.js"></script>
-    <script src="moment/moment.js"></script>
-    <script src="angular-moment/angular-moment.js"></script>
-    <script src="angular-truncate/src/truncate.js"></script>
-    <script src="d3/d3.js"></script>
-    <!-- /build -->
+    <div class="app-body__timeline">
+      <timeline></timeline>
+    </div>
+  </div>
 
-    <!-- build:js scripts/templates.js -->
-    <script src="scripts/templates/templates.js"></script>
-    <!-- /build -->
+  <!-- build:js scripts/dependencies.js -->
+  <script src="jquery/dist/jquery.js"></script>
+  <script src="angular/angular.js"></script>
+  <script src="moment/moment.js"></script>
+  <script src="angular-moment/angular-moment.js"></script>
+  <script src="angular-truncate/src/truncate.js"></script>
+  <script src="d3/d3.js"></script>
+  <!-- /build -->
 
-    <!-- build:js scripts/app.js -->
-    <script src="scripts/utils/decimalAdjust.js"></script>
-    <script src="scripts/app.js"></script>
+  <!-- build:js scripts/templates.js -->
+  <script src="scripts/templates/templates.js"></script>
+  <!-- /build -->
 
-    <script src="scripts/menuService.js"></script>
-    <script src="scripts/tweetService.js"></script>
-    <script src="scripts/filterService.js"></script>
+  <!-- build:js scripts/app.js -->
+  <script src="scripts/utils/decimalAdjust.js"></script>
+  <script src="scripts/app.js"></script>
 
-    <script src="scripts/menuDirective.js"></script>
-    <script src="scripts/toolbarDirective.js"></script>
-    <script src="scripts/panelbarDirective.js"></script>
-    <script src="scripts/tweetListDirective.js"></script>
-    <script src="scripts/tweetDirective.js"></script>
-    <!--<script src="scripts/tweetsPopupDirective.js"></script>-->
-    <!--<script src="scripts/activityDirective.js"></script>-->
-    <!--<script src="scripts/timelineDirective.js"></script>-->
-    <!--<script src="scripts/activeTweetDirective.js"></script>-->
-    <!-- /build -->
-  </body>
+  <script src="scripts/menuService.js"></script>
+  <script src="scripts/tweetService.js"></script>
+  <script src="scripts/filterService.js"></script>
+
+  <script src="scripts/menuDirective.js"></script>
+  <script src="scripts/toolbarDirective.js"></script>
+  <script src="scripts/panelbarDirective.js"></script>
+  <script src="scripts/tweetListDirective.js"></script>
+  <script src="scripts/tweetDirective.js"></script>
+  <script src="scripts/timelineDirective.js"></script>
+  <!--<script src="scripts/activityDirective.js"></script>-->
+  <!--<script src="scripts/activeTweetDirective.js"></script>-->
+  <!-- /build -->
+</body>
 </html>

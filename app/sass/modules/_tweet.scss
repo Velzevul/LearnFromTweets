@@ -51,6 +51,7 @@ $t-border: 1px solid #e1e8ed;
 }
 
 .tweet {
+  width: 100%;
   min-height: 51px;
   padding: 9px 12px;
 
@@ -100,10 +101,17 @@ $t-border: 1px solid #e1e8ed;
     border-radius: 6px 6px 0 0;
   }
   .tweet--is-open {
+    margin-top: 12px;
+    margin-bottom: 12px;
+
     border-radius: 6px;
     border-bottom: $t-border;
 
     cursor: default;
+
+    &:hover {
+      background: white;
+    }
   }
 
 .t-author {

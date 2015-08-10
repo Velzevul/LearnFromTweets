@@ -71,7 +71,7 @@
             <div class="t-share-table__cell t-share-table__cell--pre-border">
               <div class="l-list-inline l-list-inline--x-small">
                 <div class="l-list-inline__item"
-                     ng-repeat="author in tweet.retweetedBy">
+                     ng-repeat="author in tweet.retweetedBy | limitTo:8">
                   <div class="t-retweet">
                     <img src="{{author.profileImageUrl}}"
                          alt="author.name"
