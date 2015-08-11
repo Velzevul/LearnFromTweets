@@ -242,7 +242,7 @@ module.run(["$templateCache", function($templateCache) {
     "    </div>\n" +
     "\n" +
     "    <div class=\"tweet__extra\">\n" +
-    "      {{data.author.name}} retweeted\n" +
+    "      {{data.author.name}} retweeted ({{data.createdAt | amDateFormat:'h:mm A - D MMM YYYY'}})\n" +
     "    </div>\n" +
     "  </div>\n" +
     "\n" +
@@ -323,7 +323,7 @@ module.run(["$templateCache", function($templateCache) {
     "\n" +
     "    <div class=\"l-block-small\">\n" +
     "      <div class=\"tweet__extra\">\n" +
-    "        {{tweet.createdAt | amDateFormat:'MMMM Do, h:mm a'}}\n" +
+    "        {{tweet.createdAt | amDateFormat:'h:mm A - D MMM YYYY'}}\n" +
     "      </div>\n" +
     "    </div>\n" +
     "\n" +

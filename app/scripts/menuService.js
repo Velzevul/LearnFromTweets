@@ -1,7 +1,15 @@
-function Menu() {
+function Menu(name) {
+  this.name = name;
   this.all = [];
   this.byId = {};
+  this.terminalItems = [];
 }
+
+Menu.prototype.randomItem = function() {
+  var randomIndex = Math.floor(Math.random()*this.terminalItems.length);
+
+  return this.terminalItems[randomIndex];
+};
 
 Menu.prototype.populate = function(items) {
   var self = this;
@@ -10,6 +18,13 @@ Menu.prototype.populate = function(items) {
     self.all.push(new MenuItem(item, []));
   });
   populateIdMap(this.all, this.byId);
+
+  for (itemId in this.byId) {
+    if (this.byId.hasOwnProperty(itemId) &&
+        this.byId[itemId].children.length == 0) {
+      this.terminalItems.push(this.byId[itemId]);
+    }
+  }
 
   function populateIdMap(all, target) {
     all.forEach(function(one) {
@@ -94,9 +109,9 @@ angular.module('tweetsToSoftware')
   .factory('MenuService', function($timeout, $http, $q) {
     'use strict';
 
-    var menu = new Menu(),
-        toolbar = new Menu(),
-        panelbar = new Menu(),
+    var menu = new Menu('menu'),
+        toolbar = new Menu('tools'),
+        panelbar = new Menu('panels'),
         promise;
 
     console.time('Menu load');

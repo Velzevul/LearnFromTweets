@@ -28,9 +28,36 @@ Tweets.prototype.filter = function(posted_after) {
   }
 };
 
+Tweets.prototype.mockDates = function() {
+  function randomizeDate() {
+    var minutesInWeek = 10080,
+        distance = Math.floor(Math.random()*minutesInWeek);
+    return moment().subtract(distance, 'minutes');
+  }
+
+  var randomDates = [];
+  this.all.forEach(function() {
+    randomDates.push(randomizeDate());
+  });
+
+  randomDates.sort(function(a,b) { return a < b ? 1 : -1; });
+
+  this.all.forEach(function(t,i) {
+    t.createdAt = randomDates[i];
+  });
+};
+
+Tweets.prototype.mockCommands = function(menus) {
+  this.all.forEach(function(tweet) {
+    menus.forEach(function(menu) {
+      tweet.mockCommands(menu);
+    });
+  });
+};
+
 function Tweet(tweet) {
   this.id = tweet.id;
-  this.createdAt = moment(tweet.created_at).format();
+  this.createdAt = moment(tweet.created_at);
   this.favoriteCount = tweet.favorite_count;
   this.text = tweet.text;
 
@@ -43,6 +70,23 @@ function Tweet(tweet) {
                       }) : null;
 }
 
+Tweet.prototype.mockCommands = function(menu) {
+  var randomMenuItemIds = [],
+      n = Math.floor(Math.random()*7);
+
+  while (randomMenuItemIds.length < n) {
+    var randomItem = menu.randomItem();
+
+    while (randomMenuItemIds.indexOf(randomItem.id) != -1) {
+      randomItem = menu.randomItem();
+    }
+
+    randomMenuItemIds.push(randomItem.id);
+  }
+
+  this[menu.name] = randomMenuItemIds;
+};
+
 function Author(author) {
   this.screenName = author.screen_name;
   this.name = author.name;
@@ -50,21 +94,33 @@ function Author(author) {
 }
 
 angular.module('tweetsToSoftware')
-  .factory('TweetService', function($http) {
+  .factory('TweetService', function($http, $q, MenuService) {
     'use strict';
 
     var tweets = new Tweets(),
         promise;
 
     console.time('Tweets load');
-    promise = $http.get('http://dorado.cs.umanitoba.ca:8000/api/tweets')
+    promise = $q.all([
+      $http.get('http://dorado.cs.umanitoba.ca:8000/api/tweets/'),
+      MenuService.loaded
+    ])
       .then(function(response) {
         console.timeEnd('Tweets load');
         console.time('Tweets process');
 
-        tweets.populate(response.data);
+        tweets.populate(response[0].data);
 
-        //debugger;
+        //TODO: delete once server is ready
+        //START: mocking
+        tweets.mockDates();
+        tweets.mockCommands([
+          MenuService.menu,
+          MenuService.toolbar,
+          MenuService.panelbar
+        ]);
+        //END: mocking
+
         console.timeEnd('Tweets process');
       });
 
