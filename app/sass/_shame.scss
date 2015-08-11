@@ -15,23 +15,66 @@
 //  background: $color-bg-secondary;
 //}
 
+$timeline-width: 150px;
 .app-body {
   display: flex;
   width: 588px;
+  height: 100%;
   margin: 0 auto;
 
   &__timeline {
     position: fixed;
-    height: 500px;
-    width: 50px;
-    margin-left: 15px;
-
-    background: red;
+    height: 100%;
+    width: $timeline-width;
+    margin-left: -$timeline-width - 15px;
+    padding: 50px 0;
   }
 
   &__tweet-list {
     flex: 1;
-    margin-left: -65px;
+  }
+}
+
+.timeline {
+  height: 100%;
+
+  .axis {
+    font: 10px sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  .axis .domain {
+    fill: none;
+    stroke: darken(#C0DEED, 40%);
+    stroke-opacity: .3;
+    stroke-width: 5px;
+  }
+
+  .slider .handle {
+    fill: #fff;
+    stroke: #000;
+    stroke-opacity: .5;
+    stroke-width: 1.25px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+  }
+
+  .resize,
+  .extent {
+    display: none;
+  }
+
+  .background {
+    display: none;
+  }
+
+  .data-point {
+    fill: red;
+    position: relative;
+    z-index: 1;
   }
 }
 

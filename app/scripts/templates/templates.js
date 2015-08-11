@@ -162,7 +162,8 @@ module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("timeline.html",
     "<div id=\"js-timeline\"\n" +
-    "     class=\"timeline\"></div>");
+    "     class=\"timeline\">\n" +
+    "</div>");
 }]);
 })();
 
@@ -355,17 +356,11 @@ module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("tweetList.html",
     "<div class=\"tweet-list\">\n" +
-    "  <div class=\"l-block\">\n" +
-    "    <div class=\"tweet-list__title\">Tweets since {{postedAfter}}</div>\n" +
-    "  </div>\n" +
-    "\n" +
-    "  <div class=\"tweet-list__body\">\n" +
-    "    <tweet ng-repeat=\"t in tweets.all | limitTo: tweets.showItems\"\n" +
-    "           class=\"tweet\"\n" +
-    "           ng-class=\"{'tweet--is-first': $first,\n" +
-    "                      'tweet--is-last':  $last}\"\n" +
-    "           data=\"t\"></tweet>\n" +
-    "  </div>\n" +
+    "  <tweet ng-repeat=\"t in tweets.all | limitTo: tweets.showItems\"\n" +
+    "         class=\"tweet\"\n" +
+    "         ng-class=\"{'tweet--is-first': $first,\n" +
+    "                    'tweet--is-last':  $last}\"\n" +
+    "         data=\"t\"></tweet>\n" +
     "</div>");
 }]);
 })();
