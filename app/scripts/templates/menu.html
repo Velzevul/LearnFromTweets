@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="menuDropdown">
     <div class="md-item"
-         ng-class="{'md-item--open': item.isOpen,
+         ng-class="{'md-item--highlighted': item.isHighlighted,
                     'md-item--parent': item.children.length}"
          ng-mouseenter="hoverOpen(item)"
          ng-click="clickOpen(item)">
@@ -32,7 +32,7 @@
             ng-repeat="rootItem in menuItems">
             <div class="menu__slot">
                 <div class="m-item"
-                     ng-class="{'m-item--open': rootItem.isOpen}"
+                     ng-class="{'m-item--highlighted': rootItem.isHighlighted}"
                      ng-mouseenter="hoverOpen(rootItem)"
                      ng-click="clickOpen(rootItem)">
                     <button class="m-item__name">{{rootItem.label}}</button>

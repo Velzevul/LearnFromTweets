@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('menu', function($q, $document, MenuService, $timeout) {
+  .directive('menu', function($q, $document, MenuService, $rootScope) {
     'use strict';
 
     return {
@@ -7,7 +7,10 @@ angular.module('tweetsToSoftware')
       templateUrl: 'menu.html',
       scope: {},
       controller: function($scope) {
-        $scope.menuOpen = false;
+        if (typeof $rootScope.isOpen == 'undefined') {
+          $rootScope.isOpen = [];
+        }
+        $rootScope.isOpen['menu'] = false;
 
         MenuService.loaded
           .then(function() {
@@ -15,27 +18,31 @@ angular.module('tweetsToSoftware')
           });
 
         $scope.hoverOpen = function(menuItem) {
-          if ($scope.menuOpen) {
+          if ($rootScope.isOpen['menu']) {
             MenuService.menu.close();
+            MenuService.menu.removeHighlights();
 
             menuItem.propagate(function(i) {
               i.isOpen = true;
+              i.isHighlighted = true;
             }, 'parents');
           }
         };
 
         $scope.clickOpen = function(menuItem) {
-          if (!$scope.menuOpen) {
+          if (!$rootScope.isOpen['menu']) {
             menuItem.propagate(function(i) {
               i.isOpen = true;
+              i.isHighlighted = true;
             }, 'parents');
 
-            $scope.menuOpen = true;
+            $rootScope.isOpen['menu'] = true;
           } else if (menuItem.isOpen) {
             MenuService.menu.close();
-            $scope.menuOpen = false;
+            MenuService.menu.removeHighlights();
+            $rootScope.isOpen['menu'] = false;
           }
-        }
+        };
       },
       link: function($scope) {
         $document.on('click', function(e) {
@@ -44,7 +51,8 @@ angular.module('tweetsToSoftware')
 
           if (!isMenu) {
             MenuService.menu.close();
-            $scope.menuOpen = false;
+            MenuService.menu.removeHighlights();
+            $rootScope.isOpen['menu'] = false;
             $scope.$apply();
           }
         });

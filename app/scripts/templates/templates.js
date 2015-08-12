@@ -48,7 +48,7 @@ module.run(["$templateCache", function($templateCache) {
   $templateCache.put("menu.html",
     "<script type=\"text/ng-template\" id=\"menuDropdown\">\n" +
     "    <div class=\"md-item\"\n" +
-    "         ng-class=\"{'md-item--open': item.isOpen,\n" +
+    "         ng-class=\"{'md-item--highlighted': item.isHighlighted,\n" +
     "                    'md-item--parent': item.children.length}\"\n" +
     "         ng-mouseenter=\"hoverOpen(item)\"\n" +
     "         ng-click=\"clickOpen(item)\">\n" +
@@ -80,7 +80,7 @@ module.run(["$templateCache", function($templateCache) {
     "            ng-repeat=\"rootItem in menuItems\">\n" +
     "            <div class=\"menu__slot\">\n" +
     "                <div class=\"m-item\"\n" +
-    "                     ng-class=\"{'m-item--open': rootItem.isOpen}\"\n" +
+    "                     ng-class=\"{'m-item--highlighted': rootItem.isHighlighted}\"\n" +
     "                     ng-mouseenter=\"hoverOpen(rootItem)\"\n" +
     "                     ng-click=\"clickOpen(rootItem)\">\n" +
     "                    <button class=\"m-item__name\">{{rootItem.label}}</button>\n" +
@@ -118,11 +118,11 @@ module.run(["$templateCache", function($templateCache) {
     "<div class=\"toolbar toolbar--right\">\n" +
     "  <div ng-repeat=\"panel in panels\">\n" +
     "    <div class=\"toolbar__slot\"\n" +
-    "         ng-mouseenter=\"open(panel)\"\n" +
-    "         ng-mouseleave=\"hide()\"\n" +
+    "         ng-click=\"clickOpen(panel)\"\n" +
+    "         ng-mouseenter=\"hoverOpen(panel)\"\n" +
     "         ng-if=\"!panel.divider\">\n" +
     "      <div class=\"t-item\"\n" +
-    "           ng-class=\"{'t-item--open': panel.isOpen}\">\n" +
+    "           ng-class=\"{'t-item--highlighted': panel.isHighlighted}\">\n" +
     "        <button>\n" +
     "          <div class=\"l-list-inline l-list-inline--x-small\">\n" +
     "            <div class=\"l-list-inline__item is-middle-aligned\">\n" +
@@ -180,7 +180,7 @@ module.run(["$templateCache", function($templateCache) {
     "      <div class=\"t-item\"\n" +
     "           ng-click=\"clickOpen(tool)\"\n" +
     "           ng-mouseenter=\"hoverOpen(tool)\"\n" +
-    "           ng-class=\"{'t-item--open': tool.isOpen}\">\n" +
+    "           ng-class=\"{'t-item--highlighted': tool.isHighlighted}\">\n" +
     "        <button class=\"t-item__icon\"\n" +
     "                ng-class=\"{'t-item__icon--large': tool.largeIcon}\"\n" +
     "                style=\"background-image: url('/images/{{tool.id}}.png');\">\n" +
@@ -197,7 +197,8 @@ module.run(["$templateCache", function($templateCache) {
     "             ng-repeat=\"subtool in tool.children\">\n" +
     "          <div class=\"td-item\"\n" +
     "               ng-mouseenter=\"hoverOpen(subtool)\"\n" +
-    "               ng-class=\"{'td-item--first': $index == 0}\">\n" +
+    "               ng-class=\"{'td-item--first': $first,\n" +
+    "                          'td-item--highlighted': subtool.isHighlighted}\">\n" +
     "            <button>\n" +
     "              <div class=\"l-list-inline l-list-inline--x-small\">\n" +
     "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
@@ -280,6 +281,43 @@ module.run(["$templateCache", function($templateCache) {
     "    <div class=\"l-block-small\">\n" +
     "      <div class=\"tweet__preview-image\"\n" +
     "           style=\"background: url('//placehold.it/600x400');\"></div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"l-block-small\">\n" +
+    "      <div class=\"commands-table\">\n" +
+    "        <div class=\"commands-table__cell\">\n" +
+    "          <div class=\"commands-header\">Menu items:</div>\n" +
+    "\n" +
+    "          <div ng-repeat=\"item in tweet.menu\">\n" +
+    "            <div class=\"command\"\n" +
+    "                 ng-mouseenter=\"highlight('menu', item.id)\"\n" +
+    "                 ng-mouseleave=\"removeHighlights('menu', item.id)\"\n" +
+    "                 ng-click=\"open('menu', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"commands-table__cell commands-table__cell--pre-border\">\n" +
+    "          <div class=\"commands-header\">Panels:</div>\n" +
+    "\n" +
+    "          <div ng-repeat=\"item in tweet.panels\">\n" +
+    "            <div class=\"command\"\n" +
+    "                 ng-mouseenter=\"highlight('panelbar', item.id)\"\n" +
+    "                 ng-mouseleave=\"removeHighlights('panelbar', item.id)\"\n" +
+    "                 ng-click=\"open('panelbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"commands-table__cell commands-table__cell--pre-border\">\n" +
+    "          <div class=\"commands-header\">Tools:</div>\n" +
+    "\n" +
+    "          <div ng-repeat=\"item in tweet.tools\">\n" +
+    "            <div class=\"command\"\n" +
+    "                 ng-mouseenter=\"highlight('toolbar', item.id)\"\n" +
+    "                 ng-mouseleave=\"removeHighlights('toolbar', item.id)\"\n" +
+    "                 ng-click=\"open('toolbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
     "    </div>\n" +
     "\n" +
     "    <div class=\"l-block-small\">\n" +

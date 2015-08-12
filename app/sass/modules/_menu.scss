@@ -63,6 +63,9 @@
   .m-item--open {
     background: rgba($color-dc-secondary, 0.5);
   }
+  .m-item--highlighted {
+    background: rgba($color-dc-secondary, 0.5);
+  }
 
 .m-dropdown {
   position: absolute;
@@ -129,5 +132,8 @@
     }
   }
   .md-item--open {
+    background: rgba($color-dc-secondary, 0.5);
+  }
+  .md-item--highlighted {
     background: rgba($color-dc-secondary, 0.5);
   }

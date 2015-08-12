@@ -47,6 +47,43 @@
     </div>
 
     <div class="l-block-small">
+      <div class="commands-table">
+        <div class="commands-table__cell">
+          <div class="commands-header">Menu items:</div>
+
+          <div ng-repeat="item in tweet.menu">
+            <div class="command"
+                 ng-mouseenter="highlight('menu', item.id)"
+                 ng-mouseleave="removeHighlights('menu', item.id)"
+                 ng-click="open('menu', item.id, $event)">{{item.label | characters:25}}</div>
+          </div>
+        </div>
+
+        <div class="commands-table__cell commands-table__cell--pre-border">
+          <div class="commands-header">Panels:</div>
+
+          <div ng-repeat="item in tweet.panels">
+            <div class="command"
+                 ng-mouseenter="highlight('panelbar', item.id)"
+                 ng-mouseleave="removeHighlights('panelbar', item.id)"
+                 ng-click="open('panelbar', item.id, $event)">{{item.label | characters:25}}</div>
+          </div>
+        </div>
+
+        <div class="commands-table__cell commands-table__cell--pre-border">
+          <div class="commands-header">Tools:</div>
+
+          <div ng-repeat="item in tweet.tools">
+            <div class="command"
+                 ng-mouseenter="highlight('toolbar', item.id)"
+                 ng-mouseleave="removeHighlights('toolbar', item.id)"
+                 ng-click="open('toolbar', item.id, $event)">{{item.label | characters:25}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="l-block-small">
       <div class="t-share-table">
         <div class="l-list-inline l-list-inline--collapsed">
           <div class="l-list-inline__item">

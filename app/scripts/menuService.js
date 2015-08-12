@@ -51,6 +51,14 @@ Menu.prototype.close = function() {
   });
 };
 
+Menu.prototype.removeHighlights = function() {
+  this.all.forEach(function(item) {
+    item.propagate(function(i) {
+      i.isHighlighted = false;
+    }, 'children');
+  });
+};
+
 Menu.prototype.resetCounters = function() {
   this.all.forEach(function(item) {
     item.propagate(function(i) {
@@ -73,6 +81,7 @@ function MenuItem(item, parents) {
     }
 
     this.isOpen = false;
+    this.isHighlighted = false;
 
     this.children = [];
     this.parents = parents;
@@ -117,8 +126,8 @@ angular.module('tweetsToSoftware')
     console.time('Menu load');
     promise = $q.all([
       $http.get('/data/commandsExtra.json'),
-      $http.get('/data/toolsExtra.json'),
-      $http.get('/data/panelsExtra.json')
+      $http.get('/data/tools.json'),
+      $http.get('/data/panels.json')
     ])
       .then(function(response) {
         console.timeEnd('Menu load');

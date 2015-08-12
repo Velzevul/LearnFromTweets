@@ -81,7 +81,10 @@ Tweet.prototype.mockCommands = function(menu) {
       randomItem = menu.randomItem();
     }
 
-    randomMenuItemIds.push(randomItem.id);
+    randomMenuItemIds.push({
+      id: randomItem.id,
+      label: randomItem.label
+    });
   }
 
   this[menu.name] = randomMenuItemIds;
@@ -102,7 +105,7 @@ angular.module('tweetsToSoftware')
 
     console.time('Tweets load');
     promise = $q.all([
-      $http.get('http://dorado.cs.umanitoba.ca:8000/api/tweets/'),
+      $http.get('http://0.0.0.0:8000/api/tweets/'),
       MenuService.loaded
     ])
       .then(function(response) {
