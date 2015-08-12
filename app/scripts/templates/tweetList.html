@@ -1,7 +1,10 @@
 <div class="tweet-list">
   <tweet ng-repeat="t in tweets.all | limitTo: tweets.showItems"
+         ng-click="activate(t)"
          class="tweet"
          ng-class="{'tweet--is-first': $first,
-                    'tweet--is-last':  $last}"
-         data="t"></tweet>
+                    'tweet--is-last':  $last,
+                    'tweet--is-open': t.id == activeId}"
+         data="t"
+         active="activeId"></tweet>
 </div>

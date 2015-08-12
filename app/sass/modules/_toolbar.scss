@@ -74,12 +74,6 @@
     background: rgba($color-dc-secondary, 0.5);
   }
 }
-  .t-item--open {
-    position: relative;
-    z-index: 1;
-    outline: 2px solid $color-dc-secondary;
-    background: rgba($color-dc-secondary, 0.5);
-  }
   .t-item--highlighted {
     position: relative;
     z-index: 1;
@@ -157,8 +151,5 @@
     }
   }
   .td-item--highlighted {
-    background: rgba($color-dc-secondary, 0.5);
-  }
-  .td-item--open {
     background: rgba($color-dc-secondary, 0.5);
   }

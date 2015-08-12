@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('tweet', function(MenuService, $rootScope) {
+  .directive('tweet', function(TweetService, MenuService, $timeout, $rootScope) {
     'use strict';
 
     return {
@@ -7,39 +7,55 @@ angular.module('tweetsToSoftware')
       templateUrl: 'tweet.html',
       replace: true,
       scope: {
-        data: '='
+        data: '=',
+        active: '='
       },
       controller: function($scope) {
+        var highlightTimeout,
+            highlightDelay = 200;
+
         $scope.tweet = $scope.data.retweetedStatus || $scope.data;
 
         $scope.highlight = function(menu, id) {
-          $scope.removeHighlights(menu);
+          if ($scope.data.id == $scope.active) {
+            clearTimeout(highlightTimeout);
 
-          MenuService[menu].byId[id].propagate(function(i) {
-            i.isHighlighted = true;
-          }, 'parents');
+            highlightTimeout = $timeout(function() {
+              $scope.removeHighlights(menu);
+
+              MenuService[menu].byId[id].propagate(function(i) {
+                i.isHighlighted = true;
+              }, 'parents');
+            }, highlightDelay).$$timeoutId;
+          }
         };
 
         $scope.removeHighlights = function(menu, id) {
-          if (typeof id == 'undefined' ||
-              MenuService[menu].byId[id].isOpen == false) {
-            MenuService[menu].removeHighlights();
-            MenuService[menu].close()
+          if ($scope.data.id == $scope.active) {
+            clearTimeout(highlightTimeout);
+
+            if (typeof id == 'undefined' ||
+                $rootScope.isOpen[menu] == false) {
+              MenuService[menu].removeHighlights();
+              MenuService[menu].close()
+            }
           }
         };
 
         $scope.open = function(menu, id, e) {
-          e.stopPropagation();
+          if ($scope.data.id == $scope.active) {
+            e.stopPropagation();
 
-          MenuService.menu.close();
-          MenuService.toolbar.close();
-          MenuService.panelbar.close();
+            MenuService.menu.close();
+            MenuService.toolbar.close();
+            MenuService.panelbar.close();
 
-          $rootScope.isOpen[menu] = true;
+            $rootScope.isOpen[menu] = true;
 
-          MenuService[menu].byId[id].propagate(function(i) {
-            i.isOpen = true;
-          }, 'parents');
+            MenuService[menu].byId[id].propagate(function(i) {
+              i.isOpen = true;
+            }, 'parents');
+          }
         };
       }
     }

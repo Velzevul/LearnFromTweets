@@ -51,39 +51,46 @@
         <div class="commands-table__cell">
           <div class="commands-header">Menu items:</div>
 
-          <div ng-repeat="item in tweet.menu">
-            <div class="command"
-                 ng-mouseenter="highlight('menu', item.id)"
-                 ng-mouseleave="removeHighlights('menu', item.id)"
-                 ng-click="open('menu', item.id, $event)">{{item.label | characters:25}}</div>
-          </div>
+          <div class="command"
+               ng-repeat="item in tweet.menu | limitTo: data.id === active ? tweet.menu.length : 2"
+               ng-mouseenter="highlight('menu', item.id)"
+               ng-mouseleave="removeHighlights('menu', item.id)"
+               ng-click="open('menu', item.id, $event)">{{item.label | characters:25}}</div>
+
+          <div class="command"
+               ng-show="data.id !== active && tweet.menu.length > 2">...</div>
         </div>
 
         <div class="commands-table__cell commands-table__cell--pre-border">
           <div class="commands-header">Panels:</div>
 
-          <div ng-repeat="item in tweet.panels">
-            <div class="command"
-                 ng-mouseenter="highlight('panelbar', item.id)"
-                 ng-mouseleave="removeHighlights('panelbar', item.id)"
-                 ng-click="open('panelbar', item.id, $event)">{{item.label | characters:25}}</div>
-          </div>
+          <div class="command"
+               ng-repeat="item in tweet.panels | limitTo: data.id === active ? tweet.panels.length : 2"
+               ng-mouseenter="highlight('panelbar', item.id)"
+               ng-mouseleave="removeHighlights('panelbar', item.id)"
+               ng-click="open('panelbar', item.id, $event)">{{item.label | characters:25}}</div>
+
+          <div class="command"
+               ng-show="data.id !== active && tweet.panels.length > 2">...</div>
         </div>
 
         <div class="commands-table__cell commands-table__cell--pre-border">
           <div class="commands-header">Tools:</div>
 
-          <div ng-repeat="item in tweet.tools">
-            <div class="command"
-                 ng-mouseenter="highlight('toolbar', item.id)"
-                 ng-mouseleave="removeHighlights('toolbar', item.id)"
-                 ng-click="open('toolbar', item.id, $event)">{{item.label | characters:25}}</div>
-          </div>
+          <div class="command"
+               ng-repeat="item in tweet.tools| limitTo: data.id === active ? tweet.tools.length : 2"
+               ng-mouseenter="highlight('toolbar', item.id)"
+               ng-mouseleave="removeHighlights('toolbar', item.id)"
+               ng-click="open('toolbar', item.id, $event)">{{item.label | characters:25}}</div>
+
+          <div class="command"
+               ng-show="data.id !== active && tweet.tools.length > 2">...</div>
         </div>
       </div>
     </div>
 
-    <div class="l-block-small">
+    <div class="l-block-small"
+         ng-show="data.id == active">
       <div class="t-share-table">
         <div class="l-list-inline l-list-inline--collapsed">
           <div class="l-list-inline__item">
@@ -122,7 +129,8 @@
       </div>
     </div>
 
-    <div class="l-block-small">
+    <div class="l-block-small"
+         ng-show="data.id == active">
       <div class="tweet__extra">
         {{tweet.createdAt | amDateFormat:'h:mm A - D MMM YYYY'}}
       </div>
@@ -133,14 +141,14 @@
         <div class="l-list-inline__item">
           <div class="tweet__action">
             <i class="icon t-icon-retweet"></i>
-            {{tweet.retweetedBy.length}}
+            <span ng-show="data.id != active">{{tweet.retweetedBy.length}}</span>
           </div>
         </div>
 
         <div class="l-list-inline__item">
           <div class="tweet__action">
             <i class="icon t-icon-favorite"></i>
-            {{tweet.favoriteCount}}
+            <span ng-show="data.id != active">{{tweet.favoriteCount}}</span>
           </div>
         </div>
       </div>

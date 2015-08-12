@@ -13,16 +13,16 @@ Tweets.prototype.populate = function(tweets) {
   self.showItems = tweets.length;
 };
 
-Tweets.prototype.filter = function(posted_after) {
+Tweets.prototype.filter = function(postedAfter) {
   var lastTweet = this.all[this.showItems - 1],
-      moveIndexForward = lastTweet.createdAt > posted_after;
+      moveIndexForward = lastTweet.createdAt > postedAfter;
 
   if (moveIndexForward) {
-    while (this.all[this.showItems - 1].createdAt > posted_after) {
+    while (this.all[this.showItems - 1].createdAt > postedAfter) {
       this.showItems += 1;
     }
   } else {
-    while (this.all[this.showItems - 1].createdAt < posted_after) {
+    while (this.all[this.showItems - 1].createdAt < postedAfter) {
       this.showItems -= 1;
     }
   }

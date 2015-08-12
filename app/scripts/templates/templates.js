@@ -142,6 +142,7 @@ module.run(["$templateCache", function($templateCache) {
     "      </div>\n" +
     "\n" +
     "      <div class=\"t-dropdown t-dropdown--rev\"\n" +
+    "           ng-click=\"clickOpen(panel)\"\n" +
     "           ng-show=\"panel.isOpen\">\n" +
     "        <img ng-src=\"/images/{{panel.id}}-panel.png\" alt=\"{{panel.label}}\"/>\n" +
     "      </div>\n" +
@@ -288,39 +289,46 @@ module.run(["$templateCache", function($templateCache) {
     "        <div class=\"commands-table__cell\">\n" +
     "          <div class=\"commands-header\">Menu items:</div>\n" +
     "\n" +
-    "          <div ng-repeat=\"item in tweet.menu\">\n" +
-    "            <div class=\"command\"\n" +
-    "                 ng-mouseenter=\"highlight('menu', item.id)\"\n" +
-    "                 ng-mouseleave=\"removeHighlights('menu', item.id)\"\n" +
-    "                 ng-click=\"open('menu', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
-    "          </div>\n" +
+    "          <div class=\"command\"\n" +
+    "               ng-repeat=\"item in tweet.menu | limitTo: data.id === active ? tweet.menu.length : 2\"\n" +
+    "               ng-mouseenter=\"highlight('menu', item.id)\"\n" +
+    "               ng-mouseleave=\"removeHighlights('menu', item.id)\"\n" +
+    "               ng-click=\"open('menu', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
+    "\n" +
+    "          <div class=\"command\"\n" +
+    "               ng-show=\"data.id !== active && tweet.menu.length > 2\">...</div>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"commands-table__cell commands-table__cell--pre-border\">\n" +
     "          <div class=\"commands-header\">Panels:</div>\n" +
     "\n" +
-    "          <div ng-repeat=\"item in tweet.panels\">\n" +
-    "            <div class=\"command\"\n" +
-    "                 ng-mouseenter=\"highlight('panelbar', item.id)\"\n" +
-    "                 ng-mouseleave=\"removeHighlights('panelbar', item.id)\"\n" +
-    "                 ng-click=\"open('panelbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
-    "          </div>\n" +
+    "          <div class=\"command\"\n" +
+    "               ng-repeat=\"item in tweet.panels | limitTo: data.id === active ? tweet.panels.length : 2\"\n" +
+    "               ng-mouseenter=\"highlight('panelbar', item.id)\"\n" +
+    "               ng-mouseleave=\"removeHighlights('panelbar', item.id)\"\n" +
+    "               ng-click=\"open('panelbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
+    "\n" +
+    "          <div class=\"command\"\n" +
+    "               ng-show=\"data.id !== active && tweet.panels.length > 2\">...</div>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"commands-table__cell commands-table__cell--pre-border\">\n" +
     "          <div class=\"commands-header\">Tools:</div>\n" +
     "\n" +
-    "          <div ng-repeat=\"item in tweet.tools\">\n" +
-    "            <div class=\"command\"\n" +
-    "                 ng-mouseenter=\"highlight('toolbar', item.id)\"\n" +
-    "                 ng-mouseleave=\"removeHighlights('toolbar', item.id)\"\n" +
-    "                 ng-click=\"open('toolbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
-    "          </div>\n" +
+    "          <div class=\"command\"\n" +
+    "               ng-repeat=\"item in tweet.tools| limitTo: data.id === active ? tweet.tools.length : 2\"\n" +
+    "               ng-mouseenter=\"highlight('toolbar', item.id)\"\n" +
+    "               ng-mouseleave=\"removeHighlights('toolbar', item.id)\"\n" +
+    "               ng-click=\"open('toolbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
+    "\n" +
+    "          <div class=\"command\"\n" +
+    "               ng-show=\"data.id !== active && tweet.tools.length > 2\">...</div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"l-block-small\">\n" +
+    "    <div class=\"l-block-small\"\n" +
+    "         ng-show=\"data.id == active\">\n" +
     "      <div class=\"t-share-table\">\n" +
     "        <div class=\"l-list-inline l-list-inline--collapsed\">\n" +
     "          <div class=\"l-list-inline__item\">\n" +
@@ -359,7 +367,8 @@ module.run(["$templateCache", function($templateCache) {
     "      </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"l-block-small\">\n" +
+    "    <div class=\"l-block-small\"\n" +
+    "         ng-show=\"data.id == active\">\n" +
     "      <div class=\"tweet__extra\">\n" +
     "        {{tweet.createdAt | amDateFormat:'h:mm A - D MMM YYYY'}}\n" +
     "      </div>\n" +
@@ -370,14 +379,14 @@ module.run(["$templateCache", function($templateCache) {
     "        <div class=\"l-list-inline__item\">\n" +
     "          <div class=\"tweet__action\">\n" +
     "            <i class=\"icon t-icon-retweet\"></i>\n" +
-    "            {{tweet.retweetedBy.length}}\n" +
+    "            <span ng-show=\"data.id != active\">{{tweet.retweetedBy.length}}</span>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"l-list-inline__item\">\n" +
     "          <div class=\"tweet__action\">\n" +
     "            <i class=\"icon t-icon-favorite\"></i>\n" +
-    "            {{tweet.favoriteCount}}\n" +
+    "            <span ng-show=\"data.id != active\">{{tweet.favoriteCount}}</span>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
@@ -395,10 +404,13 @@ module.run(["$templateCache", function($templateCache) {
   $templateCache.put("tweetList.html",
     "<div class=\"tweet-list\">\n" +
     "  <tweet ng-repeat=\"t in tweets.all | limitTo: tweets.showItems\"\n" +
+    "         ng-click=\"activate(t)\"\n" +
     "         class=\"tweet\"\n" +
     "         ng-class=\"{'tweet--is-first': $first,\n" +
-    "                    'tweet--is-last':  $last}\"\n" +
-    "         data=\"t\"></tweet>\n" +
+    "                    'tweet--is-last':  $last,\n" +
+    "                    'tweet--is-open': t.id == activeId}\"\n" +
+    "         data=\"t\"\n" +
+    "         active=\"activeId\"></tweet>\n" +
     "</div>");
 }]);
 })();

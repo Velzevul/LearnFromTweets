@@ -60,9 +60,6 @@
     background: rgba($color-dc-secondary, 0.5);
   }
 }
-  .m-item--open {
-    background: rgba($color-dc-secondary, 0.5);
-  }
   .m-item--highlighted {
     background: rgba($color-dc-secondary, 0.5);
   }
@@ -130,9 +127,6 @@
     &:after {
       @include simple-arrow($global-baseline/3, darken($color-border, 15%), 'quadrant-2', 0, 6px, 'right');
     }
-  }
-  .md-item--open {
-    background: rgba($color-dc-secondary, 0.5);
   }
   .md-item--highlighted {
     background: rgba($color-dc-secondary, 0.5);

@@ -240,14 +240,14 @@ $t-border: 1px solid #e1e8ed;
 }
 
 .command {
-  padding: 3px 6px;
+  padding: 0 6px;
 
   font-size: 12px;
 
   color: #1F98C7;
+}
 
-  &:hover {
-    background: #EEF8FF;
-    outline: 1px solid #C0DEED;
-  }
+.tweet--is-open .command:hover {
+  background: #EEF8FF;
+  outline: 1px solid #C0DEED;
 }

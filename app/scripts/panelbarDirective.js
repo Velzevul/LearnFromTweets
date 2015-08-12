@@ -47,7 +47,7 @@ angular.module('tweetsToSoftware')
       link: function($scope) {
         $document.on('click', function(e) {
           var isPanelbar = $(e.target).parents('.toolbar').length ||
-            $(e.target).hasClass('toolbar');
+                           $(e.target).hasClass('toolbar');
 
           if (!isPanelbar) {
             MenuService.panelbar.close();
