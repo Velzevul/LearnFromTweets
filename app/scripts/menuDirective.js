@@ -43,6 +43,10 @@ angular.module('tweetsToSoftware')
             $rootScope.isOpen['menu'] = false;
           }
         };
+
+        $scope.showTweetsFor = function(item) {
+          console.log('showing tweets for ' + item.label);
+        };
       },
       link: function($scope) {
         $document.on('click', function(e) {

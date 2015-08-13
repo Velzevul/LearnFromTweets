@@ -144,19 +144,6 @@ angular.module('tweetsToSoftware')
       loaded: promise,
       menu: menu,
       toolbar: toolbar,
-      panelbar: panelbar,
-      resetTweets: function() {
-        angular.forEach(menu.byId, function(menuItem) {
-          menuItem.tweets = [];
-        });
-
-        angular.forEach(toolbar.byId, function(tool) {
-          tool.tweets = [];
-        });
-
-        angular.forEach(panelbar.byId, function(panel) {
-          panel.tweets = [];
-        });
-      }
+      panelbar: panelbar
     };
   });

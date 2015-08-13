@@ -56,7 +56,8 @@ module.run(["$templateCache", function($templateCache) {
     "        <div class=\"md-item__counter\"\n" +
     "             ng-show=\"item.tweetsCount > 0\">{{item.tweetsCount}}</div>\n" +
     "\n" +
-    "        <button class=\"md-item__name\">{{item.label}}</button>\n" +
+    "        <button class=\"md-item__name\"\n" +
+    "                ng-click=\"showTweetsFor(item)\">{{item.label}}</button>\n" +
     "    </div>\n" +
     "\n" +
     "    <div ng-show=\"item.children.length\">\n" +

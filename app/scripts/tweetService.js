@@ -13,7 +13,7 @@ Tweets.prototype.populate = function(tweets) {
   self.showItems = tweets.length;
 };
 
-Tweets.prototype.filter = function(postedAfter) {
+Tweets.prototype.filterByTime = function(postedAfter) {
   var lastTweet = this.all[this.showItems - 1],
       moveIndexForward = lastTweet.createdAt > postedAfter;
 
@@ -60,6 +60,7 @@ function Tweet(tweet) {
   this.createdAt = moment(tweet.created_at);
   this.favoriteCount = tweet.favorite_count;
   this.text = tweet.text;
+  this.matchesFilters = true;
 
   this.author = new Author(tweet.author);
   this.retweetedStatus = tweet.retweeted_status ?

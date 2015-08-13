@@ -8,7 +8,8 @@
         <div class="md-item__counter"
              ng-show="item.tweetsCount > 0">{{item.tweetsCount}}</div>
 
-        <button class="md-item__name">{{item.label}}</button>
+        <button class="md-item__name"
+                ng-click="showTweetsFor(item)">{{item.label}}</button>
     </div>
 
     <div ng-show="item.children.length">
