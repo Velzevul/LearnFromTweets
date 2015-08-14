@@ -1,24 +1,17 @@
 angular.module('tweetsToSoftware')
-  .directive('menu', function(MenuService, FilterService, $q, $document, $rootScope) {
+  .directive('menu', function(FilterService, $document) {
     'use strict';
 
     return {
       restrict: 'E',
       templateUrl: 'menu.html',
-      scope: {},
+      scope: {
+        menu: '=',
+        openMenu: '='
+      },
       controller: function($scope) {
-        if (typeof $rootScope.isOpen == 'undefined') {
-          $rootScope.isOpen = [];
-        }
-        $rootScope.isOpen['menu'] = false;
-
-        MenuService.loaded
-          .then(function() {
-            $scope.menuItems = MenuService.menu.all;
-          });
-
         $scope.hoverOpen = function(menuItem) {
-          if ($rootScope.isOpen['menu']) {
+          if ($scope.openMenu == 'menu') {
             MenuService.menu.close();
             MenuService.menu.removeHighlights();
 

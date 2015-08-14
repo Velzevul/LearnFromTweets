@@ -12,11 +12,11 @@
   <script src="modernizr/modernizr.js"></script>
   <!-- /build -->
 </head>
-<body>
-  <menu></menu>
+<body ng-controller="mainController">
+  <menu menu="menu"></menu>
 
-  <toolbar></toolbar>
-  <panelbar></panelbar>
+  <toolbar menu="toolbar"></toolbar>
+  <panelbar menu="panelbar"></panelbar>
 
   <div class="app-body">
     <div class="app-body__timeline">
@@ -44,6 +44,7 @@
   <!-- build:js scripts/app.js -->
   <script src="scripts/utils/decimalAdjust.js"></script>
   <script src="scripts/app.js"></script>
+  <script src="scripts/mainController.js"></script>
 
   <script src="scripts/menuService.js"></script>
   <script src="scripts/tweetService.js"></script>

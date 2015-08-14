@@ -8,6 +8,9 @@ angular.module('tweetsToSoftware')
       templateUrl: 'tweetList.html',
       scope: {},
       controller: function($scope) {
+        var highlightTimeout,
+            highlightDelay = 100;
+
         $scope.activeId = null;
         $scope.filters = FilterService;
 
@@ -33,9 +36,6 @@ angular.module('tweetsToSoftware')
         $scope.resetActiveCommand = function() {
           $scope.filters.activeCommand = null;
         };
-
-        var highlightTimeout,
-            highlightDelay = 100;
 
         $scope.highlight = function() {
           clearTimeout(highlightTimeout);

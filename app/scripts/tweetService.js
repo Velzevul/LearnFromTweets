@@ -1,6 +1,5 @@
 function Tweets() {
   this.all = [];
-  this.showItems = 0;
 }
 
 Tweets.prototype.populate = function(tweets) {
@@ -100,34 +99,22 @@ function Author(author) {
 }
 
 angular.module('tweetsToSoftware')
-  .factory('TweetService', function($http, $q, MenuService) {
+  .factory('TweetService', function($http) {
     'use strict';
 
     var tweets = new Tweets(),
         promise;
 
     console.time('Tweets load');
-    promise = $q.all([
-      $http.get('http://0.0.0.0:8000/api/tweets/'),
-      MenuService.loaded
-    ])
+    promise = $http.get('http://0.0.0.0:8000/api/tweets/')
       .then(function(response) {
         console.timeEnd('Tweets load');
-        console.time('Tweets process');
+        console.time('Tweets population');
 
         tweets.populate(response[0].data);
-
-        //TODO: delete once server is ready
-        //START: mocking
         tweets.mockDates();
-        tweets.mockCommands([
-          MenuService.menu,
-          MenuService.toolbar,
-          MenuService.panelbar
-        ]);
-        //END: mocking
 
-        console.timeEnd('Tweets process');
+        console.timeEnd('Tweets population');
       });
 
     return {
