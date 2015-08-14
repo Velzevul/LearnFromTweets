@@ -54,7 +54,7 @@
           <div class="command"
                ng-repeat="item in tweet.menu | limitTo: data.id === active ? tweet.menu.length : 2"
                ng-mouseenter="highlight('menu', item.id)"
-               ng-mouseleave="removeHighlights('menu', item.id)"
+               ng-mouseleave="removeHighlights('menu')"
                ng-click="open('menu', item.id, $event)">{{item.label | characters:25}}</div>
 
           <div class="command"
@@ -67,7 +67,7 @@
           <div class="command"
                ng-repeat="item in tweet.panels | limitTo: data.id === active ? tweet.panels.length : 2"
                ng-mouseenter="highlight('panelbar', item.id)"
-               ng-mouseleave="removeHighlights('panelbar', item.id)"
+               ng-mouseleave="removeHighlights('panelbar')"
                ng-click="open('panelbar', item.id, $event)">{{item.label | characters:25}}</div>
 
           <div class="command"
@@ -80,7 +80,7 @@
           <div class="command"
                ng-repeat="item in tweet.tools| limitTo: data.id === active ? tweet.tools.length : 2"
                ng-mouseenter="highlight('toolbar', item.id)"
-               ng-mouseleave="removeHighlights('toolbar', item.id)"
+               ng-mouseleave="removeHighlights('toolbar')"
                ng-click="open('toolbar', item.id, $event)">{{item.label | characters:25}}</div>
 
           <div class="command"

@@ -6,23 +6,25 @@ function Tweets() {
 Tweets.prototype.populate = function(tweets) {
   var self = this;
 
-  tweets.forEach(function(t) {
-    self.all.push(new Tweet(t));
-  });
-
   self.showItems = tweets.length;
+
+  tweets.forEach(function(t) {
+    var tweet = new Tweet(t);
+
+    self.all.push(tweet);
+  });
 };
 
-Tweets.prototype.filterByTime = function(postedAfter) {
-  var lastTweet = this.all[this.showItems - 1],
-      moveIndexForward = lastTweet.createdAt > postedAfter;
+Tweets.prototype.revealUntil = function(targetTime) {
+  var lastShownTweet = this.all[this.showItems - 1],
+      increaseIndex = lastShownTweet.createdAt > targetTime;
 
-  if (moveIndexForward) {
-    while (this.all[this.showItems - 1].createdAt > postedAfter) {
+  if (increaseIndex) {
+    while (this.all[this.showItems - 1].createdAt > targetTime) {
       this.showItems += 1;
     }
   } else {
-    while (this.all[this.showItems - 1].createdAt < postedAfter) {
+    while (this.all[this.showItems - 1].createdAt < targetTime) {
       this.showItems -= 1;
     }
   }
@@ -72,23 +74,23 @@ function Tweet(tweet) {
 }
 
 Tweet.prototype.mockCommands = function(menu) {
-  var randomMenuItemIds = [],
+  var randomMenuItems = [],
       n = Math.floor(Math.random()*7);
 
-  while (randomMenuItemIds.length < n) {
+  while (randomMenuItems.length < n) {
     var randomItem = menu.randomItem();
 
-    while (randomMenuItemIds.indexOf(randomItem.id) != -1) {
+    while (randomMenuItems.indexOf(randomItem) != -1) {
       randomItem = menu.randomItem();
     }
 
-    randomMenuItemIds.push({
-      id: randomItem.id,
-      label: randomItem.label
-    });
+    randomMenuItems.push(randomItem);
   }
 
-  this[menu.name] = randomMenuItemIds;
+  this[menu.name] = randomMenuItems;
+  if (this.retweetedStatus) {
+    this.retweetedStatus[menu.name] = randomMenuItems;
+  }
 };
 
 function Author(author) {

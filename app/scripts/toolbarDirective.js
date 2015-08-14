@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('toolbar', function(MenuService, $document, $rootScope) {
+  .directive('toolbar', function(FilterService, MenuService, $document, $rootScope) {
     'use strict';
 
     return {
@@ -41,6 +41,13 @@ angular.module('tweetsToSoftware')
             MenuService.toolbar.close();
             MenuService.toolbar.removeHighlights();
             $rootScope.isOpen['toolbar'] = false;
+          }
+        };
+
+        $scope.showTweetsFor = function(item) {
+          if (item.children.length == 0) {
+            FilterService.activeCommand = item;
+            FilterService.activeCommandLocation = MenuService.toolbar;
           }
         };
       },

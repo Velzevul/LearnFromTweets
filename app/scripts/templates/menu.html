@@ -1,61 +1,64 @@
-<script type="text/ng-template" id="menuDropdown">
-    <div class="md-item"
-         ng-class="{'md-item--highlighted': item.isHighlighted,
+<script type="text/ng-template"
+        id="menuDropdown">
+  <div class="md-item"
+       ng-class="{'md-item--highlighted': item.isHighlighted,
                     'md-item--parent': item.children.length}"
-         ng-mouseenter="hoverOpen(item)"
-         ng-click="clickOpen(item)">
+       ng-mouseenter="hoverOpen(item)"
+       ng-click="clickOpen(item)">
 
-        <div class="md-item__counter"
-             ng-show="item.tweetsCount > 0">{{item.tweetsCount}}</div>
-
-        <button class="md-item__name"
-                ng-click="showTweetsFor(item)">{{item.label}}</button>
+    <div class="md-item__counter"
+         ng-show="item.tweetsCount > 0">{{item.tweetsCount}}
     </div>
 
-    <div ng-show="item.children.length">
-        <div class="m-dropdown m-dropdown--nested"
-             ng-show="item.isOpen">
-            <div ng-repeat="item in item.children">
-                <div class="m-dropdown__slot"
-                     ng-hide="item.divider"
-                     ng-include="'menuDropdown'"></div>
+    <button class="md-item__name"
+            ng-click="showTweetsFor(item)">{{item.label}}
+    </button>
+  </div>
 
-                <div class="m-dropdown__divider"
-                     ng-show="item.divider"></div>
-            </div>
-        </div>
+  <div ng-show="item.children.length">
+    <div class="m-dropdown m-dropdown--nested"
+         ng-show="item.isOpen">
+      <div ng-repeat="item in item.children">
+        <div class="m-dropdown__slot"
+             ng-hide="item.divider"
+             ng-include="'menuDropdown'"></div>
+
+        <div class="m-dropdown__divider"
+             ng-show="item.divider"></div>
+      </div>
     </div>
+  </div>
 </script>
 
 <div class="menu">
-    <ul class="l-list-inline l-list-inline--collapsed">
-        <li class="l-list-inline__item"
-            ng-repeat="rootItem in menuItems">
-            <div class="menu__slot">
-                <div class="m-item"
-                     ng-class="{'m-item--highlighted': rootItem.isHighlighted}"
-                     ng-mouseenter="hoverOpen(rootItem)"
-                     ng-click="clickOpen(rootItem)">
-                    <button class="m-item__name">{{rootItem.label}}</button>
+  <ul class="l-list-inline l-list-inline--collapsed">
+    <li class="l-list-inline__item"
+        ng-repeat="rootItem in menuItems">
+      <div class="menu__slot">
+        <div class="m-item"
+             ng-class="{'m-item--highlighted': rootItem.isHighlighted}"
+             ng-mouseenter="hoverOpen(rootItem)"
+             ng-click="clickOpen(rootItem)">
+          <button class="m-item__name">{{rootItem.label}}</button>
 
-                    <div class="m-item__counter"
-                         ng-show="rootItem.tweetsCount > 0">
-                        {{rootItem.tweetsCount}}
-                    </div>
-                </div>
+          <div class="m-item__counter"
+               ng-show="rootItem.tweetsCount > 0">
+            {{rootItem.tweetsCount}}
+          </div>
+        </div>
 
-                <div class="m-dropdown m-dropdown--root"
-                     ng-show="rootItem.isOpen">
-                    <div ng-repeat="item in rootItem.children">
-                        <div class="m-dropdown__slot"
-                             ng-hide="item.divider"
-                             ng-include="'menuDropdown'"></div>
+        <div class="m-dropdown m-dropdown--root"
+             ng-show="rootItem.isOpen">
+          <div ng-repeat="item in rootItem.children">
+            <div class="m-dropdown__slot"
+                 ng-hide="item.divider"
+                 ng-include="'menuDropdown'"></div>
 
-                        <div class="m-dropdown__divider"
-                             ng-show="item.divider"></div>
-                    </div>
-                </div>
-            </div>
-        </li>
-    </ul>
+            <div class="m-dropdown__divider"
+                 ng-show="item.divider"></div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

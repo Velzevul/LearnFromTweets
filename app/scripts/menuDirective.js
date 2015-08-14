@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('menu', function($q, $document, MenuService, $rootScope) {
+  .directive('menu', function(MenuService, FilterService, $q, $document, $rootScope) {
     'use strict';
 
     return {
@@ -45,7 +45,10 @@ angular.module('tweetsToSoftware')
         };
 
         $scope.showTweetsFor = function(item) {
-          console.log('showing tweets for ' + item.label);
+          if (item.children.length == 0) {
+            FilterService.activeCommand = item;
+            FilterService.activeCommandLocation = MenuService.menu;
+          }
         };
       },
       link: function($scope) {

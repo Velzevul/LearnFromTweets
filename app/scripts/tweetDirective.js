@@ -12,7 +12,7 @@ angular.module('tweetsToSoftware')
       },
       controller: function($scope) {
         var highlightTimeout,
-            highlightDelay = 200;
+            highlightDelay = 100;
 
         $scope.tweet = $scope.data.retweetedStatus || $scope.data;
 
@@ -21,7 +21,8 @@ angular.module('tweetsToSoftware')
             clearTimeout(highlightTimeout);
 
             highlightTimeout = $timeout(function() {
-              $scope.removeHighlights(menu);
+              MenuService[menu].removeHighlights();
+              MenuService[menu].close();
 
               MenuService[menu].byId[id].propagate(function(i) {
                 i.isHighlighted = true;
@@ -30,12 +31,11 @@ angular.module('tweetsToSoftware')
           }
         };
 
-        $scope.removeHighlights = function(menu, id) {
+        $scope.removeHighlights = function(menu) {
           if ($scope.data.id == $scope.active) {
             clearTimeout(highlightTimeout);
 
-            if (typeof id == 'undefined' ||
-                $rootScope.isOpen[menu] == false) {
+            if ($rootScope.isOpen[menu] == false) {
               MenuService[menu].removeHighlights();
               MenuService[menu].close()
             }

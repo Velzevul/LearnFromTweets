@@ -3,7 +3,8 @@ angular.module('tweetsToSoftware')
     'use strict';
 
     return {
-      postedAfter: moment().subtract(1, 'days').format(),
+      activeCommand: null,
+      activeCommandLocation: null,
       bannedAuthors: {},
       bannedCommands: {},
       promotedAuthors: {},
