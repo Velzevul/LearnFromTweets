@@ -2,16 +2,15 @@
         id="menuDropdown">
   <div class="md-item"
        ng-class="{'md-item--highlighted': item.isHighlighted,
-                    'md-item--parent': item.children.length}"
-       ng-mouseenter="hoverOpen(item)"
-       ng-click="clickOpen(item)">
+                  'md-item--parent': item.children.length}"
+       ng-mouseenter="onItemHover(menu, item)">
 
     <div class="md-item__counter"
          ng-show="item.tweetsCount > 0">{{item.tweetsCount}}
     </div>
 
     <button class="md-item__name"
-            ng-click="showTweetsFor(item)">{{item.label}}
+            ng-click="onItemActivate(menu, item, $event)">{{item.label}}
     </button>
   </div>
 
@@ -30,15 +29,15 @@
   </div>
 </script>
 
-<div class="menu">
+<div class="menu js-menu">
   <ul class="l-list-inline l-list-inline--collapsed">
     <li class="l-list-inline__item"
-        ng-repeat="rootItem in menuItems">
+        ng-repeat="rootItem in menu.all">
       <div class="menu__slot">
         <div class="m-item"
              ng-class="{'m-item--highlighted': rootItem.isHighlighted}"
-             ng-mouseenter="hoverOpen(rootItem)"
-             ng-click="clickOpen(rootItem)">
+             ng-mouseenter="onItemHover(menu, rootItem)"
+             ng-click="onItemClick(menu, rootItem)">
           <button class="m-item__name">{{rootItem.label}}</button>
 
           <div class="m-item__counter"

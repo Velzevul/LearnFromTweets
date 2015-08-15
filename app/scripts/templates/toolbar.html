@@ -1,53 +1,53 @@
-<div class="toolbar toolbar--left">
-  <div ng-repeat="tool in tools">
+<div class="toolbar toolbar--left js-menu">
+  <div ng-repeat="item in menu.all">
     <div class="toolbar__slot"
-         ng-if="!tool.divider">
+         ng-if="!item.divider">
       <div class="t-item"
-           ng-click="clickOpen(tool)"
-           ng-mouseenter="hoverOpen(tool)"
-           ng-class="{'t-item--highlighted': tool.isHighlighted}">
+           ng-click="onItemClick(menu, item)"
+           ng-mouseenter="onItemHover(menu, item)"
+           ng-class="{'t-item--highlighted': item.isHighlighted}">
         <button class="t-item__icon"
-                ng-class="{'t-item__icon--large': tool.largeIcon}"
-                style="background-image: url('/images/{{tool.id}}.png');"
-                ng-click="showTweetsFor(tool)">
+                ng-class="{'t-item__icon--large': item.largeIcon}"
+                style="background-image: url('/images/{{item.id}}.png');"
+                ng-click="onItemActivate(menu, item, $event)">
         </button>
 
         <div class="t-item__counter"
-             ng-show="tool.tweetsCount > 0">{{tool.tweetsCount}}</div>
+             ng-show="item.tweetsCount > 0">{{item.tweetsCount}}</div>
       </div>
 
       <div class="t-dropdown"
-           ng-show="tool.isOpen"
-           ng-if="tool.children.length">
+           ng-show="item.isOpen"
+           ng-if="item.children.length">
         <div class="t-dropdown__slot"
-             ng-repeat="subtool in tool.children">
+             ng-repeat="subitem in item.children">
           <div class="td-item"
-               ng-mouseenter="hoverOpen(subtool)"
+               ng-mouseenter="onItemHover(menu, subitem)"
                ng-class="{'td-item--first': $first,
-                          'td-item--highlighted': subtool.isHighlighted}">
-            <button ng-click="showTweetsFor(subtool)">
+                          'td-item--highlighted': subitem.isHighlighted}">
+            <button ng-click="onItemActivate(menu, subitem, $event)">
               <div class="l-list-inline l-list-inline--x-small">
                 <div class="l-list-inline__item is-middle-aligned">
                   <div class="td-item__icon"
-                       ng-class="{'td-item__icon--large': subtool.largeIcon}"
+                       ng-class="{'td-item__icon--large': subitem.largeIcon}"
                        style="background-image:
-                       url('/images/{{subtool.id}}.png');"></div>
+                       url('/images/{{subitem.id}}.png');"></div>
                 </div>
 
                 <div class="l-list-inline__item is-middle-aligned">
-                  <div class="td-item__label">{{subtool.label}}</div>
+                  <div class="td-item__label">{{subitem.label}}</div>
                 </div>
               </div>
             </button>
 
             <div class="td-item__counter"
-                 ng-show="tool.tweetsCount > 0">{{tool.tweetsCount}}</div>
+                 ng-show="item.tweetsCount > 0">{{item.tweetsCount}}</div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="toolbar__divider"
-         ng-if="tool.divider"></div>
+         ng-if="item.divider"></div>
   </div>
 </div>

@@ -41,6 +41,8 @@ Menu.prototype.populate = function(items) {
       }
     });
   }
+
+  return this;
 };
 
 Menu.prototype.close = function() {
@@ -49,6 +51,8 @@ Menu.prototype.close = function() {
       i.isOpen = false;
     }, 'children');
   });
+
+  return this;
 };
 
 Menu.prototype.removeHighlights = function() {
@@ -57,6 +61,8 @@ Menu.prototype.removeHighlights = function() {
       i.isHighlighted = false;
     }, 'children');
   });
+
+  return this;
 };
 
 Menu.prototype.resetCounters = function() {
@@ -65,6 +71,8 @@ Menu.prototype.resetCounters = function() {
       i.tweetsCount = 0;
     });
   });
+
+  return this;
 };
 
 function MenuItem(item, parents) {

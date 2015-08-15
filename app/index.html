@@ -13,18 +13,30 @@
   <!-- /build -->
 </head>
 <body ng-controller="mainController">
-  <menu menu="menu"></menu>
+  <menu menu="menu"
+        on-item-hover="itemHoverCallback"
+        on-item-click="itemClickCallback"
+        on-item-activate="itemActivateCallback"></menu>
 
-  <toolbar menu="toolbar"></toolbar>
-  <panelbar menu="panelbar"></panelbar>
+  <toolbar menu="toolbar"
+           on-item-hover="itemHoverCallback"
+           on-item-click="itemClickCallback"
+           on-item-activate="itemActivateCallback"></toolbar>
 
-  <div class="app-body">
-    <div class="app-body__timeline">
-      <timeline></timeline>
-    </div>
+  <panelbar menu="panelbar"
+            on-item-hover="itemHoverCallback"
+            on-item-click="itemClickCallback"
+            on-item-activate="itemActivateCallback"></panelbar>
 
-    <div class="app-body__tweet-list">
-      <tweet-list></tweet-list>
+  <div ng-click="hideMenus()">
+    <div class="app-body">
+      <div class="app-body__timeline">
+        <timeline></timeline>
+      </div>
+
+      <div class="app-body__tweet-list">
+        <tweet-list></tweet-list>
+      </div>
     </div>
   </div>
 
@@ -56,8 +68,6 @@
   <script src="scripts/tweetListDirective.js"></script>
   <script src="scripts/tweetDirective.js"></script>
   <script src="scripts/timelineDirective.js"></script>
-  <!--<script src="scripts/activityDirective.js"></script>-->
-  <!--<script src="scripts/activeTweetDirective.js"></script>-->
   <!-- /build -->
 </body>
 </html>

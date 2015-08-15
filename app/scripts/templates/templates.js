@@ -50,16 +50,15 @@ module.run(["$templateCache", function($templateCache) {
     "        id=\"menuDropdown\">\n" +
     "  <div class=\"md-item\"\n" +
     "       ng-class=\"{'md-item--highlighted': item.isHighlighted,\n" +
-    "                    'md-item--parent': item.children.length}\"\n" +
-    "       ng-mouseenter=\"hoverOpen(item)\"\n" +
-    "       ng-click=\"clickOpen(item)\">\n" +
+    "                  'md-item--parent': item.children.length}\"\n" +
+    "       ng-mouseenter=\"onItemHover(menu, item)\">\n" +
     "\n" +
     "    <div class=\"md-item__counter\"\n" +
     "         ng-show=\"item.tweetsCount > 0\">{{item.tweetsCount}}\n" +
     "    </div>\n" +
     "\n" +
     "    <button class=\"md-item__name\"\n" +
-    "            ng-click=\"showTweetsFor(item)\">{{item.label}}\n" +
+    "            ng-click=\"onItemActivate(menu, item, $event)\">{{item.label}}\n" +
     "    </button>\n" +
     "  </div>\n" +
     "\n" +
@@ -78,15 +77,15 @@ module.run(["$templateCache", function($templateCache) {
     "  </div>\n" +
     "</script>\n" +
     "\n" +
-    "<div class=\"menu\">\n" +
+    "<div class=\"menu js-menu\">\n" +
     "  <ul class=\"l-list-inline l-list-inline--collapsed\">\n" +
     "    <li class=\"l-list-inline__item\"\n" +
-    "        ng-repeat=\"rootItem in menuItems\">\n" +
+    "        ng-repeat=\"rootItem in menu.all\">\n" +
     "      <div class=\"menu__slot\">\n" +
     "        <div class=\"m-item\"\n" +
     "             ng-class=\"{'m-item--highlighted': rootItem.isHighlighted}\"\n" +
-    "             ng-mouseenter=\"hoverOpen(rootItem)\"\n" +
-    "             ng-click=\"clickOpen(rootItem)\">\n" +
+    "             ng-mouseenter=\"onItemHover(menu, rootItem)\"\n" +
+    "             ng-click=\"onItemClick(menu, rootItem)\">\n" +
     "          <button class=\"m-item__name\">{{rootItem.label}}</button>\n" +
     "\n" +
     "          <div class=\"m-item__counter\"\n" +
@@ -119,43 +118,37 @@ catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("panelbar.html",
-    "<div class=\"toolbar toolbar--right\">\n" +
-    "  <div ng-repeat=\"panel in panels\">\n" +
-    "    <div class=\"toolbar__slot\"\n" +
-    "         ng-click=\"clickOpen(panel)\"\n" +
-    "         ng-mouseenter=\"hoverOpen(panel)\"\n" +
-    "         ng-if=\"!panel.divider\">\n" +
+    "<div class=\"toolbar toolbar--right js-menu\">\n" +
+    "  <div ng-repeat=\"item in menu.all\">\n" +
+    "    <div class=\"toolbar__slot\">\n" +
     "      <div class=\"t-item\"\n" +
-    "           ng-class=\"{'t-item--highlighted': panel.isHighlighted}\">\n" +
-    "        <button>\n" +
+    "           ng-class=\"{'t-item--highlighted': item.isHighlighted}\">\n" +
+    "        <button ng-click=\"onItemClick(menu, item)\"\n" +
+    "                ng-mouseenter=\"onItemHover(menu, item)\">\n" +
     "          <div class=\"l-list-inline l-list-inline--x-small\">\n" +
     "            <div class=\"l-list-inline__item is-middle-aligned\">\n" +
     "              <div class=\"t-item__icon\"\n" +
-    "                   style=\"background-image: url('/images/{{panel.id}}.png');\">\n" +
+    "                   style=\"background-image: url('/images/{{item.id}}.png');\">\n" +
     "              </div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "              <div class=\"t-item__label\">{{panel.label}}</div>\n" +
+    "              <div class=\"t-item__label\">{{item.label}}</div>\n" +
     "            </div>\n" +
     "          </div>\n" +
     "        </button>\n" +
     "\n" +
     "        <div class=\"t-item__counter t-item__counter--rev\"\n" +
-    "             ng-show=\"panel.tweetsCount > 0\">{{panel.tweetsCount}}</div>\n" +
+    "             ng-show=\"item.tweetsCount > 0\">{{item.tweetsCount}}</div>\n" +
     "      </div>\n" +
     "\n" +
     "      <div class=\"t-dropdown t-dropdown--rev\"\n" +
-    "           ng-click=\"clickOpen(panel)\"\n" +
-    "           ng-show=\"panel.isOpen\">\n" +
-    "        <button ng-click=\"showTweetsFor(panel)\">\n" +
-    "          <img ng-src=\"/images/{{panel.id}}-panel.png\" alt=\"{{panel.label}}\"/>\n" +
+    "           ng-show=\"item.isOpen\">\n" +
+    "        <button ng-click=\"onItemActivate(menu, item, $event)\">\n" +
+    "          <img ng-src=\"/images/{{item.id}}-panel.png\" alt=\"{{item.label}}\"/>\n" +
     "        </button>\n" +
     "      </div>\n" +
     "    </div>\n" +
-    "\n" +
-    "    <div class=\"toolbar__divider\"\n" +
-    "         ng-if=\"tool.divider\"></div>\n" +
     "  </div>\n" +
     "</div>\n" +
     "");
@@ -180,57 +173,57 @@ catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("toolbar.html",
-    "<div class=\"toolbar toolbar--left\">\n" +
-    "  <div ng-repeat=\"tool in tools\">\n" +
+    "<div class=\"toolbar toolbar--left js-menu\">\n" +
+    "  <div ng-repeat=\"item in menu.all\">\n" +
     "    <div class=\"toolbar__slot\"\n" +
-    "         ng-if=\"!tool.divider\">\n" +
+    "         ng-if=\"!item.divider\">\n" +
     "      <div class=\"t-item\"\n" +
-    "           ng-click=\"clickOpen(tool)\"\n" +
-    "           ng-mouseenter=\"hoverOpen(tool)\"\n" +
-    "           ng-class=\"{'t-item--highlighted': tool.isHighlighted}\">\n" +
+    "           ng-click=\"onItemClick(menu, item)\"\n" +
+    "           ng-mouseenter=\"onItemHover(menu, item)\"\n" +
+    "           ng-class=\"{'t-item--highlighted': item.isHighlighted}\">\n" +
     "        <button class=\"t-item__icon\"\n" +
-    "                ng-class=\"{'t-item__icon--large': tool.largeIcon}\"\n" +
-    "                style=\"background-image: url('/images/{{tool.id}}.png');\"\n" +
-    "                ng-click=\"showTweetsFor(tool)\">\n" +
+    "                ng-class=\"{'t-item__icon--large': item.largeIcon}\"\n" +
+    "                style=\"background-image: url('/images/{{item.id}}.png');\"\n" +
+    "                ng-click=\"onItemActivate(menu, item, $event)\">\n" +
     "        </button>\n" +
     "\n" +
     "        <div class=\"t-item__counter\"\n" +
-    "             ng-show=\"tool.tweetsCount > 0\">{{tool.tweetsCount}}</div>\n" +
+    "             ng-show=\"item.tweetsCount > 0\">{{item.tweetsCount}}</div>\n" +
     "      </div>\n" +
     "\n" +
     "      <div class=\"t-dropdown\"\n" +
-    "           ng-show=\"tool.isOpen\"\n" +
-    "           ng-if=\"tool.children.length\">\n" +
+    "           ng-show=\"item.isOpen\"\n" +
+    "           ng-if=\"item.children.length\">\n" +
     "        <div class=\"t-dropdown__slot\"\n" +
-    "             ng-repeat=\"subtool in tool.children\">\n" +
+    "             ng-repeat=\"subitem in item.children\">\n" +
     "          <div class=\"td-item\"\n" +
-    "               ng-mouseenter=\"hoverOpen(subtool)\"\n" +
+    "               ng-mouseenter=\"onItemHover(menu, subitem)\"\n" +
     "               ng-class=\"{'td-item--first': $first,\n" +
-    "                          'td-item--highlighted': subtool.isHighlighted}\">\n" +
-    "            <button ng-click=\"showTweetsFor(subtool)\">\n" +
+    "                          'td-item--highlighted': subitem.isHighlighted}\">\n" +
+    "            <button ng-click=\"onItemActivate(menu, subitem, $event)\">\n" +
     "              <div class=\"l-list-inline l-list-inline--x-small\">\n" +
     "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
     "                  <div class=\"td-item__icon\"\n" +
-    "                       ng-class=\"{'td-item__icon--large': subtool.largeIcon}\"\n" +
+    "                       ng-class=\"{'td-item__icon--large': subitem.largeIcon}\"\n" +
     "                       style=\"background-image:\n" +
-    "                       url('/images/{{subtool.id}}.png');\"></div>\n" +
+    "                       url('/images/{{subitem.id}}.png');\"></div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "                  <div class=\"td-item__label\">{{subtool.label}}</div>\n" +
+    "                  <div class=\"td-item__label\">{{subitem.label}}</div>\n" +
     "                </div>\n" +
     "              </div>\n" +
     "            </button>\n" +
     "\n" +
     "            <div class=\"td-item__counter\"\n" +
-    "                 ng-show=\"tool.tweetsCount > 0\">{{tool.tweetsCount}}</div>\n" +
+    "                 ng-show=\"item.tweetsCount > 0\">{{item.tweetsCount}}</div>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "\n" +
     "    <div class=\"toolbar__divider\"\n" +
-    "         ng-if=\"tool.divider\"></div>\n" +
+    "         ng-if=\"item.divider\"></div>\n" +
     "  </div>\n" +
     "</div>\n" +
     "");
