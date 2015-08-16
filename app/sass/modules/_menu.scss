@@ -17,9 +17,6 @@
 .m-item {
   position: relative;
 
-  @include transition-property(background-color);
-  @include transition-duration(0.2s);
-
   &__name {
     position: relative;
     z-index: 2;
@@ -96,9 +93,6 @@
 .md-item {
   position: relative;
   white-space: nowrap;
-
-  @include transition-property(background-color);
-  @include transition-duration(0.2s);
 
   &__name {
     @extend .m-item__name;

@@ -7,9 +7,12 @@ angular.module('tweetsToSoftware')
       templateUrl: 'panelbar.html',
       scope: {
         menu: '=',
+        onItemActivate: '=',
         onItemHover: '=',
-        onItemClick: '=',
-        onItemActivate: '='
+        onItemLeave: '=',
+        onRootItemClick: '=',
+        onRootItemHover: '=',
+        onRootItemLeave: '='
       }
-    }
+    };
   });

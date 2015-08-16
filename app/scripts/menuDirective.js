@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('menu', function() {
+  .directive('topMenu', function() {
     'use strict';
 
     return {
@@ -7,9 +7,12 @@ angular.module('tweetsToSoftware')
       templateUrl: 'menu.html',
       scope: {
         menu: '=',
+        onItemActivate: '=',
         onItemHover: '=',
-        onItemClick: '=',
-        onItemActivate: '='
+        onItemLeave: '=',
+        onRootItemClick: '=',
+        onRootItemHover: '=',
+        onRootItemLeave: '='
       }
     };
   });

@@ -3,7 +3,8 @@
   <div class="md-item"
        ng-class="{'md-item--highlighted': item.isHighlighted,
                   'md-item--parent': item.children.length}"
-       ng-mouseenter="onItemHover(menu, item)">
+       ng-mouseenter="onItemHover(menu, item)"
+       ng-mouseleave="onItemLeave(item)">
 
     <div class="md-item__counter"
          ng-show="item.tweetsCount > 0">{{item.tweetsCount}}
@@ -36,8 +37,9 @@
       <div class="menu__slot">
         <div class="m-item"
              ng-class="{'m-item--highlighted': rootItem.isHighlighted}"
-             ng-mouseenter="onItemHover(menu, rootItem)"
-             ng-click="onItemClick(menu, rootItem)">
+             ng-mouseenter="onRootItemHover(menu, rootItem)"
+             ng-mouseleave="onRootItemLeave(menu, rootItem)"
+             ng-click="onRootItemClick(menu, rootItem)">
           <button class="m-item__name">{{rootItem.label}}</button>
 
           <div class="m-item__counter"

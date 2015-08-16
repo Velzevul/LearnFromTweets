@@ -3,6 +3,8 @@ function Menu(name) {
   this.all = [];
   this.byId = {};
   this.terminalItems = [];
+
+  this.isOpen = false;
 }
 
 Menu.prototype.randomItem = function() {
@@ -47,33 +49,23 @@ Menu.prototype.populate = function(items) {
 
 Menu.prototype.close = function() {
   this.all.forEach(function(item) {
-    item.propagate(function(i) {
-      i.isOpen = false;
-    }, 'children');
+    item.close().dim();
   });
+
+  this.isOpen = false;
 
   return this;
 };
 
-Menu.prototype.removeHighlights = function() {
-  this.all.forEach(function(item) {
-    item.propagate(function(i) {
-      i.isHighlighted = false;
-    }, 'children');
-  });
-
-  return this;
-};
-
-Menu.prototype.resetCounters = function() {
-  this.all.forEach(function(item) {
-    item.propagate(function(i) {
-      i.tweetsCount = 0;
-    });
-  });
-
-  return this;
-};
+//Menu.prototype.resetCounters = function() {
+//  this.all.forEach(function(item) {
+//    item.propagate(function(i) {
+//      i.tweetsCount = 0;
+//    });
+//  });
+//
+//  return this;
+//};
 
 function MenuItem(item, parents) {
   if (!item.divider) {
@@ -110,16 +102,48 @@ function MenuItem(item, parents) {
   }
 }
 
-MenuItem.prototype.propagate = function(callback, prop) {
+MenuItem.prototype._propagate = function(callback, prop) {
   callback(this);
 
   if (this[prop]) {
     this[prop].forEach(function(obj) {
       if (!obj.divider) {
-        obj.propagate(callback, prop);
+        obj._propagate(callback, prop);
       }
     });
   }
+};
+
+MenuItem.prototype.highlight = function() {
+  this._propagate(function(i) {
+    i.isHighlighted = true;
+  }, 'parents');
+
+  return this;
+};
+
+MenuItem.prototype.dim = function() {
+  this._propagate(function(i) {
+    i.isHighlighted = false;
+  }, 'parents');
+
+  return this;
+};
+
+MenuItem.prototype.open = function() {
+  this._propagate(function(i) {
+    i.isOpen = true;
+  }, 'parents');
+
+  return this;
+};
+
+MenuItem.prototype.close = function() {
+  this._propagate(function(i) {
+    i.isOpen = false;
+  }, 'parents');
+
+  return this;
 };
 
 angular.module('tweetsToSoftware')

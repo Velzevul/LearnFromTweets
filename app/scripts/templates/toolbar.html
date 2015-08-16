@@ -3,9 +3,11 @@
     <div class="toolbar__slot"
          ng-if="!item.divider">
       <div class="t-item"
-           ng-click="onItemClick(menu, item)"
-           ng-mouseenter="onItemHover(menu, item)"
+           ng-click="onRootItemClick(menu, item)"
+           ng-mouseenter="onRootItemHover(menu, item)"
+           ng-mouseleave="onRootItemLeave(menu, item)"
            ng-class="{'t-item--highlighted': item.isHighlighted}">
+
         <button class="t-item__icon"
                 ng-class="{'t-item__icon--large': item.largeIcon}"
                 style="background-image: url('/images/{{item.id}}.png');"
@@ -23,6 +25,7 @@
              ng-repeat="subitem in item.children">
           <div class="td-item"
                ng-mouseenter="onItemHover(menu, subitem)"
+               ng-mouseleave="onItemLeave(subitem)"
                ng-class="{'td-item--first': $first,
                           'td-item--highlighted': subitem.isHighlighted}">
             <button ng-click="onItemActivate(menu, subitem, $event)">
