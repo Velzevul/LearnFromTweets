@@ -7,12 +7,12 @@ angular.module('tweetsToSoftware')
       templateUrl: 'toolbar.html',
       scope: {
         menu: '=',
-        onItemActivate: '=',
-        onItemHover: '=',
-        onItemLeave: '=',
-        onRootItemClick: '=',
-        onRootItemHover: '=',
-        onRootItemLeave: '='
+        itemActivateCallback: '=',
+        itemHoverCallback: '=',
+        itemLeaveCallback: '=',
+        rootItemClickCallback: '=',
+        rootItemHoverCallback: '=',
+        rootItemLeaveCallback: '='
       }
     };
   });

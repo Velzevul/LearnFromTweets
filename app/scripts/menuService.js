@@ -151,8 +151,8 @@ angular.module('tweetsToSoftware')
     'use strict';
 
     var menu = new Menu('menu'),
-        toolbar = new Menu('tools'),
-        panelbar = new Menu('panels'),
+        toolbar = new Menu('toolbar'),
+        panelbar = new Menu('panelbar'),
         promise;
 
     console.time('Menu load');

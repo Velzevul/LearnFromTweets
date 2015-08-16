@@ -51,15 +51,15 @@ module.run(["$templateCache", function($templateCache) {
     "  <div class=\"md-item\"\n" +
     "       ng-class=\"{'md-item--highlighted': item.isHighlighted,\n" +
     "                  'md-item--parent': item.children.length}\"\n" +
-    "       ng-mouseenter=\"onItemHover(menu, item)\"\n" +
-    "       ng-mouseleave=\"onItemLeave(item)\">\n" +
+    "       ng-mouseenter=\"itemHoverCallback(menu, item)\"\n" +
+    "       ng-mouseleave=\"itemLeaveCallback(item)\">\n" +
     "\n" +
     "    <div class=\"md-item__counter\"\n" +
     "         ng-show=\"item.tweetsCount > 0\">{{item.tweetsCount}}\n" +
     "    </div>\n" +
     "\n" +
     "    <button class=\"md-item__name\"\n" +
-    "            ng-click=\"onItemActivate(menu, item, $event)\">{{item.label}}\n" +
+    "            ng-click=\"itemActivateCallback(menu, item, $event)\">{{item.label}}\n" +
     "    </button>\n" +
     "  </div>\n" +
     "\n" +
@@ -85,9 +85,9 @@ module.run(["$templateCache", function($templateCache) {
     "      <div class=\"menu__slot\">\n" +
     "        <div class=\"m-item\"\n" +
     "             ng-class=\"{'m-item--highlighted': rootItem.isHighlighted}\"\n" +
-    "             ng-mouseenter=\"onRootItemHover(menu, rootItem)\"\n" +
-    "             ng-mouseleave=\"onRootItemLeave(menu, rootItem)\"\n" +
-    "             ng-click=\"onRootItemClick(menu, rootItem)\">\n" +
+    "             ng-mouseenter=\"rootItemHoverCallback(menu, rootItem)\"\n" +
+    "             ng-mouseleave=\"rootItemLeaveCallback(menu, rootItem)\"\n" +
+    "             ng-click=\"rootItemClickCallback(menu, rootItem)\">\n" +
     "          <button class=\"m-item__name\">{{rootItem.label}}</button>\n" +
     "\n" +
     "          <div class=\"m-item__counter\"\n" +
@@ -125,9 +125,9 @@ module.run(["$templateCache", function($templateCache) {
     "    <div class=\"toolbar__slot\">\n" +
     "      <div class=\"t-item\"\n" +
     "           ng-class=\"{'t-item--highlighted': item.isHighlighted}\">\n" +
-    "        <button ng-click=\"onRootItemClick(menu, item)\"\n" +
-    "                ng-mouseenter=\"onRootItemHover(menu, item)\"\n" +
-    "                ng-mouseleave=\"onRootItemLeave(menu, item)\">\n" +
+    "        <button ng-click=\"rootItemClickCallback(menu, item)\"\n" +
+    "                ng-mouseenter=\"rootItemHoverCallback(menu, item)\"\n" +
+    "                ng-mouseleave=\"rootItemLeaveCallback(menu, item)\">\n" +
     "          <div class=\"l-list-inline l-list-inline--x-small\">\n" +
     "            <div class=\"l-list-inline__item is-middle-aligned\">\n" +
     "              <div class=\"t-item__icon\"\n" +
@@ -147,7 +147,7 @@ module.run(["$templateCache", function($templateCache) {
     "\n" +
     "      <div class=\"t-dropdown t-dropdown--rev\"\n" +
     "           ng-show=\"item.isOpen\">\n" +
-    "        <button ng-click=\"onItemActivate(menu, item, $event)\">\n" +
+    "        <button ng-click=\"itemActivateCallback(menu, item, $event)\">\n" +
     "          <img ng-src=\"/images/{{item.id}}-panel.png\" alt=\"{{item.label}}\"/>\n" +
     "        </button>\n" +
     "      </div>\n" +
@@ -181,15 +181,15 @@ module.run(["$templateCache", function($templateCache) {
     "    <div class=\"toolbar__slot\"\n" +
     "         ng-if=\"!item.divider\">\n" +
     "      <div class=\"t-item\"\n" +
-    "           ng-click=\"onRootItemClick(menu, item)\"\n" +
-    "           ng-mouseenter=\"onRootItemHover(menu, item)\"\n" +
-    "           ng-mouseleave=\"onRootItemLeave(menu, item)\"\n" +
+    "           ng-click=\"rootItemClickCallback(menu, item)\"\n" +
+    "           ng-mouseenter=\"rootItemHoverCallback(menu, item)\"\n" +
+    "           ng-mouseleave=\"rootItemLeaveCallback(menu, item)\"\n" +
     "           ng-class=\"{'t-item--highlighted': item.isHighlighted}\">\n" +
     "\n" +
     "        <button class=\"t-item__icon\"\n" +
     "                ng-class=\"{'t-item__icon--large': item.largeIcon}\"\n" +
     "                style=\"background-image: url('/images/{{item.id}}.png');\"\n" +
-    "                ng-click=\"onItemActivate(menu, item, $event)\">\n" +
+    "                ng-click=\"itemActivateCallback(menu, item, $event)\">\n" +
     "        </button>\n" +
     "\n" +
     "        <div class=\"t-item__counter\"\n" +
@@ -202,11 +202,11 @@ module.run(["$templateCache", function($templateCache) {
     "        <div class=\"t-dropdown__slot\"\n" +
     "             ng-repeat=\"subitem in item.children\">\n" +
     "          <div class=\"td-item\"\n" +
-    "               ng-mouseenter=\"onItemHover(menu, subitem)\"\n" +
-    "               ng-mouseleave=\"onItemLeave(subitem)\"\n" +
+    "               ng-mouseenter=\"itemHoverCallback(menu, subitem)\"\n" +
+    "               ng-mouseleave=\"itemLeaveCallback(subitem)\"\n" +
     "               ng-class=\"{'td-item--first': $first,\n" +
     "                          'td-item--highlighted': subitem.isHighlighted}\">\n" +
-    "            <button ng-click=\"onItemActivate(menu, subitem, $event)\">\n" +
+    "            <button ng-click=\"itemActivateCallback(menu, subitem, $event)\">\n" +
     "              <div class=\"l-list-inline l-list-inline--x-small\">\n" +
     "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
     "                  <div class=\"td-item__icon\"\n" +
@@ -415,7 +415,7 @@ module.run(["$templateCache", function($templateCache) {
     "      <div class=\"l-split\">\n" +
     "        <div class=\"l-split__right\">\n" +
     "          <button class=\"tweet-list__back\"\n" +
-    "                  ng-click=\"onItemReset()\">back to all tweets</button>\n" +
+    "                  ng-click=\"deactivateCallback()\">back to all tweets</button>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"l-split__left\">\n" +
@@ -425,9 +425,9 @@ module.run(["$templateCache", function($templateCache) {
     "\n" +
     "      <div class=\"tweet-list__title\">{{activeItem.label}}</div>\n" +
     "\n" +
-    "      <button ng-mouseenter=\"hoverCommandCallback(activeMenu.name, activeItem.id)\"\n" +
-    "              ng-mouseleave=\"hoverEndCommandCallback(activeMenu.name)\"\n" +
-    "              ng-click=\"onItemClick(activeMenu, activeItem, $event)\">\n" +
+    "      <button ng-mouseenter=\"highlightCommand(activeMenu.name, activeItem.id)\"\n" +
+    "              ng-mouseleave=\"dimCommand(activeMenu.name, activeItem.id)\"\n" +
+    "              ng-click=\"revealCommandLocation(activeMenu.name, activeItem.id, $event)\">\n" +
     "        <div class=\"l-list-inline l-list-inline--collapsed\">\n" +
     "          <div class=\"l-list-inline__item\">\n" +
     "            <div class=\"tweet-list__path\">\n" +

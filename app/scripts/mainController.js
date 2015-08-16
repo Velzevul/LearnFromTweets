@@ -11,7 +11,18 @@ angular.module('tweetsToSoftware')
     $scope.activeItem = null;
     $scope.activeTweetId = null;
 
-    $scope.activateItemHandler = function(menu, item, event) {
+
+    $scope.deactivateItem = function() {
+      $scope.activeMenu = null;
+      $scope.activeItem = null;
+      // re-filter tweets
+      // re-calculate indicators
+    };
+
+    /**
+     * common for all menus
+     */
+    $scope.activateItem = function(menu, item, event) {
       if (item.children.length === 0) {
         event.stopPropagation();
 
@@ -26,9 +37,6 @@ angular.module('tweetsToSoftware')
       }
     };
 
-    /**
-     * common for all menus
-     */
     $scope.itemHoverHandler = function(menu, item) {
       if (menu.lastOpenItem) {
         menu.lastOpenItem.dim().close();

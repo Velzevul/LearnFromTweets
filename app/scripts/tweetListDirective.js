@@ -10,9 +10,7 @@ angular.module('tweetsToSoftware')
         activeTweetId: '=',
         activeItem: '=',
         activeMenu: '=',
-        //onItemClick: '=',
-        onItemReset: '=',
-        onTweetActivate: '='
+        deactivateCallback: '='
       },
       controller: function($scope) {
         var highlightTimeout,
@@ -20,44 +18,37 @@ angular.module('tweetsToSoftware')
 
         // "opens" tweet and makes it "active", so that user can
         // interact with the command links in it
-        $scope.tweetClickCallback = function(t, e) {
-          e.stopPropagation();
+        $scope.tweetClickCallback = function(t) {
           $scope.activeTweetId = t.id;
         };
 
-        // remove all previous highlights, close menus, and
-        // highlight hovered command in the interface
-        $scope.mouseOverCommandCallback = function(menuName, commandId) {
+        $scope.highlightCommand = function(menuName, commandId) {
           clearTimeout(highlightTimeout);
           highlightTimeout = $timeout(function() {
-            MenuService.closeAll();
-
-            MenuService[menuName].byId[commandId].propagate(function(i) {
-              i.isHighlighted = true;
-            }, 'parents');
+            MenuService[menuName].byId[commandId].highlight();
           }, highlightDelay).$$timeoutId;
         };
 
-        $scope.hoverEndCommandCallback = function(menuName) {
+        $scope.dimCommand = function(menuName, commandId) {
           clearTimeout(highlightTimeout);
 
-          if ($scope.activeMenu !== menuName) {
-            MenuService[menuName].removeHighlights().close();
+          var menu = MenuService[menuName];
+
+          if (!menu.isOpen) {
+            menu.byId[commandId].dim();
           }
         };
 
-        $scope.clickCommandCallback = function(menuName, commandId, e) {
-          e.stopPropagation();
-          MenuService.closeAll();
-          $scope.activeMenu = menuName;
+        $scope.revealCommandLocation = function(menuName, commandId, event) {
+          clearTimeout(highlightTimeout);
+          event.stopPropagation();
 
-          MenuService[menuName].byId[commandId].propagate(function(i) {
-            i.isHighlighted = true;
-            i.isOpen = true;
-          }, 'parents');
+          var menu = MenuService[menuName],
+              item = menu.byId[commandId];
+
+          menu.isOpen = true;
+          item.highlight().open();
         };
-
-
 
         //$scope.hasActiveCommand = function(tweet) {
         //  if (!$scope.filters.activeCommand) {

@@ -14,28 +14,28 @@
 </head>
 <body ng-controller="mainController">
   <top-menu menu="menu"
-            on-item-activate="activateItemHandler"
-            on-item-hover="itemHoverHandler"
-            on-item-leave="itemLeaveHandler"
-            on-root-item-click="rootItemClickHandler"
-            on-root-item-hover="rootItemHoverHandler"
-            on-root-item-leave="rootItemLeaveHandler"></top-menu>
+            item-activate-callback="activateItem"
+            item-hover-callback="itemHoverHandler"
+            item-leave-callback="itemLeaveHandler"
+            root-item-click-callback="rootItemClickHandler"
+            root-item-hover-callback="rootItemHoverHandler"
+            root-item-leave-callback="rootItemLeaveHandler"></top-menu>
 
   <toolbar menu="toolbar"
-           on-item-activate="activateItemHandler"
-           on-item-hover="itemHoverHandler"
-           on-item-leave="itemLeaveHandler"
-           on-root-item-click="rootItemClickHandler"
-           on-root-item-hover="rootItemHoverHandler"
-           on-root-item-leave="rootItemLeaveHandler"></toolbar>
+           item-activate-callback="activateItem"
+           item-hover-callback="itemHoverHandler"
+           item-leave-callback="itemLeaveHandler"
+           root-item-click-callback="rootItemClickHandler"
+           root-item-hover-callback="rootItemHoverHandler"
+           root-item-leave-callback="rootItemLeaveHandler"></toolbar>
 
   <panelbar menu="panelbar"
-            on-item-activate="activateItemHandler"
-            on-item-hover="itemHoverHandler"
-            on-item-leave="itemLeaveHandler"
-            on-root-item-click="rootItemClickHandler"
-            on-root-item-hover="rootItemHoverHandler"
-            on-root-item-leave="rootItemLeaveHandler"></panelbar>
+            item-activate-callback="activateItem"
+            item-hover-callback="itemHoverHandler"
+            item-leave-callback="itemLeaveHandler"
+            root-item-click-callback="rootItemClickHandler"
+            root-item-hover-callback="rootItemHoverHandler"
+            root-item-leave-callback="rootItemLeaveHandler"></panelbar>
 
   <div ng-click="reset()">
     <div class="app-body">
@@ -44,13 +44,11 @@
       </div>
 
       <div class="app-body__tweet-list">
-        <!--<tweet-list tweets="tweets"-->
-                    <!--active-tweet-id="activeTweetId"-->
-                    <!--active-item="activeItem"-->
-                    <!--active-menu="activeMenu"-->
-                    <!--on-item-click="itemClickCallback"-->
-                    <!--on-item-reset="itemResetCallback"-->
-                    <!--on-tweet-activate="tweetActivateCallback"></tweet-list>-->
+        <tweet-list tweets="tweets"
+                    active-tweet-id="activeTweetId"
+                    active-item="activeItem"
+                    active-menu="activeMenu"
+                    deactivate-callback="deactivateItem"></tweet-list>
       </div>
     </div>
   </div>

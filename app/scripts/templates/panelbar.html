@@ -3,9 +3,9 @@
     <div class="toolbar__slot">
       <div class="t-item"
            ng-class="{'t-item--highlighted': item.isHighlighted}">
-        <button ng-click="onRootItemClick(menu, item)"
-                ng-mouseenter="onRootItemHover(menu, item)"
-                ng-mouseleave="onRootItemLeave(menu, item)">
+        <button ng-click="rootItemClickCallback(menu, item)"
+                ng-mouseenter="rootItemHoverCallback(menu, item)"
+                ng-mouseleave="rootItemLeaveCallback(menu, item)">
           <div class="l-list-inline l-list-inline--x-small">
             <div class="l-list-inline__item is-middle-aligned">
               <div class="t-item__icon"
@@ -25,7 +25,7 @@
 
       <div class="t-dropdown t-dropdown--rev"
            ng-show="item.isOpen">
-        <button ng-click="onItemActivate(menu, item, $event)">
+        <button ng-click="itemActivateCallback(menu, item, $event)">
           <img ng-src="/images/{{item.id}}-panel.png" alt="{{item.label}}"/>
         </button>
       </div>

@@ -5,7 +5,7 @@
       <div class="l-split">
         <div class="l-split__right">
           <button class="tweet-list__back"
-                  ng-click="onItemReset()">back to all tweets</button>
+                  ng-click="deactivateCallback()">back to all tweets</button>
         </div>
 
         <div class="l-split__left">
@@ -15,9 +15,9 @@
 
       <div class="tweet-list__title">{{activeItem.label}}</div>
 
-      <button ng-mouseenter="hoverCommandCallback(activeMenu.name, activeItem.id)"
-              ng-mouseleave="hoverEndCommandCallback(activeMenu.name)"
-              ng-click="onItemClick(activeMenu, activeItem, $event)">
+      <button ng-mouseenter="highlightCommand(activeMenu.name, activeItem.id)"
+              ng-mouseleave="dimCommand(activeMenu.name, activeItem.id)"
+              ng-click="revealCommandLocation(activeMenu.name, activeItem.id, $event)">
         <div class="l-list-inline l-list-inline--collapsed">
           <div class="l-list-inline__item">
             <div class="tweet-list__path">
