@@ -9,13 +9,12 @@ angular.module('tweetsToSoftware')
 
     $scope.activeMenu = null;
     $scope.activeItem = null;
-    $scope.activeTweetId = null;
 
     $scope.deactivateItem = function() {
       $scope.activeMenu = null;
       $scope.activeItem = null;
       $scope.tweets.resetFilter();
-      // re-calculate indicators
+      resetCounters();
     };
 
     /**
@@ -33,7 +32,7 @@ angular.module('tweetsToSoftware')
         $scope.activeItem = item;
 
         $scope.tweets.filter($scope.activeMenu.name, $scope.activeItem);
-        // re-calculate indicators
+        resetCounters();
       }
     };
 
@@ -88,6 +87,28 @@ angular.module('tweetsToSoftware')
       $scope.panelbar.close();
     };
 
+    function resetCounters() {
+      $scope.menu.resetCounters();
+      $scope.panelbar.resetCounters();
+      $scope.toolbar.resetCounters();
+
+      $scope.tweets.filtered.forEach(function(t) {
+        var tweet = t.retweeted_status || t;
+
+        ['menu', 'toolbar', 'panelbar'].forEach(function(menu) {
+          console.log(tweet[menu].map(function(i) {
+            return i.id;
+          }));
+
+
+          tweet[menu].forEach(function(item) {
+            item.addTweet();
+          })
+        });
+        console.log('------------------')
+      });
+    }
+
     $q.all([
       TweetService.loaded,
       MenuService.loaded
@@ -100,5 +121,7 @@ angular.module('tweetsToSoftware')
           $scope.toolbar,
           $scope.panelbar
         ]);
+
+        resetCounters();
       });
   });

@@ -57,15 +57,15 @@ Menu.prototype.close = function() {
   return this;
 };
 
-//Menu.prototype.resetCounters = function() {
-//  this.all.forEach(function(item) {
-//    item.propagate(function(i) {
-//      i.tweetsCount = 0;
-//    });
-//  });
-//
-//  return this;
-//};
+Menu.prototype.resetCounters = function() {
+  this.all.forEach(function(item) {
+    item._propagate(function(i) {
+      i.tweetsCount = 0;
+    });
+  });
+
+  return this;
+};
 
 function MenuItem(item, parents) {
   if (!item.divider) {
@@ -141,6 +141,14 @@ MenuItem.prototype.open = function() {
 MenuItem.prototype.close = function() {
   this._propagate(function(i) {
     i.isOpen = false;
+  }, 'parents');
+
+  return this;
+};
+
+MenuItem.prototype.addTweet = function() {
+  this._propagate(function(i) {
+    i.tweetsCount++;
   }, 'parents');
 
   return this;

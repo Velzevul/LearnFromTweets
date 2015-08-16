@@ -7,7 +7,6 @@ angular.module('tweetsToSoftware')
       templateUrl: 'tweetList.html',
       scope: {
         tweets: '=',
-        activeTweetId: '=',
         activeItem: '=',
         activeMenu: '=',
         deactivateCallback: '='
@@ -16,6 +15,8 @@ angular.module('tweetsToSoftware')
         var highlightTimeout,
             highlightDelay = 50,
             lastOpenItem = null;
+
+        $scope.activeTweetId = null;
 
         // "opens" tweet and makes it "active", so that user can
         // interact with the command links in it
@@ -59,6 +60,9 @@ angular.module('tweetsToSoftware')
           item.open();
           menu.isOpen = true;
         };
+      },
+      link: function($scope) {
+        
       }
     };
   });

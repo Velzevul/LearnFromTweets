@@ -19,7 +19,8 @@ Tweets.prototype.populate = function(tweets) {
 
 Tweets.prototype.filter = function(menuName, command) {
   this.filtered = this.all.filter(function(t) {
-    return t[menuName].indexOf(command) !== -1;
+    var tweet = t.retweeted_status || t;
+    return tweet[menuName].indexOf(command) !== -1;
   });
 };
 
@@ -87,7 +88,7 @@ function Tweet(tweet) {
 
 Tweet.prototype.mockCommands = function(menu) {
   var randomMenuItems = [],
-      n = Math.floor(Math.random()*7);
+      n = Math.floor(Math.random()*5);
 
   while (randomMenuItems.length < n) {
     var randomItem = menu.randomItem();
@@ -124,7 +125,7 @@ angular.module('tweetsToSoftware')
         console.timeEnd('Tweets load');
         console.time('Tweets population');
 
-        tweets.populate(response.data);
+        tweets.populate(response.data.slice(0,4));
         tweets.mockDates();
 
         console.timeEnd('Tweets population');

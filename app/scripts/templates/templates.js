@@ -222,7 +222,7 @@ module.run(["$templateCache", function($templateCache) {
     "            </button>\n" +
     "\n" +
     "            <div class=\"td-item__counter\"\n" +
-    "                 ng-show=\"item.tweetsCount > 0\">{{item.tweetsCount}}</div>\n" +
+    "                 ng-show=\"subitem.tweetsCount > 0\">{{subitem.tweetsCount}}</div>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
