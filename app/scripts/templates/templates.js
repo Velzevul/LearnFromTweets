@@ -451,7 +451,7 @@ module.run(["$templateCache", function($templateCache) {
     "    </div>\n" +
     "  </div>\n" +
     "\n" +
-    "  <tweet ng-repeat=\"t in tweets.all | limitTo: tweets.showItems\"\n" +
+    "  <tweet ng-repeat=\"t in tweets.filtered | limitTo: tweets.showItems\"\n" +
     "         ng-click=\"activateTweet(t, $event)\"\n" +
     "         class=\"tweet\"\n" +
     "         ng-class=\"{'tweet--is-first': $first,\n" +

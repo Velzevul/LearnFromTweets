@@ -14,7 +14,7 @@ angular.module('tweetsToSoftware')
     $scope.deactivateItem = function() {
       $scope.activeMenu = null;
       $scope.activeItem = null;
-      // re-filter tweets
+      $scope.tweets.resetFilter();
       // re-calculate indicators
     };
 
@@ -31,7 +31,8 @@ angular.module('tweetsToSoftware')
 
         $scope.activeMenu = menu;
         $scope.activeItem = item;
-        // re-filter tweets
+
+        $scope.tweets.filter($scope.activeMenu.name, $scope.activeItem);
         // re-calculate indicators
       }
     };
@@ -86,44 +87,6 @@ angular.module('tweetsToSoftware')
       $scope.toolbar.close();
       $scope.panelbar.close();
     };
-
-// -----------------------------
-
-    //$scope.itemActivate = function(menu, item, event) {
-    //  if (item.children.length === 0) {
-    //    event.stopPropagation();
-    //
-    //    console.log('activate');
-    //    $scope.activeItem = item;
-    //    $scope.activeMenu = menu;
-    //    $scope.activeTweetId = null;
-    //
-    //    if (openMenu) {
-    //      openMenu.close().removeHighlights();
-    //      openMenu = null;
-    //    }
-    //  }
-    //};
-
-    //$scope.itemReset = function() {
-    //  $scope.activeMenu = null;
-    //  $scope.activeItem = null;
-    //  // re-filter tweets
-    //  // re-calculate indicators
-    //};
-
-    //$scope.tweetActivate = function(tweet, event) {
-    //  console.log('activate tweet');
-    //  event.stopPropagation();
-    //  $scope.activeTweetId = tweet.id;
-    //  hideMenus();
-    //};
-    //
-    //var hideMenus = function() {
-    //  MenuService.closeAll();
-    //
-    //  openMenu = null;
-    //};
 
     $q.all([
       TweetService.loaded,

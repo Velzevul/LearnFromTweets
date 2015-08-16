@@ -1,5 +1,6 @@
 function Tweets() {
   this.all = [];
+  this.filtered = [];
 }
 
 Tweets.prototype.populate = function(tweets) {
@@ -12,6 +13,18 @@ Tweets.prototype.populate = function(tweets) {
 
     self.all.push(tweet);
   });
+
+  this.filtered = this.all;
+};
+
+Tweets.prototype.filter = function(menuName, command) {
+  this.filtered = this.all.filter(function(t) {
+    return t[menuName].indexOf(command) !== -1;
+  });
+};
+
+Tweets.prototype.resetFilter = function() {
+  this.filtered = this.all;
 };
 
 Tweets.prototype.revealUntil = function(targetTime) {

@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <tweet ng-repeat="t in tweets.all | limitTo: tweets.showItems"
+  <tweet ng-repeat="t in tweets.filtered | limitTo: tweets.showItems"
          ng-click="activateTweet(t, $event)"
          class="tweet"
          ng-class="{'tweet--is-first': $first,
