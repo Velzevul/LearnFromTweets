@@ -309,7 +309,7 @@ module.run(["$templateCache", function($templateCache) {
     "          <div class=\"commands-header\">Panels:</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
-    "               ng-repeat=\"item in tweet.panelbar | limitTo: data.id === activeTweetId ? tweet.panels.length : 2\"\n" +
+    "               ng-repeat=\"item in tweet.panelbar | limitTo: data.id === activeTweetId ? tweet.panelbar.length : 2\"\n" +
     "               ng-mouseenter=\"commandHover('panelbar', item.id)\"\n" +
     "               ng-mouseleave=\"commandHoverEnd('panelbar', item.id)\"\n" +
     "               ng-click=\"commandClick('panelbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
@@ -322,7 +322,7 @@ module.run(["$templateCache", function($templateCache) {
     "          <div class=\"commands-header\">Tools:</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
-    "               ng-repeat=\"item in tweet.toolbar | limitTo: data.id === activeTweetId ? tweet.tools.length : 2\"\n" +
+    "               ng-repeat=\"item in tweet.toolbar | limitTo: data.id === activeTweetId ? tweet.toolbar.length : 2\"\n" +
     "               ng-mouseenter=\"commandHover('toolbar', item.id)\"\n" +
     "               ng-mouseleave=\"commandHoverEnd('toolbar', item.id)\"\n" +
     "               ng-click=\"commandClick('toolbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
@@ -419,7 +419,7 @@ module.run(["$templateCache", function($templateCache) {
     "        </div>\n" +
     "\n" +
     "        <div class=\"l-split__left\">\n" +
-    "          <div class=\"tweet-list__subtitle\">Tweets about</div>\n" +
+    "          <div class=\"tweet-list__subtitle\">Tweets that mention</div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "\n" +
@@ -462,6 +462,7 @@ module.run(["$templateCache", function($templateCache) {
     "         command-hover-callback=\"highlightCommand\"\n" +
     "         command-leave-callback=\"dimCommand\"\n" +
     "         command-click-callback=\"revealCommandLocation\"></tweet>\n" +
-    "</div>");
+    "</div>\n" +
+    "");
 }]);
 })();

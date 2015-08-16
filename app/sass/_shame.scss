@@ -17,10 +17,13 @@
 
 $timeline-width: 150px;
 .app-body {
-  display: flex;
-  width: 588px;
   height: 100%;
-  margin: 0 auto;
+
+  &__wrapper {
+    display: flex;
+    width: 588px;
+    margin: 0 auto;
+  }
 
   &__timeline {
     position: fixed;

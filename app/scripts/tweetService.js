@@ -125,7 +125,7 @@ angular.module('tweetsToSoftware')
         console.timeEnd('Tweets load');
         console.time('Tweets population');
 
-        tweets.populate(response.data.slice(0,4));
+        tweets.populate(response.data);
         tweets.mockDates();
 
         console.timeEnd('Tweets population');

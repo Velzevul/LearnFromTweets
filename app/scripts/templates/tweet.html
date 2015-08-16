@@ -65,7 +65,7 @@
           <div class="commands-header">Panels:</div>
 
           <div class="command"
-               ng-repeat="item in tweet.panelbar | limitTo: data.id === activeTweetId ? tweet.panels.length : 2"
+               ng-repeat="item in tweet.panelbar | limitTo: data.id === activeTweetId ? tweet.panelbar.length : 2"
                ng-mouseenter="commandHover('panelbar', item.id)"
                ng-mouseleave="commandHoverEnd('panelbar', item.id)"
                ng-click="commandClick('panelbar', item.id, $event)">{{item.label | characters:25}}</div>
@@ -78,7 +78,7 @@
           <div class="commands-header">Tools:</div>
 
           <div class="command"
-               ng-repeat="item in tweet.toolbar | limitTo: data.id === activeTweetId ? tweet.tools.length : 2"
+               ng-repeat="item in tweet.toolbar | limitTo: data.id === activeTweetId ? tweet.toolbar.length : 2"
                ng-mouseenter="commandHover('toolbar', item.id)"
                ng-mouseleave="commandHoverEnd('toolbar', item.id)"
                ng-click="commandClick('toolbar', item.id, $event)">{{item.label | characters:25}}</div>

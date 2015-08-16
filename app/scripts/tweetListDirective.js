@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('tweetList', function(FilterService, MenuService, $timeout) {
+  .directive('tweetList', function(FilterService, MenuService, $timeout, $document) {
     'use strict';
 
     return {
@@ -7,20 +7,19 @@ angular.module('tweetsToSoftware')
       templateUrl: 'tweetList.html',
       scope: {
         tweets: '=',
+        activeTweetId: '=',
         activeItem: '=',
         activeMenu: '=',
         deactivateCallback: '='
       },
       controller: function($scope) {
         var highlightTimeout,
-            highlightDelay = 50,
-            lastOpenItem = null;
-
-        $scope.activeTweetId = null;
+            highlightDelay = 50;
 
         // "opens" tweet and makes it "active", so that user can
         // interact with the command links in it
-        $scope.activateTweet = function(t) {
+        $scope.activateTweet = function(t, e) {
+          e.stopPropagation();
           $scope.activeTweetId = t.id;
         };
 
@@ -60,9 +59,6 @@ angular.module('tweetsToSoftware')
           item.open();
           menu.isOpen = true;
         };
-      },
-      link: function($scope) {
-        
       }
     };
   });

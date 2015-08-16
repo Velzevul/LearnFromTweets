@@ -9,10 +9,12 @@ angular.module('tweetsToSoftware')
 
     $scope.activeMenu = null;
     $scope.activeItem = null;
+    $scope.activeTweetId = null;
 
     $scope.deactivateItem = function() {
       $scope.activeMenu = null;
       $scope.activeItem = null;
+      $scope.activeTweetId = null;
       $scope.tweets.resetFilter();
       resetCounters();
     };
@@ -30,6 +32,7 @@ angular.module('tweetsToSoftware')
 
         $scope.activeMenu = menu;
         $scope.activeItem = item;
+        $scope.activeTweetId = null;
 
         $scope.tweets.filter($scope.activeMenu.name, $scope.activeItem);
         resetCounters();
@@ -69,7 +72,10 @@ angular.module('tweetsToSoftware')
         menu.isOpen = false;
         rootItem.close();
       } else {
-        $scope.reset();
+        $scope.menu.close();
+        $scope.toolbar.close();
+        $scope.panelbar.close();
+
         rootItem.open();
         menu.isOpen = true;
       }
@@ -85,9 +91,13 @@ angular.module('tweetsToSoftware')
       $scope.menu.close();
       $scope.toolbar.close();
       $scope.panelbar.close();
+
+      $scope.activeTweetId = null;
     };
 
     function resetCounters() {
+      var processedTweetIds = {};
+
       $scope.menu.resetCounters();
       $scope.panelbar.resetCounters();
       $scope.toolbar.resetCounters();
@@ -95,17 +105,16 @@ angular.module('tweetsToSoftware')
       $scope.tweets.filtered.forEach(function(t) {
         var tweet = t.retweeted_status || t;
 
-        ['menu', 'toolbar', 'panelbar'].forEach(function(menu) {
-          console.log(tweet[menu].map(function(i) {
-            return i.id;
-          }));
+        // avoid processing retweets multiple times
+        if (processedTweetIds[t.id] === undefined) {
+          processedTweetIds[t.id] = true;
 
-
-          tweet[menu].forEach(function(item) {
-            item.addTweet();
-          })
-        });
-        console.log('------------------')
+          ['menu', 'toolbar', 'panelbar'].forEach(function(menuName) {
+            t[menuName].forEach(function(item) {
+              item.increaseCounter();
+            });
+          });
+        }
       });
     }
 

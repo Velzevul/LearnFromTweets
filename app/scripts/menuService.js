@@ -61,7 +61,7 @@ Menu.prototype.resetCounters = function() {
   this.all.forEach(function(item) {
     item._propagate(function(i) {
       i.tweetsCount = 0;
-    });
+    }, 'children');
   });
 
   return this;
@@ -146,7 +146,7 @@ MenuItem.prototype.close = function() {
   return this;
 };
 
-MenuItem.prototype.addTweet = function() {
+MenuItem.prototype.increaseCounter = function() {
   this._propagate(function(i) {
     i.tweetsCount++;
   }, 'parents');
