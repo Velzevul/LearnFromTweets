@@ -11,7 +11,6 @@ angular.module('tweetsToSoftware')
     $scope.activeItem = null;
     $scope.activeTweetId = null;
 
-
     $scope.deactivateItem = function() {
       $scope.activeMenu = null;
       $scope.activeItem = null;

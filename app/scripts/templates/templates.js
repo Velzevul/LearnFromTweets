@@ -298,7 +298,7 @@ module.run(["$templateCache", function($templateCache) {
     "          <div class=\"command\"\n" +
     "               ng-repeat=\"item in tweet.menu | limitTo: data.id === activeTweetId ? tweet.menu.length : 2\"\n" +
     "               ng-mouseenter=\"commandHover('menu', item.id)\"\n" +
-    "               ng-mouseleave=\"commandHoverEnd('menu')\"\n" +
+    "               ng-mouseleave=\"commandHoverEnd('menu', item.id)\"\n" +
     "               ng-click=\"commandClick('menu', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
@@ -309,9 +309,9 @@ module.run(["$templateCache", function($templateCache) {
     "          <div class=\"commands-header\">Panels:</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
-    "               ng-repeat=\"item in tweet.panels | limitTo: data.id === activeTweetId ? tweet.panels.length : 2\"\n" +
+    "               ng-repeat=\"item in tweet.panelbar | limitTo: data.id === activeTweetId ? tweet.panels.length : 2\"\n" +
     "               ng-mouseenter=\"commandHover('panelbar', item.id)\"\n" +
-    "               ng-mouseleave=\"commandHoverEnd('panelbar')\"\n" +
+    "               ng-mouseleave=\"commandHoverEnd('panelbar', item.id)\"\n" +
     "               ng-click=\"commandClick('panelbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
@@ -322,9 +322,9 @@ module.run(["$templateCache", function($templateCache) {
     "          <div class=\"commands-header\">Tools:</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
-    "               ng-repeat=\"item in tweet.tools| limitTo: data.id === activeTweetId ? tweet.tools.length : 2\"\n" +
+    "               ng-repeat=\"item in tweet.toolbar | limitTo: data.id === activeTweetId ? tweet.tools.length : 2\"\n" +
     "               ng-mouseenter=\"commandHover('toolbar', item.id)\"\n" +
-    "               ng-mouseleave=\"commandHoverEnd('toolbar')\"\n" +
+    "               ng-mouseleave=\"commandHoverEnd('toolbar', item.id)\"\n" +
     "               ng-click=\"commandClick('toolbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
@@ -452,15 +452,16 @@ module.run(["$templateCache", function($templateCache) {
     "  </div>\n" +
     "\n" +
     "  <tweet ng-repeat=\"t in tweets.all | limitTo: tweets.showItems\"\n" +
-    "         ng-click=\"onTweetActivate(t, $event)\"\n" +
+    "         ng-click=\"activateTweet(t, $event)\"\n" +
     "         class=\"tweet\"\n" +
     "         ng-class=\"{'tweet--is-first': $first,\n" +
     "                    'tweet--is-last':  $last,\n" +
     "                    'tweet--is-open': t.id == activeTweetId}\"\n" +
     "         data=\"t\"\n" +
     "         active-tweet-id=\"activeTweetId\"\n" +
-    "         on-command-hover=\"hoverCommandCallback\"\n" +
-    "         on-command-hover-end=\"hoverEndCommandCallback\"></tweet>\n" +
+    "         command-hover-callback=\"highlightCommand\"\n" +
+    "         command-leave-callback=\"dimCommand\"\n" +
+    "         command-click-callback=\"revealCommandLocation\"></tweet>\n" +
     "</div>");
 }]);
 })();

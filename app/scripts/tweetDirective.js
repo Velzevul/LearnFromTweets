@@ -9,28 +9,28 @@ angular.module('tweetsToSoftware')
       scope: {
         data: '=',
         activeTweetId: '=',
-        onCommandHover: '=',
-        onCommandHoverEnd: '=',
-        onCommandClick: '='
+        commandHoverCallback: '=',
+        commandLeaveCallback: '=',
+        commandClickCallback: '='
       },
       controller: function($scope) {
         $scope.tweet = $scope.data.retweetedStatus || $scope.data;
 
         $scope.commandHover = function(menuName, commandId) {
           if ($scope.activeTweetId === $scope.data.id) {
-            $scope.onCommandHover(menuName, commandId);
+            $scope.commandHoverCallback(menuName, commandId);
           }
         };
 
-        $scope.commandHoverEnd = function(menuName) {
+        $scope.commandHoverEnd = function(menuName, commandId) {
           if ($scope.activeTweetId === $scope.data.id) {
-            $scope.onCommandHoverEnd(menuName);
+            $scope.commandLeaveCallback(menuName, commandId);
           }
         };
 
         $scope.commandClick = function(menuName, commandId, event) {
           if ($scope.activeTweetId === $scope.data.id) {
-            $scope.onCommandClick(menuName, commandId, event)
+            $scope.commandClickCallback(menuName, commandId, event)
           }
         };
       }

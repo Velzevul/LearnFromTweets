@@ -42,13 +42,14 @@
   </div>
 
   <tweet ng-repeat="t in tweets.all | limitTo: tweets.showItems"
-         ng-click="onTweetActivate(t, $event)"
+         ng-click="activateTweet(t, $event)"
          class="tweet"
          ng-class="{'tweet--is-first': $first,
                     'tweet--is-last':  $last,
                     'tweet--is-open': t.id == activeTweetId}"
          data="t"
          active-tweet-id="activeTweetId"
-         on-command-hover="hoverCommandCallback"
-         on-command-hover-end="hoverEndCommandCallback"></tweet>
+         command-hover-callback="highlightCommand"
+         command-leave-callback="dimCommand"
+         command-click-callback="revealCommandLocation"></tweet>
 </div>
