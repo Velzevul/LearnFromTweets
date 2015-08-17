@@ -1,3 +1,31 @@
+var NOW = moment();
+
+function dateToPoint(date) {
+  // 0    to 3*60        minutes
+  // 3*60  to 6*60       minutes
+  // 6*60  to 12*60      minutes
+  // 12*60  to 24*60     minutes
+  // 24*60 to 3*24*60    minutes
+  // 3*24*60 to 7*24*60  minutes
+  var diff = NOW.diff(date, 'minutes');
+
+  if (diff <= 3*60) {
+    return diff/60;
+  } else if (diff <= 6*60) {
+    return 3 + (diff - 3*60)/(3*60);
+  } else if (diff <= 12*60) {
+    return 4 + (diff - 6*60)/(6*60);
+  } else if (diff <= 24*60) {
+    return 5 + (diff - 12*60)/(12*60);
+  } else if (diff <= 3*24*60) {
+    return 6 + (diff - 24*60)/(24*60);
+  } else if (diff <= 7*24*60) {
+    return 8 + (diff - 3*24*60)/(4*24*60);
+  } else {
+    return 9;
+  }
+}
+
 angular.module('tweetsToSoftware')
   .directive('timeline', function($window, $q, $timeout, TweetService, FilterService) {
     'use strict';
@@ -6,8 +34,25 @@ angular.module('tweetsToSoftware')
       restrict: 'E',
       templateUrl: 'timeline.html',
       replace: true,
-      scope: {},
+      scope: {
+        tweets: '='
+      },
       link: function($scope) {
+        var points = [];
+
+        TweetService.loaded
+          .then(function() {
+            points = $scope.tweets.dates.map(dateToPoint);
+
+            svg.selectAll('.data-point')
+              .data(points)
+              .enter().append('circle')
+              .attr('class', 'data-point')
+              .attr('r', 3)
+              .attr('opacity', 0.5)
+              .attr('transform', function(d) { return 'translate(10,' + y(d) + ')'; });
+          });
+
         var margin = {
             top: 20,
             bottom: 20,
@@ -27,12 +72,7 @@ angular.module('tweetsToSoftware')
             '2 days',
             '3 days',
             '1 week'
-          ],
-          dummyValues = [];
-
-        for (var i=0; i<30; i++) {
-          dummyValues.push(Math.random()*10);
-        }
+          ];
 
         var y = d3.scale.linear()
           .range([0, height])
@@ -68,14 +108,6 @@ angular.module('tweetsToSoftware')
           .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
           .attr('transform', 'translate(10,0)')
           .attr('class', 'halo');
-
-        svg.selectAll('.data-point')
-          .data(dummyValues)
-        .enter().append('circle')
-          .attr('class', 'data-point')
-          .attr('r', 2)
-          .attr('opacity', 0.4)
-          .attr('transform', function(d) { return 'translate(10,' + y(d) + ')'; });
 
         var slider = svg.append('g')
           .attr('class', 'slider')

@@ -250,7 +250,7 @@ module.run(["$templateCache", function($templateCache) {
     "    </div>\n" +
     "\n" +
     "    <div class=\"tweet__extra\">\n" +
-    "      {{data.author.name}} retweeted ({{data.createdAt | amDateFormat:'h:mm A - D MMM YYYY'}})\n" +
+    "      {{data.author.name}} retweeted <span am-time-ago=\"data.createdAt\"></span>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "\n" +
@@ -277,7 +277,8 @@ module.run(["$templateCache", function($templateCache) {
     "      </div>\n" +
     "\n" +
     "      <div class=\"l-list-inline__item\">\n" +
-    "        <div class=\"tweet__extra tweet__extra--pre-dot\">1h</div>\n" +
+    "        <div class=\"tweet__extra tweet__extra--pre-dot\"\n" +
+    "             am-time-ago=\"tweet.createdAt\"></div>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -315,7 +316,7 @@ module.run(["$templateCache", function($templateCache) {
     "               ng-click=\"commandClick('panelbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
-    "               ng-show=\"data.id !== activeTweetId && tweet.panels.length > 2\">...</div>\n" +
+    "               ng-show=\"data.id !== activeTweetId && tweet.panelbar.length > 2\">...</div>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"commands-table__cell commands-table__cell--pre-border\">\n" +
@@ -328,7 +329,7 @@ module.run(["$templateCache", function($templateCache) {
     "               ng-click=\"commandClick('toolbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
-    "               ng-show=\"data.id !== activeTweetId && tweet.tools.length > 2\">...</div>\n" +
+    "               ng-show=\"data.id !== activeTweetId && tweet.toolbar.length > 2\">...</div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +

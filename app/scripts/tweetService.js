@@ -1,6 +1,7 @@
 function Tweets() {
   this.all = [];
   this.filtered = [];
+  this.dates = [];
 }
 
 Tweets.prototype.populate = function(tweets) {
@@ -15,6 +16,9 @@ Tweets.prototype.populate = function(tweets) {
   });
 
   this.filtered = this.all;
+  this.dates = this.filtered.map(function(i) {
+    return i.createdAt;
+  });
 };
 
 Tweets.prototype.filter = function(menuName, command) {
@@ -22,43 +26,58 @@ Tweets.prototype.filter = function(menuName, command) {
     var tweet = t.retweeted_status || t;
     return tweet[menuName].indexOf(command) !== -1;
   });
+  this.dates = this.filtered.map(function(i) {
+    return i.createdAt;
+  });
 };
 
 Tweets.prototype.resetFilter = function() {
   this.filtered = this.all;
 };
 
-Tweets.prototype.revealUntil = function(targetTime) {
-  var lastShownTweet = this.all[this.showItems - 1],
-      increaseIndex = lastShownTweet.createdAt > targetTime;
-
-  if (increaseIndex) {
-    while (this.all[this.showItems - 1].createdAt > targetTime) {
-      this.showItems += 1;
-    }
-  } else {
-    while (this.all[this.showItems - 1].createdAt < targetTime) {
-      this.showItems -= 1;
-    }
-  }
-};
+//Tweets.prototype.revealUntil = function(targetTime) {
+//  var lastShownTweet = this.all[this.showItems - 1],
+//      increaseIndex = lastShownTweet.createdAt > targetTime;
+//
+//  if (increaseIndex) {
+//    while (this.all[this.showItems - 1].createdAt > targetTime) {
+//      this.showItems += 1;
+//    }
+//  } else {
+//    while (this.all[this.showItems - 1].createdAt < targetTime) {
+//      this.showItems -= 1;
+//    }
+//  }
+//};
 
 Tweets.prototype.mockDates = function() {
-  function randomizeDate() {
-    var minutesInWeek = 10080,
-        distance = Math.floor(Math.random()*minutesInWeek);
+  function randomizeDate(minutesBack) {
+    var distance = Math.floor(Math.random()*minutesBack);
     return moment().subtract(distance, 'minutes');
   }
 
   var randomDates = [];
-  this.all.forEach(function() {
-    randomDates.push(randomizeDate());
+  this.all.forEach(function(t,i) {
+    if (i<3) {
+      randomDates.push(randomizeDate(300));
+    } else if (i<8) {
+      randomDates.push(randomizeDate(1000));
+    } else if (i<15) {
+      randomDates.push(randomizeDate(6000));
+    } else {
+      randomDates.push(randomizeDate(10000));
+    }
   });
 
   randomDates.sort(function(a,b) { return a < b ? 1 : -1; });
 
   this.all.forEach(function(t,i) {
     t.createdAt = randomDates[i];
+  });
+
+  this.filtered = this.all;
+  this.dates = this.filtered.map(function(i) {
+    return i.createdAt;
   });
 };
 

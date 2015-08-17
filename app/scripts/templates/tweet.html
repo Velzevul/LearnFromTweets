@@ -6,7 +6,7 @@
     </div>
 
     <div class="tweet__extra">
-      {{data.author.name}} retweeted ({{data.createdAt | amDateFormat:'h:mm A - D MMM YYYY'}})
+      {{data.author.name}} retweeted <span am-time-ago="data.createdAt"></span>
     </div>
   </div>
 
@@ -33,7 +33,8 @@
       </div>
 
       <div class="l-list-inline__item">
-        <div class="tweet__extra tweet__extra--pre-dot">1h</div>
+        <div class="tweet__extra tweet__extra--pre-dot"
+             am-time-ago="tweet.createdAt"></div>
       </div>
     </div>
 
@@ -71,7 +72,7 @@
                ng-click="commandClick('panelbar', item.id, $event)">{{item.label | characters:25}}</div>
 
           <div class="command"
-               ng-show="data.id !== activeTweetId && tweet.panels.length > 2">...</div>
+               ng-show="data.id !== activeTweetId && tweet.panelbar.length > 2">...</div>
         </div>
 
         <div class="commands-table__cell commands-table__cell--pre-border">
@@ -84,7 +85,7 @@
                ng-click="commandClick('toolbar', item.id, $event)">{{item.label | characters:25}}</div>
 
           <div class="command"
-               ng-show="data.id !== activeTweetId && tweet.tools.length > 2">...</div>
+               ng-show="data.id !== activeTweetId && tweet.toolbar.length > 2">...</div>
         </div>
       </div>
     </div>
