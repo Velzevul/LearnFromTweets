@@ -134,7 +134,11 @@ angular.module('tweetsToSoftware')
           }
 
           handle.attr('cy', y(value));
-          console.log(value, y(value));
+
+          var nPoints = points.filter(function(point) {
+            return point <= value;
+          }).length;
+          console.log(nPoints);
         }
 
         //function drawPortraitPatterns(authors) {
