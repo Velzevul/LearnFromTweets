@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('topMenu', function() {
+  .directive('topMenu', function($document) {
     'use strict';
 
     return {
@@ -13,6 +13,18 @@ angular.module('tweetsToSoftware')
         rootItemClickCallback: '=',
         rootItemHoverCallback: '=',
         rootItemLeaveCallback: '='
+      },
+      link: function($scope) {
+        $document.on('click', function(e) {
+          var targetIsMenu =  $(e.target).parents('.js-top-menu').length ||
+                              $(e.target).hasClass('js-top-menu');
+
+          if ($scope.menu.isOpen && !targetIsMenu) {
+            console.log('menu close');
+            $scope.menu.close();
+            $scope.$apply();
+          }
+        });
       }
     };
   });

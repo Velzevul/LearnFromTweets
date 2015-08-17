@@ -1,5 +1,6 @@
 angular.module('tweetsToSoftware')
-  .controller('mainController', function(TweetService, MenuService, $scope, $q) {
+  .controller('mainController', function(TweetService, MenuService, FilterService,
+                                         $scope, $q) {
     'use strict';
 
     $scope.tweets = TweetService.tweets;
@@ -7,35 +8,64 @@ angular.module('tweetsToSoftware')
     $scope.toolbar = MenuService.toolbar;
     $scope.panelbar = MenuService.panelbar;
 
-    $scope.activeMenu = null;
-    $scope.activeItem = null;
-    $scope.activeTweetId = null;
+    $scope.filters = FilterService;
 
-    $scope.deactivateItem = function() {
-      $scope.activeMenu = null;
-      $scope.activeItem = null;
-      $scope.activeTweetId = null;
-      $scope.tweets.resetFilter();
-      resetCounters();
-    };
+    $q.all([
+      TweetService.loaded,
+      MenuService.loaded
+    ])
+      .then(function() {
+        $scope.tweets.mockCommands([
+          $scope.menu,
+          $scope.toolbar,
+          $scope.panelbar
+        ]);
+
+        filterHandler();
+        $scope.$watchGroup([
+            'filters.selectedCommand',
+            'filters.renderUntil'
+          ], filterHandler);
+      });
+
+    function filterHandler() {
+      console.log('filter handler');
+
+      var processedTweetIds = {};
+
+      $scope.filters.activeTweetId = null;
+      $scope.tweets.filter($scope.filters.renderUntil,
+        $scope.filters.selectedMenu,
+        $scope.filters.selectedCommand);
+
+      $scope.menu.resetCounters();
+      $scope.panelbar.resetCounters();
+      $scope.toolbar.resetCounters();
+      $scope.tweets.filtered.forEach(function(t) {
+        var tweet = t.retweetedStatus || t;
+
+        // avoid processing retweets multiple times
+        if (processedTweetIds[t.id] === undefined) {
+          processedTweetIds[t.id] = true;
+
+          ['menu', 'toolbar', 'panelbar'].forEach(function(menuName) {
+            t[menuName].forEach(function(item) {
+              item.increaseCounter();
+            });
+          });
+        }
+      });
+    }
 
     /**
      * common for all menus
      */
-    $scope.activateItem = function(menu, item, event) {
+    $scope.activateItem = function(menu, item) {
       if (item.children.length === 0) {
-        event.stopPropagation();
+        menu.close();
 
-        $scope.menu.close();
-        $scope.panelbar.close();
-        $scope.toolbar.close();
-
-        $scope.activeMenu = menu;
-        $scope.activeItem = item;
-        $scope.activeTweetId = null;
-
-        $scope.tweets.filter($scope.activeMenu.name, $scope.activeItem);
-        resetCounters();
+        $scope.filters.selectedMenu = menu;
+        $scope.filters.selectedCommand = item;
       }
     };
 
@@ -86,51 +116,4 @@ angular.module('tweetsToSoftware')
         rootItem.isHighlighted = false;
       }
     };
-
-    $scope.reset = function() {
-      $scope.menu.close();
-      $scope.toolbar.close();
-      $scope.panelbar.close();
-
-      $scope.activeTweetId = null;
-    };
-
-    function resetCounters() {
-      var processedTweetIds = {};
-
-      $scope.menu.resetCounters();
-      $scope.panelbar.resetCounters();
-      $scope.toolbar.resetCounters();
-
-      $scope.tweets.filtered.forEach(function(t) {
-        var tweet = t.retweeted_status || t;
-
-        // avoid processing retweets multiple times
-        if (processedTweetIds[t.id] === undefined) {
-          processedTweetIds[t.id] = true;
-
-          ['menu', 'toolbar', 'panelbar'].forEach(function(menuName) {
-            t[menuName].forEach(function(item) {
-              item.increaseCounter();
-            });
-          });
-        }
-      });
-    }
-
-    $q.all([
-      TweetService.loaded,
-      MenuService.loaded
-    ])
-      .then(function() {
-        console.log('tweets loaded!');
-
-        $scope.tweets.mockCommands([
-          $scope.menu,
-          $scope.toolbar,
-          $scope.panelbar
-        ]);
-
-        resetCounters();
-      });
   });

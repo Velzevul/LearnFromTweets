@@ -78,7 +78,7 @@ module.run(["$templateCache", function($templateCache) {
     "  </div>\n" +
     "</script>\n" +
     "\n" +
-    "<div class=\"menu js-menu\">\n" +
+    "<div class=\"menu js-menu js-top-menu\">\n" +
     "  <ul class=\"l-list-inline l-list-inline--collapsed\">\n" +
     "    <li class=\"l-list-inline__item\"\n" +
     "        ng-repeat=\"rootItem in menu.all\">\n" +
@@ -120,7 +120,7 @@ catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("panelbar.html",
-    "<div class=\"toolbar toolbar--right js-menu\">\n" +
+    "<div class=\"toolbar toolbar--right js-menu js-panelbar\">\n" +
     "  <div ng-repeat=\"item in menu.all\">\n" +
     "    <div class=\"toolbar__slot\">\n" +
     "      <div class=\"t-item\"\n" +
@@ -176,7 +176,7 @@ catch(err) { module = angular.module("app-templates", []); }
 module.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("toolbar.html",
-    "<div class=\"toolbar toolbar--left js-menu\">\n" +
+    "<div class=\"toolbar toolbar--left js-menu js-toolbar\">\n" +
     "  <div ng-repeat=\"item in menu.all\">\n" +
     "    <div class=\"toolbar__slot\"\n" +
     "         ng-if=\"!item.divider\">\n" +
@@ -297,45 +297,45 @@ module.run(["$templateCache", function($templateCache) {
     "          <div class=\"commands-header\">Menu items:</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
-    "               ng-repeat=\"item in tweet.menu | limitTo: data.id === activeTweetId ? tweet.menu.length : 2\"\n" +
+    "               ng-repeat=\"item in tweet.menu | limitTo: data.id === filters.activeTweetId ? tweet.menu.length : 2\"\n" +
     "               ng-mouseenter=\"commandHover('menu', item.id)\"\n" +
     "               ng-mouseleave=\"commandHoverEnd('menu', item.id)\"\n" +
     "               ng-click=\"commandClick('menu', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
-    "               ng-show=\"data.id !== activeTweetId && tweet.menu.length > 2\">...</div>\n" +
+    "               ng-show=\"data.id !== filters.activeTweetId && tweet.menu.length > 2\">...</div>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"commands-table__cell commands-table__cell--pre-border\">\n" +
     "          <div class=\"commands-header\">Panels:</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
-    "               ng-repeat=\"item in tweet.panelbar | limitTo: data.id === activeTweetId ? tweet.panelbar.length : 2\"\n" +
+    "               ng-repeat=\"item in tweet.panelbar | limitTo: data.id === filters.activeTweetId ? tweet.panelbar.length : 2\"\n" +
     "               ng-mouseenter=\"commandHover('panelbar', item.id)\"\n" +
     "               ng-mouseleave=\"commandHoverEnd('panelbar', item.id)\"\n" +
     "               ng-click=\"commandClick('panelbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
-    "               ng-show=\"data.id !== activeTweetId && tweet.panelbar.length > 2\">...</div>\n" +
+    "               ng-show=\"data.id !== filters.activeTweetId && tweet.panelbar.length > 2\">...</div>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"commands-table__cell commands-table__cell--pre-border\">\n" +
     "          <div class=\"commands-header\">Tools:</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
-    "               ng-repeat=\"item in tweet.toolbar | limitTo: data.id === activeTweetId ? tweet.toolbar.length : 2\"\n" +
+    "               ng-repeat=\"item in tweet.toolbar | limitTo: data.id === filters.activeTweetId ? tweet.toolbar.length : 2\"\n" +
     "               ng-mouseenter=\"commandHover('toolbar', item.id)\"\n" +
     "               ng-mouseleave=\"commandHoverEnd('toolbar', item.id)\"\n" +
     "               ng-click=\"commandClick('toolbar', item.id, $event)\">{{item.label | characters:25}}</div>\n" +
     "\n" +
     "          <div class=\"command\"\n" +
-    "               ng-show=\"data.id !== activeTweetId && tweet.toolbar.length > 2\">...</div>\n" +
+    "               ng-show=\"data.id !== filters.activeTweetId && tweet.toolbar.length > 2\">...</div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "\n" +
     "    <div class=\"l-block-small\"\n" +
-    "         ng-show=\"data.id == activeTweetId\">\n" +
+    "         ng-show=\"data.id == filters.activeTweetId\">\n" +
     "      <div class=\"t-share-table\">\n" +
     "        <div class=\"l-list-inline l-list-inline--collapsed\">\n" +
     "          <div class=\"l-list-inline__item\">\n" +
@@ -375,7 +375,7 @@ module.run(["$templateCache", function($templateCache) {
     "    </div>\n" +
     "\n" +
     "    <div class=\"l-block-small\"\n" +
-    "         ng-show=\"data.id == activeTweetId\">\n" +
+    "         ng-show=\"data.id == filters.activeTweetId\">\n" +
     "      <div class=\"tweet__extra\">\n" +
     "        {{tweet.createdAt | amDateFormat:'h:mm A - D MMM YYYY'}}\n" +
     "      </div>\n" +
@@ -386,14 +386,14 @@ module.run(["$templateCache", function($templateCache) {
     "        <div class=\"l-list-inline__item\">\n" +
     "          <div class=\"tweet__action\">\n" +
     "            <i class=\"icon t-icon-retweet\"></i>\n" +
-    "            <span ng-show=\"data.id != activeTweetId\">{{tweet.retweetedBy.length}}</span>\n" +
+    "            <span ng-show=\"data.id != filters.activeTweetId\">{{tweet.retweetedBy.length}}</span>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"l-list-inline__item\">\n" +
     "          <div class=\"tweet__action\">\n" +
     "            <i class=\"icon t-icon-favorite\"></i>\n" +
-    "            <span ng-show=\"data.id != activeTweetId\">{{tweet.favoriteCount}}</span>\n" +
+    "            <span ng-show=\"data.id != filters.activeTweetId\">{{tweet.favoriteCount}}</span>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
@@ -411,12 +411,12 @@ module.run(["$templateCache", function($templateCache) {
   $templateCache.put("tweetList.html",
     "<div class=\"tweet-list\">\n" +
     "  <div class=\"l-block\"\n" +
-    "       ng-show=\"activeItem\">\n" +
+    "       ng-show=\"filters.selectedCommand\">\n" +
     "    <div class=\"tweet-list__header\">\n" +
     "      <div class=\"l-split\">\n" +
     "        <div class=\"l-split__right\">\n" +
     "          <button class=\"tweet-list__back\"\n" +
-    "                  ng-click=\"deactivateCallback()\">back to all tweets</button>\n" +
+    "                  ng-click=\"resetCommandFilter()\">back to all tweets</button>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"l-split__left\">\n" +
@@ -424,19 +424,19 @@ module.run(["$templateCache", function($templateCache) {
     "        </div>\n" +
     "      </div>\n" +
     "\n" +
-    "      <div class=\"tweet-list__title\">{{activeItem.label}}</div>\n" +
+    "      <div class=\"tweet-list__title\">{{filters.selectedCommand.label}}</div>\n" +
     "\n" +
-    "      <button ng-mouseenter=\"highlightCommand(activeMenu.name, activeItem.id)\"\n" +
-    "              ng-mouseleave=\"dimCommand(activeMenu.name, activeItem.id)\"\n" +
-    "              ng-click=\"revealCommandLocation(activeMenu.name, activeItem.id, $event)\">\n" +
+    "      <button ng-mouseenter=\"highlightCommand(filters.selectedMenu.name, filters.selectedCommand.id)\"\n" +
+    "              ng-mouseleave=\"dimCommand(filters.selectedMenu.name, filters.selectedCommand.id)\"\n" +
+    "              ng-click=\"revealCommandLocation(filters.selectedMenu.name, filters.selectedCommand.id, $event)\">\n" +
     "        <div class=\"l-list-inline l-list-inline--collapsed\">\n" +
     "          <div class=\"l-list-inline__item\">\n" +
     "            <div class=\"tweet-list__path\">\n" +
-    "              {{activeMenu.name}} /&nbsp;\n" +
+    "              {{filters.selectedMenu.name}} /&nbsp;\n" +
     "            </div>\n" +
     "          </div><!--\n" +
     "          --><div class=\"l-list-inline__item\"\n" +
-    "               ng-repeat=\"parent in activeItem.parents\"\n" +
+    "               ng-repeat=\"parent in filters.selectedCommand.parents\"\n" +
     "               ng-show=\"parent.label && parent.label != ''\">\n" +
     "            <div class=\"tweet-list__path\">\n" +
     "              {{parent.label}} /&nbsp;\n" +
@@ -444,7 +444,7 @@ module.run(["$templateCache", function($templateCache) {
     "          </div><!--\n" +
     "          --><div class=\"l-list-inline__item\">\n" +
     "            <div class=\"tweet-list__path\">\n" +
-    "              {{activeItem.label}}\n" +
+    "              {{filters.selectedCommand.label}}\n" +
     "            </div>\n" +
     "          </div>\n" +
     "        </div>\n" +
@@ -452,14 +452,13 @@ module.run(["$templateCache", function($templateCache) {
     "    </div>\n" +
     "  </div>\n" +
     "\n" +
-    "  <tweet ng-repeat=\"t in tweets.filtered | limitTo: tweets.showItems\"\n" +
-    "         ng-click=\"activateTweet(t, $event)\"\n" +
-    "         class=\"tweet\"\n" +
+    "  <tweet ng-repeat=\"t in tweets.filtered\"\n" +
+    "         ng-click=\"activateTweet(t)\"\n" +
+    "         class=\"tweet js-tweet\"\n" +
     "         ng-class=\"{'tweet--is-first': $first,\n" +
     "                    'tweet--is-last':  $last,\n" +
-    "                    'tweet--is-open': t.id == activeTweetId}\"\n" +
+    "                    'tweet--is-open': t.id == filters.activeTweetId}\"\n" +
     "         data=\"t\"\n" +
-    "         active-tweet-id=\"activeTweetId\"\n" +
     "         command-hover-callback=\"highlightCommand\"\n" +
     "         command-leave-callback=\"dimCommand\"\n" +
     "         command-click-callback=\"revealCommandLocation\"></tweet>\n" +

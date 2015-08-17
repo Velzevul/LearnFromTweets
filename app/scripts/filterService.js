@@ -2,12 +2,11 @@ angular.module('tweetsToSoftware')
   .factory('FilterService', function() {
     'use strict';
 
-    var filteredTweets = [];
-
     return {
-      filteredTweets: filteredTweets,
-      activeCommand: null,
-      activeCommandLocation: null,
+      activeTweetId: null,
+      selectedCommand: null,
+      selectedMenu: null,
+      renderUntil: moment(NOW).subtract(3, 'hours'),
       bannedAuthors: {},
       bannedCommands: {},
       promotedAuthors: {},

@@ -1,31 +1,3 @@
-var NOW = moment();
-
-function dateToPoint(date) {
-  // 0    to 3*60        minutes
-  // 3*60  to 6*60       minutes
-  // 6*60  to 12*60      minutes
-  // 12*60  to 24*60     minutes
-  // 24*60 to 3*24*60    minutes
-  // 3*24*60 to 7*24*60  minutes
-  var diff = NOW.diff(date, 'minutes');
-
-  if (diff <= 3*60) {
-    return diff/60;
-  } else if (diff <= 6*60) {
-    return 3 + (diff - 3*60)/(3*60);
-  } else if (diff <= 12*60) {
-    return 4 + (diff - 6*60)/(6*60);
-  } else if (diff <= 24*60) {
-    return 5 + (diff - 12*60)/(12*60);
-  } else if (diff <= 3*24*60) {
-    return 6 + (diff - 24*60)/(24*60);
-  } else if (diff <= 7*24*60) {
-    return 8 + (diff - 3*24*60)/(4*24*60);
-  } else {
-    return 9;
-  }
-}
-
 angular.module('tweetsToSoftware')
   .directive('timeline', function($window, $q, $timeout, TweetService, FilterService) {
     'use strict';
@@ -38,19 +10,34 @@ angular.module('tweetsToSoftware')
         tweets: '='
       },
       link: function($scope) {
-        var points = [];
+
+        $scope.filters = FilterService;
+
+        function plotPoints() {
+          console.log('plotting points');
+
+          var matchingTweets = $scope.tweets.haveCommand($scope.filters.selectedMenu, $scope.filters.selectedCommand),
+              points = matchingTweets.map(function(t) {
+                return dateToPoint(t.createdAt);
+              });
+
+          svg.selectAll('.data-point')
+            .remove();
+
+          svg.selectAll('.data-point')
+            .data(points)
+            .enter().append('circle')
+            .attr('class', 'data-point')
+            .attr('r', 3)
+            .attr('opacity', 0.5)
+            .attr('transform', function(d) { return 'translate(10,' + y(d) + ')'; });
+        }
+
 
         TweetService.loaded
           .then(function() {
-            points = $scope.tweets.dates.map(dateToPoint);
-
-            svg.selectAll('.data-point')
-              .data(points)
-              .enter().append('circle')
-              .attr('class', 'data-point')
-              .attr('r', 3)
-              .attr('opacity', 0.5)
-              .attr('transform', function(d) { return 'translate(10,' + y(d) + ')'; });
+            plotPoints();
+            $scope.$watch('filters.selectedCommand', plotPoints);
           });
 
         var margin = {
@@ -122,7 +109,8 @@ angular.module('tweetsToSoftware')
           .attr('r', 9);
 
         slider
-          .call(brush.extent([1, 1]))
+          .call(brush.extent([dateToPoint($scope.filters.renderUntil),
+                              dateToPoint($scope.filters.renderUntil)]))
           .call(brush.event);
 
         function brushed() {
@@ -135,10 +123,7 @@ angular.module('tweetsToSoftware')
 
           handle.attr('cy', y(value));
 
-          var nPoints = points.filter(function(point) {
-            return point <= value;
-          }).length;
-          console.log(nPoints);
+          $scope.filters.renderUntil = pointToDate(value);
         }
 
         //function drawPortraitPatterns(authors) {

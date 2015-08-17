@@ -37,18 +37,14 @@
             root-item-hover-callback="rootItemHoverHandler"
             root-item-leave-callback="rootItemLeaveHandler"></panelbar>
 
-  <div class="app-body" ng-click="reset()">
+  <div class="app-body">
     <div class="app-body__wrapper">
       <div class="app-body__timeline">
         <timeline tweets="tweets"></timeline>
       </div>
 
       <div class="app-body__tweet-list">
-        <tweet-list tweets="tweets"
-                    active-tweet-id="activeTweetId"
-                    active-item="activeItem"
-                    active-menu="activeMenu"
-                    deactivate-callback="deactivateItem"></tweet-list>
+        <tweet-list tweets="tweets"></tweet-list>
       </div>
     </div>
   </div>
@@ -68,6 +64,7 @@
 
   <!-- build:js scripts/app.js -->
   <script src="scripts/utils/decimalAdjust.js"></script>
+  <script src="scripts/utils/timeTransform.js"></script>
   <script src="scripts/app.js"></script>
   <script src="scripts/mainController.js"></script>
 

@@ -1,54 +1,40 @@
 function Tweets() {
   this.all = [];
   this.filtered = [];
-  this.dates = [];
 }
 
 Tweets.prototype.populate = function(tweets) {
   var self = this;
 
-  self.showItems = tweets.length;
-
   tweets.forEach(function(t) {
-    var tweet = new Tweet(t);
-
-    self.all.push(tweet);
-  });
-
-  this.filtered = this.all;
-  this.dates = this.filtered.map(function(i) {
-    return i.createdAt;
+    self.all.push(new Tweet(t));
   });
 };
 
-Tweets.prototype.filter = function(menuName, command) {
+Tweets.prototype.filter = function(time, menu, command) {
   this.filtered = this.all.filter(function(t) {
-    var tweet = t.retweeted_status || t;
-    return tweet[menuName].indexOf(command) !== -1;
-  });
-  this.dates = this.filtered.map(function(i) {
-    return i.createdAt;
+    var tweet = t.retweetedStatus || t,
+      match = tweet.createdAt.isAfter(time);
+
+    if (command) {
+      match = match && (tweet[menu.name].indexOf(command) !== -1);
+    }
+
+    return match;
   });
 };
 
-Tweets.prototype.resetFilter = function() {
-  this.filtered = this.all;
-};
+Tweets.prototype.haveCommand = function(menu, command) {
+  return this.all.filter(function(t) {
+    if (command) {
+      var tweet = t.retweetedStatus || t;
 
-//Tweets.prototype.revealUntil = function(targetTime) {
-//  var lastShownTweet = this.all[this.showItems - 1],
-//      increaseIndex = lastShownTweet.createdAt > targetTime;
-//
-//  if (increaseIndex) {
-//    while (this.all[this.showItems - 1].createdAt > targetTime) {
-//      this.showItems += 1;
-//    }
-//  } else {
-//    while (this.all[this.showItems - 1].createdAt < targetTime) {
-//      this.showItems -= 1;
-//    }
-//  }
-//};
+      return tweet[menu.name].indexOf(command) !== -1;
+    } else {
+      return true;
+    }
+  });
+};
 
 Tweets.prototype.mockDates = function() {
   function randomizeDate(minutesBack) {
@@ -76,9 +62,6 @@ Tweets.prototype.mockDates = function() {
   });
 
   this.filtered = this.all;
-  this.dates = this.filtered.map(function(i) {
-    return i.createdAt;
-  });
 };
 
 Tweets.prototype.mockCommands = function(menus) {
@@ -94,7 +77,6 @@ function Tweet(tweet) {
   this.createdAt = moment(tweet.created_at);
   this.favoriteCount = tweet.favorite_count;
   this.text = tweet.text;
-  this.matchesFilters = true;
 
   this.author = new Author(tweet.author);
   this.retweetedStatus = tweet.retweeted_status ?
@@ -139,7 +121,7 @@ angular.module('tweetsToSoftware')
         promise;
 
     console.time('Tweets load');
-    promise = $http.get('http://0.0.0.0:8000/api/tweets/')
+    promise = $http.get('http://dorado.cs.umanitoba.ca:7000/api/tweets/')
       .then(function(response) {
         console.timeEnd('Tweets load');
         console.time('Tweets population');

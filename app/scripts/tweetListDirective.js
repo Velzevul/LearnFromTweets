@@ -1,26 +1,27 @@
 angular.module('tweetsToSoftware')
-  .directive('tweetList', function(FilterService, MenuService, $timeout, $document) {
+  .directive('tweetList', function(FilterService, MenuService,
+                                   $document, $timeout) {
     'use strict';
 
     return {
       restrict: 'E',
       templateUrl: 'tweetList.html',
       scope: {
-        tweets: '=',
-        activeTweetId: '=',
-        activeItem: '=',
-        activeMenu: '=',
-        deactivateCallback: '='
+        tweets: '='
       },
       controller: function($scope) {
         var highlightTimeout,
             highlightDelay = 50;
 
-        // "opens" tweet and makes it "active", so that user can
-        // interact with the command links in it
-        $scope.activateTweet = function(t, e) {
-          e.stopPropagation();
-          $scope.activeTweetId = t.id;
+        $scope.filters = FilterService;
+
+        $scope.activateTweet = function(tweet) {
+          $scope.filters.activeTweetId = tweet.id;
+        };
+
+        $scope.resetCommandFilter = function() {
+          $scope.filters.selectedCommand = null;
+          $scope.filters.selectedMenu = null;
         };
 
         $scope.highlightCommand = function(menuName, commandId) {
@@ -59,6 +60,19 @@ angular.module('tweetsToSoftware')
           item.open();
           menu.isOpen = true;
         };
+      },
+      link: function($scope) {
+        $document.on('click', function(e) {
+          var isTweet = $(e.target).parents('.js-tweet').length ||
+                        $(e.target).hasClass('js-tweet'),
+              isMenu  = $(e.target).parents('.js-menu').length ||
+                        $(e.target).hasClass('js-menu');
+
+          if (!isTweet && !isMenu) {
+            $scope.filters.activeTweetId = null;
+            $scope.$apply();
+          }
+        });
       }
     };
   });
