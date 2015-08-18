@@ -1,65 +1,65 @@
-<script type="text/ng-template" id="menuDropdown">
-    <div class="amd-item"
-         ng-class="{'amd-item--active': item.isOpen,
-                    'amd-item--parent': item.children.length}"
-         ng-mouseenter="open(item)"
-         ng-mouseleave="hide(item)">
+<script type="text/ng-template"
+        id="menuDropdown">
+  <div class="md-item"
+       ng-class="{'md-item--highlighted': item.isHighlighted,
+                  'md-item--parent': item.children.length}"
+       ng-mouseenter="itemHoverCallback(menu, item)"
+       ng-mouseleave="itemLeaveCallback(item)">
 
-        <div class="amd-item__counter"
-             ng-show="item.tweets.length > 0">{{item.tweets.length}}</div>
-
-        <button class="amd-item__name">{{item.label}}</button>
-
-        <div class="amd-item__tweets"
-             ng-if="item.tweetsShown &&
-                    item.tweets.length > 0">
-            <tweets-popup context="item"></tweets-popup>
-        </div>
+    <div class="md-item__counter"
+         ng-show="item.tweetsCount > 0">{{item.tweetsCount}}
     </div>
 
-    <div ng-show="item.children.length">
-        <div class="am-dropdown am-dropdown--nested"
-             ng-show="item.isOpen">
-            <div ng-repeat="item in item.children">
-                <div class="am-dropdown__slot"
-                     ng-hide="item.divider"
-                     ng-include="'menuDropdown'"></div>
+    <button class="md-item__name"
+            ng-click="itemActivateCallback(menu, item, $event)">{{item.label}}
+    </button>
+  </div>
 
-                <div class="am-dropdown__divider"
-                     ng-show="item.divider"></div>
-            </div>
-        </div>
+  <div ng-show="item.children.length">
+    <div class="m-dropdown m-dropdown--nested"
+         ng-show="item.isOpen">
+      <div ng-repeat="item in item.children">
+        <div class="m-dropdown__slot"
+             ng-hide="item.divider"
+             ng-include="'menuDropdown'"></div>
+
+        <div class="m-dropdown__divider"
+             ng-show="item.divider"></div>
+      </div>
     </div>
+  </div>
 </script>
 
-<div class="app-menu">
-    <ul class="l-list-inline l-list-inline--collapsed">
-        <li class="l-list-inline__item"
-            ng-repeat="rootItem in menu">
-            <div class="app-menu__slot">
-                <div class="am-item"
-                     ng-class="{'am-item--active': rootItem.isOpen}"
-                     ng-mouseover="open(rootItem)">
-                    <button class="am-item__name">{{rootItem.label}}</button>
+<div class="menu js-menu js-top-menu">
+  <ul class="l-list-inline l-list-inline--collapsed">
+    <li class="l-list-inline__item"
+        ng-repeat="rootItem in menu.all">
+      <div class="menu__slot">
+        <div class="m-item"
+             ng-class="{'m-item--highlighted': rootItem.isHighlighted}"
+             ng-mouseenter="rootItemHoverCallback(menu, rootItem)"
+             ng-mouseleave="rootItemLeaveCallback(menu, rootItem)"
+             ng-click="rootItemClickCallback(menu, rootItem)">
+          <button class="m-item__name">{{rootItem.label}}</button>
 
-                    <div class="am-item__counter"
-                         ng-show="rootItem.tweets.length > 0">
-                        {{rootItem.tweets.length}}
-                    </div>
-                </div>
+          <div class="m-item__counter"
+               ng-show="rootItem.tweetsCount > 0">
+            {{rootItem.tweetsCount}}
+          </div>
+        </div>
 
-                <div class="am-dropdown am-dropdown--root"
-                     ng-show="rootItem.isOpen">
-                    <div ng-repeat="item in rootItem.children">
-                        <div class="am-dropdown__slot"
-                             ng-hide="item.divider"
-                             ng-include="'menuDropdown'"></div>
+        <div class="m-dropdown m-dropdown--root"
+             ng-show="rootItem.isOpen">
+          <div ng-repeat="item in rootItem.children">
+            <div class="m-dropdown__slot"
+                 ng-hide="item.divider"
+                 ng-include="'menuDropdown'"></div>
 
-                        <div class="am-dropdown__divider"
-                             ng-show="item.divider"></div>
-                    </div>
-                </div>
-            </div>
-        </li>
-    </ul>
+            <div class="m-dropdown__divider"
+                 ng-show="item.divider"></div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

@@ -52,7 +52,7 @@ textarea {
 }
 
 button {
-  display: inline-block;
+  display: block;
   margin: 0;
   padding: 0;
 
@@ -79,7 +79,7 @@ body {
   line-height: $global-line-height;
 
   color: $color-tx;
-  background-color: $color-bg;
+  background-color: #C0DEED;
 }
 
 h1, h2, h3, h4, h5, h6,

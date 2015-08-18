@@ -1,31 +1,33 @@
 <div class="app-body">
-    <div class="activity-panel">
-        <div class="ap-header">
-            <div class="l-block-small">
-                <div class="ap-header__title">
-                    Tweets about Photoshop
-                </div>
-            </div>
-
-            <div class="l-block-small">
-                <label>
-                    <input type="checkbox"
-                           ng-model="filters.highlightUnfamiliar"> Only tweets for unfamiliar commands
-                </label>
-            </div>
-
-            <label>
-                <input type="checkbox"
-                       ng-model="filters.highlightRelevant"> Only tweets for relevant commands
-            </label>
+  <div class="activity-panel">
+    <div class="ap-header">
+      <div class="l-block-small">
+        <div class="ap-header__title">
+          Tweets about Photoshop
         </div>
+      </div>
 
-        <div class="ap-section">
-            <timeline></timeline>
-        </div>
+      <div class="l-block-small">
+        <label>
+          <input type="checkbox"
+                 ng-model="filters.highlightUnfamiliar"> Only tweets for
+          unfamiliar commands
+        </label>
+      </div>
 
-        <div class="ap-section">
-            <active-tweet></active-tweet>
-        </div>
+      <label>
+        <input type="checkbox"
+               ng-model="filters.highlightRelevant"> Only tweets for relevant
+        commands
+      </label>
     </div>
+
+    <div class="ap-section">
+      <timeline></timeline>
+    </div>
+
+    <div class="ap-section">
+      <active-tweet></active-tweet>
+    </div>
+  </div>
 </div>

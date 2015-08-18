@@ -1,7 +1,7 @@
 [
   {
     "id": "move",
-    "label": ""
+    "label": "Move"
   },
   {
     "id": "rectangular-marquee-group",
@@ -374,16 +374,16 @@
   },
   {
     "id": "zoom",
-    "label": ""
+    "label": "Zoom"
   },
   {
     "id": "background",
     "largeIcon": true,
-    "label": ""
+    "label": "Background"
   },
   {
     "id": "quick-mask",
-    "label": ""
+    "label": "Quick mask"
   },
   {
     "id": "screen-mode-group",

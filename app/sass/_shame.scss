@@ -5,94 +5,170 @@
  *
  */
 
-.link {
-  color: $color-dc-secondary;
-  text-decoration: underline;
+//.topbar {
+//  position: fixed;
+//  z-index: 10;
+//  top: 0;
+//  left: 0;
+//  width: 100%;
+//
+//  background: $color-bg-secondary;
+//}
 
-  &:hover {
-    text-decoration: none;
+$timeline-width: 150px;
+.app-body {
+  min-height: 100%;
+
+  &__wrapper {
+    display: flex;
+    width: 588px;
+    margin: 0 auto;
+  }
+
+  &__timeline {
+    position: fixed;
+    height: 100%;
+    width: $timeline-width;
+    margin-left: -$timeline-width - 15px;
+    padding: 50px 0;
+  }
+
+  &__tweet-list {
+    flex: 1;
   }
 }
 
-.axis {
-  shape-rendering: crispEdges;
-}
+.timeline {
+  height: 100%;
 
-//.x.axis line {
-//  stroke: white;
-//}
+  .axis {
+    font: 10px sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
 
-//.x.axis .minor {
-//  stroke-opacity: 0.5;
-//}
+  .axis .domain {
+    fill: none;
+    stroke: darken(#C0DEED, 40%);
+    stroke-opacity: .3;
+    stroke-width: 5px;
+  }
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: black;
-}
+  .slider .handle {
+    fill: #fff;
+    stroke: #000;
+    stroke-opacity: .5;
+    stroke-width: 1.25px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+  }
 
-.line {
-  fill: none;
-  stroke: $color-dc-secondary;
-  stroke-width: 1px;
-}
-
-.area {
-  fill: rgba($color-dc-secondary, 0.3);
-}
-
-.ghost-total {
-  fill: rgba($color-border, 0.2);
-}
-
-.ghost-area {
-  fill: rgba($color-border, 0.5);
-}
-
-.dot {
-  fill: rgba($color-dc-secondary, 0.8);
-}
-
-.brush .extent {
-  stroke: none;
-  fill: white;
-  fill-opacity: 0.4;
-}
-
-.brush__handle {
-  stroke: none;
-  fill: $color-dc-secondary;
-  shape-rendering: crispEdges;
-}
-
-.tick {
-  font-size: 12px;
-}
-
-.axis--grid {
-  .domain {
+  .resize,
+  .extent {
     display: none;
   }
 
-  .tick line {
-    stroke: $color-bg-secondary;
+  .background {
+    display: none;
+  }
+
+  .data-point {
+    fill: red;
+    position: relative;
+    z-index: 1;
   }
 }
 
-.timeline-tweet {
-  stroke: darken($color-border, 20%);
-  stroke-width: 0;
+//.link {
+//  color: $color-dc-secondary;
+//  text-decoration: underline;
+//
+//  &:hover {
+//    text-decoration: none;
+//  }
+//}
+//
+//.axis {
+//  shape-rendering: crispEdges;
+//}
+//
+////.x.axis line {
+////  stroke: white;
+////}
+//
+////.x.axis .minor {
+////  stroke-opacity: 0.5;
+////}
 
-  cursor: pointer;
-
-  opacity: 0.2;
-}
-  .timeline-tweet--matching {
-    stroke-width: 1px;
-    opacity: 1;
-  }
-  .timeline-tweet--active {
-    stroke: $color-dc-secondary;
-    stroke-width: 3px;
-  }
+//.axis path,
+//.axis line {
+//  fill: none;
+//  stroke: black;
+//}
+//
+//.line {
+//  fill: none;
+//  stroke: $color-dc-secondary;
+//  stroke-width: 1px;
+//}
+//
+//.area {
+//  fill: rgba($color-dc-secondary, 0.3);
+//}
+//
+//.ghost-total {
+//  fill: rgba($color-border, 0.2);
+//}
+//
+//.ghost-area {
+//  fill: rgba($color-border, 0.5);
+//}
+//
+//.dot {
+//  fill: rgba($color-dc-secondary, 0.8);
+//}
+//
+//.brush .extent {
+//  stroke: none;
+//  fill: white;
+//  fill-opacity: 0.4;
+//}
+//
+//.brush__handle {
+//  stroke: none;
+//  fill: $color-dc-secondary;
+//  shape-rendering: crispEdges;
+//}
+//
+//.tick {
+//  font-size: 12px;
+//}
+//
+//.axis--grid {
+//  .domain {
+//    display: none;
+//  }
+//
+//  .tick line {
+//    stroke: $color-bg-secondary;
+//  }
+//}
+//
+//.timeline-tweet {
+//  stroke: darken($color-border, 20%);
+//  stroke-width: 0;
+//
+//  cursor: pointer;
+//
+//  opacity: 0.2;
+//}
+//  .timeline-tweet--matching {
+//    stroke-width: 1px;
+//    opacity: 1;
+//  }
+//  .timeline-tweet--active {
+//    stroke: $color-dc-secondary;
+//    stroke-width: 3px;
+//  }

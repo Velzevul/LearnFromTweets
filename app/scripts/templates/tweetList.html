@@ -1,0 +1,54 @@
+<div class="tweet-list">
+  <div class="l-block"
+       ng-show="filters.selectedCommand">
+    <div class="tweet-list__header">
+      <div class="l-split">
+        <div class="l-split__right">
+          <button class="tweet-list__back"
+                  ng-click="resetCommandFilter()">back to all tweets</button>
+        </div>
+
+        <div class="l-split__left">
+          <div class="tweet-list__subtitle">Tweets that mention</div>
+        </div>
+      </div>
+
+      <div class="tweet-list__title">{{filters.selectedCommand.label}}</div>
+
+      <button ng-mouseenter="highlightCommand(filters.selectedMenu.name, filters.selectedCommand.id)"
+              ng-mouseleave="dimCommand(filters.selectedMenu.name, filters.selectedCommand.id)"
+              ng-click="revealCommandLocation(filters.selectedMenu.name, filters.selectedCommand.id, $event)">
+        <div class="l-list-inline l-list-inline--collapsed">
+          <div class="l-list-inline__item">
+            <div class="tweet-list__path">
+              {{filters.selectedMenu.name}} /&nbsp;
+            </div>
+          </div><!--
+          --><div class="l-list-inline__item"
+               ng-repeat="parent in filters.selectedCommand.parents"
+               ng-show="parent.label && parent.label != ''">
+            <div class="tweet-list__path">
+              {{parent.label}} /&nbsp;
+            </div>
+          </div><!--
+          --><div class="l-list-inline__item">
+            <div class="tweet-list__path">
+              {{filters.selectedCommand.label}}
+            </div>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <tweet ng-repeat="t in tweets.filtered"
+         ng-click="activateTweet(t)"
+         class="tweet js-tweet"
+         ng-class="{'tweet--is-first': $first,
+                    'tweet--is-last':  $last,
+                    'tweet--is-open': t.id == filters.activeTweetId}"
+         data="t"
+         command-hover-callback="highlightCommand"
+         command-leave-callback="dimCommand"
+         command-click-callback="revealCommandLocation"></tweet>
+</div>

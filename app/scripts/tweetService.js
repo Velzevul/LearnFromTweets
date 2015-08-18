@@ -1,146 +1,140 @@
-angular.module('tweetsToSoftware')
-    .factory('TweetService', function($q, $http, MenuService) {
-        'use strict';
+function Tweets() {
+  this.all = [];
+  this.filtered = [];
+}
 
-        var tweets = {
-                all: [],
-                byId: {},
-                byAuthor: {},
-                byCommand: {},
-                byPanel: {},
-                byTool: {},
-                active: null
-            },
-            authors = [],
-            domain = [],
-            promise,
-            relevancyThreshold = 95,
-            familiarityThreshold = 20;
+Tweets.prototype.populate = function(tweets) {
+  var self = this;
 
-        window.p = $http.get('/data/tweets.json');
+  tweets.forEach(function(t) {
+    self.all.push(new Tweet(t));
+  });
+};
 
-        console.time('Tweets load');
-        promise = $q.all([
-            $http.get('/data/tweets.json'),
-            MenuService.loaded
-        ])
-            .then(function(response) {
-                console.timeEnd('Tweets load');
-                console.time('Tweets process');
+Tweets.prototype.filter = function(time, menu, command) {
+  this.filtered = this.all.filter(function(t) {
+    var tweet = t.retweetedStatus || t,
+        match = t.createdAt.isAfter(time);
 
-                tweets.all = response[0].data;
+    if (command) {
+      match = match && (tweet[menu.name].indexOf(command) !== -1);
+    }
 
-                var processedAuthors = [],
-                    processedDates = [];
+    return match;
+  });
+};
 
-                angular.forEach(tweets.all, function(tweet) {
+Tweets.prototype.haveCommand = function(menu, command) {
+  return this.all.filter(function(t) {
+    if (command) {
+      var tweet = t.retweetedStatus || t;
 
-                    tweet.published = moment(tweet.published, "h:m a - DD MM YYYY");
+      return tweet[menu.name].indexOf(command) !== -1;
+    } else {
+      return true;
+    }
+  });
+};
 
-                    if (processedAuthors.indexOf(tweet.author.screenName) == -1) {
-                        authors.push(tweet.author);
-                        processedAuthors.push(tweet.author.screenName);
-                    }
+Tweets.prototype.mockDates = function() {
+  function randomizeDate(minutesBack) {
+    var distance = Math.floor(Math.random()*minutesBack);
+    return moment().subtract(distance, 'minutes');
+  }
 
-                    if (processedDates.indexOf(tweet.published.format()) == -1) {
-                        domain.push(tweet.published);
-                        processedDates.push(tweet.published.format());
-                    }
+  var randomDates = [];
+  this.all.forEach(function(t,i) {
+    if (i<3) {
+      randomDates.push(randomizeDate(300));
+    } else if (i<8) {
+      randomDates.push(randomizeDate(1000));
+    } else if (i<15) {
+      randomDates.push(randomizeDate(6000));
+    } else {
+      randomDates.push(randomizeDate(10000));
+    }
+  });
 
-                    domain.sort();
+  randomDates.sort(function(a,b) { return a < b ? 1 : -1; });
 
-                    var tweetContext = [];
+  this.all.forEach(function(t,i) {
+    t.createdAt = randomDates[i];
+  });
 
-                    tweet.commandRefs = getMenus(tweet.tweet.commands, MenuService.menu);
-                    Array.prototype.push.apply(tweetContext, tweet.commandRefs);
-                    tweet.toolRefs = getMenus(tweet.tweet.tools, MenuService.toolbar);
-                    Array.prototype.push.apply(tweetContext, tweet.toolRefs);
-                    tweet.panelRefs = getMenus(tweet.tweet.panels, MenuService.panelbar);
-                    Array.prototype.push.apply(tweetContext, tweet.panelRefs);
+  this.filtered = this.all;
+};
 
-                    tweet.hasUnfamiliar = false;
-                    tweet.hasRelevant = false;
-
-                    angular.forEach(tweetContext, function(c) {
-                        if (c.familiarity < familiarityThreshold) {
-                            tweet.hasUnfamiliar = true;
-                        }
-
-                        if (c.relevancy > relevancyThreshold) {
-                            tweet.hasRelevant = true;
-                        }
-                    });
-                });
-
-                populateMap(tweets.all, tweets.byId, true, function(item) {
-                    return item.id;
-                });
-                populateMap(tweets.all, tweets.byAuthor, false, function(item) {
-                    return item.author.screenName;
-                });
-                populateMap(tweets.all, tweets.byCommand, false, function(item) {
-                    return item.tweet.commands || [];
-                });
-                populateMap(tweets.all, tweets.byTool, false, function(item) {
-                    return item.tweet.tools || [];
-                });
-                populateMap(tweets.all, tweets.byPanel, false, function(item) {
-                    return item.tweet.panels || [];
-                });
-
-                console.timeEnd('Tweets process');
-            });
-
-        function getMenus(commandIds, menu) {
-            var commands = [];
-
-            angular.forEach(commandIds, function(c) {
-                commands.push(menu.byId[c]);
-            });
-
-            return commands;
-        }
-
-        function populateMap(all, map, uniqueFlag, propertyRetrievalCallback) {
-            angular.forEach(all, function(one) {
-                var property = propertyRetrievalCallback(one);
-
-                if (Object.prototype.toString.call(property) === '[object Array]') {
-                    angular.forEach(property, function(key) {
-                        storeInMap(one, key);
-                    });
-                } else {
-                    storeInMap(one, property);
-                }
-
-                function storeInMap(obj, key) {
-                    if (map[key]) {
-                        if (uniqueFlag) {
-                            console.error('entry already exists:', map[key], obj);
-                        } else {
-                            map[key].push(obj);
-                        }
-                    } else {
-                        if (uniqueFlag) {
-                            map[key] = obj;
-                        } else {
-                            map[key] = [obj];
-                        }
-                    }
-                }
-            });
-        }
-
-        return {
-            loaded: promise,
-            tweets: tweets,
-            authors: authors,
-            domain: domain,
-            activate: function(tweet) {
-                tweets.active = tweet;
-            },
-            deactivate: function() {
-                tweets.active = null;
-            }
-        }
+Tweets.prototype.mockCommands = function(menus) {
+  this.all.forEach(function(tweet) {
+    menus.forEach(function(menu) {
+      tweet.mockCommands(menu);
     });
+  });
+};
+
+function Tweet(tweet) {
+  this.id = tweet.id;
+  this.createdAt = moment(tweet.created_at);
+  this.favoriteCount = tweet.favorite_count;
+  this.text = tweet.text;
+
+  this.author = new Author(tweet.author);
+  this.retweetedStatus = tweet.retweeted_status ?
+                          new Tweet(tweet.retweeted_status) : null;
+  this.retweetedBy = tweet.retweeted_by ?
+                      tweet.retweeted_by.map(function(a) {
+                        return new Author(a);
+                      }) : null;
+}
+
+Tweet.prototype.mockCommands = function(menu) {
+  var randomMenuItems = [],
+      n = Math.floor(Math.random()*5);
+
+  while (randomMenuItems.length < n) {
+    var randomItem = menu.randomItem();
+
+    while (randomMenuItems.indexOf(randomItem) != -1) {
+      randomItem = menu.randomItem();
+    }
+
+    randomMenuItems.push(randomItem);
+  }
+
+  if (this.retweetedStatus) {
+    this.retweetedStatus[menu.name] = randomMenuItems;
+  } else {
+    this[menu.name] = randomMenuItems;
+  }
+};
+
+function Author(author) {
+  this.screenName = author.screen_name;
+  this.name = author.name;
+  this.profileImageUrl = author.profile_image_url;
+}
+
+angular.module('tweetsToSoftware')
+  .factory('TweetService', function($http) {
+    'use strict';
+
+    var tweets = new Tweets(),
+        promise;
+
+    console.time('Tweets load');
+    promise = $http.get('//0.0.0.0:7000/api/tweets/')
+      .then(function(response) {
+        console.timeEnd('Tweets load');
+        console.time('Tweets population');
+
+        tweets.populate(response.data);
+        tweets.mockDates();
+
+        console.timeEnd('Tweets population');
+      });
+
+    return {
+      loaded: promise,
+      tweets: tweets
+    };
+  });

@@ -1,0 +1,50 @@
+$t-color: #292f33;
+$t-border: 1px solid #e1e8ed;
+
+.tweet-list-wrapper {
+  height: 100%;
+}
+
+.tweet-list {
+  padding: 50px 0;
+
+  &__header {
+    padding: 12px 12px;
+
+    color: $t-color;
+
+    background: white;
+    border: $t-border;
+
+    border-radius: 6px;
+  }
+
+  &__subtitle {
+    font-size: 10px;
+
+    color: #8899a6;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  &__path {
+    color: #1F98C7;
+    cursor: pointer;
+  }
+
+  &__back {
+    display: block;
+    text-decoration: underline;
+
+    color: #1F98C7;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

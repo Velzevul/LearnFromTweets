@@ -1,34 +1,15 @@
 angular.module('tweetsToSoftware')
-    .factory('FilterService', function() {
-        'use strict';
+  .factory('FilterService', function() {
+    'use strict';
 
-        var filters = {
-                time: null,
-                highlightRelevant: false,
-                highlightUnfamiliar: false
-            };
-
-        return {
-            filters: filters,
-            matchTweet: function(tweet) {
-                if (filters.time) {
-                    if ((tweet.published.toDate() <= filters.time.lower) ||
-                        (tweet.published.toDate() >= filters.time.upper)) {
-                        return false;
-                    }
-                }
-
-                if (filters.highlightRelevant &&
-                    !tweet.hasRelevant) {
-                    return false;
-                }
-
-                if (filters.highlightUnfamiliar &&
-                    !tweet.hasUnfamiliar) {
-                    return false;
-                }
-
-                return true;
-            }
-        };
-    });
+    return {
+      activeTweetId: null,
+      selectedCommand: null,
+      selectedMenu: null,
+      renderUntil: moment(NOW).subtract(3, 'hours'),
+      bannedAuthors: {},
+      bannedCommands: {},
+      promotedAuthors: {},
+      promotedCommands: {}
+    };
+  });
