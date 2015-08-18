@@ -49,7 +49,10 @@ Menu.prototype.populate = function(items) {
 
 Menu.prototype.close = function() {
   this.all.forEach(function(item) {
-    item.close().dim();
+    item.propagate(function(i) {
+      i.isOpen = false;
+      i.isHighlighted = false;
+    });
   });
 
   this.isOpen = false;
@@ -59,7 +62,7 @@ Menu.prototype.close = function() {
 
 Menu.prototype.resetCounters = function() {
   this.all.forEach(function(item) {
-    item._propagate(function(i) {
+    item.propagate(function(i) {
       i.tweetsCount = 0;
     });
   });
@@ -102,13 +105,13 @@ function MenuItem(item, parents) {
   }
 }
 
-MenuItem.prototype._propagate = function(callback) {
+MenuItem.prototype.propagate = function(callback) {
   callback(this);
 
   if (this.children) {
     this.children.forEach(function(child) {
       if (!child.divider) {
-        child._propagate(callback);
+        child.propagate(callback);
       }
     });
   }

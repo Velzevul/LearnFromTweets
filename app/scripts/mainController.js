@@ -70,12 +70,9 @@ angular.module('tweetsToSoftware')
     };
 
     $scope.itemHoverHandler = function(menu, item) {
-      if (menu.lastOpenItem) {
-        menu.lastOpenItem.dim().close();
-      }
-
+      menu.close();
       item.highlight().open();
-      menu.lastOpenItem = item;
+      menu.isOpen = true;
     };
 
     $scope.itemLeaveHandler = function(item) {
@@ -85,27 +82,22 @@ angular.module('tweetsToSoftware')
     };
 
     $scope.rootItemHoverHandler = function(menu, rootItem) {
-      if (menu.lastOpenItem) {
-        menu.lastOpenItem.dim().close();
+      if (menu.isOpen) {
+        menu.close();
+        rootItem.open();
+        menu.isOpen = true;
       }
 
       rootItem.highlight();
-      if (menu.isOpen) {
-        rootItem.open();
-      }
-
-      menu.lastOpenItem = rootItem;
     };
 
     $scope.rootItemClickHandler = function(menu, rootItem) {
-      if (menu.isOpen) {
-        menu.isOpen = false;
-        rootItem.close();
-      } else {
-        $scope.menu.close();
-        $scope.toolbar.close();
-        $scope.panelbar.close();
+      rootItem.highlight();
 
+      if (menu.isOpen) {
+        menu.close();
+      } else {
+        menu.close();
         rootItem.open();
         menu.isOpen = true;
       }

@@ -34,7 +34,6 @@ angular.module('tweetsToSoftware')
             MenuService.panelbar.close();
             MenuService.toolbar.close();
 
-            menu.lastOpenItem = item;
             item.highlight();
           }, highlightDelay).$$timeoutId;
         };
