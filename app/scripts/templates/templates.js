@@ -123,27 +123,26 @@ module.run(["$templateCache", function($templateCache) {
     "<div class=\"toolbar toolbar--right js-menu js-panelbar\">\n" +
     "  <div ng-repeat=\"item in menu.all\">\n" +
     "    <div class=\"toolbar__slot\">\n" +
-    "      <div class=\"t-item\"\n" +
-    "           ng-class=\"{'t-item--highlighted': item.isHighlighted}\">\n" +
-    "        <button ng-click=\"rootItemClickCallback(menu, item)\"\n" +
-    "                ng-mouseenter=\"rootItemHoverCallback(menu, item)\"\n" +
-    "                ng-mouseleave=\"rootItemLeaveCallback(menu, item)\">\n" +
-    "          <div class=\"l-list-inline l-list-inline--x-small\">\n" +
-    "            <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "              <div class=\"t-item__icon\"\n" +
-    "                   style=\"background-image: url('/images/{{item.id}}.png');\">\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "              <div class=\"t-item__label\">{{item.label}}</div>\n" +
+    "      <button class=\"t-item\"\n" +
+    "              ng-class=\"{'t-item--highlighted': item.isHighlighted}\"\n" +
+    "              ng-click=\"rootItemClickCallback(menu, item)\"\n" +
+    "              ng-mouseenter=\"rootItemHoverCallback(menu, item)\"\n" +
+    "              ng-mouseleave=\"rootItemLeaveCallback(menu, item)\">\n" +
+    "        <div class=\"l-list-inline l-list-inline--x-small\">\n" +
+    "          <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "            <div class=\"t-item__icon\"\n" +
+    "                 style=\"background-image: url('/images/{{item.id}}.png');\">\n" +
     "            </div>\n" +
     "          </div>\n" +
-    "        </button>\n" +
+    "\n" +
+    "          <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "            <div class=\"t-item__label\">{{item.label}}</div>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
     "\n" +
     "        <div class=\"t-item__counter t-item__counter--rev\"\n" +
     "             ng-show=\"item.tweetsCount > 0\">{{item.tweetsCount}}</div>\n" +
-    "      </div>\n" +
+    "      </button>\n" +
     "\n" +
     "      <div class=\"t-dropdown t-dropdown--rev\"\n" +
     "           ng-show=\"item.isOpen\">\n" +
@@ -201,29 +200,28 @@ module.run(["$templateCache", function($templateCache) {
     "           ng-if=\"item.children.length\">\n" +
     "        <div class=\"t-dropdown__slot\"\n" +
     "             ng-repeat=\"subitem in item.children\">\n" +
-    "          <div class=\"td-item\"\n" +
-    "               ng-mouseenter=\"itemHoverCallback(menu, subitem)\"\n" +
-    "               ng-mouseleave=\"itemLeaveCallback(subitem)\"\n" +
-    "               ng-class=\"{'td-item--first': $first,\n" +
-    "                          'td-item--highlighted': subitem.isHighlighted}\">\n" +
-    "            <button ng-click=\"itemActivateCallback(menu, subitem, $event)\">\n" +
-    "              <div class=\"l-list-inline l-list-inline--x-small\">\n" +
-    "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "                  <div class=\"td-item__icon\"\n" +
-    "                       ng-class=\"{'td-item__icon--large': subitem.largeIcon}\"\n" +
-    "                       style=\"background-image:\n" +
-    "                       url('/images/{{subitem.id}}.png');\"></div>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"l-list-inline__item is-middle-aligned\">\n" +
-    "                  <div class=\"td-item__label\">{{subitem.label}}</div>\n" +
-    "                </div>\n" +
+    "          <button class=\"td-item\"\n" +
+    "                  ng-mouseenter=\"itemHoverCallback(menu, subitem)\"\n" +
+    "                  ng-mouseleave=\"itemLeaveCallback(subitem)\"\n" +
+    "                  ng-class=\"{'td-item--first': $first,\n" +
+    "                        'td-item--highlighted': subitem.isHighlighted}\"\n" +
+    "                  ng-click=\"itemActivateCallback(menu, subitem, $event)\">\n" +
+    "            <div class=\"l-list-inline l-list-inline--x-small\">\n" +
+    "              <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "                <div class=\"td-item__icon\"\n" +
+    "                     ng-class=\"{'td-item__icon--large': subitem.largeIcon}\"\n" +
+    "                     style=\"background-image:\n" +
+    "                     url('/images/{{subitem.id}}.png');\"></div>\n" +
     "              </div>\n" +
-    "            </button>\n" +
+    "\n" +
+    "              <div class=\"l-list-inline__item is-middle-aligned\">\n" +
+    "                <div class=\"td-item__label\">{{subitem.label}}</div>\n" +
+    "              </div>\n" +
+    "            </div>\n" +
     "\n" +
     "            <div class=\"td-item__counter\"\n" +
     "                 ng-show=\"subitem.tweetsCount > 0\">{{subitem.tweetsCount}}</div>\n" +
-    "          </div>\n" +
+    "          </button>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
