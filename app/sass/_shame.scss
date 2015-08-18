@@ -81,6 +81,44 @@ $timeline-width: 150px;
   }
 }
 
+.admin-panel {
+  background-color: white;
+  margin: 20px;
+  max-width: 1200px;
+  min-width: 600px;
+  padding: 10px;
+
+  &__title{
+    font-size: 150%;
+  }
+
+  &__section{
+    clear: both;
+    margin-top: 10px;
+  }
+
+  &__commands{
+    margin-bottom: 10px;
+  }
+
+  &__command-label{
+    padding: 10px;
+    text-align: right;
+  }
+
+  &__command-items{
+    border-left: #6E8392 solid 1px;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  &__button{
+    border: #6E8392 solid 1px;
+    display: inline-block;
+    padding: 0 5px;
+  }
+}
+
 //.link {
 //  color: $color-dc-secondary;
 //  text-decoration: underline;
