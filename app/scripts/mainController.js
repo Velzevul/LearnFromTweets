@@ -45,11 +45,11 @@ angular.module('tweetsToSoftware')
         var tweet = t.retweetedStatus || t;
 
         // avoid processing retweets multiple times
-        if (processedTweetIds[t.id] === undefined) {
-          processedTweetIds[t.id] = true;
+        if (!processedTweetIds[tweet.id]) {
+          processedTweetIds[tweet.id] = true;
 
           ['menu', 'toolbar', 'panelbar'].forEach(function(menuName) {
-            t[menuName].forEach(function(item) {
+            tweet[menuName].forEach(function(item) {
               item.increaseCounter();
             });
           });

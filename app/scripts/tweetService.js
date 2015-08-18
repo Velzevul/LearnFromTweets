@@ -14,7 +14,7 @@ Tweets.prototype.populate = function(tweets) {
 Tweets.prototype.filter = function(time, menu, command) {
   this.filtered = this.all.filter(function(t) {
     var tweet = t.retweetedStatus || t,
-      match = tweet.createdAt.isAfter(time);
+        match = t.createdAt.isAfter(time);
 
     if (command) {
       match = match && (tweet[menu.name].indexOf(command) !== -1);
@@ -101,9 +101,10 @@ Tweet.prototype.mockCommands = function(menu) {
     randomMenuItems.push(randomItem);
   }
 
-  this[menu.name] = randomMenuItems;
   if (this.retweetedStatus) {
     this.retweetedStatus[menu.name] = randomMenuItems;
+  } else {
+    this[menu.name] = randomMenuItems;
   }
 };
 

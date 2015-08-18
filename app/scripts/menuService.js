@@ -61,7 +61,7 @@ Menu.prototype.resetCounters = function() {
   this.all.forEach(function(item) {
     item._propagate(function(i) {
       i.tweetsCount = 0;
-    }, 'children');
+    });
   });
 
   return this;
@@ -102,54 +102,74 @@ function MenuItem(item, parents) {
   }
 }
 
-MenuItem.prototype._propagate = function(callback, prop) {
+MenuItem.prototype._propagate = function(callback) {
   callback(this);
 
-  if (this[prop]) {
-    this[prop].forEach(function(obj) {
-      if (!obj.divider) {
-        obj._propagate(callback, prop);
+  if (this.children) {
+    this.children.forEach(function(child) {
+      if (!child.divider) {
+        child._propagate(callback);
       }
     });
   }
 };
 
 MenuItem.prototype.highlight = function() {
-  this._propagate(function(i) {
-    i.isHighlighted = true;
-  }, 'parents');
+  this.isHighlighted = true;
+
+  if (this.parents) {
+    this.parents.forEach(function(p) {
+      p.isHighlighted = true;
+    });
+  }
 
   return this;
 };
 
 MenuItem.prototype.dim = function() {
-  this._propagate(function(i) {
-    i.isHighlighted = false;
-  }, 'parents');
+  this.isHighlighted = false;
+
+  if (this.parents) {
+    this.parents.forEach(function (p) {
+      p.isHighlighted = false;
+    });
+  }
 
   return this;
 };
 
 MenuItem.prototype.open = function() {
-  this._propagate(function(i) {
-    i.isOpen = true;
-  }, 'parents');
+  this.isOpen = true;
+
+  if (this.parents) {
+    this.parents.forEach(function (p) {
+      p.isOpen = true;
+    });
+  }
 
   return this;
 };
 
 MenuItem.prototype.close = function() {
-  this._propagate(function(i) {
-    i.isOpen = false;
-  }, 'parents');
+  this.isOpen = false;
+
+  if (this.parents) {
+    this.parents.forEach(function (p) {
+      p.isOpen = false;
+    });
+  }
 
   return this;
 };
 
 MenuItem.prototype.increaseCounter = function() {
-  this._propagate(function(i) {
-    i.tweetsCount++;
-  }, 'parents');
+  this.tweetsCount++;
+
+  if (this.parents) {
+    this.parents.forEach(function (p) {
+      p.tweetsCount++;
+    });
+  }
 
   return this;
 };
