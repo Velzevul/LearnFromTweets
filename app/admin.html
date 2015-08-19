@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="adminController">
+<div class="admin-panel">
+    <h1 class="admin-panel__title">Add a Tweet</h1>
+
+    <div class="admin-panel__section">
+        <label for="tweetId">Tweet ID: </label>
+        <input id="tweetId" type="text" ng-model="tweetId">
+    </div>
+
+    <div class="admin-panel__section">
+        <label for="thumbLink">Thumbnail: </label>
+        <input id="thumbLink" type="text" ng-model="previewImageUrl"/>
+    </div>
+
+    <div class="grid grid--full grid--middle admin-panel__section">
+        <div class="grid__item one-twelfth admin-panel__command-label">Menu Items</div><!--
+        --><div class="grid__item eleven-twelfths">
+            <div class="admin-panel__command-items">
+                <div class="admin-panel__commands" ng-repeat="selectedMenuItem in selectedMenuItems">
+                    <select ng-options="menuItem.id as menuItem.id for menuItem in menuItems.byId"
+                            ng-model="selectedMenuItem.id"></select>
+                    <button class="admin-panel__button" ng-click="removeMenuItem(selectedMenuItem)">X</button>
+                </div>
+                <button class="admin-panel__button" ng-click="addMenuItem()">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid--full grid--middle admin-panel__section">
+        <div class="grid__item one-twelfth admin-panel__command-label">Panels</div><!--
+        --><div class="grid__item eleven-twelfths">
+            <div class="admin-panel__command-items">
+                <div class="admin-panel__commands" ng-repeat="selectedPanelbarItem in selectedPanelbarItems">
+                    <select ng-options="panelbarItem.id as panelbarItem.id for panelbarItem in panelbarItems.byId"
+                            ng-model="selectedPanelbarItem.id"></select>
+                    <button class="admin-panel__button" ng-click="removePanelbarItem(selectedMenuItem)">X</button>
+                </div>
+                <button class="admin-panel__button" ng-click="addPanelbarItem()">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid--full grid--middle admin-panel__section">
+        <div class="grid__item one-twelfth admin-panel__command-label">Tools</div><!--
+        --><div class="grid__item eleven-twelfths">
+            <div class="admin-panel__command-items">
+                <div class="admin-panel__commands" ng-repeat="selectedToolbarItem in selectedToolbarItems">
+                    <select ng-options="toolbarItem.id as toolbarItem.id for toolbarItem in toolbarItems.byId"
+                            ng-model="selectedToolbarItem.id"></select>
+                    <button class="admin-panel__button" ng-click="removeToolbarItem(selectedMenuItem)">X</button>
+                </div>
+                <button class="admin-panel__button" ng-click="addToolbarItem()">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-panel__section">
+        <button class="admin-panel__button" id="submit" ng-click="submit()">Submit</button>
+    </div>
+</div>
+</body>
+</html>
