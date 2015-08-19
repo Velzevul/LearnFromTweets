@@ -11,7 +11,7 @@
     </div>
 
     <button class="md-item__name"
-            ng-click="itemActivateCallback(menu, item, $event)">{{item.label}}
+            ng-click="itemActivateCallback(menu, item, $event)">{{item.isHighlighted}}
     </button>
   </div>
 
@@ -40,7 +40,7 @@
              ng-mouseenter="rootItemHoverCallback(menu, rootItem)"
              ng-mouseleave="rootItemLeaveCallback(menu, rootItem)"
              ng-click="rootItemClickCallback(menu, rootItem)">
-          <button class="m-item__name">{{rootItem.label}}</button>
+          <button class="m-item__name">{{rootItem.isHighlighted}}</button>
 
           <div class="m-item__counter"
                ng-show="rootItem.tweetsCount > 0">

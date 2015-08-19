@@ -59,7 +59,7 @@ module.run(["$templateCache", function($templateCache) {
     "    </div>\n" +
     "\n" +
     "    <button class=\"md-item__name\"\n" +
-    "            ng-click=\"itemActivateCallback(menu, item, $event)\">{{item.label}}\n" +
+    "            ng-click=\"itemActivateCallback(menu, item, $event)\">{{item.isHighlighted}}\n" +
     "    </button>\n" +
     "  </div>\n" +
     "\n" +
@@ -88,7 +88,7 @@ module.run(["$templateCache", function($templateCache) {
     "             ng-mouseenter=\"rootItemHoverCallback(menu, rootItem)\"\n" +
     "             ng-mouseleave=\"rootItemLeaveCallback(menu, rootItem)\"\n" +
     "             ng-click=\"rootItemClickCallback(menu, rootItem)\">\n" +
-    "          <button class=\"m-item__name\">{{rootItem.label}}</button>\n" +
+    "          <button class=\"m-item__name\">{{rootItem.isHighlighted}}</button>\n" +
     "\n" +
     "          <div class=\"m-item__counter\"\n" +
     "               ng-show=\"rootItem.tweetsCount > 0\">\n" +

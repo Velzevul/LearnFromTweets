@@ -46,6 +46,7 @@ angular.module('tweetsToSoftware')
 
           if (!item.isOpen) {
             item.isHighlighted = false;
+            console.log(item.isHighlighted);
           }
         };
 
