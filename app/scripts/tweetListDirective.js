@@ -45,8 +45,7 @@ angular.module('tweetsToSoftware')
               item = menu.byId[commandId];
 
           if (!item.isOpen) {
-            item.isHighlighted = false;
-            console.log(item.isHighlighted);
+            item.dim();
           }
         };
 

@@ -3,7 +3,7 @@ app/css/
 node_modules/
 bower_components/
 npm-debug.log
-app/scripts/templates.js
+app/scripts/templates/templates.js
 .ruby-version
 .ruby-gemset
 .idea/
