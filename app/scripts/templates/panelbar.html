@@ -25,7 +25,7 @@
       <div class="t-dropdown t-dropdown--rev"
            ng-show="item.isOpen">
         <button ng-click="itemActivateCallback(menu, item, $event)">
-          <img ng-src="/images/{{item.id}}-panel.png" alt="{{item.label}}"/>
+          <img ng-src="{{rootPrefix + '/images/' + item.id}}-panel.png" alt="{{item.label}}"/>
         </button>
       </div>
     </div>

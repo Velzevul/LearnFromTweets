@@ -10,7 +10,7 @@
 
         <button class="t-item__icon"
                 ng-class="{'t-item__icon--large': item.largeIcon}"
-                style="background-image: url('/images/{{item.id}}.png');"
+                style="background-image: url('{{rootPrefix + '/images/' + item.id}}.png');"
                 ng-click="itemActivateCallback(menu, item, $event)">
         </button>
 
@@ -34,7 +34,7 @@
                 <div class="td-item__icon"
                      ng-class="{'td-item__icon--large': subitem.largeIcon}"
                      style="background-image:
-                     url('{{rootPrefix + '/images/' + item.id}}.png');"></div>
+                     url('{{rootPrefix + '/images/' + subitem.id}}.png');"></div>
               </div>
 
               <div class="l-list-inline__item is-middle-aligned">

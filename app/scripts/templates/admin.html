@@ -18,7 +18,7 @@
     <div class="grid__item eleven-twelfths">
       <div class="admin-panel__command-items">
         <div class="admin-panel__commands" ng-repeat="selectedMenuItem in selectedMenuItems">
-          <select ng-options="menuItem.id as menuItem.id for menuItem in menuItems.byId"
+          <select ng-options="menuItem.id as menuItem.id for menuItem in menuItems.terminalItems"
                   ng-model="selectedMenuItem.id"></select>
           <button class="admin-panel__button" ng-click="removeMenuItem(selectedMenuItem)">X</button>
         </div>
@@ -34,7 +34,7 @@
     <div class="grid__item eleven-twelfths">
       <div class="admin-panel__command-items">
         <div class="admin-panel__commands" ng-repeat="selectedPanelbarItem in selectedPanelbarItems">
-          <select ng-options="panelbarItem.id as panelbarItem.id for panelbarItem in panelbarItems.byId"
+          <select ng-options="panelbarItem.id as panelbarItem.id for panelbarItem in panelbarItems.terminalItems"
                   ng-model="selectedPanelbarItem.id"></select>
           <button class="admin-panel__button" ng-click="removePanelbarItem(selectedMenuItem)">X</button>
         </div>
@@ -50,7 +50,7 @@
     <div class="grid__item eleven-twelfths">
       <div class="admin-panel__command-items">
         <div class="admin-panel__commands" ng-repeat="selectedToolbarItem in selectedToolbarItems">
-          <select ng-options="toolbarItem.id as toolbarItem.id for toolbarItem in toolbarItems.byId"
+          <select ng-options="toolbarItem.id as toolbarItem.id for toolbarItem in toolbarItems.terminalItems"
                   ng-model="selectedToolbarItem.id"></select>
           <button class="admin-panel__button" ng-click="removeToolbarItem(selectedMenuItem)">X</button>
         </div>

@@ -31,11 +31,11 @@
     }
   });
 
-  app.factory('rootPath', function() {
+  app.factory('rootPrefix', function() {
     if (typeof(DEVELOPMENT) === 'undefined') {
-      return '';
-    } else {
       return '/switter';
+    } else {
+      return '';
     }
   });
 

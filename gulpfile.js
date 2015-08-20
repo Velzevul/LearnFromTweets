@@ -75,6 +75,12 @@ gulp.task('data', function() {
     .pipe(connect.reload());
 });
 
+gulp.task('fonts', function() {
+  gulp.src('./app/fonts/*.*', {base: './app/fonts'})
+    .pipe(gulp.dest(DIST_PATH + '/fonts'))
+    .pipe(connect.reload());
+});
+
 gulp.task('dist:dependencies', function() {
   gulp.src(['./bower_components/modernizr/modernizr.js'], {
     base: './bower_components/modernizr'
@@ -117,8 +123,8 @@ gulp.task('watch', function() {
   gulp.watch('./app/data/*.json', ['data']);
 });
 
-gulp.task('default', ['dist:dependencies', 'connect', 'data', 'images', 'html',
+gulp.task('default', ['dist:dependencies', 'connect', 'fonts', 'data', 'images', 'html',
   'css', 'app', 'templates', 'watch']);
 
-gulp.task('s', ['dist:dependencies', 'server', 'data', 'images', 'html',
+gulp.task('s', ['dist:dependencies', 'server', 'data', 'fonts', 'images', 'html',
   'css', 'app', 'templates', 'watch']);

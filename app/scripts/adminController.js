@@ -31,7 +31,7 @@ angular.module('tweetsToSoftware')
     };
 
     $scope.submit = function() {
-      $http.get(switterServer + '/twitter-api/tweets' + $scope.tweetId)
+      $http.get(switterServer + '/twitter-api/tweets/' + $scope.tweetId)
         .then(function(r) {
           var tweetData = r.data;
 

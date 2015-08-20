@@ -15,7 +15,7 @@ angular.module('tweetsToSoftware')
       MenuService.loaded
     ])
       .then(function() {
-        $scope.tweets.mockCommands([
+        $scope.tweets.populateCommands([
           $scope.menu,
           $scope.toolbar,
           $scope.panelbar

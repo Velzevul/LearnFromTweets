@@ -64,10 +64,10 @@ Tweets.prototype.mockDates = function() {
   this.filtered = this.all;
 };
 
-Tweets.prototype.mockCommands = function(menus) {
+Tweets.prototype.populateCommands = function(menus) {
   this.all.forEach(function(tweet) {
     menus.forEach(function(menu) {
-      tweet.mockCommands(menu);
+      tweet.populateCommands(menu);
     });
   });
 };
@@ -85,26 +85,42 @@ function Tweet(tweet) {
                       tweet.retweeted_by.map(function(a) {
                         return new Author(a);
                       }) : null;
+
+  this.menuItemIds = {};
+  this.menuItemIds['menu'] = tweet.menu_items ? tweet.menu_items.split(',') : [];
+  this.menuItemIds['panelbar'] = tweet.panelbar_items ? tweet.panelbar_items.split(',') : [];
+  this.menuItemIds['toolbar'] = tweet.toolbar_items ? tweet.toolbar_items.split(',') : [];
 }
 
-Tweet.prototype.mockCommands = function(menu) {
-  var randomMenuItems = [],
-      n = Math.floor(Math.random()*5);
+Tweet.prototype.populateCommands = function(menu) {
+  if (typeof(DEVELOPMENT) === 'undefined') {
+    var self = this;
 
-  while (randomMenuItems.length < n) {
-    var randomItem = menu.randomItem();
+    this[menu.name] = [];
 
-    while (randomMenuItems.indexOf(randomItem) != -1) {
-      randomItem = menu.randomItem();
+    // we do not deal with retweets for simplicity...
+    this.menuItemIds[menu.name].forEach(function(id) {
+      self[menu.name].push(menu.byId[id]);
+    });
+  } else {
+    var randomMenuItems = [],
+        n = Math.floor(Math.random()*5);
+
+    while (randomMenuItems.length < n) {
+      var randomItem = menu.randomItem();
+
+      while (randomMenuItems.indexOf(randomItem) != -1) {
+        randomItem = menu.randomItem();
+      }
+
+      randomMenuItems.push(randomItem);
     }
 
-    randomMenuItems.push(randomItem);
-  }
-
-  if (this.retweetedStatus) {
-    this.retweetedStatus[menu.name] = randomMenuItems;
-  } else {
-    this[menu.name] = randomMenuItems;
+    if (this.retweetedStatus) {
+      this.retweetedStatus[menu.name] = randomMenuItems;
+    } else {
+      this[menu.name] = randomMenuItems;
+    }
   }
 };
 
@@ -128,7 +144,10 @@ angular.module('tweetsToSoftware')
         console.time('Tweets population');
 
         tweets.populate(response.data);
-        tweets.mockDates();
+
+        if (typeof(DEVELOPMENT) !== 'undefined') {
+          tweets.mockDates();
+        }
 
         console.timeEnd('Tweets population');
       });
