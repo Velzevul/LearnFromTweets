@@ -6,6 +6,7 @@
       'app-templates',
       'angularMoment',
       'ngRoute',
+      'ngSanitize',
       'truncate'
     ])
     .config(['$routeProvider', function($routeProvider){

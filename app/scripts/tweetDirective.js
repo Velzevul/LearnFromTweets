@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('tweet', function(FilterService) {
+  .directive('tweet', function(FilterService, $sce) {
     'use strict';
 
     return {

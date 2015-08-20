@@ -1,6 +1,6 @@
 var AUTORELOAD = false;
-//var DIST_PATH = './dist'; // development
-var DIST_PATH = '/webapps/www/switter'; // production on dorado
+var DIST_PATH = './dist'; // development
+var DEPLOY_PATH = '/webapps/www/switter'; // production on dorado
 
 var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
@@ -20,13 +20,6 @@ gulp.task('connect', function() {
     root: ['./app', './bower_components'],
     port: 3000,
     livereload: AUTORELOAD
-  });
-});
-
-gulp.task('server', function() {
-  connect.server({
-    root: [DIST_PATH],
-    port: 3000
   });
 });
 
@@ -52,7 +45,10 @@ gulp.task('css', function() {
 
 gulp.task('app', function() {
   gulp.src([
-    './app/scripts/utils/*.js',
+    './app/scripts/utils/linkify.min.js',
+    './app/scripts/utils/linkify-string.js',
+    './app/scripts/utils/decimalAdjust.js',
+    './app/scripts/utils/timeTransform.js',
     './app/scripts/app.js',
     './app/scripts/*Service.js',
     './app/scripts/*Controller.js',
@@ -94,6 +90,7 @@ gulp.task('dist:dependencies', function() {
     './bower_components/moment/moment.js',
     './bower_components/angular-moment/angular-moment.js',
     './bower_components/angular-route/angular-route.js',
+    './bower_components/angular-sanitize/angular-sanitize.js',
     './bower_components/angular-truncate/src/truncate.js',
     './bower_components/d3/d3.js'
   ])
@@ -126,5 +123,7 @@ gulp.task('watch', function() {
 gulp.task('default', ['dist:dependencies', 'connect', 'fonts', 'data', 'images', 'html',
   'css', 'app', 'templates', 'watch']);
 
-gulp.task('s', ['dist:dependencies', 'server', 'data', 'fonts', 'images', 'html',
-  'css', 'app', 'templates', 'watch']);
+gulp.task('deploy', function() {
+  gulp.src(DIST_PATH + '/**/*.*', {base: DIST_PATH})
+    .pipe(gulp.dest(DEPLOY_PATH));
+});

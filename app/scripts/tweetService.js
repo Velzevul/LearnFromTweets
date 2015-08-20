@@ -76,7 +76,7 @@ function Tweet(tweet) {
   this.id = tweet.id;
   this.createdAt = moment(tweet.created_at);
   this.favoriteCount = tweet.favorite_count;
-  this.text = tweet.text;
+  this.text = linkifyStr(tweet.text);
 
   this.author = new Author(tweet.author);
   this.retweetedStatus = tweet.retweeted_status ?
@@ -85,6 +85,8 @@ function Tweet(tweet) {
                       tweet.retweeted_by.map(function(a) {
                         return new Author(a);
                       }) : null;
+
+  this.previewImageUrl = tweet.preview_image_url;
 
   this.menuItemIds = {};
   this.menuItemIds['menu'] = tweet.menu_items ? tweet.menu_items.split(',') : [];

@@ -39,12 +39,13 @@
     </div>
 
     <div class="l-block-small">
-      {{tweet.text}}
+      <div class="tweet__text" ng-bind-html="tweet.text"></div>
     </div>
 
-    <div class="l-block-small">
-      <div class="tweet__preview-image"
-           style="background: url('//placehold.it/600x400');"></div>
+    <div class="l-block-small"
+         ng-show="tweet.previewImageUrl">
+      <img src="{{tweet.previewImageUrl}}"
+           class="tweet__preview-image"/>
     </div>
 
     <div class="l-block-small">
@@ -130,14 +131,15 @@
       </div>
     </div>
 
-    <div class="l-block-small"
+    <div ng-class="{'l-block-small': data.id !== filters.activeTweetId}"
          ng-show="data.id == filters.activeTweetId">
       <div class="tweet__extra">
         {{tweet.createdAt | amDateFormat:'h:mm A - D MMM YYYY'}}
       </div>
     </div>
 
-    <div class="tweet__extra">
+    <div class="tweet__extra"
+         ng-hide="data.id === filters.activeTweetId">
       <div class="l-list-inline">
         <div class="l-list-inline__item">
           <div class="tweet__action">
