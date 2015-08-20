@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('toolbar', function($document) {
+  .directive('toolbar', function(rootPrefix, $document) {
     'use strict';
 
     return {
@@ -13,6 +13,9 @@ angular.module('tweetsToSoftware')
         rootItemClickCallback: '=',
         rootItemHoverCallback: '=',
         rootItemLeaveCallback: '='
+      },
+      controller: function($scope) {
+        $scope.rootPrefix = rootPrefix;
       },
       link: function($scope) {
         $document.on('click', function(e) {

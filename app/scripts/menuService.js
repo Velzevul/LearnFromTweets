@@ -178,7 +178,7 @@ MenuItem.prototype.increaseCounter = function() {
 };
 
 angular.module('tweetsToSoftware')
-  .factory('MenuService', function($timeout, $http, $q) {
+  .factory('MenuService', function(rootPrefix, $timeout, $http, $q) {
     'use strict';
 
     var menu = new Menu('menu'),
@@ -188,9 +188,9 @@ angular.module('tweetsToSoftware')
 
     console.time('Menu load');
     promise = $q.all([
-      $http.get('/data/commandsExtra.json'),
-      $http.get('/data/tools.json'),
-      $http.get('/data/panels.json')
+      $http.get(rootPrefix + '/data/commandsExtra.json'),
+      $http.get(rootPrefix + '/data/tools.json'),
+      $http.get(rootPrefix + '/data/panels.json')
     ])
       .then(function(response) {
         console.timeEnd('Menu load');

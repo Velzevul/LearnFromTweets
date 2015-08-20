@@ -31,5 +31,13 @@
     }
   });
 
+  app.factory('rootPath', function() {
+    if (typeof(DEVELOPMENT) === 'undefined') {
+      return '';
+    } else {
+      return '/switter';
+    }
+  });
+
   window.app = app;
 })(window);

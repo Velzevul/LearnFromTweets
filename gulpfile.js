@@ -1,5 +1,6 @@
 var AUTORELOAD = false;
-var DIST_PATH = './dist';
+//var DIST_PATH = './dist'; // development
+var DIST_PATH = '/webapps/www/switter'; // production on dorado
 
 var gulp = require('gulp'),
     plumber = require('gulp-plumber'),

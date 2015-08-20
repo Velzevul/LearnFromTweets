@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'switter';
-  src: url('/fonts/switter.eot?-7fdrsl');
-  src: url('/fonts/switter.eot?#iefix-7fdrsl') format('embedded-opentype'),
-       url('/fonts/switter.ttf?-7fdrsl') format('truetype'),
-       url('/fonts/switter.woff?-7fdrsl') format('woff'),
-       url('/fonts/switter.svg?-7fdrsl#switter') format('svg');
+  src: url($prefix + '/fonts/switter.eot?-7fdrsl');
+  src: url($prefix + '/fonts/switter.eot?#iefix-7fdrsl') format('embedded-opentype'),
+       url($prefix + '/fonts/switter.ttf?-7fdrsl') format('truetype'),
+       url($prefix + '/fonts/switter.woff?-7fdrsl') format('woff'),
+       url($prefix + '/fonts/switter.svg?-7fdrsl#switter') format('svg');
   font-weight: normal;
   font-style: normal;
 }
