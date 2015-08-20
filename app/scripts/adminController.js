@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .controller('adminController', function(MenuService, $scope, $http) {
+  .controller('adminController', function(MenuService, switterServer, $scope, $http) {
     'use strict';
 
     $scope.menuItems = MenuService.menu;
@@ -31,7 +31,7 @@ angular.module('tweetsToSoftware')
     };
 
     $scope.submit = function() {
-      $http.get('//0.0.0.0:7000/twitter-api/tweets/' + $scope.tweetId)
+      $http.get(switterServer + '/twitter-api/tweets' + $scope.tweetId)
         .then(function(r) {
           var tweetData = r.data;
 
@@ -46,7 +46,7 @@ angular.module('tweetsToSoftware')
             return item.id;
           }).join(',') || null;
 
-          $http.post('//0.0.0.0:7000/api/tweets', {tweet: JSON.stringify(tweetData)})
+          $http.post(switterServer + '/api/tweets', {tweet: JSON.stringify(tweetData)})
             .then(function(r) {
               alert('Tweet was successfully added!');
               $scope.tweetId = null;

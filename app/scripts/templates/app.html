@@ -1,0 +1,35 @@
+<top-menu menu="menu"
+          item-activate-callback="activateItem"
+          item-hover-callback="itemHoverHandler"
+          item-leave-callback="itemLeaveHandler"
+          root-item-click-callback="rootItemClickHandler"
+          root-item-hover-callback="rootItemHoverHandler"
+          root-item-leave-callback="rootItemLeaveHandler"></top-menu>
+
+<toolbar menu="toolbar"
+         item-activate-callback="activateItem"
+         item-hover-callback="itemHoverHandler"
+         item-leave-callback="itemLeaveHandler"
+         root-item-click-callback="rootItemClickHandler"
+         root-item-hover-callback="rootItemHoverHandler"
+         root-item-leave-callback="rootItemLeaveHandler"></toolbar>
+
+<panelbar menu="panelbar"
+          item-activate-callback="activateItem"
+          item-hover-callback="itemHoverHandler"
+          item-leave-callback="itemLeaveHandler"
+          root-item-click-callback="rootItemClickHandler"
+          root-item-hover-callback="rootItemHoverHandler"
+          root-item-leave-callback="rootItemLeaveHandler"></panelbar>
+
+<div class="app-body">
+  <div class="app-body__wrapper">
+    <div class="app-body__timeline">
+      <timeline tweets="tweets"></timeline>
+    </div>
+
+    <div class="app-body__tweet-list">
+      <tweet-list tweets="tweets"></tweet-list>
+    </div>
+  </div>
+</div>
