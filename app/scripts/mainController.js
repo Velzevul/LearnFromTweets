@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .controller('mainController', function(TweetService, MenuService, FilterService,
+  .controller('mainController', function(TweetService, MenuService, FilterService, LoggerService,
                                          $scope, $q) {
     'use strict';
 
@@ -69,6 +69,7 @@ angular.module('tweetsToSoftware')
 
         $scope.filters.selectedMenu = menu;
         $scope.filters.selectedCommand = item;
+        LoggerService.log("Clicked on command (" + menu.name + "): " + item.id);
       }
     };
 
@@ -76,6 +77,7 @@ angular.module('tweetsToSoftware')
       menu.close();
       item.highlight().open();
       menu.isOpen = true;
+      LoggerService.log("Hovered over command (" + menu.name + "): " + item.id);
     };
 
     $scope.itemLeaveHandler = function(item) {
@@ -90,8 +92,9 @@ angular.module('tweetsToSoftware')
         rootItem.open();
         menu.isOpen = true;
       }
-
       rootItem.highlight();
+
+      LoggerService.log("Hovered over command (" + menu.name + "): " + rootItem.id);
     };
 
     $scope.rootItemClickHandler = function(menu, rootItem) {

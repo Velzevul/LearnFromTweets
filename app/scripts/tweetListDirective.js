@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('tweetList', function(FilterService, MenuService,
+  .directive('tweetList', function(FilterService, MenuService, LoggerService,
                                    $document, $timeout) {
     'use strict';
 
@@ -17,6 +17,7 @@ angular.module('tweetsToSoftware')
 
         $scope.activateTweet = function(tweet) {
           $scope.filters.activeTweetId = tweet.id;
+          LoggerService.log("Clicked on tweet " + tweet.id);
         };
 
         $scope.resetCommandFilter = function() {
