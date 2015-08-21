@@ -69,7 +69,7 @@ angular.module('tweetsToSoftware')
 
         $scope.filters.selectedMenu = menu;
         $scope.filters.selectedCommand = item;
-        LoggerService.log("Clicked on command (" + menu.name + "): " + item.id);
+        LoggerService.log("Focused on command (" + menu.name + "): " + item.id);
       }
     };
 

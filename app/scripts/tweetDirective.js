@@ -19,7 +19,7 @@ angular.module('tweetsToSoftware')
         $scope.commandHover = function(menuName, commandId) {
           if ($scope.filters.activeTweetId === $scope.data.id) {
             $scope.commandHoverCallback(menuName, commandId);
-            LoggerService.log("Hovered over command (tweet - " + menuName + "): " + commandId);
+            LoggerService.log("Hovered over command (tweet " + $scope.data.id + " - " + menuName + "): " + commandId);
           }
         };
 
@@ -32,7 +32,7 @@ angular.module('tweetsToSoftware')
         $scope.commandClick = function(menuName, commandId, event) {
           if ($scope.filters.activeTweetId === $scope.data.id) {
             $scope.commandClickCallback(menuName, commandId, event);
-            LoggerService.log("Clicked on command (tweet - " + menuName + "): " + commandId);
+            LoggerService.log("Clicked on command (tweet " + $scope.data.id + " - " + menuName + "): " + commandId);
           }
         };
       },
@@ -40,7 +40,7 @@ angular.module('tweetsToSoftware')
         $timeout(function() {
           elem.find('a').on('click', function(event) {
             event.stopPropagation();
-            LoggerService.log("Clicked on link: " + event.target.href);
+            LoggerService.log("Clicked on link (tweet " + $scope.data.id + "): " + event.target.href);
           });
         });
       }

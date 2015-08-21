@@ -27,6 +27,8 @@ angular.module('tweetsToSoftware')
         $scope.resetCommandFilter = function() {
           $scope.filters.selectedCommand = null;
           $scope.filters.selectedMenu = null;
+
+          LoggerService.log("Clear command filters");
         };
 
         $scope.highlightCommand = function(menuName, commandId) {
