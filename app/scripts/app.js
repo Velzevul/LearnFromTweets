@@ -15,6 +15,10 @@
             templateUrl: 'admin.html',
             controller: 'adminController'
           })
+          .when('/journal',{
+            templateUrl: 'journal.html',
+            controller: 'journalController'
+          })
           .when('/', {
             templateUrl: 'app.html',
             controller: 'mainController'

@@ -135,6 +135,17 @@ $timeline-width: 150px;
   }
 }
 
+.journal {
+  &__question{
+    margin: 20px;
+  }
+
+  &__option{
+    list-style-type: none;
+    padding: 5px 0;
+  }
+}
+
 //.link {
 //  color: $color-dc-secondary;
 //  text-decoration: underline;
