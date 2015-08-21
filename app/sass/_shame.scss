@@ -55,29 +55,45 @@ $timeline-width: 150px;
     stroke-width: 5px;
   }
 
-  .slider .handle {
-    fill: #fff;
-    stroke: #000;
-    stroke-opacity: .5;
-    stroke-width: 1.25px;
-    cursor: pointer;
-    position: relative;
-    z-index: 2;
-  }
+  //.slider .handle {
+  //  fill: #fff;
+  //  stroke: #000;
+  //  stroke-opacity: .5;
+  //  stroke-width: 1.25px;
+  //  cursor: pointer;
+  //  position: relative;
+  //  z-index: 2;
+  //}
 
-  .resize,
-  .extent {
-    display: none;
-  }
+  //.resize,
+  //.extent {
+  //  display: none;
+  //}
 
-  .background {
-    display: none;
-  }
+  //.background {
+  //  display: none;
+  //}
+
 
   .data-point {
     fill: red;
     position: relative;
     z-index: 1;
+  }
+
+  .resize {
+    display: inline !important; /* show when empty */
+    fill: #666;
+    fill-opacity: .8;
+    stroke: #000;
+    stroke-width: 1.5px;
+  }
+
+  .extent {
+    fill-opacity: .25;
+    fill: white;
+    stroke: rgba($color-border, 0.5);
+    shape-rendering: crispEdges;
   }
 }
 

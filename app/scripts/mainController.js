@@ -24,6 +24,7 @@ angular.module('tweetsToSoftware')
         filterHandler();
         $scope.$watchGroup([
             'filters.selectedCommand',
+            'filters.renderFrom',
             'filters.renderUntil'
           ], filterHandler);
       });
@@ -34,7 +35,9 @@ angular.module('tweetsToSoftware')
       var processedTweetIds = {};
 
       $scope.filters.activeTweetId = null;
-      $scope.tweets.filter($scope.filters.renderUntil,
+      $scope.tweets.filter(
+        $scope.filters.renderFrom,
+        $scope.filters.renderUntil,
         $scope.filters.selectedMenu,
         $scope.filters.selectedCommand);
 

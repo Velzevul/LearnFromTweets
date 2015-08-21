@@ -11,10 +11,10 @@ Tweets.prototype.populate = function(tweets) {
   });
 };
 
-Tweets.prototype.filter = function(time, menu, command) {
+Tweets.prototype.filter = function(afterTime, beforeTime, menu, command) {
   this.filtered = this.all.filter(function(t) {
     var tweet = t.retweetedStatus || t,
-        match = t.createdAt.isAfter(time);
+        match = t.createdAt.isAfter(beforeTime) && t.createdAt.isBefore(afterTime);
 
     if (command) {
       match = match && (tweet[menu.name].indexOf(command) !== -1);
