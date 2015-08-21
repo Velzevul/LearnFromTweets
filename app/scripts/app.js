@@ -40,5 +40,23 @@
     }
   });
 
+  app.factory('currentParticipant', function() {
+    var participantId = localStorage.getItem('switter-participant');
+
+    if (!participantId) {
+      while (!participantId) {
+        participantId = prompt('Please, enter your participant number');
+      }
+
+      localStorage.setItem('switter-participant', participantId);
+    }
+
+    return participantId;
+  });
+
+  app.run(function(currentParticipant) {
+    console.log('participant nubmer ' + currentParticipant);
+  });
+
   window.app = app;
 })(window);
