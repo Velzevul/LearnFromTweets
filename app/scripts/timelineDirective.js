@@ -1,5 +1,6 @@
 angular.module('tweetsToSoftware')
-  .directive('timeline', function(rootPrefix, $window, $q, $timeout, TweetService, FilterService) {
+  .directive('timeline', function(rootPrefix, TweetService, FilterService,
+                                  LoggerService) {
     'use strict';
 
     return {
@@ -41,6 +42,13 @@ angular.module('tweetsToSoftware')
               plotPoints();
               makeBrush();
             });
+
+            $scope.$watchGroup([
+              'filters.renderFrom',
+              'filters.renderUntil'
+            ], function() {
+              LoggerService.log('Filtered timeline from ' + $scope.filters.renderFrom + ' to ' + $scope.filters.renderUntil);
+            });
           });
 
         var margin = {
@@ -49,8 +57,6 @@ angular.module('tweetsToSoftware')
             left: 30,
             right: 10
           },
-          centering = false,
-          alpha = .2,
           width = 150 - margin.left - margin.right,
           height = $('#js-timeline').height() - margin.top - margin.bottom,
           ticks = [
@@ -65,7 +71,6 @@ angular.module('tweetsToSoftware')
             '3 days',
             '1 week'
           ],
-          center,
           gBrush;
 
         var y = d3.scale.linear()
@@ -119,8 +124,9 @@ angular.module('tweetsToSoftware')
             .attr('width', 20);
 
           gBrush.select(".background")
-            .on("mousedown.brush", brushcenter)
-            .on("touchstart.brush", brushcenter);
+            .on("mousedown.brush", function() {
+              d3.event.stopPropagation();
+            });
 
           gBrush.call(brush.event);
         }
@@ -131,80 +137,6 @@ angular.module('tweetsToSoftware')
           $scope.filters.renderFrom  = pointToDate(extent[0]);
           $scope.filters.renderUntil = pointToDate(extent[1]);
         }
-
-        function brushcenter() {
-          var self = d3.select(window),
-            target = d3.event.target,
-            extent = brush.extent(),
-            size = extent[1] - extent[0],
-            domain = y.domain(),
-            y0 = domain[0] + size / 2,
-            y1 = domain[1] - size / 2;
-
-          recenter(true);
-          brushmove();
-
-          if (d3.event.changedTouches) {
-            self.on("touchmove.brush", brushmove).on("touchend.brush", brushend);
-          } else {
-            self.on("mousemove.brush", brushmove).on("mouseup.brush", brushend);
-          }
-
-          function brushmove() {
-            d3.event.stopPropagation();
-            center = Math.max(y0, Math.min(y1, y.invert(d3.mouse(target)[1])));
-            recenter(false);
-          }
-
-          function brushend() {
-            brushmove();
-            self.on(".brush", null);
-          }
-        }
-
-        function recenter(smooth) {
-          if (centering) return; // timer is active and already tweening
-          if (!smooth) return void tween(1); // instantaneous jump
-          centering = true;
-
-          function tween(alpha) {
-            var extent = brush.extent(),
-              size = extent[1] - extent[0],
-              center1 = center * alpha + (extent[0] + extent[1]) / 2 * (1 - alpha);
-
-            gBrush
-              .call(brush.extent([center1 - size / 2, center1 + size / 2]))
-              .call(brush.event);
-
-            return !(centering = Math.abs(center1 - center) > 1e-3);
-          }
-
-          d3.timer(function () {
-            return tween(alpha);
-          });
-        }
-
-        //var handle = slider.append('circle')
-        //  .attr('class', 'handle')
-        //  .attr('r', 9);
-
-        //slider
-        //  .call(brush.extent([dateToPoint($scope.filters.renderUntil),
-        //                      dateToPoint($scope.filters.renderUntil)]))
-        //  .call(brush.event);
-
-        //function brushed() {
-        //  var value = brush.extent()[1];
-        //
-        //  if (d3.event.sourceEvent) {
-        //    value = y.invert(d3.mouse(this)[1]);
-        //    //brush.extent([value, value]);
-        //  }
-        //
-        //  //handle.attr('cy', y(value));
-        //
-        //  $scope.filters.renderUntil = pointToDate(value);
-        //}
       }
     }
   });

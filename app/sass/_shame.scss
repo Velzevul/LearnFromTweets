@@ -95,6 +95,10 @@ $timeline-width: 150px;
     stroke: rgba($color-border, 0.5);
     shape-rendering: crispEdges;
   }
+
+  .background {
+    display: none;
+  }
 }
 
 .admin-panel {

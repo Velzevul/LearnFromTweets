@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('tweet', function(FilterService, $sce) {
+  .directive('tweet', function(FilterService, LoggerService, $sce, $timeout) {
     'use strict';
 
     return {
@@ -19,6 +19,7 @@ angular.module('tweetsToSoftware')
         $scope.commandHover = function(menuName, commandId) {
           if ($scope.filters.activeTweetId === $scope.data.id) {
             $scope.commandHoverCallback(menuName, commandId);
+            LoggerService.log("Hovered over command (tweet " + $scope.data.id + " - " + menuName + "): " + commandId);
           }
         };
 
@@ -30,9 +31,18 @@ angular.module('tweetsToSoftware')
 
         $scope.commandClick = function(menuName, commandId, event) {
           if ($scope.filters.activeTweetId === $scope.data.id) {
-            $scope.commandClickCallback(menuName, commandId, event)
+            $scope.commandClickCallback(menuName, commandId, event);
+            LoggerService.log("Clicked on command (tweet " + $scope.data.id + " - " + menuName + "): " + commandId);
           }
         };
+      },
+      link: function($scope, elem, attr) {
+        $timeout(function() {
+          elem.find('a').on('click', function(event) {
+            event.stopPropagation();
+            LoggerService.log("Clicked on link (tweet " + $scope.data.id + "): " + event.target.href);
+          });
+        });
       }
     }
   });
