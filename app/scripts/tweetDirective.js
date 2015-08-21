@@ -1,5 +1,5 @@
 angular.module('tweetsToSoftware')
-  .directive('tweet', function(FilterService, LoggerService, $sce) {
+  .directive('tweet', function(FilterService, LoggerService, $sce, $timeout) {
     'use strict';
 
     return {
@@ -35,6 +35,14 @@ angular.module('tweetsToSoftware')
             LoggerService.log("Clicked on command (tweet - " + menuName + "): " + commandId);
           }
         };
+      },
+      link: function($scope, elem, attr) {
+        $timeout(function() {
+          elem.find('a').on('click', function(event) {
+            event.stopPropagation();
+            LoggerService.log("Clicked on link: " + event.target.href);
+          });
+        });
       }
     }
   });

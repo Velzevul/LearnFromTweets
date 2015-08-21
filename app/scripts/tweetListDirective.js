@@ -16,8 +16,12 @@ angular.module('tweetsToSoftware')
         $scope.filters = FilterService;
 
         $scope.activateTweet = function(tweet) {
+
+          if($scope.filters.activeTweetId != tweet.id){
+            LoggerService.log("Clicked on tweet " + tweet.id);
+          }
+
           $scope.filters.activeTweetId = tweet.id;
-          LoggerService.log("Clicked on tweet " + tweet.id);
         };
 
         $scope.resetCommandFilter = function() {
