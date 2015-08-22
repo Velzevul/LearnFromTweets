@@ -1,46 +1,129 @@
 <div class="admin-panel">
-    <h1 class="admin-panel__title">Journal Entry</h1>
+  <h1 class="admin-panel__title">Journal Entry</h1>
 
-    <ol>
-        <li class="journal__question">
-            How many tweets did you see today that you found interesting?
-            <ul>
-                <li class="journal__option"><input ng-model="q1" type="radio" name="q1" value="a" id="q1a" /><label for="q1a">Less than 3</label></li>
-                <li class="journal__option"><input ng-model="q1" type="radio" name="q1" value="b" id="q1b" /><label for="q1b">3 to 5</label></li>
-                <li class="journal__option"><input ng-model="q1" type="radio" name="q1" value="c" id="q1c" /><label for="q1c">6 to 10</label></li>
-                <li class="journal__option"><input ng-model="q1" type="radio" name="q1" value="d" id="q1d" /><label for="q1d">11 to 20</label></li>
-                <li class="journal__option"><input ng-model="q1" type="radio" name="q1" value="e" id="q1e" /><label for="q1e">More than 20</label></li>
-            </ul>
+  <ol>
+    <li class="journal__question">
+      How many tweets did you see today that you found interesting?
+      <ul>
+        <li class="journal__option">
+          <input ng-model="q1"
+                 type="radio"
+                 name="q1"
+                 value="less than 3"
+                 id="q1a"/>
+          <label for="q1a">Less than 3</label>
         </li>
-
-        <li class="journal__question">
-            <div>For one or several tweets that you found interesting, please describe why did you find them interesting.</div>
-            <textarea ng-model="q2" cols="40" rows="5"></textarea>
+        <li class="journal__option">
+          <input ng-model="q1"
+                 type="radio"
+                 name="q1"
+                 value="3 to 5"
+                 id="q1b"/>
+          <label for="q1b">3 to 5</label>
         </li>
-
-        <li class="journal__question">
-            How many new things did you learn today? E.g. new tools, new commands, new techniques.
-            <ul>
-                <li class="journal__option"><input ng-model="q3" type="radio" name="q3" value="a" id="q3a" /><label for="q3a">None</label></li>
-                <li class="journal__option"><input ng-model="q3" type="radio" name="q3" value="b" id="q3b" /><label for="q3b">1 to 2</label></li>
-                <li class="journal__option"><input ng-model="q3" type="radio" name="q3" value="c" id="q3c" /><label for="q3c">3 to 5</label></li>
-                <li class="journal__option"><input ng-model="q3" type="radio" name="q3" value="d" id="q3d" /><label for="q3d">6 to 10</label></li>
-                <li class="journal__option"><input ng-model="q3" type="radio" name="q3" value="e" id="q3e" /><label for="q3e">More than 10</label></li>
-            </ul>
+        <li class="journal__option">
+          <input ng-model="q1"
+                 type="radio"
+                 name="q1"
+                 value="6 to 10"
+                 id="q1c"/>
+          <label for="q1c">6 to 10</label>
         </li>
-
-        <li class="journal__question">
-            <div>In a few sentences describe the new things you have learned today (if any).</div>
-            <textarea ng-model="q4" cols="40" rows="5"></textarea>
+        <li class="journal__option">
+          <input ng-model="q1"
+                 type="radio"
+                 name="q1"
+                 value="11 to 20"
+                 id="q1d"/>
+          <label for="q1d">11 to 20</label>
         </li>
-
-        <li class="journal__question">
-            <div>Feel free to give any other feedback in the area below. E.g. questions, problems with app, general impressions.</div>
-            <textarea ng-model="q5" cols="40" rows="5"></textarea>
+        <li class="journal__option">
+          <input ng-model="q1"
+                 type="radio"
+                 name="q1"
+                 value="more than 20"
+                 id="q1e"/>
+          <label for="q1e">More than 20</label>
         </li>
-    </ol>
+      </ul>
+    </li>
 
-    <div class="admin-panel__section">
-        <button class="admin-panel__button" id="submit" ng-click="submit()">Submit</button>
-    </div>
+    <li class="journal__question">
+      <label>For one or several tweets that you found interesting, please describe why you found them interesting.
+        <textarea ng-model="q2"
+                  cols="40"
+                  rows="5"></textarea>
+      </label>
+    </li>
+
+    <li class="journal__question">
+      How many new things did you learn today? E.g. new tools, new commands, new techniques.
+      <ul>
+        <li class="journal__option">
+          <input ng-model="q3"
+                 type="radio"
+                 name="q3"
+                 value="none"
+                 id="q3a"/>
+          <label for="q3a">None</label>
+        </li>
+        <li class="journal__option">
+          <input ng-model="q3"
+                 type="radio"
+                 name="q3"
+                 value="1 - 2"
+                 id="q3b"/>
+          <label for="q3b">1 to 2</label>
+        </li>
+        <li class="journal__option">
+          <input ng-model="q3"
+                 type="radio"
+                 name="q3"
+                 value="3 - 5"
+                 id="q3c"/>
+          <label for="q3c">3 to 5</label>
+        </li>
+        <li class="journal__option">
+          <input ng-model="q3"
+                 type="radio"
+                 name="q3"
+                 value="6 - 10"
+                 id="q3d"/>
+          <label for="q3d">6 to 10</label>
+        </li>
+        <li class="journal__option">
+          <input ng-model="q3"
+                 type="radio"
+                 name="q3"
+                 value="more than 10"
+                 id="q3e"/>
+          <label for="q3e">More than 10</label>
+        </li>
+      </ul>
+    </li>
+
+    <li class="journal__question">
+      <label>In a few sentences, describe any new things that you learned today.
+        <textarea ng-model="q4"
+                  cols="40"
+                  rows="5"></textarea>
+      </label>
+    </li>
+
+    <li class="journal__question">
+      <label>Please, provide us with any addition feedback that you might have on your experiences with the system today
+        (e.g. general impressions, suggestions, difficulties you encountered)
+        <textarea ng-model="q5"
+                  cols="40"
+                  rows="5"></textarea>
+      </label>
+    </li>
+  </ol>
+
+  <div class="admin-panel__section">
+    <button class="admin-panel__button"
+            id="submit"
+            ng-click="submit()">Submit
+    </button>
+  </div>
 </div>
