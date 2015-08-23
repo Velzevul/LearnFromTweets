@@ -59,6 +59,7 @@ angular.module('tweetsToSoftware')
         $http.post(switterServer + '/logger/journals', data)
           .then(function() {
             alert('thank you for you feedback!');
+            LoggerService.log('Submitted journal entry');
             $location.path('/');
           });
       }
