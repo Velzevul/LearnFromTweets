@@ -40,9 +40,11 @@ Entry.prototype.toJson = function() {
 };
 
 angular.module('tweetsToSoftware')
-  .controller('journalController', function(switterServer, currentParticipant,
+  .controller('journalController', function(switterServer, currentParticipant, LoggerService,
                                             $scope, $http, $location) {
     'use strict';
+
+    LoggerService.log('Enter journal page');
 
     $scope.entry = new Entry();
     $scope.participantId = currentParticipant;

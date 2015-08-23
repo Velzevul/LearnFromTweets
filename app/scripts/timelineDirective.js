@@ -47,7 +47,7 @@ angular.module('tweetsToSoftware')
               'filters.renderFrom',
               'filters.renderUntil'
             ], function() {
-              LoggerService.log('Filtered timeline from ' + $scope.filters.renderFrom + ' to ' + $scope.filters.renderUntil);
+              LoggerService.log('Filtered timeline from ' + $scope.filters.renderFrom.format() + ' to ' + $scope.filters.renderUntil.format());
             });
           });
 

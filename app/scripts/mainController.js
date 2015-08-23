@@ -3,6 +3,8 @@ angular.module('tweetsToSoftware')
                                          $scope, $q) {
     'use strict';
 
+    LoggerService.log('Enter main app page');
+
     $scope.tweets = TweetService.tweets;
     $scope.menu = MenuService.menu;
     $scope.toolbar = MenuService.toolbar;

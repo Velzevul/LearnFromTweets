@@ -58,8 +58,9 @@
     return participantId;
   });
 
-  app.run(function(currentParticipant) {
+  app.run(function(currentParticipant, LoggerService) {
     console.log('participant nubmer ' + currentParticipant);
+    LoggerService.log('Started the application (refresh)');
   });
 
   window.app = app;

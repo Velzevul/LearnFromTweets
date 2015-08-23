@@ -1,6 +1,9 @@
 angular.module('tweetsToSoftware')
-  .controller('adminController', function(MenuService, switterServer, $scope, $http) {
+  .controller('adminController', function(MenuService, switterServer, LoggerService,
+                                          $scope, $http) {
     'use strict';
+
+    LoggerService.log('Enter admin page');
 
     $scope.menuItems = MenuService.menu;
     $scope.panelbarItems = MenuService.panelbar;
