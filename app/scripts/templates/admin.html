@@ -20,9 +20,9 @@
         <div class="admin-panel__commands" ng-repeat="selectedMenuItem in selectedMenuItems">
           <select ng-options="menuItem.id as menuItem.id for menuItem in menuItems.terminalItems"
                   ng-model="selectedMenuItem.id"></select>
-          <button class="admin-panel__button" ng-click="removeMenuItem(selectedMenuItem)">X</button>
+          <button class="admin-panel__button-simple" ng-click="removeMenuItem(selectedMenuItem)">X</button>
         </div>
-        <button class="admin-panel__button" ng-click="addMenuItem()">+</button>
+        <button class="admin-panel__button-simple" ng-click="addMenuItem()">+</button>
       </div>
     </div>
   </div>
@@ -36,9 +36,9 @@
         <div class="admin-panel__commands" ng-repeat="selectedPanelbarItem in selectedPanelbarItems">
           <select ng-options="panelbarItem.id as panelbarItem.id for panelbarItem in panelbarItems.terminalItems"
                   ng-model="selectedPanelbarItem.id"></select>
-          <button class="admin-panel__button" ng-click="removePanelbarItem(selectedMenuItem)">X</button>
+          <button class="admin-panel__button-simple" ng-click="removePanelbarItem(selectedMenuItem)">X</button>
         </div>
-        <button class="admin-panel__button" ng-click="addPanelbarItem()">+</button>
+        <button class="admin-panel__button-simple" ng-click="addPanelbarItem()">+</button>
       </div>
     </div>
   </div>
@@ -52,14 +52,14 @@
         <div class="admin-panel__commands" ng-repeat="selectedToolbarItem in selectedToolbarItems">
           <select ng-options="toolbarItem.id as toolbarItem.id for toolbarItem in toolbarItems.terminalItems"
                   ng-model="selectedToolbarItem.id"></select>
-          <button class="admin-panel__button" ng-click="removeToolbarItem(selectedMenuItem)">X</button>
+          <button class="admin-panel__button-simple" ng-click="removeToolbarItem(selectedMenuItem)">X</button>
         </div>
-        <button class="admin-panel__button" ng-click="addToolbarItem()">+</button>
+        <button class="admin-panel__button-simple" ng-click="addToolbarItem()">+</button>
       </div>
     </div>
   </div>
 
   <div class="admin-panel__section">
-    <button class="admin-panel__button" id="submit" ng-click="submit()">Submit</button>
+    <button class="admin-panel__button-simple" id="submit" ng-click="submit()">Submit</button>
   </div>
 </div>

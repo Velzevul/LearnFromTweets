@@ -1,0 +1,205 @@
+<div class="admin-panel">
+  <div class="l-block-med is-center-aligned">
+    <h1 class="admin-panel__title">Journal Entry</h1>
+    <div class="admin-panel__subtitle">participant {{participantId}}</div>
+  </div>
+
+  <div class="l-block-med">
+    <div class="journal-question">
+      <div class="l-block-x-small">
+        <div class="journal-question__body">
+          How many tweets did you see today that you found interesting?
+        </div>
+
+        <div class="journal-question__error"
+             ng-show="entry.errors.interestingTweetsFound">
+          {{entry.errors.interestingTweetsFound}}
+        </div>
+      </div>
+
+      <div class="l-block-x-small">
+        <label>
+          <input ng-model="entry.interestingTweetsFound"
+                 class="journal-question__input"
+                 type="radio"
+                 name="q1"
+                 value="less than 3"/>
+          <span class="journal-question__option">Less than 3</span>
+        </label>
+      </div>
+
+      <div class="l-block-x-small">
+        <label>
+          <input ng-model="entry.interestingTweetsFound"
+                 class="journal-question__input"
+                 type="radio"
+                 name="q1"
+                 value="3 to 5"/>
+          <span class="journal-question__option">3 to 5</span>
+        </label>
+      </div>
+
+      <div class="l-block-x-small">
+        <label>
+          <input ng-model="entry.interestingTweetsFound"
+                 class="journal-question__input"
+                 type="radio"
+                 name="q1"
+                 value="6 to 10"/>
+          <span class="journal-question__option">6 to 10</span>
+        </label>
+      </div>
+
+      <div class="l-block-x-small">
+        <label>
+          <input ng-model="entry.interestingTweetsFound"
+                 class="journal-question__input"
+                 type="radio"
+                 name="q1"
+                 value="11 to 20"/>
+          <span class="journal-question__option">11 to 20</span>
+        </label>
+      </div>
+
+      <label>
+        <input ng-model="entry.interestingTweetsFound"
+               class="journal-question__input"
+               type="radio"
+               name="q1"
+               value="more than 20"/>
+        <span class="journal-question__option">more than 20</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="l-block-med">
+    <label class="journal-question">
+      <div class="l-block-x-small">
+        <div class="journal-question__body">
+          For one or several tweets that you found interesting, please describe why you found them interesting.
+        </div>
+
+        <div class="journal-question__error"
+             ng-show="entry.errors.interestingTweetsDescription">
+          {{entry.errors.interestingTweetsDescription}}
+        </div>
+      </div>
+
+      <textarea class="journal-question__textarea"
+                ng-model="entry.interestingTweetsDescription"
+                cols="40"
+                rows="7"></textarea>
+    </label>
+  </div>
+
+  <div class="l-block-med">
+    <div class="journal-question">
+      <div class="l-block-x-small">
+        <div class="journal-question__body">
+          How many new things did you learn today? E.g. new tools, new commands, new techniques.
+        </div>
+
+        <div class="journal-question__error"
+             ng-show="entry.errors.newThingsLearnt">
+          {{entry.errors.newThingsLearnt}}
+        </div>
+      </div>
+
+      <div class="l-block-x-small">
+        <label>
+          <input ng-model="entry.newThingsLearnt"
+                 class="journal-question__input"
+                 type="radio"
+                 name="q2"
+                 value="None"/>
+          <span class="journal-question__option">None</span>
+        </label>
+      </div>
+
+      <div class="l-block-x-small">
+        <label>
+          <input ng-model="entry.newThingsLearnt"
+                 class="journal-question__input"
+                 type="radio"
+                 name="q2"
+                 value="1 to 2"/>
+          <span class="journal-question__option">1 to 2</span>
+        </label>
+      </div>
+
+      <div class="l-block-x-small">
+        <label>
+          <input ng-model="entry.newThingsLearnt"
+                 class="journal-question__input"
+                 type="radio"
+                 name="q2"
+                 value="3 to 5"/>
+          <span class="journal-question__option">3 to 5</span>
+        </label>
+      </div>
+
+      <div class="l-block-x-small">
+        <label>
+          <input ng-model="entry.newThingsLearnt"
+                 class="journal-question__input"
+                 type="radio"
+                 name="q2"
+                 value="6 to 10"/>
+          <span class="journal-question__option">6 to 10</span>
+        </label>
+      </div>
+
+      <label>
+        <input ng-model="entry.newThingsLearnt"
+               class="journal-question__input"
+               type="radio"
+               name="q2"
+               value="more than 10"/>
+        <span class="journal-question__option">more than 10</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="l-block-med">
+    <label class="journal-question">
+      <div class="l-block-x-small">
+        <div class="journal-question__body">
+          In a few sentences, describe any new things that you learned today.
+        </div>
+
+        <div class="journal-question__error"
+             ng-show="entry.errors.newThingsDescription">
+          {{entry.errors.newThingsDescription}}
+        </div>
+      </div>
+
+      <textarea ng-model="entry.newThingsDescription"
+                rows="7"
+                class="journal-question__textarea"></textarea>
+    </label>
+  </div>
+
+  <div class="l-block">
+    <label class="journal-question">
+      <div class="l-block-x-small">
+        <div class="journal-question__body">
+          Please, provide us with any addition feedback that you might have on your experiences with the system today (e.g. general impressions, suggestions, difficulties you encountered)
+        </div>
+
+        <div class="journal-question__error"
+             ng-show="entry.errors.freeFormFeedback">
+          {{entry.errors.freeFormFeedback}}
+        </div>
+      </div>
+
+      <textarea ng-model="entry.freeFormFeedback"
+                rows="7"
+                class="journal-question__textarea"></textarea>
+    </label>
+  </div>
+
+  <div class="is-center-aligned">
+    <button class="admin-panel__button"
+            ng-click="submit()">Submit</button>
+  </div>
+</div>

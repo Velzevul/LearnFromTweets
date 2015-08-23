@@ -103,13 +103,14 @@ $timeline-width: 150px;
 
 .admin-panel {
   background-color: white;
-  margin: 20px;
-  max-width: 1200px;
-  min-width: 600px;
-  padding: 10px;
+  margin: 20px auto;
+  width: 600px;
+  padding: 20px;
 
   &__title{
-    font-size: 150%;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 600;
   }
 
   &__section{
@@ -132,10 +133,47 @@ $timeline-width: 150px;
     padding: 10px;
   }
 
-  &__button{
+  &__button-simple {
     border: #6E8392 solid 1px;
     display: inline-block;
     padding: 0 5px;
+  }
+
+  &__button {
+    display: inline-block;
+    padding: 10px 18px;
+
+    font-size: 14px;
+    line-height: 16px;
+
+    color: white;
+
+    background: $color-dc-secondary;
+    border-radius: 4px;
+  }
+}
+
+.journal-question {
+  &__body{
+    // ...
+  }
+
+  &__error{
+    color: $color-dc-tertiary;
+    font-weight: 600;
+  }
+
+  &__option {
+
+  }
+
+  &__input {
+
+  }
+
+  &__textarea {
+    display: block;
+    width: 100%;
   }
 }
 
