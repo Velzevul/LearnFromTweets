@@ -1012,18 +1012,139 @@
       },
       {
         "id": "layer/layer-style",
-        "label": "Layer Style"
+        "label": "Layer Style",
+        "children": [
+          {
+            "id": "layer/layer-style/blending-options",
+            "label": "Blending Options..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/layer-style/bevel-and-emboss",
+            "label": "Bevel & Emboss..."
+          },
+          {
+            "id": "layer/layer-style/stroke",
+            "label": "Stroke..."
+          },
+          {
+            "id": "layer/layer-style/inner-shadow",
+            "label": "Inner Shadow..."
+          },
+          {
+            "id": "layer/layer-style/inner-glow",
+            "label": "Inner Glow..."
+          },
+          {
+            "id": "layer/layer-style/satin",
+            "label": "Satin..."
+          },
+          {
+            "id": "layer/layer-style/color-overlay",
+            "label": "Color Overlay..."
+          },
+          {
+            "id": "layer/layer-style/gradient-overlay",
+            "label": "Gradient Overlay..."
+          },
+          {
+            "id": "layer/layer-style/pattern-overlay",
+            "label": "Pattern Overlay..."
+          },
+          {
+            "id": "layer/layer-style/outer-glow",
+            "label": "Outer Glow..."
+          },
+          {
+            "id": "layer/layer-style/drop-shadow",
+            "label": "Drop Shadow..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/layer-style/copy-layer-style",
+            "label": "Copy Layer Style"
+          },
+          {
+            "id": "layer/layer-style/paste-layer-style",
+            "label": "Paste Layer Style"
+          },
+          {
+            "id": "layer/layer-style/clear-layer-style",
+            "label": "Clear Layer Style"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/layer-style/global-light",
+            "label": "Global Light..."
+          },
+          {
+            "id": "layer/layer-style/create-layer",
+            "label": "Create Layer"
+          },
+          {
+            "id": "layer/layer-style/hide-all-effects",
+            "label": "Hide All Effects"
+          },
+          {
+            "id": "layer/layer-style/scale-effects",
+            "label": "Scale Effects..."
+          }
+        ]
       },
       {
         "id": "layer/smart-filter",
-        "label": "Smart Filter"
+        "label": "Smart Filter",
+        "children": [
+          {
+            "id": "layer/smart-filter/disable-smart-filters",
+            "label": "Disable Smart Filter"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/smart-filter/delete-filter-mask",
+            "label": "Delete Filter Mask"
+          },
+          {
+            "id": "layer/smart-filter/disable-filter-mask",
+            "label": "Disable Filter Mask"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/smart-filter/clear-smart-filters",
+            "label": "Clear Smart Filters"
+          }
+        ]
       },
       {
         "divider": true
       },
       {
         "id": "layer/new-fill-layer",
-        "label": "New Fill Layer"
+        "label": "New Fill Layer",
+        "children": [
+          {
+            "id": "layer/new-fill-layer/solid-color",
+            "label": "Solid Color..."
+          },
+          {
+            "id": "layer/new-fill-layer/gradient",
+            "label": "Gradient..."
+          },
+          {
+            "id": "layer/new-fill-layer/pattern",
+            "label": "Pattern..."
+          }
+        ]
       },
       {
         "id": "layer/new-adjustment-layer",
@@ -1110,11 +1231,87 @@
       },
       {
         "id": "layer/layer-mask",
-        "label": "Layer Mask"
+        "label": "Layer Mask",
+        "children": [
+          {
+            "id": "layer/layer-mask/reveal-all",
+            "label": "Reveal All"
+          },
+          {
+            "id": "layer/layer-mask/hide-all",
+            "label": "Hide All"
+          },
+          {
+            "id": "layer/layer-mask/reveal-selection",
+            "label": "Reveal Selection"
+          },
+          {
+            "id": "layer/layer-mask/hide-selection",
+            "label": "Hide Selection"
+          },
+          {
+            "id": "layer/layer-mask/from-transparency",
+            "label": "From Transparency"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/layer-mask/delete",
+            "label": "Delete"
+          },
+          {
+            "id": "layer/layer-mask/apply",
+            "label": "Apply"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/layer-mask/enable",
+            "label": "Enable"
+          },
+          {
+            "id": "layer/layer-mask/unlink",
+            "label": "Unlink"
+          }
+        ]
       },
       {
         "id": "layer/vector-mask",
-        "label": "Vector Mask"
+        "label": "Vector Mask",
+        "children": [
+          {
+            "id": "layer/vector-mask/reveal-all",
+            "label": "Reveal All"
+          },
+          {
+            "id": "layer/vector-mask/hide-all",
+            "label": "Hide All"
+          },
+          {
+            "id": "layer/vector-mask/current-path",
+            "label": "Current Path"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/vector-mask/delete",
+            "label": "Delete"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/vector-mask/enable",
+            "label": "Enable"
+          },
+          {
+            "id": "layer/vector-mask/link",
+            "label": "Link"
+          }
+        ]
       },
       {
         "id": "layer/create-clipping-mask",
@@ -1125,15 +1322,251 @@
       },
       {
         "id": "layer/smart-objects",
-        "label": "Smart Objects"
+        "label": "Smart Objects",
+        "children": [
+          {
+            "id": "layer/smart-objects/convert-to-smart-object",
+            "label": "Convert to Smart Object"
+          },
+          {
+            "id": "layer/smart-objects/new-smart-object-via-copy",
+            "label": "New Smart Object via Copy"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/smart-objects/reveal-in-explorer",
+            "label": "Reveal in Explorer"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/smart-objects/update-modified-content",
+            "label": "Update Modified Content"
+          },
+          {
+            "id": "layer/smart-objects/update-all-modified-content",
+            "label": "Update All Modified Content"
+          },
+          {
+            "id": "layer/smart-objects/resolve-broken-link",
+            "label": "Resolve Broken Link..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/smart-objects/edit-contents",
+            "label": "Edit Contents"
+          },
+          {
+            "id": "layer/smart-objects/replace-contents",
+            "label": "Replace Contents..."
+          },
+          {
+            "id": "layer/smart-objects/export-contents",
+            "label": "Export Contents..."
+          },
+          {
+            "id": "layer/smart-objects/embed-linked",
+            "label": "Embed Linked"
+          },
+          {
+            "id": "layer/smart-objects/embed-all-linked",
+            "label": "Embed All Linked"
+          },
+          {
+            "id": "layer/smart-objects/convert-to-linked",
+            "label": "Convert to Linked..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/smart-objects/stack-mode",
+            "label": "Stack Mode",
+            "children": [
+              {
+                "id": "layer/smart-objects/stack-mode/none",
+                "label": "None"
+              },
+              {
+                "id": "layer/smart-objects/stack-mode/entropy",
+                "label": "Entropy"
+              },
+              {
+                "id": "layer/smart-objects/stack-mode/kurtosis",
+                "label": "Kurtosis"
+              },
+              {
+                "id": "layer/smart-objects/stack-mode/maximum",
+                "label": "Maximum"
+              },
+              {
+                "id": "layer/smart-objects/stack-mode/mean",
+                "label": "Mean"
+              },
+              {
+                "id": "layer/smart-objects/stack-mode/median",
+                "label": "Median"
+              },
+              {
+                "id": "layer/smart-objects/stack-mode/minimum",
+                "label": "Minimum"
+              },
+              {
+                "id": "layer/smart-objects/stack-mode/range",
+                "label": "Range"
+              },
+              {
+                "id": "layer/smart-objects/stack-mode/skewness",
+                "label": "Skewness"
+              },
+              {
+                "id": "layer/smart-objects/stack-mode/standard-deviation",
+                "label": "Standard Deviation"
+              },
+              {
+                "id": "layer/smart-objects/stack-mode/summation",
+                "label": "Summation"
+              },
+              {
+                "id": "layer/smart-objects/stack-mode/variance",
+                "label": "Variance"
+              }
+            ]
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/smart-objects/rasterize",
+            "label": "Rasterize"
+          }
+        ]
       },
       {
         "id": "layer/video-layers",
-        "label": "Video Layers"
+        "label": "Video Layers",
+        "children": [
+          {
+            "id": "layer/video-layers/new-video-layer-from-file",
+            "label": "New Video Layer From File..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/video-layers/new-blank-video-layer",
+            "label": "New Blank Video Layer"
+          },
+          {
+            "id": "layer/video-layers/insert-blank-frame",
+            "label": "Insert Blank Frame"
+          },
+          {
+            "id": "layer/video-layers/duplicate-frame",
+            "label": "Duplicate Frame"
+          },
+          {
+            "id": "layer/video-layers/delete-frame",
+            "label": "Delete Frame"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/video-layers/replace-footage",
+            "label": "Replace Footage..."
+          },
+          {
+            "id": "layer/video-layers/interpret-footage",
+            "label": "Interpret Footage..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/video-layers/show-altered-video",
+            "label": "Show Altered Video"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/video-layers/restore-frame",
+            "label": "Restore Frame"
+          },
+          {
+            "id": "layer/video-layers/restore-all-frames",
+            "label": "Restore All Frames"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/video-layers/reload-frame",
+            "label": "Reload Frame"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/video-layers/rasterize",
+            "label": "Raterize"
+          }
+        ]
       },
       {
         "id": "layer/rasterize",
-        "label": "Rasterize"
+        "label": "Rasterize",
+        "children": [
+          {
+            "id": "layer/rasterize/type",
+            "label": "Type"
+          },
+          {
+            "id": "layer/rasterize/shape",
+            "label": "Shape"
+          },
+          {
+            "id": "layer/rasterize/fill-content",
+            "label": "Fill Content"
+          },
+          {
+            "id": "layer/rasterize/vector-mask",
+            "label": "Vector Mask"
+          },
+          {
+            "id": "layer/rasterize/smart-object",
+            "label": "Smart Object"
+          },
+          {
+            "id": "layer/rasterize/video",
+            "label": "Video"
+          },
+          {
+            "id": "layer/rasterize/3d",
+            "label": "3D"
+          },
+          {
+            "id": "layer/rasterize/layer-style",
+            "label": "Layer Style"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/rasterize/layer",
+            "label": "Layer"
+          },
+          {
+            "id": "layer/rasterize/all-layers",
+            "label": "All Layers"
+          }
+        ]
       },
       {
         "divider": true
@@ -1162,22 +1595,120 @@
       },
       {
         "id": "layer/arrange",
-        "label": "Arrange"
+        "label": "Arrange",
+        "children": [
+          {
+            "id": "layer/arrange/bring-to-front",
+            "label": "Bring to Front"
+          },
+          {
+            "id": "layer/arrange/bring-forward",
+            "label": "Bring Forward"
+          },
+          {
+            "id": "layer/arrange/send-backward",
+            "label": "Send Backward"
+          },
+          {
+            "id": "layer/arrange/send-to-back",
+            "label": "Send to Back"
+          },
+          {
+            "id": "layer/arrange/reverse",
+            "label": "Reverse"
+          }
+        ]
       },
       {
         "id": "layer/combine-shapes",
-        "label": "Combine Shapes"
+        "label": "Combine Shapes",
+        "children": [
+          {
+            "id": "layer/combine-shapes/unite-shapes",
+            "label": "Combine Shapes"
+          },
+          {
+            "id": "layer/combine-shapes/subtract-front-shape",
+            "label": "Subtract Front Shape"
+          },
+          {
+            "id": "layer/combine-shapes/unite-shapes-at-overlap",
+            "label": "Unite Shapes at Overlap"
+          },
+          {
+            "id": "layer/combine-shapes/subtract-shapes-at-overlap",
+            "label": "Subtract Shapes at Overlap"
+          }
+        ]
       },
       {
         "divider": true
       },
       {
         "id": "layer/align",
-        "label": "Align"
+        "label": "Align",
+        "children": [
+          {
+            "id": "layer/align/top-edges",
+            "label": "Top Edges"
+          },
+          {
+            "id": "layer/align/vertical-centers",
+            "label": "Vertical Centers"
+          },
+          {
+            "id": "layer/align/bottom-edges",
+            "label": "Bottom Edges"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/align/left-edges",
+            "label": "Left Edges"
+          },
+          {
+            "id": "layer/align/horizontal-centers",
+            "label": "Horizontal Centers"
+          },
+          {
+            "id": "layer/align/right-edges",
+            "label": "Right Edges"
+          }
+        ]
       },
       {
         "id": "layer/distribute",
-        "label": "Distribute"
+        "label": "Distribute",
+        "children": [
+          {
+            "id": "layer/distribute/top-edges",
+            "label": "Top Edges"
+          },
+          {
+            "id": "layer/distribute/vertical-centers",
+            "label": "Vertical Centers"
+          },
+          {
+            "id": "layer/distribute/bottom-edges",
+            "label": "Bottom Edges"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "layer/distribute/left-edges",
+            "label": "Left Edges"
+          },
+          {
+            "id": "layer/distribute/horizontal-centers",
+            "label": "Horizontal Centers"
+          },
+          {
+            "id": "layer/distribute/right-edges",
+            "label": "Right Edges"
+          }
+        ]
       },
       {
         "divider": true
@@ -1217,7 +1748,25 @@
       },
       {
         "id": "layer/matting",
-        "label": "Matting"
+        "label": "Matting",
+        "children": [
+          {
+            "id": "layer/matting/color-decontaminate",
+            "label": "Color Decontaminate..."
+          },
+          {
+            "id": "layer/matting/defringe",
+            "label": "Defringe..."
+          },
+          {
+            "id": "layer/matting/remove-black-matte",
+            "label": "Remove Black Matte"
+          },
+          {
+            "id": "layer/matting/remove-white-matte",
+            "label": "Remove White Matte"
+          }
+        ]
       }
     ]
   },
@@ -1234,25 +1783,156 @@
       },
       {
         "id": "type/panels",
-        "label": "Panels"
+        "label": "Panels",
+        "children": [
+          {
+            "id": "type/panels/character-panel",
+            "label": "Character Panel"
+          },
+          {
+            "id": "type/panels/paragraph-panel",
+            "label": "Paragraph Panel"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "type/panels/character-styles-panel",
+            "label": "Character Styles Panel"
+          },
+          {
+            "id": "type/panels/paragraph-styles-panel",
+            "label": "Paragraph Styles Panel"
+          }
+        ]
       },
       {
         "divider": true
       },
       {
         "id": "type/anti-alias",
-        "label": "Anti-Alias"
+        "label": "Anti-Alias",
+        "children": [
+          {
+            "id": "type/anti-alias/none",
+            "label": "None"
+          },
+          {
+            "id": "type/anti-alias/sharp",
+            "label": "Sharp"
+          },
+          {
+            "id": "type/anti-alias/crisp",
+            "label": "Crisp"
+          },
+          {
+            "id": "type/anti-alias/strong",
+            "label": "Strong"
+          },
+          {
+            "id": "type/anti-alias/smooth",
+            "label": "Smooth"
+          },
+          {
+            "id": "type/anti-alias/windows-lcd",
+            "label": "Windows LCD"
+          },
+          {
+            "id": "type/anti-alias/windows",
+            "label": "Windows"
+          }
+        ]
       },
       {
         "divider": true
       },
       {
         "id": "type/orientation",
-        "label": "Orientation"
+        "label": "Orientation",
+        "children": [
+          {
+            "id": "type/orientation/horizontal",
+            "label": "Horizontal"
+          },
+          {
+            "id": "type/orientation/vertical",
+            "label": "Vertical"
+          }
+        ]
       },
       {
         "id": "type/opentype",
-        "label": "Open Type"
+        "label": "Open Type",
+        "children": [
+          {
+            "id": "type/opentype/standard-ligatures",
+            "label": "Standard Ligatures"
+          },
+          {
+            "id": "type/opentype/contextual-alternatives",
+            "label": "Contextual Alternatives"
+          },
+          {
+            "id": "type/opentype/discretionary-ligatures",
+            "label": "Discretionary Ligatures"
+          },
+          {
+            "id": "type/opentype/swash",
+            "label": "Swash"
+          },
+          {
+            "id": "type/opentype/oldstyle",
+            "label": "Oldstyle"
+          },
+          {
+            "id": "type/opentype/stylistic-alternates",
+            "label": "Stylistic Alternates"
+          },
+          {
+            "id": "type/opentype/titling-alternates",
+            "label": "Titling Alternates"
+          },
+          {
+            "id": "type/opentype/ornaments",
+            "label": "Ornaments"
+          },
+          {
+            "id": "type/opentype/ordinals",
+            "label": "Ordinals"
+          },
+          {
+            "id": "type/opentype/fractions",
+            "label": "Fractions"
+          },
+          {
+            "id": "type/opentype/justification-alternates",
+            "label": "Justification Alternates"
+          },
+          {
+            "id": "type/opentype/japanese-78",
+            "label": "Japanese 78"
+          },
+          {
+            "id": "type/opentype/japanese-expert",
+            "label": "Japanese Expert"
+          },
+          {
+            "id": "type/opentype/japanese-traditional",
+            "label": "Japanese Traditional"
+          },
+          {
+            "id": "type/opentype/proportionals-metrics",
+            "label": "Proportional Metrics"
+          },
+          {
+            "id": "type/opentype/kana",
+            "label": "Kana"
+          },
+          {
+            "id": "type/opentype/roman-italics",
+            "label": "Roman Italics"
+          }
+        ]
       },
       {
         "divider": true
@@ -1292,14 +1972,113 @@
       },
       {
         "id": "type/font-preview-size",
-        "label": "Font Preview Size"
+        "label": "Font Preview Size",
+        "children": [
+          {
+            "id": "type/font-preview-size/none",
+            "label": "None"
+          },
+          {
+            "id": "type/font-preview-size/small",
+            "label": "Small"
+          },
+          {
+            "id": "type/font-preview-size/medium",
+            "label": "Medium"
+          },
+          {
+            "id": "type/font-preview-size/large",
+            "label": "Large"
+          },
+          {
+            "id": "type/font-preview-size/extra-large",
+            "label": "Extra Large"
+          },
+          {
+            "id": "type/font-preview-size/huge",
+            "label": "Huge"
+          }
+        ]
       },
       {
         "divider": true
       },
       {
         "id": "type/language-options",
-        "label": "Language Options"
+        "label": "Language Options",
+        "children": [
+          {
+            "id": "type/language-options/default-features",
+            "label": "Default Features"
+          },
+          {
+            "id": "type/language-options/east-asian-features",
+            "label": "East Asian Features"
+          },
+          {
+            "id": "type/language-options/middle-eastern-features",
+            "label": "Middle Eastern Features"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "type/language-options/standard-vertical-roman-alignment",
+            "label": "Standard Vertical Roman Alignment"
+          },
+          {
+            "id": "type/language-options/tate-chu-yoko",
+            "label": "Tate-chu-yoko"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "type/language-options/top-to-top-leading",
+            "label": "Top-to-Top Leading"
+          },
+          {
+            "id": "type/language-options/bottom-to-bottom-leading",
+            "label": "Bottom-to-Bottom-leading"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "type/language-options/arabic-digits",
+            "label": "Arabic Digits"
+          },
+          {
+            "id": "type/language-options/hindi-digits",
+            "label": "Hindi Digits"
+          },
+          {
+            "id": "type/language-options/farsi-digits",
+            "label": "Farsi-digits"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "type/language-options/kashidas",
+            "label": "Kashidas"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "type/language-options/default-direction",
+            "label": "Default Direction"
+          },
+          {
+            "id": "type/language-options/left-to-right-character-direction",
+            "label": "Left-to-Right Character Direction"
+          },
+          {
+            "id": "type/language-options/right-to-left-character-direction",
+            "label": "Right-to-Left Character Direction"
+          }
+        ]
       },
       {
         "divider": true
@@ -1395,7 +2174,29 @@
       },
       {
         "id": "select/modify",
-        "label": "Modify"
+        "label": "Modify",
+        "children": [
+          {
+            "id": "select/modify/border",
+            "label": "Border..."
+          },
+          {
+            "id": "select/modify/smooth",
+            "label": "Smooth..."
+          },
+          {
+            "id": "select/modify/expand",
+            "label": "Expand..."
+          },
+          {
+            "id": "select/modify/contract",
+            "label": "Contract..."
+          },
+          {
+            "id": "select/modify/feather",
+            "label": "Feather"
+          }
+        ]
       },
       {
         "divider": true
@@ -1489,7 +2290,17 @@
       },
       {
         "id": "filter/3d",
-        "label": "3D"
+        "label": "3D",
+        "children": [
+          {
+            "id": "filter/3d/generate-bump-map",
+            "label": "Generate Bump Map"
+          },
+          {
+            "id": "filter/3d/generate-normal-map",
+            "label": "Generate Normal Map"
+          }
+        ]
       },
       {
         "id": "filter/blur",
@@ -1543,11 +2354,71 @@
       },
       {
         "id": "filter/blur-gallery",
-        "label": "Blur Gallery"
+        "label": "Blur Gallery",
+        "children": [
+          {
+            "id": "filter/blur-gallery/field-blur",
+            "label": "Field Blur..."
+          },
+          {
+            "id": "filter/blur-gallery/iris-blur",
+            "label": "Iris Blur..."
+          },
+          {
+            "id": "filter/blur-gallery/tilt-shift",
+            "label": "Tilt-Shift..."
+          },
+          {
+            "id": "filter/blur-gallery/path-blur",
+            "label": "Path Blur..."
+          },
+          {
+            "id": "filter/blur-gallery/spin-blur",
+            "label": "Spin Blur..."
+          }
+        ]
       },
       {
         "id": "filter/distort",
-        "label": "Distort"
+        "label": "Distort",
+        "children": [
+          {
+            "id": "filter/distort/displace",
+            "label": "Displace..."
+          },
+          {
+            "id": "filter/distort/pinch",
+            "label": "Pinch..."
+          },
+          {
+            "id": "filter/distort/polar-coordinates",
+            "label": "Polar Coordinates..."
+          },
+          {
+            "id": "filter/distort/ripple",
+            "label": "Ripple..."
+          },
+          {
+            "id": "filter/distort/shear",
+            "label": "Shear..."
+          },
+          {
+            "id": "filter/distort/spherize",
+            "label": "Spherize..."
+          },
+          {
+            "id": "filter/distort/twirl",
+            "label": "Twirl..."
+          },
+          {
+            "id": "filter/distort/wave",
+            "label": "Wave..."
+          },
+          {
+            "id": "filter/distort/zigzag",
+            "label": "ZigZag..."
+          }
+        ]
       },
       {
         "id": "filter/noise",
@@ -1577,7 +2448,37 @@
       },
       {
         "id": "filter/pixelate",
-        "label": "Pixelate"
+        "label": "Pixelate",
+        "children": [
+          {
+            "id": "filter/pixelate/color-halftone",
+            "label": "Color Halftone..."
+          },
+          {
+            "id": "filter/pixelate/crystalize",
+            "label": "Crystalize..."
+          },
+          {
+            "id": "filter/pixelate/facet",
+            "label": "Facet..."
+          },
+          {
+            "id": "filter/pixelate/fragment",
+            "label": "Fragment..."
+          },
+          {
+            "id": "filter/pixelate/mezzotint",
+            "label": "Mezzotint..."
+          },
+          {
+            "id": "filter/pixelate/mosaic",
+            "label": "Mozaic..."
+          },
+          {
+            "id": "filter/pixelate/pointilize",
+            "label": "Pointilize..."
+          }
+        ]
       },
       {
         "id": "filter/render",
@@ -1622,26 +2523,132 @@
       },
       {
         "id": "filter/sharpen",
-        "label": "Sharpen"
+        "label": "Sharpen",
+        "children": [
+          {
+            "id": "filter/sharpen/shake-reduction",
+            "label": "Shake Reduction..."
+          },
+          {
+            "id": "filter/sharpen/sharpen",
+            "label": "Sharpen"
+          },
+          {
+            "id": "filter/sharpen/sharpen-edges",
+            "label": "Sharpen Edges"
+          },
+          {
+            "id": "filter/sharpen/sharpen-more",
+            "label": "Sharpen More"
+          },
+          {
+            "id": "filter/sharpen/smart-sharpen",
+            "label": "Smart Sharpen..."
+          },
+          {
+            "id": "filter/sharpen/unsharp-mask",
+            "label": "Unsharp Mask..."
+          }
+        ]
       },
       {
         "id": "filter/stylize",
-        "label": "Stylize"
+        "label": "Stylize",
+        "children": [
+          {
+            "id": "filter/stylize/diffuse",
+            "label": "Diffuse..."
+          },
+          {
+            "id": "filter/stylize/emboss",
+            "label": "Emboss..."
+          },
+          {
+            "id": "filter/stylize/extrude",
+            "label": "Extrude..."
+          },
+          {
+            "id": "filter/stylize/find-edges",
+            "label": "Find Edges"
+          },
+          {
+            "id": "filter/stylize/solarize",
+            "label": "Solarize"
+          },
+          {
+            "id": "filter/stylize/tiles",
+            "label": "Tiles..."
+          },
+          {
+            "id": "filter/stylize/trace-contour",
+            "label": "Trace Contour..."
+          },
+          {
+            "id": "filter/stylize/wind",
+            "label": "Wind..."
+          }
+        ]
       },
       {
         "id": "filter/video",
-        "label": "Video"
+        "label": "Video",
+        "children": [
+          {
+            "id": "filter/video/de-interlace",
+            "label": "De-Interlace..."
+          },
+          {
+            "id": "filter/video/ntsc-colors",
+            "label": "NTSC Colors"
+          }
+        ]
       },
       {
         "id": "filter/other",
-        "label": "Other"
+        "label": "Other",
+        "children": [
+          {
+            "id": "filter/other/custom",
+            "label": "Custom..."
+          },
+          {
+            "id": "filter/other/high-pass",
+            "label": "High Pass..."
+          },
+          {
+            "id": "filter/other/hsb-hsl",
+            "label": "HSB/HSL"
+          },
+          {
+            "id": "filter/other/maximum",
+            "label": "Maximum..."
+          },
+          {
+            "id": "filter/other/minimum",
+            "label": "Minimum..."
+          },
+          {
+            "id": "filter/other/offset",
+            "label": "Offset..."
+          }
+        ]
       },
       {
         "divider": true
       },
       {
         "id": "filter/digmarc",
-        "label": "Digmarc"
+        "label": "Digmarc",
+        "children": [
+          {
+            "id": "filter/digmarc/embed-watermark",
+            "label": "Embed Watermark..."
+          },
+          {
+            "id": "filter/digmarc/read-watermark",
+            "label": "Read Watermark..."
+          }
+        ]
       },
       {
         "divider": true
@@ -1813,7 +2820,66 @@
     "children": [
       {
         "id": "view/proof-setup",
-        "label": "Proof Setup"
+        "label": "Proof Setup",
+        "children": [
+          {
+            "id": "view/proof-setup/custom",
+            "label": "Custom..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "view/proof-setup/working-cmyk",
+            "label": "Working CMYK"
+          },
+          {
+            "id": "view/proof-setup/working-cyan-plate",
+            "label": "Working Cyan Plate"
+          },
+          {
+            "id": "view/proof-setup/working-magenta-plate",
+            "label": "Working Magenta Plate"
+          },
+          {
+            "id": "view/proof-setup/working-yellow-plate",
+            "label": "Working Yellow Plate"
+          },
+          {
+            "id": "view/proof-setup/working-black-plate",
+            "label": "Working Black Plate"
+          },
+          {
+            "id": "view/proof-setup/working-cmy-plate",
+            "label": "Working CMY plates"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "view/proof-setup/legacy-macintosh-rgb",
+            "label": "Legacy Macintosh RGB (Gamma 1.8)"
+          },
+          {
+            "id": "view/proof-setup/internet-standard-rgb",
+            "label": "Internet Standard RGB (sRGB)"
+          },
+          {
+            "id": "view/proof-setup/monitor-rgb",
+            "label": "Monitor RGB"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "view/proof-setup/color-blindness-propanopia-type",
+            "label": "Color Blindness - Protanopia-type"
+          },
+          {
+            "id": "view/proof-setup/color-blindness-deuteranopia-type",
+            "label": "Color Blindness - Deuteranopia-type"
+          }
+        ]
       },
       {
         "id": "view/proof-colors",
@@ -1825,7 +2891,56 @@
       },
       {
         "id": "view/pixel-aspect-ratio",
-        "label": "Pixel Aspect Ratio"
+        "label": "Pixel Aspect Ratio",
+        "children": [
+          {
+            "id": "view/pixel-aspect-ratio/custom-pixel-aspect-ratio",
+            "label": "Custom Pixel Aspect Ratio..."
+          },
+          {
+            "id": "view/pixel-aspect-ratio/delete-pixel-aspect-ratio",
+            "label": "Delete Pixel Aspect Ratio..."
+          },
+          {
+            "id": "view/pixel-aspect-ratio/reset-pixel-aspect-ratios",
+            "label": "Reset Pixel Aspect Ratios..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "view/pixel-aspect-ratio/square",
+            "label": "Square"
+          },
+          {
+            "id": "view/pixel-aspect-ratio/d1-dv-ntsc",
+            "label": "D1/DV NTSC (0.91)"
+          },
+          {
+            "id": "view/pixel-aspect-ratio/d1-dv-pal",
+            "label": "D1/DV PAL (1.09)"
+          },
+          {
+            "id": "view/pixel-aspect-ratio/d1-dv-ntsc-widescreen",
+            "label": "D1/DV NTSC Widescreen (1.21)"
+          },
+          {
+            "id": "view/pixel-aspect-ratio/hdv-1080-dvcpro-hd",
+            "label": "HDV 1080/DVCPRO HD 720 (1.33)"
+          },
+          {
+            "id": "view/pixel-aspect-ratio/d1-dv-pal-widescreen",
+            "label": "D1/DV PAL Widescreen (1.46)"
+          },
+          {
+            "id": "view/pixel-aspect-ratio/anamorphic",
+            "label": "Anamorphic 2:1 (2)"
+          },
+          {
+            "id": "view/pixel-aspect-ratio/dvcpro-hd",
+            "label": "DVCPRO HD 1080 (1.5)"
+          }
+        ]
       },
       {
         "id": "view/pixel-aspect-ratio-correcetion",
@@ -1867,7 +2982,21 @@
       },
       {
         "id": "view/screen-mode",
-        "label": "Screen Mode"
+        "label": "Screen Mode",
+        "children": [
+          {
+            "id": "view/screen-mode/standard-screen-mode",
+            "label": "Standard Screen Mode"
+          },
+          {
+            "id": "view/screen-mode/full-screen-mode-with-menu-bar",
+            "label": "Full Screen Mode With Menu Bar"
+          },
+          {
+            "id": "view/screen-mode/full-screen-mode",
+            "label": "Full Screen Mode"
+          }
+        ]
       },
       {
         "divider": true
@@ -1878,7 +3007,74 @@
       },
       {
         "id": "view/show",
-        "label": "Show"
+        "label": "Show",
+        "children": [
+          {
+            "id": "view/show/layer-edges",
+            "label": "Layer Edges"
+          },
+          {
+            "id": "view/show/selection-edges",
+            "label": "Selection Edges"
+          },
+          {
+            "id": "view/show/target-path",
+            "label": "Target Path"
+          },
+          {
+            "id": "view/show/grid",
+            "label": "Grid"
+          },
+          {
+            "id": "view/show/guides",
+            "label": "Guides"
+          },
+          {
+            "id": "view/show/count",
+            "label": "Count"
+          },
+          {
+            "id": "view/show/smart-guides",
+            "label": "Smart Guides"
+          },
+          {
+            "id": "view/show/slices",
+            "label": "Slices"
+          },
+          {
+            "id": "view/show/notes",
+            "label": "Notes"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "view/show/mesh",
+            "label": "Mesh"
+          },
+          {
+            "id": "view/show/edit-pins",
+            "label": "Edit Pins"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "view/show/all",
+            "label": "All"
+          },
+          {
+            "id": "view/show/none",
+            "label": "None"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "view/show/show-extras-options",
+            "label": "Show Extras Options..."
+          }
+        ]
       },
       {
         "divider": true
@@ -1896,7 +3092,40 @@
       },
       {
         "id": "view/snap-to",
-        "label": "Snap To"
+        "label": "Snap To",
+        "children": [
+          {
+            "id": "view/snap-to/guides",
+            "label": "Guides"
+          },
+          {
+            "id": "view/snap-to/grid",
+            "label": "Grid"
+          },
+          {
+            "id": "view/snap-to/layers",
+            "label": "Layers"
+          },
+          {
+            "id": "view/snap-to/slices",
+            "label": "Slices"
+          },
+          {
+            "id": "view/snap-to/document-bounds",
+            "label": "Document Bounds"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "view/snap-to/all",
+            "label": "All"
+          },
+          {
+            "id": "view/snap-to/none",
+            "label": "None"
+          }
+        ]
       },
       {
         "divider": true
@@ -1940,11 +3169,146 @@
     "children": [
       {
         "id": "window/arrange",
-        "label": "Arrange"
+        "label": "Arrange",
+        "children": [
+          {
+            "id": "window/arrange/tile-all-vertically",
+            "label": "Tile All Vertically"
+          },
+          {
+            "id": "window/arrange/tile-all-horizontally",
+            "label": "Tile All Horizontally"
+          },
+          {
+            "id": "window/arrange/2-up-horizontal",
+            "label": "2-up Horizontal"
+          },
+          {
+            "id": "window/arrange/2-up-vertical",
+            "label": "2-up Vertical"
+          },
+          {
+            "id": "window/arrange/3-up-horizontal",
+            "label": "3-up Horizontal"
+          },
+          {
+            "id": "window/arrange/3-up-vertical",
+            "label": "3-up Vertical"
+          },
+          {
+            "id": "window/arrange/3-up-stacked",
+            "label": "3-up Stacked"
+          },
+          {
+            "id": "window/arrange/4-up",
+            "label": "4-up"
+          },
+          {
+            "id": "window/arrange/6-up",
+            "label": "6-up"
+          },
+          {
+            "id": "window/arrange/consolidate-all-to-tabs",
+            "label": "Consolidate All to Tabs"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "window/arrange/cascade",
+            "label": "Cascade"
+          },
+          {
+            "id": "window/arrange/tile",
+            "label": "Tile"
+          },
+          {
+            "id": "window/arrange/float-in-window",
+            "label": "Float in Window"
+          },
+          {
+            "id": "window/arrange/float-all-in-windows",
+            "label": "Float All in Windows"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "window/arrange/match-zoom",
+            "label": "Match Zoom"
+          },
+          {
+            "id": "window/arrange/match-location",
+            "label": "Match Location"
+          },
+          {
+            "id": "window/arrange/match-rotation",
+            "label": "Match Rotation"
+          },
+          {
+            "id": "window/arrange/match-all",
+            "label": "Match All"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "window/arrange/new-window-for",
+            "label": "New Window For (current file)"
+          }
+        ]
       },
       {
         "id": "window/workspace",
-        "label": "Workspace"
+        "label": "Workspace",
+        "children": [
+          {
+            "id": "window/workspace/essentials",
+            "label": "Essentials (Default)"
+          },
+          {
+            "id": "window/workspace/3d",
+            "label": "3D"
+          },
+          {
+            "id": "window/workspace/motion",
+            "label": "Motion"
+          },
+          {
+            "id": "window/workspace/painting",
+            "label": "Painting"
+          },
+          {
+            "id": "window/workspace/photography",
+            "label": "Photography"
+          },
+          {
+            "id": "window/workspace/typography",
+            "label": "Typography"
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "window/workspace/reset-essentials",
+            "label": "Reset Essentials"
+          },
+          {
+            "id": "window/workspace/new-workspace",
+            "label": "New Workspace..."
+          },
+          {
+            "id": "window/workspace/delete-workspace",
+            "label": "Delete Workspace..."
+          },
+          {
+            "divider": true
+          },
+          {
+            "id": "window/workspace/keyboard-shortcuts-and-menus",
+            "label": "Keyboard Shortcuts & Menus"
+          }
+        ]
       },
       {
         "divider": true
@@ -1955,7 +3319,13 @@
       },
       {
         "id": "window/extensions",
-        "label": "Extensions"
+        "label": "Extensions",
+        "children": [
+          {
+            "id": "window/extensions/adobe-color-themes",
+            "label": "Adobe Color Themes"
+          }
+        ]
       },
       {
         "divider": true

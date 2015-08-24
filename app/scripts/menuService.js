@@ -189,7 +189,7 @@ angular.module('tweetsToSoftware')
     console.time('Menu load');
     console.log(rootPrefix);
     promise = $q.all([
-      $http.get(rootPrefix + '/data/commandsExtra.json'),
+      $http.get(rootPrefix + '/data/menu.json'),
       $http.get(rootPrefix + '/data/tools.json'),
       $http.get(rootPrefix + '/data/panels.json')
     ])
