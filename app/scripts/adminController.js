@@ -33,6 +33,15 @@ angular.module('tweetsToSoftware')
       $scope.selectedToolbarItems.splice($scope.selectedToolbarItems.indexOf(item), 1);
     };
 
+    $scope.check = function() {
+      $http.get(switterServer + '/api/tweets/' + $scope.tweetId)
+        .then(function(r) {
+          $scope.tweetStatus = 'Tweet with such ID already in the database';
+        }, function(r) {
+          $scope.tweetStatus = 'Yay, this tweet is not in the database! Let`s add it!';
+        });
+    };
+
     $scope.submit = function() {
       $http.get(switterServer + '/twitter-api/tweets/' + $scope.tweetId)
         .then(function(r) {

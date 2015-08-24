@@ -7,6 +7,22 @@
   </div>
 
   <div class="admin-panel__section">
+    <div class="l-list-inline l-list-inline--small">
+      <div class="l-list-inline__item">
+        <button class="admin-panel__button-simple"
+                ng-click="check()">Check tweet id</button>
+      </div>
+
+      <div class="l-list-inline__item">
+        <div class="admin-panel__status"
+             ng-show="tweetStatus">
+          {{tweetStatus}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-panel__section">
     <label for="thumbLink">Thumbnail: </label>
     <input id="thumbLink" type="text" ng-model="previewImageUrl"/>
   </div>
