@@ -88,7 +88,7 @@ angular.module('tweetsToSoftware')
           target = $scope.selectedToolbarItems;
         }
 
-        target.push(item);
+        target.push(angular.copy(item));
       }
     };
 
