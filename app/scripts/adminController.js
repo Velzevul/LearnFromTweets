@@ -70,4 +70,64 @@ angular.module('tweetsToSoftware')
             });
         });
     };
+
+    /**
+     * common for all menus
+     */
+    $scope.activateItem = function(menu, item) {
+      if (item.children.length === 0) {
+        menu.close();
+
+        var target;
+
+        if (menu.name === 'menu') {
+          target = $scope.selectedMenuItems;
+        } else if (menu.name === 'panelbar') {
+          target = $scope.selectedPanelbarItems;
+        } else if (menu.name === 'toolbar') {
+          target = $scope.selectedToolbarItems;
+        }
+
+        target.push(item);
+      }
+    };
+
+    $scope.itemHoverHandler = function(menu, item) {
+      menu.close();
+      item.highlight().open();
+      menu.isOpen = true;
+    };
+
+    $scope.itemLeaveHandler = function(item) {
+      if (item.children.length === 0) {
+        item.isHighlighted = false;
+      }
+    };
+
+    $scope.rootItemHoverHandler = function(menu, rootItem) {
+      if (menu.isOpen) {
+        menu.close();
+        rootItem.open();
+        menu.isOpen = true;
+      }
+      rootItem.highlight();
+    };
+
+    $scope.rootItemClickHandler = function(menu, rootItem) {
+      rootItem.highlight();
+
+      if (menu.isOpen) {
+        menu.close();
+      } else {
+        menu.close();
+        rootItem.open();
+        menu.isOpen = true;
+      }
+    };
+
+    $scope.rootItemLeaveHandler = function(menu, rootItem) {
+      if (!menu.isOpen) {
+        rootItem.isHighlighted = false;
+      }
+    };
   });
