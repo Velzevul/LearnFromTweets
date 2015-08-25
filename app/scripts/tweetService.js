@@ -137,7 +137,7 @@ angular.module('tweetsToSoftware')
     'use strict';
 
     var tweets = new Tweets(),
-        promise;
+      promise;
 
     console.time('Tweets load');
     promise = $http.get(switterServer + '/api/tweets')

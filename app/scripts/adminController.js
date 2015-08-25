@@ -1,5 +1,6 @@
 angular.module('tweetsToSoftware')
-  .controller('adminController', function(MenuService, switterServer, LoggerService,
+  .controller('adminController', function(MenuService, switterServer, currentParticipant,
+                                          LoggerService, LockService,
                                           $scope, $http) {
     'use strict';
 
@@ -34,11 +35,19 @@ angular.module('tweetsToSoftware')
     };
 
     $scope.check = function() {
-      $http.get(switterServer + '/api/tweets/' + $scope.tweetId)
+      LockService.checkIfLocked($scope.tweetId)
         .then(function(r) {
-          $scope.tweetStatus = 'Tweet with such ID already in the database';
-        }, function(r) {
-          $scope.tweetStatus = 'Yay, this tweet is not in the database! Let`s add it!';
+          if (r.data.user_id === currentParticipant) {
+            $scope.tweetStatus = 'OK. This tweet id has been reserved by you in the past';
+          } else {
+            $scope.tweetStatus = 'RESERVED. This tweet id has been reserved by ' + r.data.user_id;
+          }
+        }, function() {
+          $scope.tweetStatus = 'FREE. This tweet id had not been processed yet, reserving under your name...';
+          LockService.lock($scope.tweetId)
+            .then(function() {
+              $scope.tweetStatus = 'OK. This tweet id has been reserved by you';
+            });
         });
     };
 
@@ -67,6 +76,7 @@ angular.module('tweetsToSoftware')
               $scope.selectedMenuItems = [];
               $scope.selectedToolbarItems = [];
               $scope.selectedPanelbarItems = [];
+              $scope.tweetStatus = null;
             });
         });
     };
