@@ -32,7 +32,7 @@
     if (typeof(DEVELOPMENT) === 'undefined') {
       return '//dorado.cs.umanitoba.ca:8000'; // production environment
     } else {
-      return '//dorado.cs.umanitoba.ca:7000'; // development environment
+      return '//0.0.0.0:7000'; // development environment
     }
   });
 
