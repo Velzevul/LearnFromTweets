@@ -11,12 +11,13 @@ angular.module('tweetsToSoftware')
 
     return {
       log: function(msg) {
-        var log = new Log({
-          msg: msg,
-          participantId: currentParticipant
-        });
-
-        $http.post(switterServer + '/logger/logs', log);
+        // logging of interaction for the field study
+        //var log = new Log({
+        //  msg: msg,
+        //  participantId: currentParticipant
+        //});
+        //
+        //$http.post(switterServer + '/logger/logs', log);
       }
     }
   });

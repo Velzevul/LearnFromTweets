@@ -95,16 +95,17 @@ function Tweet(tweet) {
 }
 
 Tweet.prototype.populateCommands = function(menu) {
-  if (typeof(DEVELOPMENT) === 'undefined') {
-    var self = this;
-
-    this[menu.name] = [];
-
-    // we do not deal with retweets for simplicity...
-    this.menuItemIds[menu.name].forEach(function(id) {
-      self[menu.name].push(menu.byId[id]);
-    });
-  } else {
+  // mock commands in production for demo purposes
+  //if (typeof(DEVELOPMENT) === 'undefined') {
+  //  var self = this;
+  //
+  //  this[menu.name] = [];
+  //
+  //  // we do not deal with retweets for simplicity...
+  //  this.menuItemIds[menu.name].forEach(function(id) {
+  //    self[menu.name].push(menu.byId[id]);
+  //  });
+  //} else {
     var randomMenuItems = [],
         n = Math.floor(Math.random()*5);
 
@@ -123,7 +124,7 @@ Tweet.prototype.populateCommands = function(menu) {
     } else {
       this[menu.name] = randomMenuItems;
     }
-  }
+  //}
 };
 
 function Author(author) {
@@ -147,9 +148,10 @@ angular.module('tweetsToSoftware')
 
         tweets.populate(response.data);
 
-        if (typeof(DEVELOPMENT) !== 'undefined') {
+        // uncomment when working with real data
+        //if (typeof(DEVELOPMENT) !== 'undefined') {
           tweets.mockDates();
-        }
+        //}
 
         console.timeEnd('Tweets population');
       });
