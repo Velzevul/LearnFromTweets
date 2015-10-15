@@ -134,14 +134,14 @@ function Author(author) {
 }
 
 angular.module('tweetsToSoftware')
-  .factory('TweetService', function(switterServer, $http) {
+  .factory('TweetService', function(switterServer, rootPrefix, $http) {
     'use strict';
 
     var tweets = new Tweets(),
       promise;
 
     console.time('Tweets load');
-    promise = $http.get(switterServer + '/api/tweets')
+    promise = $http.get(rootPrefix + '/data/tweets.json')
       .then(function(response) {
         console.timeEnd('Tweets load');
         console.time('Tweets population');
