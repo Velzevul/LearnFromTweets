@@ -1,6 +1,6 @@
 var AUTORELOAD = false;
 var DIST_PATH = './dist'; // development
-var DEPLOY_PATH = '/webapps/www/switter'; // production on dorado
+//var DEPLOY_PATH = '/webapps/www/switter'; // production on dorado
 
 var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
@@ -123,7 +123,7 @@ gulp.task('watch', function() {
 gulp.task('default', ['dist:dependencies', 'connect', 'fonts', 'data', 'images', 'html',
   'css', 'app', 'templates', 'watch']);
 
-gulp.task('deploy', function() {
-  gulp.src(DIST_PATH + '/**/*.*', {base: DIST_PATH})
-    .pipe(gulp.dest(DEPLOY_PATH));
-});
+//gulp.task('deploy', function() {
+//  gulp.src(DIST_PATH + '/**/*.*', {base: DIST_PATH})
+//    .pipe(gulp.dest(DEPLOY_PATH));
+//});
