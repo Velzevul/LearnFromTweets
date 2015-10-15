@@ -1,0 +1,2326 @@
+/**
+ *
+ *    < RELCSS >
+ *  Relational CSS
+ *
+ *
+ *  FILE STRUCTURE
+ *  ==============
+ *
+ *    utilities/  : functions (-f), mixins (-m), partials (-p)
+ *    configs/    : global resets, global variables
+ *    layouts/    : positioning patterns (how modules are positioned relative to each other and the page)
+ *    modules/    : module styling
+ *    vendor/     : overwrites of 3rd-party styles
+ *
+ *    states.scss   : global state styles
+ *    shame.scss    : quick-n-dirty solutions, everything that should be refactored
+ *    dev-grid.scss : baseline grid overlay for development
+ *
+ *
+ *  NAMING CONVENTIONS
+ *  ==================
+ *
+ *    Incapsulation
+ *    -------------
+ *
+ *      Module's attributes are denoted by appending double underscore
+ *      and attribute name to the name of the module.
+ *
+ *        .table
+ *          .table__header
+ *
+ *      Notation
+ *
+ *        .table
+ *          &__header
+ *
+ *    Polymorphism
+ *    ------------
+ *
+ *      Module's behaviour could depend on where this module is placed.
+ *      If such polymorphic behaviour is required, appending modifier class
+ *      to module's class overwrights styles for its attributes.
+ *
+ *      Modifier class does not contain any additional attributes. If additional
+ *      objects appear, it's better to use inheritance.
+ *
+ *        .table
+ *          .table__row
+ *          .table__row.table__row--selected
+ *          .table__row
+ *
+ *      Notation
+ *
+ *        .table
+ *          &__row
+ *            &--selected
+ *
+ *    Inheritance
+ *    -----------
+ *
+ *      Inheritance could be used if a new variation of module has additional
+ *      attributes. In this case, new module is created by appending a single dash
+ *      and a subclass name to the original module's class. Parent module's properties
+ *      can be inherited using SASS @extend directive.
+ *
+ *        .employer {
+ *          // some css goes here
+ *        }
+ *
+ *        .employer-manager {
+ *          @extend .employer;
+ *
+ *          // overwrights and additional attributes
+ *        }
+ *
+ *      Notation
+ *
+ *        .employer
+ *        <---  .employer-manager
+ *
+ *    Composition
+ *    -----------
+ *
+ *      Relationship between two closely connected modules. Composition is used when two modules
+ *      are coupled and make no sence without each other in the context of the current application.
+ *      Composee module is prefixed by abbreviation of its composer module's class and a single dash.
+ *
+ *        .human-body
+ *          .hb-brain
+ *
+ *      Notation
+ *
+ *        .human-body
+ *          <>--  .hb-brain
+ */
+/*
+ * GENERAL
+ *
+ */
+/*
+ * RESPONSIVE
+ *
+ */
+/**
+ *  RESETS
+ */
+/**
+ *  Box model
+ */
+* {
+  margin: 0;
+  padding: 0;
+}
+*:active {
+  outline: none;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/**
+ *  Controls
+ */
+input::-webkit-input-placeholder {
+  font-family: sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 18px;
+  color: #8899a6;
+}
+
+textarea {
+  resize: vertical;
+}
+
+textarea {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  line-height: inherit;
+  background-color: transparent;
+}
+textarea:focus {
+  outline: none;
+}
+
+button {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  line-height: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/**
+ *  Typography
+ */
+html,
+body {
+  height: 100%;
+  font-family: sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  color: #363636;
+  background-color: #C0DEED;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, small {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  line-height: inherit;
+}
+
+span {
+  display: inline-block;
+  vertical-align: top;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+address {
+  font-style: normal;
+}
+
+/**
+ *  Other
+ */
+iframe {
+  border: none;
+}
+
+/**
+ *  CF PARTIAL
+ *
+ *  clears floats inside the box
+ *
+ */
+.cf:after, .l-split:after, .l-justified__item:after, .l-tricol:after, .l-media:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/**
+ *  CENTER PARTIAL
+ *
+ *  creates pseudo-element with vertical-align: middle
+ *  inside parent element, so that child elements
+ *  could be positioned exactly in the middle (vertically)
+ *  of the parent
+ *
+ */
+/**
+ *  SIMPLE ARROW MIXIN
+ *
+ *  arrow made using border-width on one side of an empty box
+ *
+ *  @param $size {px}
+ *    resulting height of the arrow
+ *
+ *  @param $color {rgb}
+ *    background color of the arrow
+ *
+ *  @param $position-quadrant { 'quadrant-1' | 'quadrant-2' | 'quadrant-3' | 'quadrant-4'}
+ *    where to calculate arrow's position from
+ *
+ *                    |
+ *      quadrant-1    |    quadrant-2
+ *      (top left)    |    (top right)
+ *                    |
+ *    ----------------------------------
+ *                    |
+ *      quadrant-3    |    quadrant-4
+ *     (bottom left)  |  (bottom right)
+ *                    |
+ *
+ *  @param $position-x {px}
+ *    x coordinate of the arrow (in given quadrant)
+ *
+ *  @param $position-y {px}
+ *    y coordinate of the arrow (in given quadrant)
+ *
+ *  @param $direction { 'top' | 'right' | 'bottom' | 'left' }
+ *    direction where arrow will be pointing to
+ *
+ */
+/**
+ *  @mixin
+ *  TOP ARROW
+ *
+ *  top arrow made with a box rotated by 45 degrees, enables use of borders and box-shadows.
+ *
+ *  @param $size {px}
+ *    width of the square that will be rotated;
+ *    height of the actual arrow (rotated square) will be
+ *    $size * sqrt(2)/2
+ *
+ *  @param $color {rgb}
+ *    background color of the suare used to make the arrow
+ *
+ *  @param $pivot { 'left' | 'right' }
+ *    where to calculate position of the arrow from
+ *
+ *  @param $position {px}
+ *    position of the arrow from the given pivot
+ *
+ */
+/**
+ *  @mixin
+ *  TOP ARROW FIX
+ *
+ *  hide bottom part of the arrow made with rotated square
+ *
+ *  @param $arrow-size {px}
+ *    width of the box used for the arrow
+ *
+ *  @param $shadow-size {px}
+ *    shadow size of the arrow
+ *
+ *  @param $color {rgb}
+ *    background color
+ *
+ *  @param $pivot { 'left' | 'right' }
+ *    where to calculate position of the fix from
+ *
+ *  @param $position {px}
+ *    position of the fix from the given pivot
+ *
+ */
+/**
+ *  BREAKPOINT MIXIN
+ *
+ *  provides wrapper for media-query based on given breakpoint
+ *
+ *  @param $condition {string}
+ *    media-query condition
+ *
+ */
+/**
+ *  EM FUNCTION
+ *
+ *  returns size in EM units from given PX units
+ *
+ *  @param $pixel-size {px}
+ *    amount of pixels that should be converted to em units
+ *
+ *  @param $base-size {px} [$global-font-size]
+ *    base value for the conversion
+ *
+ *  @returns {em}
+ *    $pixel-size converted to em units relative to the $base-size
+ *
+ */
+/**
+ *  NOUNIT FUNCTION
+ *
+ *  strips units from the value
+ *
+ *  @param $number {string}
+ *    number with units specified, e.g. 120px or 36.2em
+ *
+ *  @returns {number}
+ *    the same number without unit, e.g. 120 or 36.2
+ *
+ */
+/**
+ *  WRAP LAYOUT
+ *
+ *  maintains horizontal boundaries for the page
+ *
+ *  .l-wrap
+ *
+ */
+.l-wrap {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*------------------------------------*\
+    $CSSWIZARDRY-GRIDS
+\*------------------------------------*/
+/**
+ * CONTENTS
+ * INTRODUCTION.........How the grid system works.
+ * VARIABLES............Your settings.
+ * MIXINS...............Library mixins.
+ * GRID SETUP...........Build the grid structure.
+ * WIDTHS...............Build our responsive widths around our breakpoints.
+ * PUSH.................Push classes.
+ * PULL.................Pull classes.
+ */
+/*------------------------------------*\
+    $INTRODUCTION
+\*------------------------------------*/
+/**
+ * csswizardry grids provides you with widths to suit a number of breakpoints
+ * designed around devices of a size you specify. Out of the box, csswizardry
+ * grids caters to the following types of device:
+ *
+ * palm     --  palm-based devices, like phones and small tablets
+ * lap      --  lap-based devices, like iPads or laptops
+ * portable --  all of the above
+ * desk     --  stationary devices, like desktop computers
+ * regular  --  any/all types of device
+ *
+ * These namespaces are then used in the library to give you the ability to
+ * manipulate your layouts based around them, for example:
+ *
+   <div class="grid__item  one-whole  lap--one-half  desk--one-third">
+ *
+ * This would give you a grid item which is 100% width unless it is on a lap
+ * device, at which point it become 50% wide, or it is on a desktop device, at
+ * which point it becomes 33.333% width.
+ *
+ * csswizardry grids also has push and pull classes which allow you to nudge
+ * grid items left and right by a defined amount. These follow the same naming
+ * convention as above, but are prepended by either 'push--' or 'pull--', for
+ * example:
+ *
+   'class="grid__item  one-half  push--one-half"'
+ *
+ * This would give you a grid item which is 50% width and pushed over to the
+ * right by 50%.
+ *
+ * All classes in csswizardry grids follow this patten, so you should fairly
+ * quickly be able to piece together any combinations you can imagine, for
+ * example:
+ *
+   'class="grid__item  one-whole  lap--one-half  desk--one-third  push--desk--one-third"'
+ *
+   'class="grid__item  one-quarter  palm--one-half  push--palm--one-half"'
+ *
+   'class="grid__item  palm--one-third  desk--five-twelfths"'
+ */
+/*------------------------------------*\
+    $VARIABLES
+\*------------------------------------*/
+/**
+ * If you are building a non-responsive site but would still like to use
+ * csswizardry-grids, set this to 'false':
+ */
+/**
+ * Is this build mobile first? Setting to 'true' means that all grids will be
+ * 100% width if you do not apply a more specific class to them.
+ */
+/**
+ * Set the spacing between your grid items.
+ */
+/**
+ * Would you like Sass' silent classes, or regular CSS classes?
+ */
+/**
+ * Would you like push and pull classes enabled?
+ */
+/**
+ * Using 'inline-block' means that the grid items need their whitespace removing
+ * in order for them to work correctly. Set the following to true if you are
+ * going to achieve this by manually removing/commenting out any whitespace in
+ * your HTML yourself.
+ *
+ * Setting this to false invokes a hack which cannot always be guaranteed,
+ * please see the following for more detail:
+ *
+ * github.com/csswizardry/csswizardry-grids/commit/744d4b23c9d2b77d605b5991e54a397df72e0688
+ * github.com/csswizardry/inuit.css/issues/170#issuecomment-14859371
+ */
+/**
+ * Define your breakpoints. The first value is the prefix that shall be used for
+ * your classes (e.g. '.palm--one-half'), the second value is the media query
+ * that the breakpoint fires at.
+ */
+/**
+ * Define which namespaced breakpoints you would like to generate for each of
+ * widths, push and pull. This is handy if you only need pull on, say, desk, or
+ * you only need a new width breakpoint at mobile sizes. It allows you to only
+ * compile as much CSS as you need. All are turned on by default, but you can
+ * add and remove breakpoints at will.
+ *
+ * Push and pull shall only be used if '$push' and/or '$pull' and '$responsive'
+ * have been set to 'true'.
+ */
+/**
+ * You do not need to edit anything from this line onward; csswizardry-grids is
+ * good to go. Happy griddin'!
+ */
+/*------------------------------------*\
+    $MIXINS
+\*------------------------------------*/
+/**
+ * These mixins are for the library to use only, you should not need to modify
+ * them at all.
+ *
+ * Enclose a block of code with a media query as named in '$grid-breakpoints'.
+ */
+/**
+ * Drop relative positioning into silent classes which can't take advantage of
+ * the '[class*="push--"]' and '[class*="pull--"]' selectors.
+ */
+/*------------------------------------*\
+    $GRID SETUP
+\*------------------------------------*/
+/**
+ * 1. Allow the grid system to be used on lists.
+ * 2. Remove any margins and paddings that might affect the grid system.
+ * 3. Apply a negative 'margin-left' to negate the columns' gutters.
+ */
+.grid {
+  list-style: none;
+  /* [1] */
+  margin: 0;
+  /* [2] */
+  padding: 0;
+  /* [2] */
+  margin-left: -48px;
+  /* [3] */
+}
+
+/**
+ * 1. Cause columns to stack side-by-side.
+ * 2. Space columns apart.
+ * 3. Align columns to the tops of each other.
+ * 4. Full-width unless told to behave otherwise.
+ * 5. Required to combine fluid widths and fixed gutters.
+ */
+.grid__item {
+  display: inline-block;
+  /* [1] */
+  padding-left: 48px;
+  /* [2] */
+  vertical-align: top;
+  /* [3] */
+  -webkit-box-sizing: border-box;
+  /* [5] */
+  -moz-box-sizing: border-box;
+  /* [5] */
+  box-sizing: border-box;
+  /* [5] */
+}
+
+/**
+ * Reversed grids allow you to structure your source in the opposite order to
+ * how your rendered layout will appear. Extends '.grid'.
+ */
+.grid--rev {
+  direction: rtl;
+  text-align: left;
+}
+.grid--rev > .grid__item {
+  direction: ltr;
+  text-align: left;
+}
+
+/**
+ * Gutterless grids have all the properties of regular grids, minus any spacing.
+ * Extends '.grid'.
+ */
+.grid--full {
+  margin-left: 0;
+}
+.grid--full > .grid__item {
+  padding-left: 0;
+}
+
+/**
+ * Align the entire grid to the right. Extends '.grid'.
+ */
+.grid--right {
+  text-align: right;
+}
+.grid--right > .grid__item {
+  text-align: left;
+}
+
+/**
+ * Centered grids align grid items centrally without needing to use push or pull
+ * classes. Extends '.grid'.
+ */
+.grid--center {
+  text-align: center;
+}
+.grid--center > .grid__item {
+  text-align: left;
+}
+
+/**
+ * Align grid cells vertically ('.grid--middle' or '.grid--bottom'). Extends
+ * '.grid'.
+ */
+.grid--middle > .grid__item {
+  vertical-align: middle;
+}
+
+.grid--bottom > .grid__item {
+  vertical-align: bottom;
+}
+
+/**
+ * Create grids with narrower gutters. Extends '.grid'.
+ */
+.grid--narrow {
+  margin-left: -24px;
+}
+.grid--narrow > .grid__item {
+  padding-left: 24px;
+}
+
+/**
+ * Create grids with wider gutters. Extends '.grid'.
+ */
+.grid--wide {
+  margin-left: -96px;
+}
+.grid--wide > .grid__item {
+  padding-left: 96px;
+}
+
+/*------------------------------------*\
+    $WIDTHS
+\*------------------------------------*/
+/**
+ * Create our width classes, prefixed by the specified namespace.
+ */
+/**
+ * Our regular, non-responsive width classes.
+ */
+/**
+ * Whole
+ */
+.one-whole {
+  width: 100%;
+}
+
+/**
+ * Halves
+ */
+.one-half, .two-quarters, .three-sixths, .four-eighths, .five-tenths, .six-twelfths {
+  width: 50%;
+}
+
+/**
+ * Thirds
+ */
+.one-third, .two-sixths, .four-twelfths {
+  width: 33.333%;
+}
+
+.two-thirds, .four-sixths, .eight-twelfths {
+  width: 66.666%;
+}
+
+/**
+ * Quarters
+ */
+.one-quarter, .two-eighths, .three-twelfths {
+  width: 25%;
+}
+
+.three-quarters, .six-eighths, .nine-twelfths {
+  width: 75%;
+}
+
+/**
+ * Fifths
+ */
+.one-fifth, .two-tenths {
+  width: 20%;
+}
+
+.two-fifths, .four-tenths {
+  width: 40%;
+}
+
+.three-fifths, .six-tenths {
+  width: 60%;
+}
+
+.four-fifths, .eight-tenths {
+  width: 80%;
+}
+
+/**
+ * Sixths
+ */
+.one-sixth, .two-twelfths {
+  width: 16.666%;
+}
+
+.five-sixths, .ten-twelfths {
+  width: 83.333%;
+}
+
+/**
+ * Eighths
+ */
+.one-eighth {
+  width: 12.5%;
+}
+
+.three-eighths {
+  width: 37.5%;
+}
+
+.five-eighths {
+  width: 62.5%;
+}
+
+.seven-eighths {
+  width: 87.5%;
+}
+
+/**
+ * Tenths
+ */
+.one-tenth {
+  width: 10%;
+}
+
+.three-tenths {
+  width: 30%;
+}
+
+.seven-tenths {
+  width: 70%;
+}
+
+.nine-tenths {
+  width: 90%;
+}
+
+/**
+ * Twelfths
+ */
+.one-twelfth {
+  width: 8.333%;
+}
+
+.five-twelfths {
+  width: 41.666%;
+}
+
+.seven-twelfths {
+  width: 58.333%;
+}
+
+.eleven-twelfths {
+  width: 91.666%;
+}
+
+/**
+ * Our responsive classes, if we have enabled them.
+ */
+/*------------------------------------*\
+    $PUSH
+\*------------------------------------*/
+/**
+ * Push classes, to move grid items over to the right by certain amounts.
+ */
+/**
+ * Not a particularly great selector, but the DRYest way to do things.
+ */
+[class*="push--"] {
+  position: relative;
+}
+
+/**
+ * Whole
+ */
+.push--one-whole {
+  margin-left: 100%;
+}
+
+/**
+ * Halves
+ */
+.push--one-half, .push--two-quarters, .push--three-sixths, .push--four-eighths, .push--five-tenths, .push--six-twelfths {
+  margin-left: 50%;
+}
+
+/**
+ * Thirds
+ */
+.push--one-third, .push--two-sixths, .push--four-twelfths {
+  margin-left: 33.333%;
+}
+
+.push--two-thirds, .push--four-sixths, .push--eight-twelfths {
+  margin-left: 66.666%;
+}
+
+/**
+ * Quarters
+ */
+.push--one-quarter, .push--two-eighths, .push--three-twelfths {
+  margin-left: 25%;
+}
+
+.push--three-quarters, .push--six-eighths, .push--nine-twelfths {
+  margin-left: 75%;
+}
+
+/**
+ * Fifths
+ */
+.push--one-fifth, .push--two-tenths {
+  margin-left: 20%;
+}
+
+.push--two-fifths, .push--four-tenths {
+  margin-left: 40%;
+}
+
+.push--three-fifths, .push--six-tenths {
+  margin-left: 60%;
+}
+
+.push--four-fifths, .push--eight-tenths {
+  margin-left: 80%;
+}
+
+/**
+ * Sixths
+ */
+.push--one-sixth, .push--two-twelfths {
+  margin-left: 16.666%;
+}
+
+.push--five-sixths, .push--ten-twelfths {
+  margin-left: 83.333%;
+}
+
+/**
+ * Eighths
+ */
+.push--one-eighth {
+  margin-left: 12.5%;
+}
+
+.push--three-eighths {
+  margin-left: 37.5%;
+}
+
+.push--five-eighths {
+  margin-left: 62.5%;
+}
+
+.push--seven-eighths {
+  margin-left: 87.5%;
+}
+
+/**
+ * Tenths
+ */
+.push--one-tenth {
+  margin-left: 10%;
+}
+
+.push--three-tenths {
+  margin-left: 30%;
+}
+
+.push--seven-tenths {
+  margin-left: 70%;
+}
+
+.push--nine-tenths {
+  margin-left: 90%;
+}
+
+/**
+ * Twelfths
+ */
+.push--one-twelfth {
+  margin-left: 8.333%;
+}
+
+.push--five-twelfths {
+  margin-left: 41.666%;
+}
+
+.push--seven-twelfths {
+  margin-left: 58.333%;
+}
+
+.push--eleven-twelfths {
+  margin-left: 91.666%;
+}
+
+/*------------------------------------*\
+    $PULL
+\*------------------------------------*/
+/**
+ * Pull classes, to move grid items back to the left by certain amounts.
+ */
+/**
+ * Not a particularly great selector, but the DRYest way to do things.
+ */
+[class*="pull--"] {
+  position: relative;
+}
+
+/**
+ * Whole
+ */
+.pull--one-whole {
+  margin-right: 100%;
+}
+
+/**
+ * Halves
+ */
+.pull--one-half, .pull--two-quarters, .pull--three-sixths, .pull--four-eighths, .pull--five-tenths, .pull--six-twelfths {
+  margin-right: 50%;
+}
+
+/**
+ * Thirds
+ */
+.pull--one-third, .pull--two-sixths, .pull--four-twelfths {
+  margin-right: 33.333%;
+}
+
+.pull--two-thirds, .pull--four-sixths, .pull--eight-twelfths {
+  margin-right: 66.666%;
+}
+
+/**
+ * Quarters
+ */
+.pull--one-quarter, .pull--two-eighths, .pull--three-twelfths {
+  margin-right: 25%;
+}
+
+.pull--three-quarters, .pull--six-eighths, .pull--nine-twelfths {
+  margin-right: 75%;
+}
+
+/**
+ * Fifths
+ */
+.pull--one-fifth, .pull--two-tenths {
+  margin-right: 20%;
+}
+
+.pull--two-fifths, .pull--four-tenths {
+  margin-right: 40%;
+}
+
+.pull--three-fifths, .pull--six-tenths {
+  margin-right: 60%;
+}
+
+.pull--four-fifths, .pull--eight-tenths {
+  margin-right: 80%;
+}
+
+/**
+ * Sixths
+ */
+.pull--one-sixth, .pull--two-twelfths {
+  margin-right: 16.666%;
+}
+
+.pull--five-sixths, .pull--ten-twelfths {
+  margin-right: 83.333%;
+}
+
+/**
+ * Eighths
+ */
+.pull--one-eighth {
+  margin-right: 12.5%;
+}
+
+.pull--three-eighths {
+  margin-right: 37.5%;
+}
+
+.pull--five-eighths {
+  margin-right: 62.5%;
+}
+
+.pull--seven-eighths {
+  margin-right: 87.5%;
+}
+
+/**
+ * Tenths
+ */
+.pull--one-tenth {
+  margin-right: 10%;
+}
+
+.pull--three-tenths {
+  margin-right: 30%;
+}
+
+.pull--seven-tenths {
+  margin-right: 70%;
+}
+
+.pull--nine-tenths {
+  margin-right: 90%;
+}
+
+/**
+ * Twelfths
+ */
+.pull--one-twelfth {
+  margin-right: 8.333%;
+}
+
+.pull--five-twelfths {
+  margin-right: 41.666%;
+}
+
+.pull--seven-twelfths {
+  margin-right: 58.333%;
+}
+
+.pull--eleven-twelfths {
+  margin-right: 91.666%;
+}
+
+/**
+ *  LIST LAYOUT
+ *
+ *  layouts for unstyled block list and inline list
+ *  with the following modifiers
+ *    - collapsed
+ *    - small
+ *    - large
+ *
+ *  .l-list
+ *    &__item
+ *    &--{ modifier }
+ *
+ *  .l-list-inline
+ *    &__item
+ *    &--{ modifier }
+ *
+ */
+.l-list {
+  margin: 0;
+  padding: 0;
+  margin-bottom: -24px;
+  list-style: none;
+}
+.l-list > .l-list__item {
+  display: block;
+  margin-bottom: 24px;
+}
+
+.l-list--x-small {
+  margin-bottom: -6px;
+}
+.l-list--x-small > .l-list__item {
+  margin-bottom: 6px;
+}
+
+.l-list--small {
+  margin-bottom: -12px;
+}
+.l-list--small > .l-list__item {
+  margin-bottom: 12px;
+}
+
+.l-list--large {
+  margin-bottom: -48px;
+}
+.l-list--large > .l-list__item {
+  margin-bottom: 48px;
+}
+
+.l-list--collapsed {
+  margin-bottom: -0.1px;
+}
+.l-list--collapsed > .l-list__item {
+  margin-bottom: 0.1px;
+}
+
+.l-list-inline {
+  margin: 0;
+  padding: 0;
+  margin-bottom: -24px;
+  margin-left: -24px;
+  list-style: none;
+}
+.l-list-inline > .l-list-inline__item {
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 24px;
+  margin-left: 24px;
+}
+
+.l-list-inline--x-small {
+  margin-bottom: -6px;
+  margin-left: -6px;
+}
+.l-list-inline--x-small > .l-list-inline__item {
+  margin-bottom: 6px;
+  margin-left: 6px;
+}
+
+.l-list-inline--small {
+  margin-bottom: -12px;
+  margin-left: -12px;
+}
+.l-list-inline--small > .l-list-inline__item {
+  margin-bottom: 12px;
+  margin-left: 12px;
+}
+
+.l-list-inline--large {
+  margin-bottom: -48px;
+  margin-left: -48px;
+}
+.l-list-inline--large > .l-list-inline__item {
+  margin-bottom: 48px;
+  margin-left: 48px;
+}
+
+.l-list-inline--collapsed {
+  margin-bottom: -0.1px;
+  margin-left: -0.1px;
+}
+.l-list-inline--collapsed > .l-list-inline__item {
+  margin-bottom: 0.1px;
+  margin-left: 0.1px;
+}
+
+/**
+ *  STACKED LAYOUT
+ *
+ *  maintains vertical spacing between blocks that
+ *  become stacked on mobile/tablet devices.
+ *  Usually used as a wrapper for grids.
+ *
+ *  possible modifiers:
+ *    - small
+ *    - normal (reset modifier for nested layouts, see @warning)
+ *    - med
+ *    - large
+ *
+ *  .l-stacked
+ *    &__item
+ *    &--{ modifier }
+ *
+ *  @warning
+ *    this module does not use direct child, because
+ *    .l-stacked and .l-stacked__item are separated
+ *    by .grid and .grid__item classes. Because of this
+ *    there could be problems with nested .l-stacked
+ *    elements. If you use .l-stacked inside .l-stacked--large,
+ *    you will need to reset its behaviour to default one, like
+ *
+ *      .l-stacked.l-stacked--large
+ *        /.../
+ *        .l-stacked.l-stacked--normal
+ *
+ */
+.l-stacked {
+  margin-bottom: -24px;
+}
+.l-stacked__item {
+  display: block;
+  padding-bottom: 24px;
+}
+
+.l-stacked--large {
+  margin-bottom: -48px;
+}
+.l-stacked--large .l-stacked__item {
+  padding-bottom: 48px;
+}
+
+.l-stacked--med {
+  margin-bottom: -36px;
+}
+.l-stacked--med .l-stacked__item {
+  padding-bottom: 36px;
+}
+
+.l-stacked--normal {
+  margin-bottom: -24px;
+}
+.l-stacked--normal .l-stacked__item {
+  padding-bottom: 24px;
+}
+
+.l-stacked--small {
+  margin-bottom: -12px;
+}
+.l-stacked--small .l-stacked__item {
+  padding-bottom: 12px;
+}
+
+/**
+ *  SPLIT LAYOUT
+ *
+ *  distributes items to the left and right sides of the parent item
+ *
+ *  .l-split
+ *    &__left
+ *    &__right
+ *
+ */
+.l-split__right {
+  float: right;
+}
+
+/**
+ *  JUSTIFIED LAYOUT
+ *
+ *  distributes items evenly in the parent using inline-blocks and text-align:justify
+ *  usage of inline-blocks also enables vertical alignment with vertical-align property
+ *
+ *  .l-justified
+ *    &__item
+ *
+ *  @warning
+ *    font-size and line-height inside .l-justified__item are reset to the base values
+ *    so, if your module has custom font-size and/or line-height, you should probably
+ *    use different layout
+ *
+ */
+.l-justified {
+  text-align: justify;
+  text-justify: distribute-all-lines;
+  font-size: 0;
+  line-height: 0;
+}
+.l-justified:after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+.l-justified__item {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: left;
+  text-justify: auto;
+}
+
+/**
+ *  TRICOL LAYOUT
+ *
+ *  three column layout with left part, right part, and center-aligned middle part
+ *
+ *  .l-tricol
+ *    &__left
+ *    &__right
+ *    &__mid
+ *
+ */
+.l-tricol {
+  position: relative;
+}
+.l-tricol__left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+.l-tricol__right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+.l-tricol__mid {
+  text-align: center;
+}
+
+/**
+ *  MEDIA LAYOUT
+ *
+ *  layout of type "figure-content" or "content-figure" with floated figure
+ *  and new block formatting context for the content part
+ *
+ *  more info here: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
+ *
+ *  .l-media
+ *    &__figure
+ *    &__body
+ *    &--rev
+ *
+ */
+.l-media__figure {
+  float: left;
+  margin-right: 12px;
+}
+.l-media--rev .l-media__figure {
+  float: right;
+  margin-right: 0 !important;
+  margin-left: 12px;
+}
+.flexbox .l-media__body {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
+.no-flexbox .l-media__body {
+  overflow: hidden;
+}
+
+.l-media--small > .l-media__figure {
+  margin-right: 6px;
+}
+
+.l-media--rev.l-media--small > .l-media__figure {
+  margin-left: 6px;
+}
+
+.l-media--medium > .l-media__figure {
+  margin-right: 24px;
+}
+
+.l-media--rev.l-media--medium > .l-media__figure {
+  margin-left: 24px;
+}
+
+.l-media--large > .l-media__figure {
+  margin-right: 36px;
+}
+
+.l-media--rev.l-media--large > .l-media__figure {
+  margin-left: 36px;
+}
+
+.l-media--collapsed > .l-media__figure {
+  margin-right: 0;
+}
+
+.l-media--rev.l-media--collapsed > .l-media__figure {
+  margin-left: 0;
+}
+
+/**
+ *  BLOCK LAYOUT
+ *
+ *  maintains vertical spacing between different modules
+ *  for each of block types:
+ *    - block-small
+ *    - block
+ *    - block-med
+ *    - block-large
+ *  for different breakpoints
+ *
+ *  .l-{ block-type }
+ *  .l-{ block-type }-lt-{ breakpoint-type }
+ *  .l-{ block-type }-gt-{ breakpoint-type }
+ *
+ */
+[class^="l-block"] {
+  display: block;
+}
+
+.l-block-x-small {
+  margin-bottom: 6px;
+}
+
+/**
+ *  RESPONSIVE
+ *
+ */
+.l-block-small {
+  margin-bottom: 12px;
+}
+
+/**
+ *  RESPONSIVE
+ *
+ */
+.l-block {
+  margin-bottom: 24px;
+}
+
+/**
+ *  RESPONSIVE
+ *
+ */
+.l-block-med {
+  margin-bottom: 36px;
+}
+
+/**
+ *  RESPONSIVE
+ *
+ */
+.l-block-large {
+  margin-bottom: 48px;
+}
+
+/**
+ *  RESPONSIVE
+ *
+ */
+/**
+ *  OFFSCREEN LAYOUT
+ *
+ *  offscreen navigation for small screen sizes
+ *
+ *  .l-offscreen
+ *    &__sidebar
+ *      &--left
+ *      &--right
+ *    &__overlay
+ *    &--open-left
+ *    &--open-right
+ *
+ */
+.l-offscreen__sidebar {
+  position: fixed;
+  top: 0;
+  z-index: 500;
+  -webkit-backface-visibility: hidden;
+  width: 359px;
+  max-width: 100%;
+  height: 100%;
+  -moz-transition-property: -moz-transform;
+  -o-transition-property: -o-transform;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: transform;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+.l-offscreen__sidebar--left {
+  left: 0;
+  -moz-transform: translateX(-360px);
+  -ms-transform: translateX(-360px);
+  -webkit-transform: translateX(-360px);
+  transform: translateX(-360px);
+}
+.l-offscreen__sidebar--right {
+  right: 0;
+  -moz-transform: translateX(360px);
+  -ms-transform: translateX(360px);
+  -webkit-transform: translateX(360px);
+  transform: translateX(360px);
+}
+.l-offscreen__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 400;
+  -webkit-backface-visibility: hidden;
+  display: none;
+  height: 100%;
+  width: 100%;
+  background: white;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.l-offscreen--open-left .l-offscreen__sidebar--left {
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+.l-offscreen--open-left .l-offscreen__overlay {
+  display: block;
+}
+
+.l-offscreen--open-right .l-offscreen__sidebar--right {
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+.l-offscreen--open-right .l-offscreen__overlay {
+  display: block;
+}
+
+/**
+ *  HOVERCHANGE LAYOUT
+ *
+ *  content that changes on hover
+ *
+ *  .l-hoverchange
+ *    &__content-normal
+ *    &__content-hover
+ *
+ */
+.l-hoverchange__content-normal {
+  display: block;
+}
+.l-hoverchange:hover .l-hoverchange__content-normal {
+  display: none;
+}
+.l-hoverchange__content-hover {
+  display: none;
+}
+.l-hoverchange:hover .l-hoverchange__content-hover {
+  display: block;
+}
+
+@font-face {
+  font-family: 'switter';
+  src: url("/switter/fonts/switter.eot?-7fdrsl");
+  src: url("/switter/fonts/switter.eot?#iefix-7fdrsl") format("embedded-opentype"), url("/switter/fonts/switter.ttf?-7fdrsl") format("truetype"), url("/switter/fonts/switter.woff?-7fdrsl") format("woff"), url("/switter/fonts/switter.svg?-7fdrsl#switter") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+.menu {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 3px;
+  background: #D6D6D6;
+  border-bottom: 1px solid #646464;
+}
+.menu__slot {
+  position: relative;
+}
+
+.m-item {
+  position: relative;
+}
+.m-item__name, .md-item__name {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  padding: 0 12px;
+  line-height: 20px;
+  text-align: left;
+}
+.m-item__counter, .md-item__counter {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  font-size: 10px;
+  line-height: 15px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  background-color: #ff4d39;
+  border-radius: 50%;
+}
+.m-item > button:focus {
+  outline: none;
+}
+.m-item:hover {
+  background: rgba(76, 111, 255, 0.5);
+}
+
+.m-item--highlighted {
+  background: rgba(76, 111, 255, 0.5);
+}
+
+.m-dropdown {
+  position: absolute;
+  padding: 3px;
+  background: #f0f0f0;
+  border: 1px solid #a0a0a0;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+.m-dropdown__slot {
+  position: relative;
+}
+.m-dropdown__divider {
+  width: 100%;
+  height: 1px;
+  background: #a0a0a0;
+  margin: 3px 0;
+}
+
+.m-dropdown--root {
+  top: 100%;
+  left: 0;
+}
+
+.m-dropdown--nested {
+  top: 0;
+  left: 100%;
+}
+
+.md-item {
+  position: relative;
+  white-space: nowrap;
+}
+.md-item__name {
+  padding-right: 84px;
+}
+.md-item__counter {
+  right: 14px;
+  top: 2px;
+}
+.md-item > button:focus {
+  outline: none;
+}
+.md-item:hover {
+  background: rgba(76, 111, 255, 0.5);
+}
+
+.md-item--parent {
+  position: relative;
+}
+.md-item--parent:after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 0;
+  display: block;
+  height: 0;
+  width: 0;
+  border-style: solid;
+  border-width: 4px;
+  border-color: transparent;
+  border-left-color: #3e3e3e;
+}
+
+.md-item--highlighted {
+  background: rgba(76, 111, 255, 0.5);
+}
+
+.tweet-list-wrapper {
+  height: 100%;
+}
+
+.tweet-list {
+  padding: 50px 0;
+}
+.tweet-list__header {
+  padding: 12px 12px;
+  color: #292f33;
+  background: white;
+  border: 1px solid #e1e8ed;
+  border-radius: 6px;
+}
+.tweet-list__subtitle {
+  font-size: 10px;
+  color: #8899a6;
+  text-transform: uppercase;
+}
+.tweet-list__title {
+  display: inline-block;
+  font-size: 20px;
+  line-height: 32px;
+}
+.tweet-list__path {
+  color: #1F98C7;
+  cursor: pointer;
+}
+.tweet-list__back {
+  display: block;
+  text-decoration: underline;
+  color: #1F98C7;
+}
+.tweet-list__back:hover {
+  text-decoration: none;
+}
+
+/**
+ *  TWEET MODULE
+ *
+ *  styling for tweet in the timeline
+ *
+ *  .l-tweet-content
+ *    &__icon
+ *
+ *  .tweet
+ *    &__extra
+ *      &--pre-dot
+ *    &__preview-image
+ *    &__action
+ *    &--is-open
+ *
+ *  .t-author
+ *    &__avatar
+ *    &__name
+ *    &__screen-name
+ *
+ *  .t-share-table
+ *    &__cell
+ *      &--post-border
+ *
+ *  .t-stat
+ *    &__title
+ *    &__value
+ *
+ *  .t-retweet
+ *    &__user-avatar
+ *
+ *  .t-icon-retweet-indicator
+ *  .t-icon-retweet
+ *  .t-icon-favorite
+ *
+ */
+.l-tweet-content {
+  position: relative;
+  padding-left: 58px;
+}
+.l-tweet-content__icon {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  width: 48px;
+}
+
+.tweet {
+  width: 100%;
+  min-height: 51px;
+  padding: 9px 12px;
+  font-size: 14px;
+  line-height: 18px;
+  color: #292f33;
+  background: white;
+  border-left: 1px solid #e1e8ed;
+  border-right: 1px solid #e1e8ed;
+  border-top: 1px solid #e1e8ed;
+  cursor: pointer;
+}
+.tweet:hover {
+  background: #f5f8fa;
+}
+.tweet__preview-image {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+.tweet__extra {
+  font-size: 13px;
+  color: #8899a6;
+}
+.tweet__extra--pre-dot:before {
+  content: '\00b7';
+  display: inline-block;
+  margin-right: 3px;
+}
+.tweet__action {
+  font-size: 12px;
+  font-weight: bold;
+}
+.tweet__text a {
+  color: #1F98C7;
+  text-decoration: underline;
+}
+.tweet__text a:hover {
+  text-decoration: none;
+}
+
+.tweet--is-last {
+  border-bottom: 1px solid #e1e8ed;
+  border-radius: 0 0 6px 6px;
+}
+
+.tweet--is-first {
+  border-top: 1px solid #e1e8ed;
+  border-radius: 6px 6px 0 0;
+}
+
+.tweet--is-open {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border-bottom: 1px solid #e1e8ed;
+  cursor: default;
+}
+.tweet--is-open:hover {
+  background: white;
+}
+
+.t-author__avatar {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin-top: 3px;
+  border-radius: 5px;
+}
+.t-author__name {
+  font-weight: bold;
+}
+
+.t-share-table {
+  border-top: 1px solid #e1e8ed;
+  border-bottom: 1px solid #e1e8ed;
+}
+.t-share-table__cell {
+  padding: 6px 12px;
+}
+.t-share-table__cell--pre-border {
+  border-left: 1px solid #e1e8ed;
+}
+
+.t-stat__title {
+  font-size: 10px;
+  text-transform: uppercase;
+}
+.t-stat__value {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #1F98C7;
+}
+
+.t-retweet {
+  padding: 7px 0;
+}
+.t-retweet__user-avatar {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 3px;
+}
+
+.t-icon-retweet-indicator:before {
+  content: "\e600";
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin: 2px 0;
+  font-size: 8px;
+  line-height: 14px;
+  color: white;
+  text-align: center;
+  background: #77b255;
+  border-radius: 2px;
+}
+
+.t-icon-retweet {
+  margin-right: 6px;
+  color: #ccd6dd;
+}
+.t-icon-retweet:before {
+  line-height: 18px;
+  content: "\e600";
+}
+
+.t-icon-favorite {
+  margin-right: 6px;
+  color: #ccd6dd;
+}
+.t-icon-favorite:before {
+  line-height: 18px;
+  content: "\e601";
+}
+
+.commands-table {
+  display: flex;
+  border-top: 1px solid #e1e8ed;
+  border-bottom: 1px solid #e1e8ed;
+}
+.commands-table__cell {
+  padding: 3px 6px;
+  flex: 1;
+}
+.commands-table__cell--pre-border {
+  border-left: 1px solid #e1e8ed;
+}
+
+.commands-header {
+  padding: 3px 6px;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #8899a6;
+}
+
+.command {
+  padding: 0 6px;
+  font-size: 12px;
+  color: #1F98C7;
+}
+
+.tweet--is-open .command:hover {
+  background: #EEF8FF;
+  outline: 1px solid #C0DEED;
+}
+
+.author {
+  padding: 9px 0;
+}
+.author__avatar {
+  width: 30px;
+  height: 30px;
+  margin: 0 6px;
+  border-radius: 50%;
+  border: 1px solid #646464;
+  background-size: cover;
+  background-position: center center;
+}
+.author__name {
+  font-weight: 600;
+  line-height: 18px;
+}
+.author__tweets {
+  line-height: 18px;
+}
+.author__follow-status {
+  width: 78px;
+  font-size: 12px;
+  line-height: 24px;
+  text-align: center;
+  color: #8899a6;
+}
+
+.author--selected {
+  background: #D6D6D6;
+}
+
+.toolbar {
+  position: fixed;
+  z-index: 9;
+  top: 60px;
+  padding: 3px;
+  background: #D6D6D6;
+  border: 1px solid #646464;
+}
+.toolbar__slot {
+  position: relative;
+}
+.toolbar__divider {
+  width: 100%;
+  height: 1px;
+  margin: 3px 0;
+  background: #a0a0a0;
+}
+
+.toolbar--left {
+  left: 6px;
+}
+
+.toolbar--right {
+  right: 6px;
+}
+
+.t-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+.t-item:focus {
+  outline: none !important;
+}
+.t-item__icon {
+  display: block;
+  width: 33px;
+  height: 27px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.t-item__icon--large {
+  height: 53px;
+}
+.t-item__counter, .td-item__counter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  font-size: 10px;
+  line-height: 15px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  background-color: #ff4d39;
+  border-radius: 50%;
+}
+.t-item__counter--rev {
+  left: 0;
+}
+.t-item > button:focus {
+  outline: none;
+}
+.t-item:hover {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid #4c6fff;
+  background: rgba(76, 111, 255, 0.5);
+}
+
+.t-item--highlighted {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid #4c6fff;
+  background: rgba(76, 111, 255, 0.5);
+}
+
+.t-dropdown {
+  position: absolute;
+  z-index: 1;
+  top: -1px;
+  left: 98%;
+  padding: 3px;
+  min-width: 100px;
+  white-space: nowrap;
+  background: #DCDCDC;
+  border: 1px solid #939393;
+}
+.t-dropdown__slot {
+  position: relative;
+}
+
+.t-dropdown--rev {
+  left: auto;
+  right: 98%;
+}
+
+.td-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 24px;
+  text-align: left;
+  white-space: nowrap;
+}
+.td-item:focus {
+  outline: none !important;
+}
+.td-item__icon {
+  display: block;
+  width: 20px;
+  height: 22px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.td-item__label {
+  font-size: 11px;
+  line-height: 20px;
+}
+.td-item > button:focus {
+  outline: none;
+}
+.td-item:hover {
+  background: rgba(76, 111, 255, 0.5);
+}
+
+.td-item--first {
+  position: relative;
+}
+.td-item--first:before {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 4px;
+  width: 4px;
+  top: 8px;
+  left: 8px;
+  background: #363636;
+}
+
+.td-item--highlighted {
+  background: rgba(76, 111, 255, 0.5);
+}
+
+.activity-panel {
+  background: #D6D6D6;
+  border: 1px solid #646464;
+}
+
+.ap-header {
+  padding: 24px 18px;
+  border-bottom: 1px solid #a0a0a0;
+}
+.ap-header__title {
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.ap-section {
+  padding: 18px;
+  border-bottom: 1px solid #a0a0a0;
+}
+
+.active-tweet {
+  width: 480px;
+  margin: 0 auto;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 20px;
+  background: white;
+  border: 1px solid #a0a0a0;
+}
+.active-tweet__link {
+  color: #4c6fff;
+  text-decoration: underline;
+}
+.active-tweet__link:hover {
+  text-decoration: none;
+}
+.active-tweet__author-avatar {
+  width: 48px;
+  height: 48px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: 1px solid #a0a0a0;
+  border-radius: 6px;
+}
+.active-tweet__author-name {
+  font-weight: 600;
+}
+.active-tweet__author-screenname {
+  color: #8899a6;
+}
+
+.active-tweet-placeholder {
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 120px;
+  text-align: center;
+  color: #8899a6;
+}
+
+.at-commands__title {
+  font-weight: 600;
+  font-size: 12px;
+  border-bottom: 1px solid #a0a0a0;
+}
+
+.atc-command {
+  display: inline-block;
+}
+.atc-command__label {
+  font-size: 12px;
+}
+.atc-command__icon {
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: top;
+  font-family: 'switter';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-close:before {
+  content: "\e602";
+}
+
+/**
+ *  GLOBAL STATE STYLES
+ *
+ */
+.is-top-aligned {
+  vertical-align: top !important;
+}
+
+.is-middle-aligned {
+  vertical-align: middle !important;
+}
+
+.is-bottom-aligned {
+  vertical-align: bottom !important;
+}
+
+.is-floated-right {
+  float: right;
+}
+
+.is-floated-left {
+  float: left;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.is-frozen {
+  overflow: hidden;
+}
+
+.new-positioning-grid {
+  position: relative;
+}
+
+.is-rtl {
+  direction: rtl;
+}
+
+.is-ltr {
+  direction: ltr;
+}
+
+.is-left-aligned {
+  text-align: left !important;
+}
+
+.is-right-aligned {
+  text-align: right !important;
+}
+
+.is-center-aligned {
+  text-align: center !important;
+}
+
+/**
+ *  RESPONSIVE VISIBILITY
+ *
+ */
+/**
+ *  DEVELOPMENT GRID HELPER
+ *
+ *  grid helper based on $global-baseline value
+ *
+ */
+.dev-grid {
+  display: block;
+  height: 1000%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-image: linear-gradient(0deg, rgba(255, 0, 0, 0.2) 1px, rgba(0, 0, 0, 0) 1px), linear-gradient(90deg, rgba(255, 0, 0, 0.2) 1px, rgba(0, 0, 0, 0) 1px), linear-gradient(0deg, rgba(255, 0, 0, 0.1) 1px, rgba(0, 0, 0, 0) 1px), linear-gradient(90deg, rgba(255, 0, 0, 0.1) 1px, rgba(0, 0, 0, 0) 1px);
+  background-size: 24px 24px, 24px 24px, 12px 12px, 12px 12px;
+}
+
+/**
+ *  SHAME MODULE
+ *
+ *  sandbox for various experiments and other stuff that should be refactored in the future
+ *
+ */
+.app-body {
+  min-height: 100%;
+}
+.app-body__wrapper {
+  display: flex;
+  width: 588px;
+  margin: 0 auto;
+}
+.app-body__timeline {
+  position: fixed;
+  height: 100%;
+  width: 150px;
+  margin-left: -165px;
+  padding: 50px 0;
+}
+.app-body__tweet-list {
+  flex: 1;
+}
+
+.timeline {
+  height: 100%;
+}
+.timeline .axis {
+  font: 10px sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+.timeline .axis .domain {
+  fill: none;
+  stroke: #3285af;
+  stroke-opacity: .3;
+  stroke-width: 5px;
+}
+.timeline .data-point {
+  fill: red;
+  position: relative;
+  z-index: 1;
+}
+.timeline .resize {
+  display: inline !important;
+  /* show when empty */
+  fill: #666;
+  fill-opacity: .8;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+.timeline .extent {
+  fill-opacity: .25;
+  fill: white;
+  stroke: rgba(100, 100, 100, 0.5);
+  shape-rendering: crispEdges;
+}
+.timeline .background {
+  display: none;
+}
+
+.admin-panel {
+  background-color: white;
+  margin: 20px auto;
+  width: 600px;
+  padding: 20px;
+}
+.admin-panel__title {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
+}
+.admin-panel__section {
+  clear: both;
+  margin-top: 10px;
+}
+.admin-panel__commands {
+  margin-bottom: 10px;
+}
+.admin-panel__command-label {
+  padding: 10px;
+  text-align: right;
+}
+.admin-panel__command-items {
+  border-left: #6E8392 solid 1px;
+  border-radius: 10px;
+  padding: 10px;
+}
+.admin-panel__button-simple {
+  border: #6E8392 solid 1px;
+  display: inline-block;
+  padding: 0 5px;
+}
+.admin-panel__button {
+  display: inline-block;
+  padding: 10px 18px;
+  font-size: 14px;
+  line-height: 16px;
+  color: white;
+  background: #4c6fff;
+  border-radius: 4px;
+}
+
+.journal-question__error {
+  color: #ff4d39;
+  font-weight: 600;
+}
+.journal-question__textarea {
+  display: block;
+  width: 100%;
+}
